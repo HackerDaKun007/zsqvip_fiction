@@ -1,0 +1,14 @@
+/* 说明 */
+
+//每个页面都必须要加上这段备注
+
+//Remarks是，备注信息<如需要重要说明，在此说明>，可以为空
+/**
+ * @author      dakun007 <dakun007@hotmail.com>
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ *
+ * @see         路由配置文件
+*/
