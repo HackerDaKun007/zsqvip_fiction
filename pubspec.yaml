@@ -46,6 +46,7 @@ flutter:
   uses-material-design: true
   assets:
     - images/home.png
+    - images/jia.png
     - images/li.png
     - images/2.0x/li.png
     - images/3.0x/li.png

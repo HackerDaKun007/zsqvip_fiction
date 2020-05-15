@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:fiction/config/Config.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
+import 'package:fiction/fonts/Iconfont.dart';
 //阅读分钟
 int minute = 0;
 
@@ -54,9 +55,19 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
     setState(() {
       minute = 10;
     });
+
+    //添加一项追加数据
+    listData.add({
+      "title": '',
+      "author": '',
+      "imageUrl":'images/jia.png',
+    });
   }
 
+  
+
   Widget build(BuildContext context) {
+    
     return Stack(
       children: <Widget>[
         MediaQuery.removePadding(
@@ -205,9 +216,19 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
+              // IconButton(
+              //   icon: Icon(
+              //     Iconfont.vip,
+              //     size: fontSize(20),
+              //     color: Color(0xFF000000),
+              //   ),
+              //   onPressed: () {
+              //     print(1);
+              //   },
+              // ),
               IconButton(
                 icon: Icon(
-                  Icons.account_balance,
+                  Iconfont.sousuo,
                   size: fontSize(20),
                   color: Color(0xFF000000),
                 ),
@@ -217,17 +238,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
               ),
               IconButton(
                 icon: Icon(
-                  Icons.search,
-                  size: fontSize(20),
-                  color: Color(0xFF000000),
-                ),
-                onPressed: () {
-                  print(1);
-                },
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.more_vert,
+                  Iconfont.youcecaidan,
                   size: fontSize(20),
                   color: Color(0xFF000000),
                 ),
@@ -250,7 +261,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                                     EdgeInsets.fromLTRB(fontSize(10), 0, 0, 0),
                                 child: Text(
                                   "记录",
-                                  style: TextStyle(fontSize: fontSize(12)),
+                                  style: TextStyle(fontSize: fontSize(14)),
                                 ),
                               )
                             ],
@@ -260,16 +271,16 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                           child: Row(
                             children: <Widget>[
                               Icon(
-                                Icons.border_color,
+                                Iconfont.bianji,
                                 color: Colors.blue,
-                                size: fontSize(18),
+                                size: fontSize(21),
                               ),
                               Container(
                                 padding:
-                                    EdgeInsets.fromLTRB(fontSize(12), 0, 0, 0),
+                                    EdgeInsets.fromLTRB(fontSize(11), 0, 0, 0),
                                 child: Text(
                                   "编辑",
-                                  style: TextStyle(fontSize: fontSize(12)),
+                                  style: TextStyle(fontSize: fontSize(14)),
                                 ),
                               )
                             ],
@@ -302,8 +313,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
             width: fontSize(40),
             child: Center(
               child: Icon(
-                Icons.whatshot,
-                color: Colors.red[500],
+                Iconfont.remen,
+                color: Colors.red,
                 size: fontSize(18),
               ),
             ),
@@ -320,7 +331,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                     return Center(
                       child: GestureDetector(
                         child: Text(list[index]['title'], style: TextStyle(
-                          fontSize: fontSize(14),
+                          fontSize: fontSize(13),color: Color(0x99333333),
                         ),),
                         onTap: () {
                           print(list[index]['title']);
@@ -332,6 +343,11 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
               )),
           SizedBox(
             width: fontSize(10),
+          ),
+          Container(
+            width: fontSize(30),
+            // color: Colors.yellow,
+            child: Icon(Icons.keyboard_arrow_right, size: fontSize(20),color: Color(0x99333333)),
           ),
         ],
       ),
@@ -350,12 +366,13 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
             BoxShadow(color: Color(0x99e7e7e7), offset: Offset(1.0, 1.0)),
             BoxShadow(color: Color(0x99e7e7e7))
           ]),
-      margin: EdgeInsets.fromLTRB(fontSize(25), fontSize(10), fontSize(25), fontSize(10)),
+      margin: EdgeInsets.fromLTRB(fontSize(25), 0, fontSize(25), fontSize(10)),
     );
   }
 
   //内容模块
   Widget _content() {
+    
     return Padding(
       padding: EdgeInsets.all(10),
       child: GridView.builder(
@@ -372,9 +389,45 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
       ),
     );
   }
-
   Widget _getListData(context, index) {
-    return Container(
+    int dataLength = (listData.length - 1);
+    if(index == dataLength) {
+       return Container(
+        child: GestureDetector(
+      child: Column(
+        children: <Widget>[
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.circular(5),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: Image.asset(
+              listData[index]['imageUrl'],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            child: Text(
+              listData[index]['title'],
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black, fontSize: fontSize(12)),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+      onTap: () {
+        // setState(() {
+        //   Config.currenIndex = 1;
+        // });
+        Navigator.pushNamed(context, '/',arguments: {'index':1});
+      },
+    ),
+ 
+    );
+    } else {
+      return Container(
         child: GestureDetector(
       child: Column(
         children: <Widget>[
@@ -398,19 +451,16 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
             ),
           ),
         ],
-        //边框
       ),
       onTap: () {
-        print('跳转');
+        print(index);
+        print(listData.length);
       },
-    )
-        // decoration: BoxDecoration(
-        //   border: Border.all(
-        //     color: Color.fromRGBO(233, 233, 233, 0.7),
-        //     width: 1,
-        //   )
-        // ),
-        );
+    ),
+ 
+    );
+    }
+    
   }
 
   //底部广告位置

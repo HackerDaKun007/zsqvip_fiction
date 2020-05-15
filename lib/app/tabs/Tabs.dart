@@ -1,4 +1,3 @@
-import 'package:fiction/app/tabs/tabs_icon.dart';
 /**
  * @author      dakun007 <dakun007@hotmail.com>  Yuri Chen <pluto401zz@gmail.com>
  * @Remarks     无
@@ -9,6 +8,8 @@ import 'package:fiction/app/tabs/tabs_icon.dart';
  * @see         首页底部导航栏目
 */
 import 'package:flutter/material.dart';
+import 'package:fiction/config/Config.dart';
+import 'package:fiction/fonts/Iconfont.dart';
 
 //导航栏目地址
 import 'package:fiction/app/pages/Home.dart'; //书城
@@ -18,21 +19,20 @@ import 'package:fiction/app/pages/My.dart'; //我的
 
 //像素
 import 'package:fiction/widget/PixelSize.dart';
-
 class Tabs extends StatefulWidget{
-  Tabs({Key key}) : super(key: key);
+  Map arguments;
+  Tabs({Key key, this.arguments}) : super(key: key);
 
   @override
-  _TabsState createState() => _TabsState();
+  _TabsState createState() => _TabsState(arguments: this.arguments);
 }
 
 class _TabsState extends State<Tabs> with PixelSize{
   //控制选中时的数据
   int _currenIndex = 0;
-
-  _TabsState ({index=0}) {
-    this._currenIndex = index;
-    
+  Map arguments;
+  _TabsState ({this.arguments}) {
+    this._currenIndex = arguments != null ? this.arguments['index'] : 0;
   }
   @override
   Widget build(BuildContext context) {
@@ -60,29 +60,29 @@ class _TabsState extends State<Tabs> with PixelSize{
           //创建栏目
           items: [
             BottomNavigationBarItem(
-              icon: Icon(MyIcons.home, size: fontSize(20) ),
-              activeIcon: Icon(MyIcons.home_active, size: fontSize(20) ),
+              icon: Icon(Iconfont.book, size: fontSize(20) ),
+              activeIcon: Icon(Iconfont.book_active, size: fontSize(20) ),
               title: Text('书架', style: TextStyle(
                 fontSize: fontSize(13)
               )),
             ),
             BottomNavigationBarItem(
-              icon: Icon(MyIcons.book, size: fontSize(20) ),
-              activeIcon: Icon(MyIcons.book, size: fontSize(20) ),
+              icon: Icon(Iconfont.home, size: fontSize(20) ),
+              activeIcon: Icon(Iconfont.home_active, size: fontSize(20) ),
               title: Text('书城', style: TextStyle(
                 fontSize: fontSize(13)
               )),
             ),
             BottomNavigationBarItem(
-              icon: Icon(MyIcons.category, size: fontSize(20) ),
-              activeIcon: Icon(MyIcons.category_active, size: fontSize(20) ),
+              icon: Icon(Iconfont.category, size: fontSize(20) ),
+              activeIcon: Icon(Iconfont.category_active, size: fontSize(20) ),
               title: Text('分类', style: TextStyle(
                 fontSize: fontSize(13)
               )),
             ),
             BottomNavigationBarItem(
-              icon: Icon(MyIcons.mine, size: fontSize(20) ),
-              activeIcon: Icon(MyIcons.mine_active, size: fontSize(20) ),
+              icon: Icon(Iconfont.mine, size: fontSize(20) ),
+              activeIcon: Icon(Iconfont.mine_active, size: fontSize(20) ),
               title: Text('我的', style: TextStyle(
                 fontSize: fontSize(13)
               ),),

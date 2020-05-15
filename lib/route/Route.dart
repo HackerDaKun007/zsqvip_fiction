@@ -22,7 +22,7 @@ import 'package:fiction/app/pages/My.dart';  //我的
 
 //配置命令路由
 final routes = {
-  '/': (context) => Tabs(),
+  '/': (context, {arguments}) => Tabs(arguments:arguments),
   '/home': (context) => HomePage(),
   '/bookshelf': (context) => BookShelfPage(),
   '/categorypage': (context) => CategoryPage(),

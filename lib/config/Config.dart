@@ -1,4 +1,5 @@
 //配置文件
 class Config{
   static String domain = "https://m.ac.qq.com/"; //域名
+  // static int currenIndex = 0; //栏目状态 - 控制选中时的数据
 }
