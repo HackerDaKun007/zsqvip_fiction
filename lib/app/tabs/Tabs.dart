@@ -10,26 +10,29 @@
 import 'package:flutter/material.dart';
 
 //导航栏目地址
-import 'package:fiction/app/pages/Home.dart'; //首页书架
-import 'package:fiction/app/pages/Bookshelf.dart'; //书成
+import 'package:fiction/app/pages/Home.dart'; //书城
+import 'package:fiction/app/pages/BookShelf.dart'; //书架
 import 'package:fiction/app/pages/Category.dart'; //分类
 import 'package:fiction/app/pages/My.dart'; //我的
 
-class Tabs extends StatefulWidget {
+//像素
+import 'package:fiction/widget/PixelSize.dart';
+
+class Tabs extends StatefulWidget{
   Tabs({Key key}) : super(key: key);
 
   @override
   _TabsState createState() => _TabsState();
 }
 
-class _TabsState extends State<Tabs> {
+class _TabsState extends State<Tabs> with PixelSize{
   //控制选中时的数据
   int _currenIndex = 0;
 
   _TabsState ({index=0}) {
     this._currenIndex = index;
+    
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +57,33 @@ class _TabsState extends State<Tabs> {
             });
           },
           //创建栏目
-          items: this._items,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.call_to_action, size: fontSize(20) ),
+              title: Text('书架', style: TextStyle(
+                fontSize: fontSize(13)
+              )),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.storage, size: fontSize(20) ),
+              title: Text('书城', style: TextStyle(
+                fontSize: fontSize(13)
+              )),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.category, size: fontSize(20) ),
+              title: Text('分类', style: TextStyle(
+                fontSize: fontSize(13)
+              )),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.perm_identity, size: fontSize(20) ),
+              title: Text('我的', style: TextStyle(
+                fontSize: fontSize(13)
+              ),),
+            ),
+          ],
+
         ),
       ),
     );
@@ -62,30 +91,11 @@ class _TabsState extends State<Tabs> {
 
   //切换底部导航栏数组页面
   final List<Widget> _pageList = [
+    BookShelfPage(),
     HomePage(),
-    BookshelfPage(),
     CategoryPage(),
     MyPage(),
   ];
 
-  //底部导航栏按钮
-  final List<BottomNavigationBarItem> _items = <BottomNavigationBarItem>[
-    BottomNavigationBarItem(
-      icon: Icon(Icons.call_to_action),
-      title: Text('书架'),
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.storage),
-      title: Text('书城'),
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.category),
-      title: Text('分类'),
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.perm_identity),
-      title: Text('我的'),
-    ),
-  ];
 
 }

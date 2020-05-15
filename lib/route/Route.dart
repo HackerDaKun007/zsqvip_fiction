@@ -12,8 +12,8 @@ import 'package:flutter/cupertino.dart';  //动画执行
 
 //大坤配置_路由区域
 import 'package:fiction/app/tabs/Tabs.dart';  //首页底部导航栏目
-import 'package:fiction/app/pages/Home.dart';  //首页书架
-import 'package:fiction/app/pages/Bookshelf.dart';  //书成
+import 'package:fiction/app/pages/Home.dart';  //书城
+import 'package:fiction/app/pages/BookShelf.dart';  //书架
 import 'package:fiction/app/pages/Category.dart';  //分类
 import 'package:fiction/app/pages/My.dart';  //我的
 
@@ -24,7 +24,7 @@ import 'package:fiction/app/pages/My.dart';  //我的
 final routes = {
   '/': (context) => Tabs(),
   '/home': (context) => HomePage(),
-  '/bookshelf': (context) => BookshelfPage(),
+  '/bookshelf': (context) => BookShelfPage(),
   '/categorypage': (context) => CategoryPage(),
   '/mypage': (context) => MyPage(),
   
