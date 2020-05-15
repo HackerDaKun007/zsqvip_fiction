@@ -31,10 +31,9 @@ class MyApp extends StatelessWidget {
         const Locale('zh', 'CH'),
         const Locale('en', 'US'),
       ],
-
       debugShowCheckedModeBanner: false, //移除左上角的图标
-      
       initialRoute: '/', //初始化加载路由
+      
       onGenerateRoute: onGenerateRoute, 
       theme: ThemeData(primaryColor: Colors.white,),
     );

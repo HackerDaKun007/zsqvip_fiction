@@ -1,5 +1,5 @@
 /**
- * @author      dakun007 <dakun007@hotmail.com>  YuriChen <pluto401zz@gmail.com>
+ * @author      dakun007 <dakun007@hotmail.com> 
  * @Remarks     无
  * @copyright   GPL
  * @since       1.0 version
@@ -20,28 +20,30 @@ import 'package:fiction/app/pages/My.dart'; //我的
 //像素
 import 'package:fiction/widget/PixelSize.dart';
 class Tabs extends StatefulWidget{
-  Map arguments;
-  Tabs({Key key, this.arguments}) : super(key: key);
+  // Map arguments;
+  Tabs({Key key}) : super(key: key);
 
   @override
-  _TabsState createState() => _TabsState(arguments: this.arguments);
+  _TabsState createState() => _TabsState();
 }
 
 class _TabsState extends State<Tabs> with PixelSize{
   //控制选中时的数据
   int _currenIndex = 0;
-  Map arguments;
-  _TabsState ({this.arguments}) {
-    this._currenIndex = arguments != null ? this.arguments['index'] : 0;
-  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.transparent,
-      // appBar: HomeTopPage(),
       body: IndexedStack(
         index: this._currenIndex,
-        children: this._pageList,
+        //切换底部导航栏数组页面
+        children: [
+          BookShelfPage(getCurrenIndex: (number) => _getCurren(number) ),
+          HomePage(),
+          CategoryPage(),
+          MyPage(),
+        ],
       ),
       //定义导航组件
       bottomNavigationBar: Container(
@@ -52,39 +54,36 @@ class _TabsState extends State<Tabs> with PixelSize{
           selectedFontSize: 12.0,
           currentIndex: this._currenIndex,
           onTap: (int index) {
-            setState(() {
-              minute += 1;
-              this._currenIndex = index;
-            });
+            _getCurren(index);
           },
           //创建栏目
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Iconfont.book, size: fontSize(20) ),
-              activeIcon: Icon(Iconfont.book_active, size: fontSize(20) ),
+              icon: Icon(Iconfont.book, size: getPixe(20) ),
+              activeIcon: Icon(Iconfont.book_active, size: getPixe(20) ),
               title: Text('书架', style: TextStyle(
-                fontSize: fontSize(13)
+                fontSize: getPixe(13)
               )),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Iconfont.home, size: fontSize(20) ),
-              activeIcon: Icon(Iconfont.home_active, size: fontSize(20) ),
+              icon: Icon(Iconfont.home, size: getPixe(20) ),
+              activeIcon: Icon(Iconfont.home_active, size: getPixe(20) ),
               title: Text('书城', style: TextStyle(
-                fontSize: fontSize(13)
+                fontSize: getPixe(13)
               )),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Iconfont.category, size: fontSize(20) ),
-              activeIcon: Icon(Iconfont.category_active, size: fontSize(20) ),
+              icon: Icon(Iconfont.category, size: getPixe(20) ),
+              activeIcon: Icon(Iconfont.category_active, size: getPixe(20) ),
               title: Text('分类', style: TextStyle(
-                fontSize: fontSize(13)
+                fontSize: getPixe(13)
               )),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Iconfont.mine, size: fontSize(20) ),
-              activeIcon: Icon(Iconfont.mine_active, size: fontSize(20) ),
+              icon: Icon(Iconfont.mine, size: getPixe(20) ),
+              activeIcon: Icon(Iconfont.mine_active, size: getPixe(20) ),
               title: Text('我的', style: TextStyle(
-                fontSize: fontSize(13)
+                fontSize: getPixe(13)
               ),),
             ),
           ],
@@ -94,13 +93,13 @@ class _TabsState extends State<Tabs> with PixelSize{
     );
   }
 
-  //切换底部导航栏数组页面
-  final List<Widget> _pageList = [
-    BookShelfPage(),
-    HomePage(),
-    CategoryPage(),
-    MyPage(),
-  ];
 
+ //修改切换状态数字
+  _getCurren(int number) {
+    setState(() {
+      minute += 1;
+      this._currenIndex = number;
+    });
+  }
 
 }

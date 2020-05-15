@@ -22,7 +22,7 @@ import 'package:fiction/app/pages/top_charts.dart'; // 排行榜
 
 //配置命令路由
 final routes = {
-  '/': (context, {arguments}) => Tabs(arguments:arguments),
+  '/': (context) => Tabs(),
   '/home': (context) => HomePage(),
   '/bookshelf': (context) => BookShelfPage(),
   '/categorypage': (context) => CategoryPage(),

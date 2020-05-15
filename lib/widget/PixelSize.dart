@@ -1,13 +1,19 @@
-// import 'package:flutter/material.dart';
+/**
+ * @author      dakun007 <dakun007@hotmail.com>  YuriChen <pluto401zz@gmail.com>
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ *
+ * @see         定义类型 - 像素大小
+*/
+
 import 'dart:ui';
 
-// import 'package:flutter/cupertino.dart';
-
-//定义类型 - 像素大小
 class PixelSize {
   var win = window.physicalSize; //获取屏幕
 
-  double fontSize(int number) {
+  double getPixe(int number) {
     int defaultValue = 750;
     double width = win.width;
     //  print(width);
