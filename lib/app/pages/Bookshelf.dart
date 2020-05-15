@@ -6,6 +6,7 @@ import 'package:fiction/config/Config.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'package:fiction/fonts/Iconfont.dart';
+
 //阅读分钟
 int minute = 0;
 // int parindex = 0BuildContext context, ;
@@ -20,11 +21,7 @@ class BookShelfPage extends StatefulWidget {
 }
 
 class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
-
   @override
-
-
-
   List<Widget> _arr() {
     List<Widget> list = new List();
     for (var i = 0; i < 100; i++) {
@@ -64,23 +61,19 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
     });
 
     //添加一项追加数据
-    if(listData[(listData.length - 1)]['system'] == null) { //防止数据追加
+    if (listData[(listData.length - 1)]['system'] == null) {
+      //防止数据追加
       //添加书架
       listData.add({
         "title": '',
         "author": '',
-        "imageUrl":'images/jia.png',
+        "imageUrl": 'images/jia.png',
         "system": 1,
       });
-
     }
-    
   }
 
-  
-
   Widget build(BuildContext context) {
-    
     return Stack(
       children: <Widget>[
         MediaQuery.removePadding(
@@ -165,8 +158,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                         ),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            getPixe(30), getPixe(8), 0, 0),
+                        padding:
+                            EdgeInsets.fromLTRB(getPixe(30), getPixe(8), 0, 0),
                         child: Text(
                           '签到',
                           style: TextStyle(
@@ -343,9 +336,13 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                   itemBuilder: (BuildContext context, int index) {
                     return Center(
                       child: GestureDetector(
-                        child: Text(list[index]['title'], style: TextStyle(
-                          fontSize: getPixe(13),color: Color(0x99333333),
-                        ),),
+                        child: Text(
+                          list[index]['title'],
+                          style: TextStyle(
+                            fontSize: getPixe(13),
+                            color: Color(0x99333333),
+                          ),
+                        ),
                         onTap: () {
                           print(list[index]['title']);
                         },
@@ -360,7 +357,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
           Container(
             width: getPixe(30),
             // color: Colors.yellow,
-            child: Icon(Icons.keyboard_arrow_right, size: getPixe(20),color: Color(0x99333333)),
+            child: Icon(Icons.keyboard_arrow_right,
+                size: getPixe(20), color: Color(0x99333333)),
           ),
         ],
       ),
@@ -385,7 +383,6 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
 
   //内容模块
   Widget _content() {
-    
     return Padding(
       padding: EdgeInsets.all(10),
       child: GridView.builder(
@@ -402,76 +399,93 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
       ),
     );
   }
+
   Widget _getListData(context, index) {
     int dataLength = (listData.length - 1);
-    if(index == dataLength) {
-       return Container(
+    if (index == dataLength) {
+      return Container(
         child: GestureDetector(
-      child: Column(
-        children: <Widget>[
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusDirectional.circular(5),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Image.asset(
-              listData[index]['imageUrl'],
-            ),
+          child: Column(
+            children: <Widget>[
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusDirectional.circular(5),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: Image.asset(
+                  listData[index]['imageUrl'],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                child: Text(
+                  listData[index]['title'],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black, fontSize: getPixe(12)),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
           ),
-          Container(
-            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-            child: Text(
-              listData[index]['title'],
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.black, fontSize: getPixe(12)),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
-      ),
-      onTap: () {
-        //修改父级组件
-        widget.getCurrenIndex(1);
-      },
-    ),
- 
-    );
+          onTap: () {
+            //修改父级组件
+            widget.getCurrenIndex(1);
+          },
+        ),
+      );
     } else {
       return Container(
         child: GestureDetector(
-      child: Column(
-        children: <Widget>[
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusDirectional.circular(5),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Image.network(
-              listData[index]['imageUrl'],
-            ),
+          child: Column(
+            children: <Widget>[
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusDirectional.circular(5),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: Image.network(
+                  listData[index]['imageUrl'],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      listData[index]['ad'] == 1 ? "[广告]" : "",
+                      style: TextStyle(
+                        color: Color(0x99C9C9C9),
+                        fontSize: getPixe(9),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        listData[index]['title'],
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            color: Colors.black, fontSize: getPixe(12)),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Container(
-            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-            child: Text(
-              listData[index]['title'],
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.black, fontSize: getPixe(12)),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
-      ),
-      onTap: () {
-        print(index);
-        print(listData.length);
-      },
-    ),
- 
-    );
+          onTap: () {
+            if (listData[index]['ad'] == 1) {
+              print('广告');
+            } else {
+              print(listData[index]['title']);
+            }
+            
+          },
+        ),
+      );
     }
-    
   }
 
   //底部广告位置
@@ -494,5 +508,4 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
       ),
     );
   }
-
 }
