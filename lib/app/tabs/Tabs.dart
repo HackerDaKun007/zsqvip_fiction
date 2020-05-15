@@ -1,6 +1,6 @@
 import 'package:fiction/app/tabs/tabs_icon.dart';
 /**
- * @author      dakun007 <dakun007@hotmail.com>  Yuri Chen <pluto401zz@gmail.com>
+ * @author      dakun007 <dakun007@hotmail.com>  YuriChen <pluto401zz@gmail.com>
  * @Remarks     无
  * @copyright   GPL
  * @since       1.0 version
