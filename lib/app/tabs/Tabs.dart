@@ -1,5 +1,6 @@
+import 'package:fiction/app/tabs/tabs_icon.dart';
 /**
- * @author      dakun007 <dakun007@hotmail.com>
+ * @author      dakun007 <dakun007@hotmail.com>  Yuri Chen <pluto401zz@gmail.com>
  * @Remarks     无
  * @copyright   GPL
  * @since       1.0 version
@@ -62,8 +63,8 @@ class _TabsState extends State<Tabs> {
 
   //切换底部导航栏数组页面
   final List<Widget> _pageList = [
-    HomePage(),
     BookshelfPage(),
+    HomePage(),
     CategoryPage(),
     MyPage(),
   ];
@@ -71,21 +72,25 @@ class _TabsState extends State<Tabs> {
   //底部导航栏按钮
   final List<BottomNavigationBarItem> _items = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
-      icon: Icon(Icons.call_to_action),
+      icon: Icon(MyIcons.book, ),
+      activeIcon: Icon(MyIcons.book_active,),
       title: Text('书架'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.storage),
-      title: Text('书城'),
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.category),
-      title: Text('分类'),
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.perm_identity),
-      title: Text('我的'),
-    ),
+      icon: Icon(MyIcons.home, ),
+      activeIcon: Icon(MyIcons.home_active, ),
+      title: Text('书城')
+      ),
+      BottomNavigationBarItem(
+      icon: Icon(MyIcons.category, ),
+      activeIcon: Icon(MyIcons.category_active, ),
+      title: Text('分类')
+      ),
+      BottomNavigationBarItem(
+      icon: Icon(MyIcons.mine, ),
+      activeIcon: Icon(MyIcons.mine_active, ),
+      title: Text('我的')
+      ),
   ];
 
 }
