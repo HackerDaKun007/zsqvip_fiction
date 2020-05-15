@@ -333,20 +333,29 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                 child: Swiper(
                   itemCount: list.length,
                   autoplay: true, //自动播放
+                  // scrollDirection: Axis.vertical,
+                  // autoplayDisableOnInteraction:false,
+                  // onIndexChanged: (index) {
+                  //   print(index);
+                  // },
+                  duration: 500,
+                  autoplayDelay: 5000,
+                  // autoplayDisableOnInteraction: true,
+                  onTap: (index) {
+                    print(list[index]['title']);
+                  },
                   itemBuilder: (BuildContext context, int index) {
                     return Center(
-                      child: GestureDetector(
                         child: Text(
                           list[index]['title'],
                           style: TextStyle(
                             fontSize: getPixe(13),
                             color: Color(0x99333333),
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis
                         ),
-                        onTap: () {
-                          print(list[index]['title']);
-                        },
-                      ),
+                       
                     );
                   },
                 ),
