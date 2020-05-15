@@ -17,8 +17,8 @@ import 'package:fiction/app/pages/Bookshelf.dart';  //书成
 import 'package:fiction/app/pages/Category.dart';  //分类
 import 'package:fiction/app/pages/My.dart';  //我的
 
-//晓镘配置_路由区域
-
+//Yuri配置_路由区域
+import 'package:fiction/app/pages/top_charts.dart'; // 排行榜
 
 //配置命令路由
 final routes = {
@@ -27,6 +27,7 @@ final routes = {
   '/bookshelf': (context) => BookshelfPage(),
   '/categorypage': (context) => CategoryPage(),
   '/mypage': (context) => MyPage(),
+  '/topcharts': (context) => TopChartsPage(),
   
 };
 

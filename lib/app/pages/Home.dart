@@ -8,6 +8,7 @@
  * @see         书城页面
 */
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 // import 'package:novel_flutter/pages/search_page/search_page.dart';
@@ -138,12 +139,23 @@ class _HomeBodyState extends State<HomeBody> {
               title: '分类',
             ),
             _getCustomNavBarItem(
-              imageUrl: 'images/paihang.png',
-              title: '排行榜',
-              // route: SortPage(),
-            ),
+                imageUrl: 'images/paihang.png',
+                title: '排行榜',
+                onTapHandler: () {
+                  Navigator.of(context).pushNamed('/topcharts');
+                }),
             _getCustomNavBarItem(
-                imageUrl: 'images/bookopen.png', title: '随便看看'),
+                imageUrl: 'images/bookopen.png',
+                title: '随便看看',
+                onTapHandler: () {
+                  return showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Dialog(
+                            backgroundColor: Colors.white,
+                            child: _showRandomBookDialog(context));
+                      });
+                }),
             _getCustomNavBarItem(
               imageUrl: 'images/booklist.png',
               title: '书单',
@@ -154,13 +166,12 @@ class _HomeBodyState extends State<HomeBody> {
   }
 
   // 导航栏单按钮
-  Widget _getCustomNavBarItem({String title, String imageUrl, Widget route}) {
+  Widget _getCustomNavBarItem(
+      {String title, String imageUrl, Function onTapHandler}) {
     return InkWell(
         onTap: () {
-          if (route != null) {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return route;
-            }));
+          if (onTapHandler != null) {
+            return onTapHandler();
           }
         },
         child: Column(
@@ -292,7 +303,10 @@ class _HomeBodyState extends State<HomeBody> {
                 Container(
                     padding: EdgeInsets.only(right: 20 * rpx),
                     child: InkWell(
-                      onTap: () {print('=========== pressed to change list content ==========');},
+                      onTap: () {
+                        print(
+                            '=========== pressed to change list content ==========');
+                      },
                       child: Row(
                         children: <Widget>[
                           Text(
@@ -344,7 +358,8 @@ class _HomeBodyState extends State<HomeBody> {
                           'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
                       bookActivityCount: 50,
                       bookCategory: ['现代', '传奇'],
-                      bookDesc: '测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据',
+                      bookDesc:
+                          '测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据',
                     ),
                   ],
                 ))
@@ -371,31 +386,119 @@ class _HomeBodyState extends State<HomeBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 BookContentWidget(
-                  bookName: '无无无',
-                  imageUrl:
-                      'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                  bookActivityCount: 45,
-                  bookCategory: ['仙侠', '传奇'],
-                  bookDesc: '测试数据',
-                  isInfinity: true
-                ),
+                    bookName: '无无无',
+                    imageUrl:
+                        'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
+                    bookActivityCount: 45,
+                    bookCategory: ['仙侠', '传奇'],
+                    bookDesc: '测试数据',
+                    isInfinity: true),
                 BookContentWidget(
-                  bookName: '无无无',
-                  imageUrl:
-                      'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                  bookActivityCount: 45,
-                  bookCategory: ['仙侠', '传奇'],
-                  bookDesc: '测试数据',
-                  isInfinity: true
-
-                ),
+                    bookName: '无无无',
+                    imageUrl:
+                        'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
+                    bookActivityCount: 45,
+                    bookCategory: ['仙侠', '传奇'],
+                    bookDesc: '测试数据',
+                    isInfinity: true),
               ],
             )
           ]),
     );
   }
-}
 
+  /// 随便看看弹框
+  Widget _showRandomBookDialog(context) {
+    return Container(
+      height: 620 * rpx,
+      width: 450 * rpx,
+      padding: EdgeInsets.fromLTRB(30 * rpx, 10 * rpx, 10 * rpx, 10 * rpx),
+      child: Stack(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                      padding:
+                          EdgeInsets.fromLTRB(0, 20 * rpx, 20 * rpx, 20 * rpx),
+                      child: Column(
+                        children: <Widget>[
+                          Material(
+                            elevation: 8,
+                            color: Colors.transparent,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8 * rpx),
+                              child: Image.network(
+                                  'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
+                                  height: 190 * rpx,
+                                  fit: BoxFit.fill),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20 * rpx,
+                          ),
+                          Text(
+                            '无无无',
+                            style: TextStyle(
+                                fontSize: 36 * rpx,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 10 * rpx,
+                          ),
+                          Text(
+                            '无无',
+                            style: TextStyle(
+                                color: Colors.grey, fontSize: 26 * rpx),
+                          ),
+                          SizedBox(
+                            height: 10 * rpx,
+                          ),
+                          Text(
+                            '测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据',
+                            style: TextStyle(
+                                color: Colors.black54, fontSize: 26 * rpx),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        ],
+                      )),
+                ),
+                Container(
+                    padding: EdgeInsets.only(right: 20 * rpx),
+                    width: 450 * rpx,
+                    child: FlatButton(
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      // padding: EdgeInsets.symmetric(horizontal:150*rpx),
+                      child: Text('立即阅读'),
+                      onPressed: () {
+                        print('====== pressed =====');
+                      },
+                    ))
+              ],
+            ),
+          ),
+          Positioned(
+              top: 0,
+              right: 0,
+              child: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.close,
+                  color: Colors.grey,
+                ),
+              ))
+        ],
+      ),
+    );
+  }
+}
 
 // 书本信息展示
 class BookContentWidget extends StatelessWidget {
@@ -414,8 +517,7 @@ class BookContentWidget extends StatelessWidget {
       this.bookCategory,
       this.bookActivityCount,
       this.isElevation = false,
-      this.isInfinity = false
-      });
+      this.isInfinity = false});
 
   @override
   Widget build(BuildContext context) {
@@ -423,7 +525,7 @@ class BookContentWidget extends StatelessWidget {
     return Container(
         width: 750 * rpx,
         height: 190 * rpx,
-        margin: EdgeInsets.only(bottom: isInfinity ? 50*rpx : 0* rpx),
+        margin: EdgeInsets.only(bottom: isInfinity ? 50 * rpx : 0 * rpx),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
