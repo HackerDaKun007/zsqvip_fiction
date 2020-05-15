@@ -1,5 +1,5 @@
 import 'package:fiction/res/listData.dart';
-import 'package:fiction/widget/PixelSize.dart'; //像素插件
+import 'package:fiction/widget/Pixelsize.dart'; //像素插件
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:fiction/config/Config.dart';

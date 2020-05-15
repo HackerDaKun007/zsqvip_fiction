@@ -18,7 +18,7 @@ import 'package:fiction/app/pages/Category.dart'; //分类
 import 'package:fiction/app/pages/My.dart'; //我的
 
 //像素
-import 'package:fiction/widget/PixelSize.dart';
+import 'package:fiction/widget/Pixelsize.dart';
 class Tabs extends StatefulWidget{
   // Map arguments;
   Tabs({Key key}) : super(key: key);
