@@ -27,7 +27,6 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
     }
     return list;
   }
-  // var a = new PixelSize();
 
   final int appbarAlpha = 100; //滚动最大值
   //修改顶部透明值

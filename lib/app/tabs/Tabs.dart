@@ -1,5 +1,6 @@
+import 'package:fiction/app/tabs/tabs_icon.dart';
 /**
- * @author      dakun007 <dakun007@hotmail.com>
+ * @author      dakun007 <dakun007@hotmail.com>  Yuri Chen <pluto401zz@gmail.com>
  * @Remarks     无
  * @copyright   GPL
  * @since       1.0 version
@@ -59,25 +60,29 @@ class _TabsState extends State<Tabs> with PixelSize{
           //创建栏目
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.call_to_action, size: fontSize(20) ),
+              icon: Icon(MyIcons.home, size: fontSize(20) ),
+              activeIcon: Icon(MyIcons.home_active, size: fontSize(20) ),
               title: Text('书架', style: TextStyle(
                 fontSize: fontSize(13)
               )),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.storage, size: fontSize(20) ),
+              icon: Icon(MyIcons.book, size: fontSize(20) ),
+              activeIcon: Icon(MyIcons.book, size: fontSize(20) ),
               title: Text('书城', style: TextStyle(
                 fontSize: fontSize(13)
               )),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.category, size: fontSize(20) ),
+              icon: Icon(MyIcons.category, size: fontSize(20) ),
+              activeIcon: Icon(MyIcons.category_active, size: fontSize(20) ),
               title: Text('分类', style: TextStyle(
                 fontSize: fontSize(13)
               )),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.perm_identity, size: fontSize(20) ),
+              icon: Icon(MyIcons.mine, size: fontSize(20) ),
+              activeIcon: Icon(MyIcons.mine_active, size: fontSize(20) ),
               title: Text('我的', style: TextStyle(
                 fontSize: fontSize(13)
               ),),
