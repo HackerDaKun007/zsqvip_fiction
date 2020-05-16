@@ -52,7 +52,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
     // double screenWidth = MediaQuery.of(context).size.width;
     // print(screenWidth);
     // rpx = screenWidth / 750;
-    print(getPixe(50, context));
+    // print(getPixe(50, context));
     // getPixe(12);
   }
 
@@ -129,7 +129,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                   Column(
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, getPixe(100, context), 0, 0),
+                        padding:
+                            EdgeInsets.fromLTRB(0, getPixe(100, context), 0, 0),
                         child: Text(
                           '${minute}',
                           style: TextStyle(fontSize: getPixe(50, context)),
@@ -160,8 +161,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                         ),
                       ),
                       child: Padding(
-                        padding:
-                            EdgeInsets.fromLTRB(getPixe(30, context), getPixe(8, context), 0, 0),
+                        padding: EdgeInsets.fromLTRB(
+                            getPixe(30, context), getPixe(8, context), 0, 0),
                         child: Text(
                           '签到',
                           style: TextStyle(
@@ -194,7 +195,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
           width: double.infinity,
           color: Colors.white,
           child: Padding(
-            padding: EdgeInsets.fromLTRB(getPixe(10, context), getPixe(40, context), 0, 0),
+            padding: EdgeInsets.fromLTRB(
+                getPixe(10, context), getPixe(40, context), 0, 0),
             child: Row(
               children: <Widget>[
                 Text('今天阅读'),
@@ -253,8 +255,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                 onPressed: () {
                   showMenu(
                       context: context,
-                      position: RelativeRect.fromLTRB(
-                          getPixe(500, context), getPixe(70, context), getPixe(10, context), 0),
+                      position: RelativeRect.fromLTRB(getPixe(500, context),
+                          getPixe(70, context), getPixe(10, context), 0),
                       items: [
                         PopupMenuItem(
                           child: Row(
@@ -265,11 +267,12 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                                 size: getPixe(21, context),
                               ),
                               Container(
-                                padding:
-                                    EdgeInsets.fromLTRB(getPixe(10, context), 0, 0, 0),
+                                padding: EdgeInsets.fromLTRB(
+                                    getPixe(10, context), 0, 0, 0),
                                 child: Text(
                                   "记录",
-                                  style: TextStyle(fontSize: getPixe(14, context)),
+                                  style:
+                                      TextStyle(fontSize: getPixe(14, context)),
                                 ),
                               )
                             ],
@@ -284,11 +287,12 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                                 size: getPixe(21, context),
                               ),
                               Container(
-                                padding:
-                                    EdgeInsets.fromLTRB(getPixe(11, context), 0, 0, 0),
+                                padding: EdgeInsets.fromLTRB(
+                                    getPixe(11, context), 0, 0, 0),
                                 child: Text(
                                   "编辑",
-                                  style: TextStyle(fontSize: getPixe(14, context)),
+                                  style:
+                                      TextStyle(fontSize: getPixe(14, context)),
                                 ),
                               )
                             ],
@@ -348,16 +352,13 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                   },
                   itemBuilder: (BuildContext context, int index) {
                     return Center(
-                        child: Text(
-                          list[index]['title'],
+                      child: Text(list[index]['title'],
                           style: TextStyle(
                             fontSize: getPixe(13, context),
                             color: Color(0x99333333),
                           ),
                           maxLines: 1,
-                          overflow: TextOverflow.ellipsis
-                        ),
-                       
+                          overflow: TextOverflow.ellipsis),
                     );
                   },
                 ),
@@ -388,7 +389,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
             BoxShadow(color: Color(0x99e7e7e7), offset: Offset(1.0, 1.0)),
             BoxShadow(color: Color(0x99e7e7e7))
           ]),
-      margin: EdgeInsets.fromLTRB(getPixe(25, context), 0, getPixe(25, context), getPixe(10, context)),
+      margin: EdgeInsets.fromLTRB(
+          getPixe(25, context), 0, getPixe(25, context), getPixe(10, context)),
     );
   }
 
@@ -432,7 +434,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                 child: Text(
                   listData[index]['title'],
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black, fontSize: getPixe(12, context)),
+                  style: TextStyle(
+                      color: Colors.black, fontSize: getPixe(12, context)),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -446,6 +449,31 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
         ),
       );
     } else {
+      //验证是否更新，并且是否点击查看过
+      _isUpdate() {
+        if (listData[index]['click'] == 0 &&
+            listData[index]['chapter'] > listData[index]['watched_chapter'] && listData[index]['ad'] == 0) {
+          return Positioned(
+            top: getPixe(10, context),
+            left: 0,
+            child: Container(
+              width: getPixe(40, context),
+              height: getPixe(20, context),
+              color: Config.color,
+              child: Center(
+                child: Text(
+                  '更新',
+                  style: TextStyle(
+                      fontSize: getPixe(12, context), color: Colors.white),
+                ),
+              ),
+            ),
+          );
+        } else {
+          return Text('');
+        }
+      }
+
       return Container(
         child: GestureDetector(
           child: Column(
@@ -460,11 +488,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                     Image.network(
                       listData[index]['imageUrl'],
                     ),
-                    Positioned(
-                      top: 10,
-                      left: 0,
-                      child: Text('12'),
-                    ),
+                    _isUpdate(),
                   ],
                 ),
               ),
@@ -485,7 +509,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                         listData[index]['title'],
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            color: Colors.black, fontSize: getPixe(12, context)),
+                            color: Colors.black,
+                            fontSize: getPixe(12, context)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -500,8 +525,10 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
               print('广告');
             } else {
               print(listData[index]['title']);
+              setState(() {
+                listData[index]['click'] = 1;
+              });
             }
-            
           },
         ),
       );
