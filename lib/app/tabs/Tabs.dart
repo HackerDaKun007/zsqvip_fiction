@@ -40,7 +40,7 @@ class _TabsState extends State<Tabs> with PixelSize{
         //切换底部导航栏数组页面
         children: [
           BookShelfPage(getCurrenIndex: (number) => _getCurren(number) ),
-          HomePage(),
+          HomePage(getCurrenIndex: (number) => _getCurren(number)),
           CategoryPage(),
           MyPage(),
         ],

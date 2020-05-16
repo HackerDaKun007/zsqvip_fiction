@@ -1,3 +1,5 @@
+import 'package:fiction/app/book_list/book_list_detail.dart';
+import 'package:fiction/app/book_list/book_list_page.dart';
 /**
  * @author      dakun007 <dakun007@hotmail.com>
  * @Remarks     无
@@ -32,6 +34,8 @@ final routes = {
 
   //Yuri配置_路由区域
   '/topcharts': (context) => TopChartsPage(),
+  '/booklist': (context) => BookListPage(),
+  '/booklistdetail': (context, {arguments}) => BookListDetail(arguments:arguments),
   
 };
 

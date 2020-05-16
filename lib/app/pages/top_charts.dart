@@ -1,3 +1,14 @@
+/*
+ * @author      Yuri Chen <pluto401zz@gmail.com>
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ * 
+ * @see         排行榜页面
+*/
+
+
 import 'package:fiction/res/topChartsData.dart';
 import 'package:flutter/material.dart';
 
@@ -69,6 +80,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> {
   double rpx;
   int indexItem;
   List _chartsData;
+
   @override
   void initState() {
     super.initState();
