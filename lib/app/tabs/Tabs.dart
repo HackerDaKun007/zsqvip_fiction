@@ -59,31 +59,31 @@ class _TabsState extends State<Tabs> with PixelSize{
           //创建栏目
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Iconfont.book, size: getPixe(20) ),
-              activeIcon: Icon(Iconfont.book_active, size: getPixe(20) ),
+              icon: Icon(Iconfont.book, size: getPixe(20, context) ),
+              activeIcon: Icon(Iconfont.book_active, size: getPixe(20, context) ),
               title: Text('书架', style: TextStyle(
-                fontSize: getPixe(13)
+                fontSize: getPixe(13, context)
               )),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Iconfont.home, size: getPixe(20) ),
-              activeIcon: Icon(Iconfont.home_active, size: getPixe(20) ),
+              icon: Icon(Iconfont.home, size: getPixe(20, context) ),
+              activeIcon: Icon(Iconfont.home_active, size: getPixe(20, context) ),
               title: Text('书城', style: TextStyle(
-                fontSize: getPixe(13)
+                fontSize: getPixe(13, context)
               )),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Iconfont.category, size: getPixe(20) ),
-              activeIcon: Icon(Iconfont.category_active, size: getPixe(20) ),
+              icon: Icon(Iconfont.category, size: getPixe(20, context) ),
+              activeIcon: Icon(Iconfont.category_active, size: getPixe(20, context) ),
               title: Text('分类', style: TextStyle(
-                fontSize: getPixe(13)
+                fontSize: getPixe(13, context)
               )),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Iconfont.mine, size: getPixe(20) ),
-              activeIcon: Icon(Iconfont.mine_active, size: getPixe(20) ),
+              icon: Icon(Iconfont.mine, size: getPixe(20, context) ),
+              activeIcon: Icon(Iconfont.mine_active, size: getPixe(20, context) ),
               title: Text('我的', style: TextStyle(
-                fontSize: getPixe(13)
+                fontSize: getPixe(13, context)
               ),),
             ),
           ],

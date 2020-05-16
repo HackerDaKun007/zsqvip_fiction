@@ -49,8 +49,10 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
     });
     // print(Config.domain);
     // print(window.physicalSize.width);
-
-    // print(getPixe(12));
+    // double screenWidth = MediaQuery.of(context).size.width;
+    // print(screenWidth);
+    // rpx = screenWidth / 750;
+    print(getPixe(50, context));
     // getPixe(12);
   }
 
@@ -115,7 +117,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
           fit: BoxFit.cover,
         ),
       ),
-      height: getPixe(220),
+      height: getPixe(220, context),
       width: double.infinity,
       child: Column(
         children: <Widget>[
@@ -127,15 +129,15 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                   Column(
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, getPixe(100), 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, getPixe(100, context), 0, 0),
                         child: Text(
                           '${minute}',
-                          style: TextStyle(fontSize: getPixe(50)),
+                          style: TextStyle(fontSize: getPixe(50, context)),
                         ),
                       ),
                       Text(
                         '今日已读 / 分钟',
-                        style: TextStyle(fontSize: getPixe(12)),
+                        style: TextStyle(fontSize: getPixe(12, context)),
                       ),
                     ],
                   ),
@@ -148,8 +150,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                 padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
                 child: GestureDetector(
                   child: Container(
-                      height: getPixe(30),
-                      width: getPixe(70),
+                      height: getPixe(30, context),
+                      width: getPixe(70, context),
                       // color: Colors.white,
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -159,11 +161,11 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                       ),
                       child: Padding(
                         padding:
-                            EdgeInsets.fromLTRB(getPixe(30), getPixe(8), 0, 0),
+                            EdgeInsets.fromLTRB(getPixe(30, context), getPixe(8, context), 0, 0),
                         child: Text(
                           '签到',
                           style: TextStyle(
-                            fontSize: getPixe(12),
+                            fontSize: getPixe(12, context),
                           ),
                         ),
                       )),
@@ -188,11 +190,11 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
       child: Opacity(
         opacity: this.appBarAlpha,
         child: Container(
-          height: getPixe(70),
+          height: getPixe(70, context),
           width: double.infinity,
           color: Colors.white,
           child: Padding(
-            padding: EdgeInsets.fromLTRB(getPixe(10), getPixe(40), 0, 0),
+            padding: EdgeInsets.fromLTRB(getPixe(10, context), getPixe(40, context), 0, 0),
             child: Row(
               children: <Widget>[
                 Text('今天阅读'),
@@ -200,7 +202,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                   padding: EdgeInsets.fromLTRB(3, 0, 3, 6),
                   child: Text("${minute}",
                       style: TextStyle(
-                          fontSize: getPixe(20), color: Colors.black)),
+                          fontSize: getPixe(20, context), color: Colors.black)),
                 ),
                 Text('分钟'),
               ],
@@ -216,9 +218,9 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
     return Align(
       alignment: Alignment.topRight,
       child: Container(
-        height: getPixe(70),
+        height: getPixe(70, context),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(0, getPixe(35), 10, 0),
+          padding: EdgeInsets.fromLTRB(0, getPixe(35, context), 10, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
@@ -235,7 +237,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
               IconButton(
                 icon: Icon(
                   Iconfont.sousuo,
-                  size: getPixe(20),
+                  size: getPixe(20, context),
                   color: Color(0xFF000000),
                 ),
                 onPressed: () {
@@ -245,14 +247,14 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
               IconButton(
                 icon: Icon(
                   Iconfont.youcecaidan,
-                  size: getPixe(20),
+                  size: getPixe(20, context),
                   color: Color(0xFF000000),
                 ),
                 onPressed: () {
                   showMenu(
                       context: context,
                       position: RelativeRect.fromLTRB(
-                          getPixe(500), getPixe(70), getPixe(10), 0),
+                          getPixe(500, context), getPixe(70, context), getPixe(10, context), 0),
                       items: [
                         PopupMenuItem(
                           child: Row(
@@ -260,14 +262,14 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                               Icon(
                                 Icons.history,
                                 color: Colors.blue,
-                                size: getPixe(21),
+                                size: getPixe(21, context),
                               ),
                               Container(
                                 padding:
-                                    EdgeInsets.fromLTRB(getPixe(10), 0, 0, 0),
+                                    EdgeInsets.fromLTRB(getPixe(10, context), 0, 0, 0),
                                 child: Text(
                                   "记录",
-                                  style: TextStyle(fontSize: getPixe(14)),
+                                  style: TextStyle(fontSize: getPixe(14, context)),
                                 ),
                               )
                             ],
@@ -279,14 +281,14 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                               Icon(
                                 Iconfont.bianji,
                                 color: Colors.blue,
-                                size: getPixe(21),
+                                size: getPixe(21, context),
                               ),
                               Container(
                                 padding:
-                                    EdgeInsets.fromLTRB(getPixe(11), 0, 0, 0),
+                                    EdgeInsets.fromLTRB(getPixe(11, context), 0, 0, 0),
                                 child: Text(
                                   "编辑",
-                                  style: TextStyle(fontSize: getPixe(14)),
+                                  style: TextStyle(fontSize: getPixe(14, context)),
                                 ),
                               )
                             ],
@@ -316,12 +318,12 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
         children: <Widget>[
           Container(
             // color: Colors.yellow,
-            width: getPixe(40),
+            width: getPixe(40, context),
             child: Center(
               child: Icon(
                 Iconfont.remen,
                 color: Colors.red,
-                size: getPixe(18),
+                size: getPixe(18, context),
               ),
             ),
           ),
@@ -349,7 +351,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                         child: Text(
                           list[index]['title'],
                           style: TextStyle(
-                            fontSize: getPixe(13),
+                            fontSize: getPixe(13, context),
                             color: Color(0x99333333),
                           ),
                           maxLines: 1,
@@ -361,18 +363,18 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                 ),
               )),
           SizedBox(
-            width: getPixe(10),
+            width: getPixe(10, context),
           ),
           Container(
-            width: getPixe(30),
+            width: getPixe(30, context),
             // color: Colors.yellow,
             child: Icon(Icons.keyboard_arrow_right,
-                size: getPixe(20), color: Color(0x99333333)),
+                size: getPixe(20, context), color: Color(0x99333333)),
           ),
         ],
       ),
       // color: Colors.white,
-      height: getPixe(37),
+      height: getPixe(37, context),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(4.0)),
@@ -386,7 +388,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
             BoxShadow(color: Color(0x99e7e7e7), offset: Offset(1.0, 1.0)),
             BoxShadow(color: Color(0x99e7e7e7))
           ]),
-      margin: EdgeInsets.fromLTRB(getPixe(25), 0, getPixe(25), getPixe(10)),
+      margin: EdgeInsets.fromLTRB(getPixe(25, context), 0, getPixe(25, context), getPixe(10, context)),
     );
   }
 
@@ -430,7 +432,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                 child: Text(
                   listData[index]['title'],
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black, fontSize: getPixe(12)),
+                  style: TextStyle(color: Colors.black, fontSize: getPixe(12, context)),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -453,8 +455,17 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                   borderRadius: BorderRadiusDirectional.circular(5),
                 ),
                 clipBehavior: Clip.antiAlias,
-                child: Image.network(
-                  listData[index]['imageUrl'],
+                child: Stack(
+                  children: <Widget>[
+                    Image.network(
+                      listData[index]['imageUrl'],
+                    ),
+                    Positioned(
+                      top: 10,
+                      left: 0,
+                      child: Text('12'),
+                    ),
+                  ],
                 ),
               ),
               Container(
@@ -465,7 +476,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                       listData[index]['ad'] == 1 ? "[广告]" : "",
                       style: TextStyle(
                         color: Color(0x99C9C9C9),
-                        fontSize: getPixe(9),
+                        fontSize: getPixe(9, context),
                       ),
                     ),
                     Expanded(
@@ -474,7 +485,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                         listData[index]['title'],
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            color: Colors.black, fontSize: getPixe(12)),
+                            color: Colors.black, fontSize: getPixe(12, context)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -500,11 +511,11 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   //底部广告位置
   Widget _bottomAd() {
     return Positioned(
-      bottom: getPixe(20),
+      bottom: getPixe(20, context),
       right: 20,
       child: Container(
-        width: getPixe(60),
-        height: getPixe(60),
+        width: getPixe(60, context),
+        height: getPixe(60, context),
         child: GestureDetector(
           child: Center(
             child: Text('广告位置'),
