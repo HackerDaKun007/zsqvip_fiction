@@ -176,6 +176,23 @@ class _SortPageContainerState extends State<SortPageContainer> {
   }
 
   Widget _getListItem(index, rpx) {
+    int topNum = 0;
+    List<Color> flagColors = [];
+    switch (index) {
+      case 0:
+        topNum = 1;
+        flagColors = [Color(0xffff1055), Color(0xfff99185)];
+        break;
+      case 1:
+        topNum = 2;
+        flagColors = [Color(0xffff5858), Color(0xfff9d423)];
+        break;
+      case 2:
+        topNum = 3;
+        flagColors = [Color(0xfffda085), Color(0xfff6d365)];
+        break;
+      default:
+    }
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -206,9 +223,15 @@ class _SortPageContainerState extends State<SortPageContainer> {
                     child: Container(
                       width: 35 * rpx,
                       padding: EdgeInsets.symmetric(vertical: 10 * rpx),
-                      color: Colors.pink,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: flagColors,
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight
+                        )
+                      ),
                       child: Text(
-                        '${index + 1}',
+                        '$topNum',
                         style: TextStyle(color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
