@@ -11,6 +11,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+
+import '../../fonts/Iconfont.dart';
 // import 'package:novel_flutter/pages/search_page/search_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -30,7 +32,7 @@ class HomePage extends StatelessWidget {
                 readOnly: true,
                 decoration: InputDecoration(
                     icon: Icon(
-                      Icons.search,
+                      Iconfont.sousuo,
                       color: Color(0xffb5b5b5),
                     ),
                     hintText: '搜索书名或作者',
