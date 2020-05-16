@@ -10,17 +10,16 @@
 
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
+
 class PixelSize {
   var win = window.physicalSize; //获取屏幕
 
-  double getPixe(int number) {
+  //返回正常的像素大小
+  double getPixe(int number, var context) {
     int defaultValue = 750;
-    double width = win.width;
-    // if(width >= 1080) { //针对大屏幕优化和苹果8p
-    //   width = width - 200;
-    // } 
-    print(width);
-    return number * (width / defaultValue);
+    double width = MediaQuery.of(context).size.width;
+    return (number * 1.817) * (width / defaultValue);
   }
 
 } 
