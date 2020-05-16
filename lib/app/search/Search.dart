@@ -95,6 +95,9 @@ class _SearchState extends State<Search> with PixelSize {
                 //最近搜索
                 SizedBox(height: getPixe(10, context)),
                 this._getRecentTitle(),
+                SizedBox(height: getPixe(10, context)),
+                //搜索记录
+                this._getRecentContent(),
               ],
             ),
             // SizedBox(height: getPixe(10, context)),
@@ -154,9 +157,7 @@ class _SearchState extends State<Search> with PixelSize {
   Widget _getEveryoneContent() {
     return Wrap(
       spacing: getPixe(10, context),
-      // runSpacing: getPixe(5, context),
       alignment: WrapAlignment.start,
-      // direction: Axis.vertical,
       children: <Widget>[
         this._myButton('你好', 0),
         this._myButton('你好', 0),
@@ -210,7 +211,20 @@ class _SearchState extends State<Search> with PixelSize {
           ],
     );
   }
-
+  //大家都在搜索内容
+  Widget _getRecentContent() {
+    return Wrap(
+      spacing: getPixe(10, context),
+      alignment: WrapAlignment.start,
+      children: <Widget>[
+        this._myButton('你好', 0),
+        this._myButton('你好', 0),
+        this._myButton('你好', 0),
+        this._myButton('你好', 0),
+        this._myButton('你好2312312', 0),
+      ],
+    );
+  }
   //公共点击按钮点击事件
   Widget _myButton(String text, int isIcon) {
     _isIconValidata() {

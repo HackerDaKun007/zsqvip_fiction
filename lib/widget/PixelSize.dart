@@ -21,6 +21,7 @@ class PixelSize {
     int defaultValue = 750;
     if (Config.width == 0.0) {
       Config.width = MediaQuery.of(context).size.width;
+      // print(Config.width);
     }
     return (number * 1.83) * (Config.width / defaultValue);
   }
