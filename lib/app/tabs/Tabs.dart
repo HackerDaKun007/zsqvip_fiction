@@ -49,7 +49,7 @@ class _TabsState extends State<Tabs> with PixelSize{
       bottomNavigationBar: Container(
         child: BottomNavigationBar(
            type: BottomNavigationBarType.fixed, //未选中显示字体
-          fixedColor: Colors.blue[400],
+          fixedColor: Config.color,
           unselectedItemColor:Colors.grey,
           selectedFontSize: 12.0,
           currentIndex: this._currenIndex,

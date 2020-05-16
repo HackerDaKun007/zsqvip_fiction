@@ -8,18 +8,21 @@
  * @see         定义类型 - 像素大小
 */
 
-import 'dart:ui';
+// import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
-
+import 'package:fiction/config/Config.dart';
 class PixelSize {
-  var win = window.physicalSize; //获取屏幕
+  // var win = window.physicalSize; //获取屏幕
 
   //返回正常的像素大小
-  double getPixe(int number, var context) {
+  double getPixe(int number, BuildContext context) {
+
     int defaultValue = 750;
-    double width = MediaQuery.of(context).size.width;
-    return (number * 1.817) * (width / defaultValue);
+    if (Config.width == 0.0) {
+      Config.width = MediaQuery.of(context).size.width;
+    }
+    return (number * 1.83) * (Config.width / defaultValue);
   }
 
 } 
