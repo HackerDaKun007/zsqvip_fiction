@@ -44,9 +44,7 @@ class _BookListDetailState extends State<BookListDetail> {
         margin: EdgeInsets.only(bottom: 30 * rpx),
         child: Row(
           children: <Widget>[
-            Expanded(
-              flex: 2,
-              child: Material(
+              Material(
                 elevation: 5,
                 color: Colors.transparent,
                 child: ClipRRect(
@@ -58,7 +56,6 @@ class _BookListDetailState extends State<BookListDetail> {
                   ),
                 ),
               ),
-            ),
             SizedBox(
               width: 20 * rpx,
             ),
@@ -81,10 +78,17 @@ class _BookListDetailState extends State<BookListDetail> {
                       SizedBox(
                         width: 10 * rpx,
                       ),
-                      Text(
-                        _data['list'][index]['category'][0],
-                        style: TextStyle(
-                            fontSize: 20 * rpx, color: Colors.lightBlue),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal:6*rpx),
+                        decoration: BoxDecoration(
+                          border: Border.all(width:1*rpx,color:Colors.blue[100]),
+                          borderRadius: BorderRadius.circular(6*rpx)
+                        ),
+                        child: Text(
+                          _data['list'][index]['category'][0],
+                          style: TextStyle(
+                              fontSize: 18 * rpx, color: Colors.lightBlue),
+                        ),
                       ),
                     ],
                   ),
@@ -107,7 +111,7 @@ class _BookListDetailState extends State<BookListDetail> {
   Widget build(BuildContext context) {
     rpx = MediaQuery.of(context).size.width / 750;
     return Scaffold(
-        body: CustomScrollView(
+      body: CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
             pinned: true,
