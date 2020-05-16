@@ -22,7 +22,7 @@ class _TopChartsPageState extends State<TopChartsPage>
     double indicatorWidth = MediaQuery.of(context).size.width / 2 - 30;
     return Scaffold(
       appBar: AppBar(
-        title: Text('排行榜'),
+        title: Text('排行榜', style: TextStyle(fontSize: 36*rpx),),
         centerTitle: true,
         elevation: 0,
         bottom: TabBar(
@@ -95,7 +95,7 @@ class SortPageContainer extends StatefulWidget {
 }
 
 class _SortPageContainerState extends State<SortPageContainer> {
-  int indexItem;
+  int indexItem; 
   List<SortListData> sortLists = [];
   SortListData data = SortListData();
 
@@ -107,9 +107,9 @@ class _SortPageContainerState extends State<SortPageContainer> {
   }
 
   Widget _getNavListItem(int index, rpx) {
-    Color bgColor = Color(0xfff4f4f4);
-    Color textColor = Colors.black54;
-    Color borderColor = Colors.transparent;
+    Color bgColor = Color(0xfff4f4f4);  // 默认背景颜色
+    Color textColor = Colors.black54; // 默认文字颜色
+    Color borderColor = Colors.transparent; // 默认左边框颜色
 
     if (index == indexItem) {
       bgColor = Colors.white;
@@ -179,21 +179,25 @@ class _SortPageContainerState extends State<SortPageContainer> {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        height: 220 * rpx,
+        height: 210 * rpx,
         padding: EdgeInsets.symmetric(horizontal: 20 * rpx),
-        margin: EdgeInsets.only(bottom: 20 * rpx),
+        margin: EdgeInsets.only(bottom: 30 * rpx),
         child: Row(
           children: <Widget>[
             Expanded(
               flex: 2,
               child: Stack(
                 children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(4 * rpx),
-                    child: Image.asset(
-                      'images/OIP.jpg',
-                      height: 200 * rpx,
-                      fit: BoxFit.fill,
+                  Material(
+                    elevation: 5,
+                    color: Colors.transparent,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(4 * rpx),
+                      child: Image.network(
+                        'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
+                        height: 190 * rpx,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                   Positioned(

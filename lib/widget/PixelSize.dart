@@ -16,9 +16,10 @@ class PixelSize {
   double getPixe(int number) {
     int defaultValue = 750;
     double width = win.width;
-    if(width >= 1242) { //针对大屏幕优化和苹果8p
-      width = width - 414;
-    } 
+    // if(width >= 1080) { //针对大屏幕优化和苹果8p
+    //   width = width - 200;
+    // } 
+    print(width);
     return number * (width / defaultValue);
   }
 
