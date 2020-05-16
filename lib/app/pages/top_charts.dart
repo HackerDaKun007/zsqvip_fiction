@@ -1,3 +1,4 @@
+import 'package:fiction/res/topChartsData.dart';
 import 'package:flutter/material.dart';
 
 class TopChartsPage extends StatefulWidget {
@@ -10,61 +11,91 @@ class _TopChartsPageState extends State<TopChartsPage>
   TabController _controller;
   double rpx;
 
-  int indexItem;
-  List<SortListData> sortLists = [];
-  SortListData data = SortListData();
-
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: 2, vsync: this);
-    indexItem = 0;
-    List.generate(3, (index) => sortLists.add(data));
+    ;
   }
 
-  /// tabview
-  Widget _tabViewWidget() {
-    return TabBarView(
-      controller: _controller,
-      children: <Widget>[
-        _tabViewContentWidget(),
-        _tabViewContentWidget(),
-      ],
-    );
-  }
-
-  /// 排行榜页面内容
-  Widget _tabViewContentWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Expanded(
-          flex: 2,
-          child: Container(
-            color: Color(0xfff4f4f4),
-            child: ListView.builder(
-              itemCount: sortLists.length,
-              itemBuilder: (BuildContext context, int index) {
-                return _getNavListItem(index);
-              },
-            ),
-          ),
+  @override
+  Widget build(BuildContext context) {
+    rpx = MediaQuery.of(context).size.width / 750;
+    double indicatorWidth = MediaQuery.of(context).size.width / 2 - 30;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          '排行榜',
+          style: TextStyle(fontSize: 36 * rpx),
         ),
-        Expanded(
-          flex: 7,
-          child: Container(
-            // margin: EdgeInsets.symmetric(horizontal:15*rpx),
-            alignment: Alignment.topCenter,
-            child: ListView.builder(
-                itemCount: 8,
-                itemBuilder: (BuildContext context, int index) {
-                  return _getListItem(index);
-                }),
-          ),
-        )
-      ],
+        centerTitle: true,
+        elevation: 0,
+        bottom: TabBar(
+          controller: _controller,
+          labelPadding: EdgeInsets.only(bottom: 10 * rpx),
+          labelColor: Colors.lightBlue,
+          unselectedLabelColor: Colors.black54,
+          labelStyle:
+              TextStyle(fontSize: 28 * rpx, fontWeight: FontWeight.bold),
+          unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
+          indicatorPadding: EdgeInsets.only(
+              left: indicatorWidth * rpx, right: indicatorWidth * rpx),
+          tabs: <Widget>[
+            Text('男生频道'),
+            Text('女生频道'),
+          ],
+        ),
+      ),
+      body: TabBarView(
+        controller: _controller,
+        children: <Widget>[
+          TabViewContentWidget(data: topChartsData[0],),
+          TabViewContentWidget(data: topChartsData[1],),
+        ],
+      ),
     );
   }
+}
+
+class TabViewContentWidget extends StatefulWidget {
+  final List data;
+  TabViewContentWidget({Key key, @required this.data}):super(key: key);
+
+  @override
+  _TabViewContentWidgetState createState() => _TabViewContentWidgetState();
+}
+
+class _TabViewContentWidgetState extends State<TabViewContentWidget> {
+  double rpx;
+  int indexItem;
+  List _chartsData;
+  @override
+  void initState() {
+    super.initState();
+    indexItem = 0;
+    _chartsData = widget.data;
+  }
+
+  /// 更新排行榜列表
+  _updateListData(int index) {
+    List list;
+    setState(() {
+      if (topChartsData.length != 0) {
+        list = _chartsData[index]['sort_list'];
+      }
+    });
+    return list;
+  }
+
+  Widget _getListWidget(int index) {
+    List data = _updateListData(index);
+    return ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return _getListItem(index, data);
+        });
+  }
+
   // 排行榜分类菜单列表
   Widget _getNavListItem(int index) {
     Color bgColor = Color(0xfff4f4f4); // 默认背景颜色
@@ -92,7 +123,7 @@ class _TopChartsPageState extends State<TopChartsPage>
                 Border(left: BorderSide(color: borderColor, width: 6 * rpx)),
           ),
           child: Text(
-            sortLists[index].sortName,
+            _chartsData[index]['name'],
             style: TextStyle(fontSize: 28 * rpx, color: textColor),
             textAlign: TextAlign.center,
           ),
@@ -100,22 +131,23 @@ class _TopChartsPageState extends State<TopChartsPage>
       ),
     );
   }
+
   // 排行榜分类列表
-  Widget _getListItem(int index) {
+  Widget _getListItem(int index, List data) {
     int topNum = 0;
     List<Color> flagColors = [];
     switch (index) {
       case 0:
         topNum = 1;
-        flagColors = [Color(0xffff1055), Color(0xfff99185)];
+        flagColors = [Color(0xffff0844), Color(0xffffb199)];
         break;
       case 1:
         topNum = 2;
-        flagColors = [Color(0xffff5858), Color(0xfff9d423)];
+        flagColors = [Color(0xfffc6076), Color(0xffff9a44)];
         break;
       case 2:
         topNum = 3;
-        flagColors = [Color(0xfffda085), Color(0xfff6d365)];
+        flagColors = [Color(0xff2580B3), Color(0xffCBBACC)];
         break;
       default:
     }
@@ -137,7 +169,7 @@ class _TopChartsPageState extends State<TopChartsPage>
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(4 * rpx),
                       child: Image.network(
-                        'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
+                        data[index]['image'],
                         height: 190 * rpx,
                         fit: BoxFit.fill,
                       ),
@@ -174,11 +206,11 @@ class _TopChartsPageState extends State<TopChartsPage>
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Text(
-                    '无无无',
+                    data[index]['bookname'],
                     style: TextStyle(fontSize: 30 * rpx),
                   ),
                   Text(
-                    '只是介绍，不超过2两行只是介绍，不超过2两行只是介绍，不超过2两行',
+                    data[index]['desc'],
                     style: TextStyle(fontSize: 26 * rpx, color: Colors.grey),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -193,7 +225,7 @@ class _TopChartsPageState extends State<TopChartsPage>
                                 width: 1 * rpx, color: Colors.lightBlue[200]),
                             borderRadius: BorderRadius.circular(2)),
                         child: Text(
-                          '仙侠',
+                          data[index]['category'][0],
                           style: TextStyle(
                               color: Colors.lightBlue, fontSize: 20 * rpx),
                         ),
@@ -201,7 +233,7 @@ class _TopChartsPageState extends State<TopChartsPage>
                       Container(
                         padding: EdgeInsets.only(right: 10 * rpx),
                         child: Text(
-                          '210万人气',
+                          '${data[index]['activity_count']}万人气',
                           style: TextStyle(
                               color: Colors.deepOrange, fontSize: 20 * rpx),
                         ),
@@ -220,58 +252,27 @@ class _TopChartsPageState extends State<TopChartsPage>
   @override
   Widget build(BuildContext context) {
     rpx = MediaQuery.of(context).size.width / 750;
-    double indicatorWidth = MediaQuery.of(context).size.width / 2 - 30;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '排行榜',
-          style: TextStyle(fontSize: 36 * rpx),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Expanded(
+          flex: 2,
+          child: Container(
+            color: Color(0xfff4f4f4),
+            child: ListView.builder(
+              itemCount: _chartsData.length,
+              itemBuilder: (BuildContext context, int index) {
+                return _getNavListItem(index);
+              },
+            ),
+          ),
         ),
-        centerTitle: true,
-        elevation: 0,
-        bottom: TabBar(
-          controller: _controller,
-          labelPadding: EdgeInsets.only(bottom: 10 * rpx),
-          labelColor: Colors.lightBlue,
-          unselectedLabelColor: Colors.black54,
-          labelStyle:
-              TextStyle(fontSize: 28 * rpx, fontWeight: FontWeight.bold),
-          unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
-          indicatorPadding: EdgeInsets.only(
-              left: indicatorWidth * rpx, right: indicatorWidth * rpx),
-          tabs: <Widget>[
-            Text('男生频道'),
-            Text('女生频道'),
-          ],
-        ),
-      ),
-      body: _tabViewWidget(),
+        Expanded(
+          flex: 7,
+          child: Container(
+              alignment: Alignment.topCenter, child: _getListWidget(indexItem)),
+        )
+      ],
     );
   }
-}
-
-class SortData {
-  String sortName;
-  List sortList = [];
-
-  SortData({this.sortName, this.sortList});
-}
-
-class BookDetail {
-  int bookId = 1;
-  String bookImg = 'images/OIP.jpg';
-  String bookTitle = '无题';
-  String author = '佚名';
-  String categoryName = '传说';
-  String bookDesc =
-      '是十九世纪和手机号就是时间合适就合适是十九世纪和手机号就是时间合适就合适是十九世纪和手机号就是时间合适就合适是十九世纪和手机号就是时间合适就合适';
-}
-
-class SortListData extends SortData {
-  BookDetail data = BookDetail();
-
-  @override
-  List get sortList => List.generate(5, (index) => sortList..add(data));
-  @override
-  String get sortName => sortName = '人气榜';
 }
