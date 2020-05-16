@@ -109,4 +109,31 @@ class Iconfont {
     fontFamily: 'myIcon',
     matchTextDirection: true
   );
+
+  //左边
+  static const IconData zuo = const IconData(
+    0xe612,
+    fontFamily: 'myIcon',
+    matchTextDirection: true
+  );
+
+  //删除
+  static const IconData shanchu = const IconData(
+    0xe603,
+    fontFamily: 'myIcon',
+    matchTextDirection: true
+  );
+
+  //删除-1
+  static const IconData shanchu1 = const IconData(
+    0xe62d,
+    fontFamily: 'myIcon',
+    matchTextDirection: true
+  );
+  //删除-2
+  static const IconData shanchu2 = const IconData(
+    0xe785,
+    fontFamily: 'myIcon',
+    matchTextDirection: true
+  );
 }
