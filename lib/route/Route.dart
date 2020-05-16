@@ -16,6 +16,7 @@ import 'package:fiction/app/pages/Home.dart';  //书城
 import 'package:fiction/app/pages/BookShelf.dart';  //书架
 import 'package:fiction/app/pages/Category.dart';  //分类
 import 'package:fiction/app/pages/My.dart';  //我的
+import 'package:fiction/app/search/Search.dart';  //我的
 
 //Yuri配置_路由区域
 import 'package:fiction/app/pages/top_charts.dart'; // 排行榜
@@ -27,6 +28,9 @@ final routes = {
   '/bookshelf': (context) => BookShelfPage(),
   '/categorypage': (context) => CategoryPage(),
   '/mypage': (context) => MyPage(),
+  '/search': (context) => Search(),
+
+  //Yuri配置_路由区域
   '/topcharts': (context) => TopChartsPage(),
   
 };
