@@ -243,7 +243,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                   color: Color(0xFF000000),
                 ),
                 onPressed: () {
-                  print(1);
+                  Navigator.pushNamed(context, '/search');
                 },
               ),
               IconButton(
