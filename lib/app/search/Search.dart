@@ -11,6 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fiction/widget/Pixelsize.dart';
 import 'package:fiction/fonts/Iconfont.dart';
+import 'package:fiction/res/searchData.dart';
+import 'package:fiction/config/Path.dart';
+import 'package:fiction/widget/Common.dart';
+import 'dart:math';
 
 class Search extends StatefulWidget {
   Search({Key key}) : super(key: key);
@@ -19,8 +23,35 @@ class Search extends StatefulWidget {
   _SearchState createState() => _SearchState();
 }
 
-class _SearchState extends State<Search> with PixelSize {
+class _SearchState extends State<Search> with PixelSize, Common {
+  //判断是否关闭广告, true开启广告，false关闭广告
+  bool _isAd = true;
+  //判断是否删除搜索记录, true不删除，false删除
+  bool _isReccent = true;
+
+  //new随机类
+  var _random = new Random();
+  int _randomLength = 0; //随机大家都搜索长度
+  List<Widget> _list = new List(); //大家都搜索保留数据
+
+  //搜索框记本
+  String _input = '';
+
   @override
+
+  //初始化数据
+  void initState() {
+    super.initState();
+    //大家都搜索打乱数据
+    listData.shuffle();
+    //随机大家都搜索长度
+    this._randomLength = _random.nextInt(listData.length);
+    if (this._randomLength == 0) {
+      this._randomLength = _random.nextInt(listData.length);
+    }
+   
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -52,6 +83,9 @@ class _SearchState extends State<Search> with PixelSize {
                   hintText: '搜索书名或作者',
                   border: InputBorder.none,
                 ),
+                onChanged: (value) {
+                  this._input = value;
+                },
               )),
           decoration: BoxDecoration(
             color: Color(0x99ededed),
@@ -75,7 +109,17 @@ class _SearchState extends State<Search> with PixelSize {
                     ),
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  if (this._input != '' && this._input != null) {
+                    setState(() {
+                      if (in_array(Path.recen, this._input)) {
+                        Path.recen.remove(this._input);
+                      }
+                      Path.recen.add(this._input);
+                      this._isReccent = true;
+                    });
+                  }
+                },
               )),
         ],
       ),
@@ -85,24 +129,28 @@ class _SearchState extends State<Search> with PixelSize {
         child: Stack(
           children: <Widget>[
             //主体内容
-            Column(
+            ListView(
               children: <Widget>[
-                //大家都在搜索标题
-                this._getEveryoneTitle(),
-                SizedBox(height: getPixe(10, context)),
-                //大家都在搜索内容
-                this._getEveryoneContent(),
-                //最近搜索
-                SizedBox(height: getPixe(10, context)),
-                this._getRecentTitle(),
-                SizedBox(height: getPixe(10, context)),
-                //搜索记录
-                this._getRecentContent(),
+                Column(
+                  children: <Widget>[
+                    //大家都在搜索标题
+                    this._getEveryoneTitle(),
+                    SizedBox(height: getPixe(10, context)),
+                    //大家都在搜索内容
+                    this._getEveryoneContent(),
+                    //最近搜索
+                    SizedBox(height: getPixe(10, context)),
+                    this._getRecentTitle(),
+                    SizedBox(height: getPixe(10, context)),
+                    //搜索记录
+                    this._getRecentContent(),
+                  ],
+                ),
               ],
             ),
-            // SizedBox(height: getPixe(10, context)),
-           
-            
+
+            //  广告位置
+            _getAd(),
           ],
         ),
       ),
@@ -111,175 +159,256 @@ class _SearchState extends State<Search> with PixelSize {
 
   //大家都在搜索标题
   Widget _getEveryoneTitle() {
-    return 
-        Row(
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Text(
-                '大家都在搜索',
-                style: TextStyle(
-                    fontSize: getPixe(16, context),
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            Container(
-              // width: getPixe(50, context),
-              child: GestureDetector(
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      '换一换',
-                      style: TextStyle(
-                        fontSize: getPixe(14, context),
-                        color: Color(0x993e3e3e),
-                      ),
-                    ),
-                    SizedBox(
-                      width: getPixe(2, context),
-                    ),
-                    Icon(
-                      Icons.loop,
-                      size: getPixe(14, context),
-                      color: Color(0x993e3e3e),
-                    ),
-                  ],
+    return Row(
+      children: <Widget>[
+        Expanded(
+          flex: 1,
+          child: Text(
+            '大家都在搜索',
+            style: TextStyle(
+                fontSize: getPixe(16, context), fontWeight: FontWeight.bold),
+          ),
+        ),
+        Container(
+          // width: getPixe(50, context),
+          child: GestureDetector(
+            child: Row(
+              children: <Widget>[
+                Text(
+                  '换一换',
+                  style: TextStyle(
+                    fontSize: getPixe(14, context),
+                    color: Color(0x993e3e3e),
+                  ),
                 ),
-                onTap: () {
-                  print('换一换');
-                },
-              ),
-            )
-          ],
+                SizedBox(
+                  width: getPixe(2, context),
+                ),
+                Icon(
+                  Icons.loop,
+                  size: getPixe(14, context),
+                  color: Color(0x993e3e3e),
+                ),
+              ],
+            ),
+            onTap: () {
+              setState(() {
+                listData.shuffle();
+                //随机长度
+                this._randomLength = _random.nextInt(listData.length);
+                if (this._randomLength == 0) {
+                  //如果大家都搜索长度为0重新请求一下
+                  this._randomLength = _random.nextInt(listData.length);
+                }
+              });
+            },
+          ),
+        )
+      ],
     );
   }
+
   //大家都在搜索内容
   Widget _getEveryoneContent() {
-    return Wrap(
-      spacing: getPixe(10, context),
-      alignment: WrapAlignment.start,
-      children: <Widget>[
-        this._myButton('你好', 0),
-        this._myButton('你好', 0),
-        this._myButton('你好', 1),
-        this._myButton('你好', 0),
-        this._myButton('你好2312312', 0),
-      ],
+    this._list = [];
+    for (int i = 0; i < this._randomLength; i++) {
+      this
+          ._list
+          .add(this._myButton(listData[i]['title'], listData[i]['renme']));
+    }
+    return Container(
+      width: double.infinity,
+      child: Wrap(
+        spacing: getPixe(10, context),
+        alignment: WrapAlignment.start,
+        children: this._list,
+      ),
     );
   }
 
   //最近搜索标题
   Widget _getRecentTitle() {
-    return Row(
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Text(
-                '最近搜索',
-                style: TextStyle(
-                    fontSize: getPixe(16, context),
-                    fontWeight: FontWeight.bold),
-              ),
+    if (this._isReccent && Path.recen.length > 0) {
+      return Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Text(
+              '最近搜索',
+              style: TextStyle(
+                  fontSize: getPixe(16, context), fontWeight: FontWeight.bold),
             ),
-            Container(
-              // width: getPixe(50, context),
-              child: GestureDetector(
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      '删除',
-                      style: TextStyle(
-                        fontSize: getPixe(14, context),
-                        color: Color(0x993e3e3e),
-                      ),
-                    ),
-                    SizedBox(
-                      width: getPixe(2, context),
-                    ),
-                    Icon(
-                      Iconfont.shanchu1,
-                      size: getPixe(13, context),
+          ),
+          Container(
+            // width: getPixe(50, context),
+            child: GestureDetector(
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    '删除',
+                    style: TextStyle(
+                      fontSize: getPixe(14, context),
                       color: Color(0x993e3e3e),
                     ),
-                  ],
-                ),
-                onTap: () {
-                  print('删除');
-                },
+                  ),
+                  SizedBox(
+                    width: getPixe(2, context),
+                  ),
+                  Icon(
+                    Iconfont.shanchu1,
+                    size: getPixe(13, context),
+                    color: Color(0x993e3e3e),
+                  ),
+                ],
               ),
-            )
-          ],
-    );
+              onTap: () {
+                setState(() {
+                  //删除搜索记录
+                  this._isReccent = false;
+                  Path.recen = [];
+                });
+              },
+            ),
+          )
+        ],
+      );
+    } else {
+      return Text('');
+    }
   }
-  //大家都在搜索内容
+
+  //最近搜索标题内容
   Widget _getRecentContent() {
-    return Wrap(
-      spacing: getPixe(10, context),
-      alignment: WrapAlignment.start,
-      children: <Widget>[
-        this._myButton('你好', 0),
-        this._myButton('你好', 0),
-        this._myButton('你好', 0),
-        this._myButton('你好', 0),
-        this._myButton('你好2312312', 0),
-      ],
-    );
+    if (this._isReccent && Path.recen.length > 0) {
+      List<Widget> rencentList = new List();
+      //倒序输出
+      for (int i = (Path.recen.length - 1); i >= 0; i--) {
+        rencentList.add(this._myButton(Path.recen[i], 0));
+      }
+      return Container(
+        width: double.infinity,
+        child: Wrap(
+          spacing: getPixe(10, context),
+          alignment: WrapAlignment.start,
+          children: rencentList,
+        ),
+      );
+    } else {
+      return Text('');
+    }
   }
+
   //公共点击按钮点击事件
   Widget _myButton(String text, int isIcon) {
     _isIconValidata() {
       if (isIcon == 1) {
         return Padding(
           padding: EdgeInsets.fromLTRB(getPixe(3, context), 0, 0, 0),
-          child: Icon(Iconfont.remen, size: getPixe(16, context),color: Colors.red,),
+          child: Icon(
+            Iconfont.remen,
+            size: getPixe(16, context),
+            color: Colors.red,
+          ),
         );
       } else {
         return Text('');
       }
     }
-    return  FlatButton(
+
+    return FlatButton(
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(text, style: TextStyle(
-            fontSize: getPixe(14, context),
-          ),),
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: getPixe(14, context),
+            ),
+          ),
           _isIconValidata(),
         ],
       ),
-      
       textColor: Colors.black,
       color: Color(0x99e2e2e2),
       onPressed: () {
-        
+        setState(() {
+          if (in_array(Path.recen, text)) {
+            Path.recen.remove(text);
+          }
+          Path.recen.add(text);
+          this._isReccent = true;
+        });
       },
     );
   }
 
-
+  //广告位置
+  Widget _getAd() {
+    if (this._isAd) {
+      return Positioned(
+        bottom: getPixe(15, context),
+        left: getPixe(15, context),
+        right: getPixe(15, context),
+        child: Container(
+          height: getPixe(150, context),
+          width: double.infinity,
+          child: Stack(
+            children: <Widget>[
+              GestureDetector(
+                child: Center(
+                  child: Image.network(
+                    'https://manhua.qpic.cn/operation/0/16_00_10_88908a9e29068d08f1d7620fc2373cda_1589559004105.jpg/0',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                onTap: () {
+                  print('跳转广告');
+                },
+              ),
+              //关闭
+              Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  // color: Colors.grey,
+                  child: GestureDetector(
+                    child: Icon(
+                      Iconfont.shanchu,
+                      color: Colors.black,
+                      size: getPixe(25, context),
+                    ),
+                    onTap: () {
+                      //关闭广告
+                      setState(() {
+                        this._isAd = false;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Container(
+                  color: Color(0x99e2e2e2),
+                  child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          getPixe(5, context),
+                          getPixe(2, context),
+                          getPixe(5, context),
+                          getPixe(2, context)),
+                      child: Text(
+                        '广告',
+                        style: TextStyle(
+                          fontSize: getPixe(12, context),
+                        ),
+                      )),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return Text('');
+    }
+  }
 }
-
-
-
-// class MyButton extends StatelessWidget {
-//   final String text;
-//   final int icon;
-//   const MyButton (this.text, {Key key, this.icon}) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     // TODO: implement build
-//     return FlatButton(
-//       child: Row(
-//         children: <Widget>[
-//           Text(this.text),
-//           SizedBox(width: ,),
-//         ],
-//       ),
-//       textColor: Colors.black,
-//       color: Color(0x99e2e2e2),
-//       onPressed: () {
-        
-//       },
-//     );
-//   }
-// }
