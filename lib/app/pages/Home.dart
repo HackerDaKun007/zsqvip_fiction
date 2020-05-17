@@ -16,6 +16,10 @@ import '../../fonts/Iconfont.dart';
 // import 'package:novel_flutter/pages/search_page/search_page.dart';
 
 class HomePage extends StatelessWidget {
+
+  final getCurrenIndex;
+  HomePage({this.getCurrenIndex});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +44,7 @@ class HomePage extends StatelessWidget {
                         TextStyle(fontSize: 14, color: Color(0xffb5b5b5)),
                     border: InputBorder.none),
                 onTap: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  //   return SearchPage();
-                  // }));
+                  Navigator.pushNamed(context, '/search');
                 },
               ),
             ),
@@ -55,12 +57,14 @@ class HomePage extends StatelessWidget {
           ],
         ),
         body: SingleChildScrollView(
-          child: HomeBody(),
+          child: HomeBody(getCurrenIndex: getCurrenIndex),
         ));
   }
 }
 
 class HomeBody extends StatefulWidget {
+  final getCurrenIndex;
+  HomeBody({this.getCurrenIndex});
   @override
   _HomeBodyState createState() => _HomeBodyState();
 }
@@ -139,6 +143,9 @@ class _HomeBodyState extends State<HomeBody> {
             _getCustomNavBarItem(
               imageUrl: 'images/category.png',
               title: '分类',
+              onTapHandler: () {
+                widget.getCurrenIndex(2);
+              }
             ),
             _getCustomNavBarItem(
                 imageUrl: 'images/paihang.png',
@@ -161,7 +168,9 @@ class _HomeBodyState extends State<HomeBody> {
             _getCustomNavBarItem(
               imageUrl: 'images/booklist.png',
               title: '书单',
-              // route: BookListPage(),
+              onTapHandler: () {
+                Navigator.pushNamed(context, '/booklist');
+              }
             ),
           ],
         ));
