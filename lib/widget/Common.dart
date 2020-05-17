@@ -19,6 +19,22 @@ class Common {
     }
   }
   
+  /**
+   * 判断数组指定字符是否存在
+   * @param {List} 数组
+   * @param {String} 字符
+   * @return Bool 存在返回true, 否则返回false
+   */
+  in_array(List arr, String str) {
+    bool isBool = false;
+    arr.forEach((value){
+      if (str == value) {
+        isBool = true;
+        return;
+      }
+    });
+    return isBool;
+  }
   
 
 }
