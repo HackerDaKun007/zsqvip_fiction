@@ -14,14 +14,14 @@ import 'package:flutter/cupertino.dart';  //动画执行
 
 //大坤配置_路由区域
 import 'package:fiction/app/tabs/Tabs.dart';  //首页底部导航栏目
-import 'package:fiction/app/pages/Home.dart';  //书城
+import 'package:fiction/app/pages/home/Home.dart';  //书城
 import 'package:fiction/app/pages/BookShelf.dart';  //书架
 import 'package:fiction/app/pages/Category.dart';  //分类
 import 'package:fiction/app/pages/My.dart';  //我的
 import 'package:fiction/app/search/Search.dart';  //我的
 
 //Yuri配置_路由区域
-import 'package:fiction/app/pages/top_charts.dart'; // 排行榜
+import 'package:fiction/app/pages/home/top_charts.dart'; // 排行榜
 
 //配置命令路由
 final routes = {

@@ -8,12 +8,11 @@
  * @see         书城页面
 */
 
+import 'package:fiction/fonts/Iconfont.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-import '../../fonts/Iconfont.dart';
-// import 'package:novel_flutter/pages/search_page/search_page.dart';
 
 class HomePage extends StatelessWidget {
 
@@ -22,6 +21,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double rpx = MediaQuery.of(context).size.width / 750;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -50,9 +50,11 @@ class HomePage extends StatelessWidget {
             ),
           ),
           actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.calendar_today),
-              onPressed: () {},
+            InkWell(
+              onTap: (){},
+              child: Image.asset('images/box.png',  fit: BoxFit.fill,
+                height: 58 * rpx,
+                width: 58 * rpx,),
             )
           ],
         ),
@@ -176,7 +178,7 @@ class _HomeBodyState extends State<HomeBody> {
         ));
   }
 
-  // 导航栏单按钮
+  /// 导航栏单按钮
   Widget _getCustomNavBarItem(
       {String title, String imageUrl, Function onTapHandler}) {
     return InkWell(
@@ -257,7 +259,7 @@ class _HomeBodyState extends State<HomeBody> {
     );
   }
 
-  // 其余推荐
+  /// 其余推荐
   Widget _getLeftRecommendItem() {
     return Container(
       width: (750 / 5) * rpx,
