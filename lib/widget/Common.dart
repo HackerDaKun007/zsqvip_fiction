@@ -25,7 +25,7 @@ class Common {
    * @param {String} 字符
    * @return Bool 存在返回true, 否则返回false
    */
-  in_array(List arr, String str) {
+  inArray(List arr, String str) {
     bool isBool = false;
     arr.forEach((value){
       if (str == value) {

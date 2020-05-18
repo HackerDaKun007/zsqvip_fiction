@@ -112,7 +112,7 @@ class _SearchState extends State<Search> with PixelSize, Common {
                 onTap: () {
                   if (this._input != '' && this._input != null) {
                     setState(() {
-                      if (in_array(Path.recen, this._input)) {
+                      if (inArray(Path.recen, this._input)) {
                         Path.recen.remove(this._input);
                       }
                       Path.recen.add(this._input);
@@ -332,7 +332,7 @@ class _SearchState extends State<Search> with PixelSize, Common {
       color: Color(0x99e2e2e2),
       onPressed: () {
         setState(() {
-          if (in_array(Path.recen, text)) {
+          if (inArray(Path.recen, text)) {
             Path.recen.remove(text);
           }
           Path.recen.add(text);
