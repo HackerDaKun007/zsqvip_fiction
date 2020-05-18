@@ -8,8 +8,7 @@
  * @see         首页底部导航栏目
 */
 import 'package:flutter/material.dart';
-import 'package:fiction/config/Config.dart';
-import 'package:fiction/fonts/Iconfont.dart';
+import 'package:fiction/public/public.dart';
 
 //导航栏目地址
 import 'package:fiction/app/pages/home/Home.dart'; //书城
@@ -17,8 +16,7 @@ import 'package:fiction/app/pages/BookShelf.dart'; //书架
 import 'package:fiction/app/pages/Category.dart'; //分类
 import 'package:fiction/app/pages/My.dart'; //我的
 
-//像素
-import 'package:fiction/widget/Pixelsize.dart';
+
 class Tabs extends StatefulWidget{
   // Map arguments;
   Tabs({Key key}) : super(key: key);

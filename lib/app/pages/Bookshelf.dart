@@ -1,11 +1,9 @@
-import 'package:fiction/res/listData.dart';
-import 'package:fiction/widget/Pixelsize.dart'; //像素插件
 import 'package:flutter/material.dart';
+import 'package:fiction/public/public.dart';
 import 'dart:ui';
-import 'package:fiction/config/Config.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-import 'package:fiction/fonts/Iconfont.dart';
+import 'package:fiction/res/listData.dart';
 
 //阅读分钟
 int minute = 0;

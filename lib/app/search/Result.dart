@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fiction/widget/Pixelsize.dart';
-import 'package:fiction/fonts/Iconfont.dart';
+import 'package:fiction/public/public.dart';
+
 import 'package:fiction/res/searchData.dart';
-import 'package:fiction/config/Path.dart';
-import 'package:fiction/widget/Common.dart';
+
 
 class ResultSearch extends StatefulWidget {
   Map arguments;

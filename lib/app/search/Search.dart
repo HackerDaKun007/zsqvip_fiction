@@ -9,12 +9,12 @@
 */
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:fiction/widget/Pixelsize.dart';
-import 'package:fiction/fonts/Iconfont.dart';
-import 'package:fiction/res/searchData.dart';
-import 'package:fiction/config/Path.dart';
-import 'package:fiction/widget/Common.dart';
 import 'dart:math';
+
+import 'package:fiction/public/public.dart';
+import 'package:fiction/res/searchData.dart';
+
+
 
 class Search extends StatefulWidget {
   Search({Key key}) : super(key: key);
