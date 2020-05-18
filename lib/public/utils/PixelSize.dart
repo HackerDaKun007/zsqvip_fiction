@@ -17,7 +17,7 @@ class PixelSize {
   // var win = window.physicalSize; //获取屏幕
 
   //返回正常的像素大小
-  double getPixe(int number, BuildContext context) {
+  double getPixe(double number, BuildContext context) {
 
     int defaultValue = 750;
     if (Config.width == 0.0) {
