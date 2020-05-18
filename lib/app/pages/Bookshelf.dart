@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:fiction/public/public.dart';
 import 'dart:ui';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
+import 'package:fiction/public/public.dart';
 import 'package:fiction/res/listData.dart';
 
 //阅读分钟
-int minute = 0;
+// int Path.minute = 0;
 // int parindex = 0BuildContext context, ;
 
 class BookShelfPage extends StatefulWidget {
@@ -37,6 +37,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   //获取滚动事件方法
   _onScroll(double offset) {
     double appha = offset / appbarAlpha;
+<<<<<<< HEAD
     if (appha <= 1.5 && appha >= -1) {
       if (appha < 0) {
         appha = 0;
@@ -47,14 +48,21 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
         appBarAlpha = appha;
       });
       // print(appBarAlpha);
+=======
+    if (appha < 0) {
+      appha = 0;
+    } else if (appha > 1) {
+      appha = 1;
+>>>>>>> 37740181401a59bce128cf9bbacddaafb9160150
     }
   }
 
   void initState() {
     super.initState();
-    setState(() {
-      minute = 10;
-    });
+    
+    // setState(() {
+    //   Path.minute = 10;
+    // });
 
     //添加一项追加数据
     if (listData[(listData.length - 1)]['system'] == null) {
@@ -126,7 +134,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                         padding:
                             EdgeInsets.fromLTRB(0, getPixe(100, context), 0, 0),
                         child: Text(
-                          '${minute}',
+                          '${Path.minute}',
                           style: TextStyle(fontSize: getPixe(50, context)),
                         ),
                       ),
@@ -166,7 +174,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                       )),
                   onTap: () {
                     setState(() {
-                      minute += 1;
+                      Path.minute += 1;
                     });
                   },
                 ),
@@ -196,7 +204,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                 Text('今天阅读'),
                 Padding(
                   padding: EdgeInsets.fromLTRB(3, 0, 3, 6),
-                  child: Text("${minute}",
+                  child: Text("${Path.minute}",
                       style: TextStyle(
                           fontSize: getPixe(20, context), color: Colors.black)),
                 ),
