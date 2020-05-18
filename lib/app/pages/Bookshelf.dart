@@ -37,7 +37,6 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   //获取滚动事件方法
   _onScroll(double offset) {
     double appha = offset / appbarAlpha;
-<<<<<<< HEAD
     if (appha <= 1.5 && appha >= -1) {
       if (appha < 0) {
         appha = 0;
@@ -48,12 +47,6 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
         appBarAlpha = appha;
       });
       // print(appBarAlpha);
-=======
-    if (appha < 0) {
-      appha = 0;
-    } else if (appha > 1) {
-      appha = 1;
->>>>>>> 37740181401a59bce128cf9bbacddaafb9160150
     }
   }
 

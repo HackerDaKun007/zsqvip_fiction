@@ -148,7 +148,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> {
   /// 排行榜分类列表
   Widget _getListItem(int index, List data) {
     int topNum = 0;
-    List<Color> flagColors = [];
+    List<Color> flagColors = []; // 渐变颜色
     switch (index) {
       case 0:
         topNum = 1;
@@ -163,6 +163,8 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> {
         flagColors = [Color(0xff2580B3), Color(0xffCBBACC)];
         break;
       default:
+      topNum = 0;
+      flagColors=[Colors.transparent, Colors.transparent];
     }
     return GestureDetector(
       onTap: () {},
@@ -188,6 +190,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> {
                       ),
                     ),
                   ),
+                  topNum > 0 ?
                   Positioned(
                     top: 0,
                     left: 0,
@@ -205,7 +208,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                  )
+                  ) : SizedBox(width: 0,)
                 ],
               ),
             ),

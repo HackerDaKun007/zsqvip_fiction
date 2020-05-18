@@ -442,15 +442,12 @@ class _HomeBodyState extends State<HomeBody>
       padding: EdgeInsets.fromLTRB(30 * rpx, 10 * rpx, 10 * rpx, 10 * rpx),
       child: Stack(
         children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Column(
+            Column(
               children: <Widget>[
                 Expanded(
                   flex: 1,
                   child: Container(
-                      padding:
-                          EdgeInsets.fromLTRB(0, 20 * rpx, 20 * rpx, 20 * rpx),
+                      padding:EdgeInsets.fromLTRB(0, 20 * rpx, 20 * rpx, 20 * rpx),
                       child: Column(
                         children: <Widget>[
                           Material(
@@ -508,7 +505,6 @@ class _HomeBodyState extends State<HomeBody>
                     ))
               ],
             ),
-          ),
           Positioned(
               top: 0,
               right: 0,
@@ -589,7 +585,7 @@ class _HomeBodyState extends State<HomeBody>
               Text('男生人气'),
               Text('男生新书'),
               Text('女生人气'),
-              Text('女生人气'),
+              Text('女生新书'),
             ],
           ),
           SizedBox(height: 30 * rpx),
