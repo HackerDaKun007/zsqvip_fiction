@@ -91,7 +91,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
             },
             child: ListView(
               children: <Widget>[
-                this._topBack(),
+                this._readTime(),
                 //推荐内容
                 this._recommendedContent(),
                 //列表内容
@@ -100,15 +100,15 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
             ),
           ),
         ),
-        this._topLeftColumn(),
-        this._topRightColumn(),
-        this._bottomAd(),
+        this._columnReadTime(),
+        this._columnIocn(),
+        this._footerAd(),
       ],
     );
   }
 
   //头部背景显示阅读
-  Widget _topBack() {
+  Widget _readTime() {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -185,7 +185,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   }
 
   //顶部左边导航
-  Widget _topLeftColumn() {
+  Widget _columnReadTime() {
     return Align(
       alignment: Alignment.topCenter,
       child: Opacity(
@@ -216,7 +216,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   }
 
   //顶部右边导航
-  Widget _topRightColumn() {
+  Widget _columnIocn() {
     return Align(
       alignment: Alignment.topRight,
       child: Container(
@@ -536,7 +536,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   }
 
   //底部广告位置
-  Widget _bottomAd() {
+  Widget _footerAd() {
     return Positioned(
       bottom: getPixe(20, context),
       right: 20,
