@@ -105,18 +105,19 @@ class _SearchState extends State<Search> with PixelSize, Common {
                   child: Text(
                     '搜索',
                     style: TextStyle(
-                      fontSize: getPixe(15, context),
+                      fontSize: getPixe(16, context),
                     ),
                   ),
                 ),
                 onTap: () {
-                  if (this._input != '' && this._input != null) {
+                  if (empty(this._input)) {
                     setState(() {
-                      if (in_array(Path.recen, this._input)) {
+                      if (inArray(Path.recen, this._input)) {
                         Path.recen.remove(this._input);
                       }
                       Path.recen.add(this._input);
                       this._isReccent = true;
+                      _getResult(this._input);
                     });
                   }
                 },
@@ -332,16 +333,23 @@ class _SearchState extends State<Search> with PixelSize, Common {
       color: Color(0x99e2e2e2),
       onPressed: () {
         setState(() {
-          if (in_array(Path.recen, text)) {
+          if (inArray(Path.recen, text)) {
             Path.recen.remove(text);
           }
           Path.recen.add(text);
           this._isReccent = true;
+          _getResult(text);
         });
       },
     );
   }
 
+  //跳转搜索结果
+  void _getResult(text) {
+    if (empty(text)) {
+      Navigator.pushNamed(context, '/result', arguments: {'title':text});
+    }
+  }
   //广告位置
   Widget _getAd() {
     if (this._isAd) {
