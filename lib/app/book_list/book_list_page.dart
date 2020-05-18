@@ -7,6 +7,7 @@
  * 
  * @see         书单页面
 */
+import 'package:fiction/public/public.dart';
 import 'package:fiction/res/booklistData.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class BookListPage extends StatefulWidget {
 }
 
 class _BookListPageState extends State<BookListPage> {
-  double rpx;
+  double rpx = Config.width / 750;
   int listIndex;
 
   Widget _getBookListWidget(int index) {  
@@ -57,7 +58,6 @@ class _BookListPageState extends State<BookListPage> {
 
   @override
   Widget build(BuildContext context) {
-    rpx = MediaQuery.of(context).size.width / 750;
     return Scaffold(
       appBar: AppBar(
         title: Text('精选书单', style: TextStyle(fontSize: 36 * rpx),),

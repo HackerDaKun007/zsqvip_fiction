@@ -45,20 +45,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - images/home.png
-    - images/jia.png
-    - images/li.png
-    - images/2.0x/li.png
-    - images/3.0x/li.png
-    - images/4.0x/li.png
-    - images/5.0x/li.png
-    - images/category.png
-    - images/paihang.png
-    - images/bookopen.png
-    - images/booklist.png
-    - images/box.png
-    - images/ava1.png
-    - images/bg.jpg
+    - images/
 
   # To add assets to your application, add an assets section, like this:
    

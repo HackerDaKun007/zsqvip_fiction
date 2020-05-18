@@ -9,6 +9,7 @@
 */
 
 
+import 'package:fiction/public/public.dart';
 import 'package:fiction/res/topChartsData.dart';
 import 'package:flutter/material.dart';
 
@@ -18,21 +19,20 @@ class TopChartsPage extends StatefulWidget {
 }
 
 class _TopChartsPageState extends State<TopChartsPage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, PixelSize {
   TabController _controller;
-  double rpx;
+  double rpx = Config.width /750;
 
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: 2, vsync: this);
-    ;
+    
   }
 
   @override
   Widget build(BuildContext context) {
-    rpx = MediaQuery.of(context).size.width / 750;
-    double indicatorWidth = MediaQuery.of(context).size.width / 2 - 30;
+    double indicatorWidth = Config.width / 2 - 30;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -77,7 +77,7 @@ class TabViewContentWidget extends StatefulWidget {
 }
 
 class _TabViewContentWidgetState extends State<TabViewContentWidget> {
-  double rpx;
+  double rpx = Config.width / 750;
   int indexItem;
   List _chartsData;
 
@@ -108,7 +108,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> {
         });
   }
 
-  // 排行榜分类菜单列表
+  /// 排行榜分类菜单列表
   Widget _getNavListItem(int index) {
     Color bgColor = Color(0xfff4f4f4); // 默认背景颜色
     Color textColor = Colors.black54; // 默认文字颜色
@@ -144,7 +144,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> {
     );
   }
 
-  // 排行榜分类列表
+  /// 排行榜分类列表
   Widget _getListItem(int index, List data) {
     int topNum = 0;
     List<Color> flagColors = [];
@@ -263,7 +263,6 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> {
 
   @override
   Widget build(BuildContext context) {
-    rpx = MediaQuery.of(context).size.width / 750;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[

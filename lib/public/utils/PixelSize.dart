@@ -11,7 +11,7 @@
 // import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
-import 'package:fiction/config/Config.dart';
+import 'package:fiction/public/public.dart';
 
 class PixelSize {
   // var win = window.physicalSize; //获取屏幕

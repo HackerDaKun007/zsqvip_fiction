@@ -8,30 +8,27 @@
  * @see         书城页面
 */
 
-import 'package:fiction/fonts/Iconfont.dart';
+import 'package:fiction/public/public.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-
-class HomePage extends StatelessWidget {
-
+class HomePage extends StatelessWidget with PixelSize {
   final getCurrenIndex;
   HomePage({this.getCurrenIndex});
 
   @override
   Widget build(BuildContext context) {
-    double rpx = MediaQuery.of(context).size.width / 750;
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
+          backgroundColor: Color(0xfff4f4f4),
+          elevation: 1,
           title: Container(
             decoration: BoxDecoration(
-              color: Color(0xfff9f9f9),
+              color: Color(0xfffcfcfc),
             ),
             child: Container(
-              padding: EdgeInsets.only(left: 10),
+              padding: EdgeInsets.only(left: getPixe(10, context)),
               child: TextField(
                 readOnly: true,
                 decoration: InputDecoration(
@@ -40,8 +37,9 @@ class HomePage extends StatelessWidget {
                       color: Color(0xffb5b5b5),
                     ),
                     hintText: '搜索书名或作者',
-                    hintStyle:
-                        TextStyle(fontSize: 14, color: Color(0xffb5b5b5)),
+                    hintStyle: TextStyle(
+                        fontSize: getPixe(14, context),
+                        color: Color(0xffb5b5b5)),
                     border: InputBorder.none),
                 onTap: () {
                   Navigator.pushNamed(context, '/search');
@@ -51,11 +49,16 @@ class HomePage extends StatelessWidget {
           ),
           actions: <Widget>[
             InkWell(
-              onTap: (){},
-              child: Image.asset('images/box.png',  fit: BoxFit.fill,
-                height: 58 * rpx,
-                width: 58 * rpx,),
-            )
+              onTap: () {},
+              child: Ink(
+                padding: EdgeInsets.only(right: getPixe(10, context)),
+                child: Image.asset(
+                  'images/box.png',
+                  fit: BoxFit.fitWidth,
+                  width: getPixe(30, context),
+                ),
+              ),
+            ),
           ],
         ),
         body: SingleChildScrollView(
@@ -77,29 +80,28 @@ class _HomeBodyState extends State<HomeBody> {
     'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
   ];
 
-  double rpx = 0; // 自适应像素
+  double rpx = Config.width / 750; // 自适应像素
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    rpx = screenWidth / 750;
+
     return Column(
       children: <Widget>[
-        _swiperWidget(screenWidth: screenWidth), // 轮播图
-        _customNavBarWidget(), // 导航栏
-        _recommendWidget(), // 编辑推荐
-        _guessYouLikeWidget(), // 猜你喜欢
-        _infinityListWidget() // 无限列表
+        _buildSwiperWidget(), // 轮播图
+        _buildCustomNavBarWidget(), // 导航栏
+        _buildRecommendWidget(), // 编辑推荐
+        _buildGuessYouLikeWidget(), // 猜你喜欢
+        _buildInfinityListWidget() // 无限列表
       ],
     );
   }
 
   /// 轮播图
-  Widget _swiperWidget({double screenWidth}) {
+  Widget _buildSwiperWidget() {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(26 * rpx)),
       padding: EdgeInsets.symmetric(horizontal: 30 * rpx, vertical: 20 * rpx),
-      width: screenWidth,
+      width: Config.width,
       height: 300 * rpx,
       child: Container(
         decoration:
@@ -133,7 +135,7 @@ class _HomeBodyState extends State<HomeBody> {
   }
 
   /// 导航栏
-  Widget _customNavBarWidget() {
+  Widget _buildCustomNavBarWidget() {
     return Container(
         height: 110 * rpx,
         width: 750 * rpx,
@@ -143,12 +145,11 @@ class _HomeBodyState extends State<HomeBody> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             _getCustomNavBarItem(
-              imageUrl: 'images/category.png',
-              title: '分类',
-              onTapHandler: () {
-                widget.getCurrenIndex(2);
-              }
-            ),
+                imageUrl: 'images/category.png',
+                title: '分类',
+                onTapHandler: () {
+                  widget.getCurrenIndex(2);
+                }),
             _getCustomNavBarItem(
                 imageUrl: 'images/paihang.png',
                 title: '排行榜',
@@ -168,12 +169,11 @@ class _HomeBodyState extends State<HomeBody> {
                       });
                 }),
             _getCustomNavBarItem(
-              imageUrl: 'images/booklist.png',
-              title: '书单',
-              onTapHandler: () {
-                Navigator.pushNamed(context, '/booklist');
-              }
-            ),
+                imageUrl: 'images/lists.png',
+                title: '书单',
+                onTapHandler: () {
+                  Navigator.pushNamed(context, '/booklist');
+                }),
           ],
         ));
   }
@@ -193,8 +193,8 @@ class _HomeBodyState extends State<HomeBody> {
               child: Image.asset(
                 imageUrl,
                 fit: BoxFit.fill,
-                height: 58 * rpx,
-                width: 58 * rpx,
+                height: 60 * rpx,
+                width: 60 * rpx,
               ),
               color: Colors.white.withOpacity(0),
               elevation: 16,
@@ -213,7 +213,7 @@ class _HomeBodyState extends State<HomeBody> {
   }
 
   /// 编辑推荐
-  Widget _recommendWidget() {
+  Widget _buildRecommendWidget() {
     return Container(
       width: 750 * rpx,
       height: 600 * rpx,
@@ -296,7 +296,7 @@ class _HomeBodyState extends State<HomeBody> {
   }
 
   /// 猜你喜欢
-  Widget _guessYouLikeWidget() {
+  Widget _buildGuessYouLikeWidget() {
     return Container(
       width: 750 * rpx,
       height: 770 * rpx,
@@ -381,7 +381,7 @@ class _HomeBodyState extends State<HomeBody> {
   }
 
   /// 无限列表
-  Widget _infinityListWidget() {
+  Widget _buildInfinityListWidget() {
     return Container(
       width: 750 * rpx,
       margin: EdgeInsets.all(20 * rpx),
@@ -545,7 +545,7 @@ class BookContentWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Material(
-              elevation: isElevation ? 5 : 0,
+              elevation: isElevation ? 2 : 0,
               color: Colors.transparent,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(6 * rpx),

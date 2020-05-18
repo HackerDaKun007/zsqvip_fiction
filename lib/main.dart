@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/', //初始化加载路由
       
       onGenerateRoute: onGenerateRoute, 
-      theme: ThemeData(primaryColor: Colors.white,),
+      theme: ThemeData(primaryColor: Colors.white, splashColor: Colors.transparent),
     );
   }
 }
