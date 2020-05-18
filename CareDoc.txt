@@ -4,7 +4,7 @@
 
 //Remarks是，备注信息<如需要重要说明，在此说明>，可以为空
 /**
- * @author      dakun007 <dakun007@hotmail.com>
+ * @author      HackerDaKun007 <hackerdakun007@gmail.com>
  * @Remarks     无
  * @copyright   GPL
  * @since       1.0 version

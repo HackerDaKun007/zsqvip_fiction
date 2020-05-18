@@ -1,5 +1,5 @@
 /**
- * @author      dakun007 <dakun007@hotmail.com>
+ * @author      HackerDaKun007 <hackerdakun007@gmail.com>
  * @Remarks     无
  * @copyright   GPL
  * @since       1.0 version
