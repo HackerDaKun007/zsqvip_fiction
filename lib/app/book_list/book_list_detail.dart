@@ -7,8 +7,10 @@
  * 
  * @see         书单单个列表详情页面
 */
-import 'package:fiction/res/booklistData.dart';
+
 import 'package:flutter/material.dart';
+
+import 'package:fiction/res/booklistData.dart';
 
 class BookListDetail extends StatefulWidget {
   final arguments;

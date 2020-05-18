@@ -9,9 +9,10 @@
 */
 
 
+import 'package:flutter/material.dart';
+
 import 'package:fiction/public/public.dart';
 import 'package:fiction/res/topChartsData.dart';
-import 'package:flutter/material.dart';
 
 class TopChartsPage extends StatefulWidget {
   @override

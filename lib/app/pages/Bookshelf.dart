@@ -35,23 +35,19 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   //修改顶部透明值
   double appBarAlpha = 0;
   //获取滚动事件方法
-  _onScroll(Offset) {
-    double appha = Offset / appbarAlpha;
-    if (appha < 0) {
-      appha = 0;
-    } else if (appha > 1) {
-      appha = 1;
+  _onScroll(double offset) {
+    double appha = offset / appbarAlpha;
+    if (appha <= 1.5 && appha >= -1) {
+      if (appha < 0) {
+        appha = 0;
+      } else if (appha > 1) {
+        appha = 1;
+      }
+      setState(() {
+        appBarAlpha = appha;
+      });
+      // print(appBarAlpha);
     }
-    setState(() {
-      appBarAlpha = appha;
-    });
-    // print(Config.domain);
-    // print(window.physicalSize.width);
-    // double screenWidth = MediaQuery.of(context).size.width;
-    // print(screenWidth);
-    // rpx = screenWidth / 750;
-    // print(getPixe(50, context));
-    // getPixe(12);
   }
 
   void initState() {
