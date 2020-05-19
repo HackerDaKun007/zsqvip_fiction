@@ -60,7 +60,7 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
                   text: this.title,
                 ),
                 decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 11.2),
+                  contentPadding: EdgeInsets.symmetric(vertical: getPixe(11.2, context)),
                   icon: Icon(
                     Iconfont.sousuo,
                     size: getPixe(22, context),
@@ -117,10 +117,10 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
 
   //返回搜索结果
   List<Widget> _getData() {
-    List<Widget> data = new List();
+    List<Widget> _data = new List();
     listData.forEach((value) {
       if (value['system'] == null) {
-        data.add(InkWell(
+        _data.add(InkWell(
           onTap: () {
             print('跳转页面');
           },
@@ -194,27 +194,33 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
         ));
       }
     });
-    return data;
+    return _data;
   }
 
   //返回类别
   List<Widget> _getCategory(var data) {
-    List<Widget> category = new List();
-    data.forEach((v) {
-      category.add(Container(
-        margin: EdgeInsets.symmetric(horizontal: getPixe(5.0, context)),
-        padding: EdgeInsets.symmetric(horizontal: getPixe(5.0, context)),
-        decoration: BoxDecoration(
-            border: Border.all(
-                width: getPixe(1, context), color: Colors.lightBlue[200]),
-            borderRadius: BorderRadius.circular(2)),
-        child: Text(
-          v,
-          style: TextStyle(
-              color: Colors.lightBlue, fontSize: getPixe(12.0, context)),
-        ),
-      ));
+    List<Widget> _category = new List();
+    int _num = 1; //分类长度最大2
+    data.forEach((value) {
+      if(_num <= 2) {
+        _category.add(Container(
+          margin: EdgeInsets.symmetric(horizontal: getPixe(5.0, context)),
+          padding: EdgeInsets.symmetric(horizontal: getPixe(5.0, context)),
+          decoration: BoxDecoration(
+              border: Border.all(
+                  width: getPixe(1, context), color: Config.color),
+              borderRadius: BorderRadius.circular(2)),
+          child: Text(
+            value,
+            style: TextStyle(
+                color: Config.color, fontSize: getPixe(12.0, context)),
+          ),
+        ));
+        _num++;
+      } else {
+        return false;
+      }
     });
-    return category;
+    return _category;
   }
 }

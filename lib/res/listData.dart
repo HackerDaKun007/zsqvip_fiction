@@ -18,7 +18,7 @@ List<Map> listData = [
     'chapter': 1002,
     'watched_chapter': 800,
     'click': 0,
-    "category": ['科幻', '爱妻'],
+    "category": ['现代言情', '都市爱情', '现代修仙'],
     'sutitle': '年仅七岁却超速生长的短命神童时江，为恢复正常生活，带着寄宿体内的某位大神仙闯入仙界，从此走上成为仙界大亨的传奇之路',
     "imageUrl":
         'https://manhua.qpic.cn/operation/0/14_11_37_0e3a028433108833b9467872030868e8_1581651432311.jpg/0',
