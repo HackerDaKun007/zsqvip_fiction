@@ -14,8 +14,6 @@ import 'dart:math';
 import 'package:fiction/public/public.dart';
 import 'package:fiction/res/searchData.dart';
 
-
-
 class Search extends StatefulWidget {
   Search({Key key}) : super(key: key);
 
@@ -49,83 +47,88 @@ class _SearchState extends State<Search> with PixelSize, Common {
     if (this._randomLength == 0) {
       this._randomLength = _random.nextInt(listData.length);
     }
-   
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // centerTitle: true,
-        elevation: 1,
-        leading: IconButton(
-          icon: Icon(
-            Iconfont.zuo,
-            size: getPixe(30, context),
+      appBar:  AppBar(
+          // centerTitle: true,
+          elevation: 1,
+          leading: Container(
+            width: getPixe(70, context),
+            child: IconButton(
+            icon: Icon(
+              Iconfont.zuo,
+              size: getPixe(30, context),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Container(
-          // color: Colors.yellow,
-          width: double.infinity,
-          height: getPixe(42, context),
-          child: Padding(
+          ),
+          titleSpacing: 0.0,
+          title: Container(
+            // color: Colors.yellow,
+            width: double.infinity,
+            height: getPixe(44, context),
+            child: Padding(
               padding: EdgeInsets.fromLTRB(
                   getPixe(10, context), 0, getPixe(10, context), 0),
               child: Center(
                 child: TextField(
-                decoration: InputDecoration(
-                  icon: Icon(
-                    Iconfont.sousuo,
-                    size: getPixe(22, context),
-                    color: Color(0x993c3c3c),
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 11.2),
+                    icon: Icon(
+                      Iconfont.sousuo,
+                      size: getPixe(22, context),
+                      color: Color(0x993c3c3c),
+                    ),
+                    hintText: '搜索书名或作者',
+                    border: InputBorder.none,
                   ),
-                  hintText: '搜索书名或作者',
-                  border: InputBorder.none,
+                  onChanged: (value) {
+                    this._input = value;
+                  },
+                  style: TextStyle(fontSize: getPixe(16.0, context)),
                 ),
-                onChanged: (value) {
-                  this._input = value;
-                },
-              ),
               ),
             ),
-          decoration: BoxDecoration(
-            color: Color(0x99ededed),
-            borderRadius: BorderRadius.all(
-              Radius.circular(getPixe(100, context)),
+            decoration: BoxDecoration(
+              color: Color(0x99ededed),
+              borderRadius: BorderRadius.all(
+                Radius.circular(getPixe(100, context)),
+              ),
             ),
           ),
-        ),
-        // elevation:
-        actions: <Widget>[
-          Container(
-              width: getPixe(50, context),
-              // height: 40,
-              // color: Colors.red,
-              child: GestureDetector(
-                child: Center(
-                  child: Text(
-                    '搜索',
-                    style: TextStyle(
-                      fontSize: getPixe(16, context),
+          // elevation:
+          actions: <Widget>[
+            Container(
+                width: getPixe(70, context),
+                // height: 40,
+                // color: Colors.red,
+                child: GestureDetector(
+                  child: Center(
+                    child: Text(
+                      '搜索',
+                      style: TextStyle(
+                        fontSize: getPixe(16, context),
+                      ),
                     ),
                   ),
-                ),
-                onTap: () {
-                  if (empty(this._input)) {
-                    // setState(() {
+                  onTap: () {
+                    if (empty(this._input)) {
+                      // setState(() {
                       if (inArray(Path.recen, this._input)) {
                         Path.recen.remove(this._input);
                       }
                       Path.recen.add(this._input);
                       this._isReccent = true;
                       _getResult(this._input);
-                    // });
-                  }
-                },
-              )),
-        ],
+                      // });
+                    }
+                  },
+                )),
+          ],
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(getPixe(10, context), getPixe(20, context),
@@ -336,12 +339,12 @@ class _SearchState extends State<Search> with PixelSize, Common {
       color: Color(0x99e2e2e2),
       onPressed: () {
         // setState(() {
-          if (inArray(Path.recen, text)) {
-            Path.recen.remove(text);
-          }
-          Path.recen.add(text);
-          this._isReccent = true;
-          _getResult(text);
+        if (inArray(Path.recen, text)) {
+          Path.recen.remove(text);
+        }
+        Path.recen.add(text);
+        this._isReccent = true;
+        _getResult(text);
         // });
       },
     );
@@ -350,9 +353,10 @@ class _SearchState extends State<Search> with PixelSize, Common {
   //跳转搜索结果
   void _getResult(text) {
     if (empty(text)) {
-      Navigator.pushNamed(context, '/result', arguments: {'title':text});
+      Navigator.pushNamed(context, '/result', arguments: {'title': text});
     }
   }
+
   //广告位置
   Widget _getAd() {
     if (this._isAd) {

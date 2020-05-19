@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
-import 'package:fiction/res/searchData.dart';
-
+import 'package:fiction/res/listData.dart';
 
 class ResultSearch extends StatefulWidget {
   Map arguments;
@@ -35,27 +34,33 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
       appBar: AppBar(
         // centerTitle: true,
         elevation: 1,
-        leading: IconButton(
-          icon: Icon(
-            Iconfont.zuo,
-            size: getPixe(30, context),
+        leading: Container(
+          width: getPixe(70, context),
+          child: IconButton(
+            icon: Icon(
+              Iconfont.zuo,
+              size: getPixe(30, context),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
         ),
+        titleSpacing: 0.0,
         title: Container(
           // color: Colors.yellow,
           width: double.infinity,
-          height: getPixe(42, context),
+          height: getPixe(44, context),
           child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                  getPixe(10, context), 0, getPixe(10, context), 0),
+            padding: EdgeInsets.fromLTRB(
+                getPixe(10, context), 0, getPixe(10, context), 0),
+            child: Center(
               child: TextField(
                 controller: TextEditingController(
                   text: this.title,
                 ),
                 decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(vertical: 11.2),
                   icon: Icon(
                     Iconfont.sousuo,
                     size: getPixe(22, context),
@@ -67,7 +72,10 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
                 onChanged: (value) {
                   this._input = value;
                 },
-              )),
+                style: TextStyle(fontSize: getPixe(16.0, context)),
+              ),
+            ),
+          ),
           decoration: BoxDecoration(
             color: Color(0x99ededed),
             borderRadius: BorderRadius.all(
@@ -78,7 +86,7 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
         // elevation:
         actions: <Widget>[
           Container(
-              width: getPixe(50, context),
+              width: getPixe(70, context),
               // height: 40,
               // color: Colors.red,
               child: GestureDetector(
@@ -102,63 +110,111 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
         ],
       ),
       body: ListView(
-        children: <Widget>[
-          // SizedBox(height: getPixe(30, context)),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              width: double.infinity,
-              height: getPixe(140, context),
-              color: Colors.yellow,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                    getPixe(10, context),
-                    getPixe(25, context),
-                    getPixe(10, context),
-                    getPixe(10, context)),
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      height: getPixe(115, context),
-                      width: getPixe(85, context),
-                       decoration: BoxDecoration(
-                        borderRadius:BorderRadius.circular(getPixe(5, context)),
-                        image: DecorationImage(
-                          image: NetworkImage("https://manhua.qpic.cn/operation/0/13_10_58_4745d48330847218e1e16b8e43693844_1586746736596.jpg/0"),
-                          fit: BoxFit.cover,
-                        )
-                      ),
-                    ),
-                    SizedBox(width: getPixe(10, context),),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(height: getPixe(5, context)),
-                          Text('我是大神仙', style: TextStyle(
-                            fontSize: getPixe(18, context),
-                          ),),
-                          SizedBox(height: getPixe(5, context)),
-                          Text('盛世卡漫', style: TextStyle(
-                            fontSize: getPixe(14, context),
-                            color: Color(0x99e2e2e2)
-                          )),
-                          SizedBox(height: getPixe(5, context)),
-                          Text('年仅七岁却超速生长的短命神童时江，为恢复正常生活，带着寄宿体内的某位大神仙闯入仙界，从此走上成为仙界大亨的传奇之路', style: TextStyle(
-                            fontSize: getPixe(14, context),
-                            color: Color(0x99d2d2d2)
-                          ), maxLines: 2, overflow: TextOverflow.ellipsis,),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
-        ],
+        children: _getData(),
       ),
     );
+  }
+
+  //返回搜索结果
+  List<Widget> _getData() {
+    List<Widget> data = new List();
+    listData.forEach((value) {
+      if (value['system'] == null) {
+        data.add(InkWell(
+          onTap: () {
+            print('跳转页面');
+          },
+          child: Container(
+            width: double.infinity,
+            height: getPixe(135, context),
+            // color: Colors.yellow,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                  getPixe(10, context),
+                  getPixe(25, context),
+                  getPixe(10, context),
+                  getPixe(10, context)),
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    height: getPixe(110, context),
+                    width: getPixe(83, context),
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(getPixe(3, context)),
+                        image: DecorationImage(
+                          image: NetworkImage(value['imageUrl']),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  SizedBox(
+                    width: getPixe(10, context),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: getPixe(5, context)),
+                        Text(
+                          "${value['title']}",
+                          style: TextStyle(
+                            fontSize: getPixe(18, context),
+                          ),
+                        ),
+                        SizedBox(height: getPixe(5, context)),
+                        Row(
+                          children: <Widget>[
+                            Text("${value['author']}",
+                                style: TextStyle(
+                                    fontSize: getPixe(14, context),
+                                    color: Color(0x997e7e7e))),
+                            Row(
+                              children: _getCategory(value['category']),
+                            ),
+                            // _getCategory(value['category']),
+                          ],
+                        ),
+                        SizedBox(height: getPixe(5, context)),
+                        Text(
+                          "${value['sutitle']}",
+                          style: TextStyle(
+                              fontSize: getPixe(14, context),
+                              color: Color(0x99151515)),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ));
+      }
+    });
+    return data;
+  }
+
+  //返回类别
+  List<Widget> _getCategory(var data) {
+    List<Widget> category = new List();
+    data.forEach((v) {
+      category.add(Container(
+        margin: EdgeInsets.symmetric(horizontal: getPixe(5.0, context)),
+        padding: EdgeInsets.symmetric(horizontal: getPixe(5.0, context)),
+        decoration: BoxDecoration(
+            border: Border.all(
+                width: getPixe(1, context), color: Colors.lightBlue[200]),
+            borderRadius: BorderRadius.circular(2)),
+        child: Text(
+          v,
+          style: TextStyle(
+              color: Colors.lightBlue, fontSize: getPixe(12.0, context)),
+        ),
+      ));
+    });
+    return category;
   }
 }
