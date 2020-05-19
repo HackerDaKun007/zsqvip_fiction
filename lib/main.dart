@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 
 import 'package:fiction/route/Route.dart'; //路由文件
 import 'package:flutter_localizations/flutter_localizations.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -33,9 +34,10 @@ class MyApp extends StatelessWidget {
       ],
       debugShowCheckedModeBanner: false, //移除左上角的图标
       initialRoute: '/', //初始化加载路由
-      
-      onGenerateRoute: onGenerateRoute, 
-      theme: ThemeData(primaryColor: Colors.white, splashColor: Colors.transparent),
+
+      onGenerateRoute: onGenerateRoute,
+      theme: ThemeData(
+          primaryColor: Colors.white, splashColor: Colors.transparent),
     );
   }
 }

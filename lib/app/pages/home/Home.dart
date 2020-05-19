@@ -8,12 +8,12 @@
  * @see         书城页面
 */
 
+import 'package:fiction/app/ad/Tabsad.dart';
 import 'package:fiction/res/todayHotChartsData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'package:fiction/public/public.dart';
-
 
 class HomePage extends StatelessWidget with PixelSize {
   final getCurrenIndex;
@@ -72,40 +72,29 @@ class HomePage extends StatelessWidget with PixelSize {
   }
 }
 
-class HomeBody extends StatefulWidget {
+
+class HomeBody extends StatelessWidget {
   final getCurrenIndex;
   HomeBody({this.getCurrenIndex});
-  @override
-  _HomeBodyState createState() => _HomeBodyState();
-}
 
-class _HomeBodyState extends State<HomeBody>
-    with SingleTickerProviderStateMixin {
-  List<String> swiperList = [
+  final List<String> swiperList = [
     'https://images.pexels.com/photos/1667071/pexels-photo-1667071.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
   ];
 
-  double rpx = Config.width / 750; // 自适应像素
+  final double rpx = Config.width / 750; // 自适应像素
 
-  TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 4, vsync: this);
-  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         _buildSwiperWidget(), // 轮播图
-        _buildCustomNavBarWidget(), // 导航栏
+        _buildCustomNavBarWidget(context), // 导航栏
         _buildRecommendWidget(), // 编辑推荐
-        _buildHotChartsWidget(),
+        HotChartsWidget(), // 今日热榜
         _buildGuessYouLikeWidget(), // 猜你喜欢
-        _buildInfinityListWidget() // 无限列表
+        _buildInfinityListWidget(), // 无限列表
       ],
     );
   }
@@ -149,7 +138,7 @@ class _HomeBodyState extends State<HomeBody>
   }
 
   /// 导航栏
-  Widget _buildCustomNavBarWidget() {
+  Widget _buildCustomNavBarWidget(context) {
     return Container(
         height: 110 * rpx,
         width: 750 * rpx,
@@ -162,7 +151,7 @@ class _HomeBodyState extends State<HomeBody>
                 imageUrl: 'images/category.png',
                 title: '分类',
                 onTapHandler: () {
-                  widget.getCurrenIndex(2);
+                  getCurrenIndex(2);
                 }),
             _getCustomNavBarItem(
                 imageUrl: 'images/paihang.png',
@@ -442,69 +431,69 @@ class _HomeBodyState extends State<HomeBody>
       padding: EdgeInsets.fromLTRB(30 * rpx, 10 * rpx, 10 * rpx, 10 * rpx),
       child: Stack(
         children: <Widget>[
-            Column(
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                      padding:EdgeInsets.fromLTRB(0, 20 * rpx, 20 * rpx, 20 * rpx),
-                      child: Column(
-                        children: <Widget>[
-                          Material(
-                            elevation: 8,
-                            color: Colors.transparent,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8 * rpx),
-                              child: Image.network(
-                                  'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                                  height: 190 * rpx,
-                                  fit: BoxFit.fill),
-                            ),
+          Column(
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Container(
+                    padding:
+                        EdgeInsets.fromLTRB(0, 20 * rpx, 20 * rpx, 20 * rpx),
+                    child: Column(
+                      children: <Widget>[
+                        Material(
+                          elevation: 8,
+                          color: Colors.transparent,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8 * rpx),
+                            child: Image.network(
+                                'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
+                                height: 190 * rpx,
+                                fit: BoxFit.fill),
                           ),
-                          SizedBox(
-                            height: 20 * rpx,
-                          ),
-                          Text(
-                            '无无无',
-                            style: TextStyle(
-                                fontSize: 36 * rpx,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 10 * rpx,
-                          ),
-                          Text(
-                            '无无',
-                            style: TextStyle(
-                                color: Colors.grey, fontSize: 26 * rpx),
-                          ),
-                          SizedBox(
-                            height: 10 * rpx,
-                          ),
-                          Text(
-                            '测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据',
-                            style: TextStyle(
-                                color: Colors.black54, fontSize: 26 * rpx),
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          )
-                        ],
-                      )),
-                ),
-                Container(
-                    padding: EdgeInsets.only(right: 20 * rpx),
-                    width: 450 * rpx,
-                    child: FlatButton(
-                      color: Colors.blue,
-                      textColor: Colors.white,
-                      // padding: EdgeInsets.symmetric(horizontal:150*rpx),
-                      child: Text('立即阅读'),
-                      onPressed: () {
-                        print('====== pressed =====');
-                      },
-                    ))
-              ],
-            ),
+                        ),
+                        SizedBox(
+                          height: 20 * rpx,
+                        ),
+                        Text(
+                          '无无无',
+                          style: TextStyle(
+                              fontSize: 36 * rpx, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 10 * rpx,
+                        ),
+                        Text(
+                          '无无',
+                          style:
+                              TextStyle(color: Colors.grey, fontSize: 26 * rpx),
+                        ),
+                        SizedBox(
+                          height: 10 * rpx,
+                        ),
+                        Text(
+                          '测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据',
+                          style: TextStyle(
+                              color: Colors.black54, fontSize: 26 * rpx),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      ],
+                    )),
+              ),
+              Container(
+                  padding: EdgeInsets.only(right: 20 * rpx),
+                  width: 450 * rpx,
+                  child: FlatButton(
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    // padding: EdgeInsets.symmetric(horizontal:150*rpx),
+                    child: Text('立即阅读'),
+                    onPressed: () {
+                      print('====== pressed =====');
+                    },
+                  ))
+            ],
+          ),
           Positioned(
               top: 0,
               right: 0,
@@ -522,8 +511,59 @@ class _HomeBodyState extends State<HomeBody>
     );
   }
 
-  /// 今日热榜
-  Widget _buildHotChartsWidget() {
+  
+}
+
+/// 今日热榜
+class HotChartsWidget extends StatefulWidget {
+  @override
+  _HotChartsWidgetState createState() => _HotChartsWidgetState();
+}
+
+class _HotChartsWidgetState extends State<HotChartsWidget> with SingleTickerProviderStateMixin{
+  TabController _tabController;
+  double rpx = Config.width / 750;
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);    
+  }
+
+  List _hotChartsData = todayHotChartsData;
+  Widget _getHotChartsTab() {
+    return Column(children: <Widget>[
+          TabBar(
+            controller: _tabController,
+            unselectedLabelColor: Color(0xff333333),
+            labelStyle:
+                TextStyle(fontSize: 28 * rpx, fontWeight: FontWeight.w700),
+            unselectedLabelStyle: TextStyle(fontSize: 28 * rpx),
+            indicatorPadding: EdgeInsets.only(left: 70 * rpx, right: 70 * rpx),
+            tabs: <Widget>[
+              Text('男生人气'),
+              Text('男生新书'),
+              Text('女生人气'),
+              Text('女生新书'),
+            ],
+          ),
+          SizedBox(height: 30 * rpx),
+          Expanded(
+            flex: 1,
+            child: TabBarView(
+              controller: _tabController,
+              children: <Widget>[
+                HotChartsTabView(data: _hotChartsData[0]),
+                HotChartsTabView(data: _hotChartsData[1]),
+                HotChartsTabView(data: _hotChartsData[2]),
+                HotChartsTabView(data: _hotChartsData[3]),
+              ],
+            ),
+          ),
+        ]);
+  }
+  
+  @override
+  Widget build(BuildContext context) {
     return Container(
         width: Config.width,
         height: 500 * rpx,
@@ -566,69 +606,41 @@ class _HomeBodyState extends State<HomeBody>
               SizedBox(
                 height: 30 * rpx,
               ),
-              _getHotChartsTab()
+              Expanded(
+                flex: 1,
+                child:  _getHotChartsTab()
+              ) 
             ]));
   }
+}
 
-  Widget _getHotChartsTab() {
-    return Expanded(
-        flex: 1,
-        child: Column(children: <Widget>[
-          TabBar(
-            controller: _tabController,
-            unselectedLabelColor: Color(0xff333333),
-            labelStyle:
-                TextStyle(fontSize: 28 * rpx, fontWeight: FontWeight.w700),
-            unselectedLabelStyle: TextStyle(fontSize: 28 * rpx),
-            indicatorPadding: EdgeInsets.only(left: 70 * rpx, right: 70 * rpx),
-            tabs: <Widget>[
-              Text('男生人气'),
-              Text('男生新书'),
-              Text('女生人气'),
-              Text('女生新书'),
-            ],
-          ),
-          SizedBox(height: 30 * rpx),
-          Expanded(
-            flex: 1,
-            child: TabBarView(
-              controller: _tabController,
-              children: <Widget>[
-                _getTabViewItem(_hotChartsData[0]),
-                _getTabViewItem(_hotChartsData[1]),
-                _getTabViewItem(_hotChartsData[2]),
-                _getTabViewItem(_hotChartsData[3]),
-              ],
-            ),
-          ),
-        ]));
-  }
+/// 今日热榜列表内容
+class HotChartsTabView extends StatefulWidget {
 
-  Widget _getTabViewItem(data) {
-    return Container(
-      width: Config.width,
-      padding: EdgeInsets.symmetric(horizontal: 10*rpx),
-      child: Wrap(
-        verticalDirection: VerticalDirection.down,
-        direction: Axis.vertical,
-        runSpacing: 30*rpx,
-        spacing: 10*rpx,
-        children: _getHotChartList(data),
-      ),
-    );
-  }
-  List _hotChartsData = todayHotChartsData;
+  final List data;
+
+  HotChartsTabView({this.data});  
+  @override
+  _HotChartsTabViewState createState() => _HotChartsTabViewState();
+}
+
+class _HotChartsTabViewState extends State<HotChartsTabView>
+    with AutomaticKeepAliveClientMixin {
+  double rpx = Config.width /750;
+
+  @override
+  bool get wantKeepAlive => true;
 
   _getHotChartList(data) {
+    print(data);
     List<Widget> wrapList = List<Widget>();
-
-    for (var i=0; i<data.length; i++) {
+    for (var i = 0; i < data.length; i++) {
       wrapList.add(_getHotChartsListItem(i, data[i]));
     }
     return wrapList;
-  } 
-   
-  Widget _getHotChartsListItem(int index, data){
+  }
+
+  Widget _getHotChartsListItem(int index, data) {
     bool isLeftNum = index <= 2;
     Color bgColor;
     String imgUrl;
@@ -647,52 +659,77 @@ class _HomeBodyState extends State<HomeBody>
         imgUrl = 'images/third.png';
         break;
       default:
-      bgColor = Colors.blueGrey[50];
-      imgUrl = 'images/first.png';
+        bgColor = Colors.blueGrey[50];
+        imgUrl = 'images/first.png';
     }
 
     return InkWell(
-        onTap: () {},
-        child: Container(
-          width: Config.width / 2 - (50*rpx),
-          child: Row(
-            children: <Widget>[
-              isLeftNum ?
-              Image.asset(
-                imgUrl,
-                width: 38*rpx,
-                fit: BoxFit.fitWidth,
-              ) :
-              Container(
-                padding: EdgeInsets.symmetric(horizontal:4*rpx, vertical: 2*rpx),
-                decoration: BoxDecoration(
-                  color: Colors.blue[100],
-                  borderRadius: BorderRadius.circular(4*rpx)
-                ),
-                child: Container(
-                  height: 30*rpx,
-                  width: 30*rpx,
-                  padding: EdgeInsets.only(top: 1*rpx),
-                  child: Text('${index+1}', style: TextStyle(color: Colors.white, fontSize: 22*rpx), textAlign: TextAlign.center,)
-                ),
-              ),
-              SizedBox(width: 10*rpx,),
-              Expanded(
+      onTap: () {},
+      child: Container(
+        width: Config.width / 2 - (50 * rpx),
+        child: Row(
+          children: <Widget>[
+            isLeftNum
+                ? Image.asset(
+                    imgUrl,
+                    width: 38 * rpx,
+                    fit: BoxFit.fitWidth,
+                  )
+                : Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 4 * rpx, vertical: 2 * rpx),
+                    decoration: BoxDecoration(
+                        color: Colors.blue[100],
+                        borderRadius: BorderRadius.circular(4 * rpx)),
+                    child: Container(
+                        height: 30 * rpx,
+                        width: 30 * rpx,
+                        padding: EdgeInsets.only(top: 1 * rpx),
+                        child: Text(
+                          '${index + 1}',
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 22 * rpx),
+                          textAlign: TextAlign.center,
+                        )),
+                  ),
+            SizedBox(
+              width: 10 * rpx,
+            ),
+            Expanded(
                 flex: 1,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15*rpx, vertical: 10*rpx),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 15 * rpx, vertical: 10 * rpx),
                   decoration: BoxDecoration(
-                    color: bgColor,
-                    borderRadius: BorderRadius.circular(6*rpx)
+                      color: bgColor,
+                      borderRadius: BorderRadius.circular(6 * rpx)),
+                  child: Text(
+                    data['book_name'],
+                    style: TextStyle(
+                      fontSize: 24 * rpx,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  child: Text(data['book_name'], style: TextStyle(fontSize: 24*rpx, ),overflow: TextOverflow.ellipsis,),
-                )
-              )
-            ],
-          ),
+                ))
+          ],
         ),
-      )
-    ;
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: Config.width,
+      padding: EdgeInsets.symmetric(horizontal: 10 * rpx),
+      child: Wrap(
+        verticalDirection: VerticalDirection.down,
+        direction: Axis.vertical,
+        runSpacing: 30 * rpx,
+        spacing: 10 * rpx,
+        children: _getHotChartList(widget.data),
+      ),
+    );
   }
 }
 
@@ -779,7 +816,7 @@ class BookContentWidget extends StatelessWidget {
                             Text(
                               '连载人气 · ${bookActivityCount}万人气',
                               style: TextStyle(
-                                  color: Colors.grey[400], fontSize: 20*rpx),
+                                  color: Colors.grey[400], fontSize: 20 * rpx),
                             )
                           ],
                         )
@@ -788,7 +825,6 @@ class BookContentWidget extends StatelessWidget {
           ],
         ));
   }
-
 
   // 分类
   Widget _getCategoryWidget({String name, double rpx}) {
