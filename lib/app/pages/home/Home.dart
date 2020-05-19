@@ -632,7 +632,6 @@ class _HotChartsTabViewState extends State<HotChartsTabView>
   bool get wantKeepAlive => true;
 
   _getHotChartList(data) {
-    print(data);
     List<Widget> wrapList = List<Widget>();
     for (var i = 0; i < data.length; i++) {
       wrapList.add(_getHotChartsListItem(i, data[i]));
