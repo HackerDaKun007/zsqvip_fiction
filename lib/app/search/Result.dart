@@ -206,12 +206,12 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
         padding: EdgeInsets.symmetric(horizontal: getPixe(5.0, context)),
         decoration: BoxDecoration(
             border: Border.all(
-                width: getPixe(1, context), color: Colors.lightBlue[200]),
+                width: getPixe(1, context), color: Config.color),
             borderRadius: BorderRadius.circular(2)),
         child: Text(
           v,
           style: TextStyle(
-              color: Colors.lightBlue, fontSize: getPixe(12.0, context)),
+              color: Config.color, fontSize: getPixe(12.0, context)),
         ),
       ));
     });
