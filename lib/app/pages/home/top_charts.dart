@@ -77,10 +77,14 @@ class TabViewContentWidget extends StatefulWidget {
   _TabViewContentWidgetState createState() => _TabViewContentWidgetState();
 }
 
-class _TabViewContentWidgetState extends State<TabViewContentWidget> {
+class _TabViewContentWidgetState extends State<TabViewContentWidget> with AutomaticKeepAliveClientMixin{
   double rpx = Config.width / 750;
   int indexItem;
   List _chartsData;
+
+  // 保持tab bar切换时不重载
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
