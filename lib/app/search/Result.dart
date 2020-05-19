@@ -60,7 +60,7 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
                   text: this.title,
                 ),
                 decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 11.2),
+                  contentPadding: EdgeInsets.symmetric(vertical: getPixe(11.2, context)),
                   icon: Icon(
                     Iconfont.sousuo,
                     size: getPixe(22, context),
