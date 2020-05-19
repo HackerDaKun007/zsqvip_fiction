@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
 class CategoryPage extends StatefulWidget {
-  CategoryPage({Key key}) : super(key: key);
 
   @override
   _CategoryPageState createState() => _CategoryPageState();
@@ -23,8 +22,8 @@ class _CategoryPageState extends State<CategoryPage>
     with SingleTickerProviderStateMixin, PixelSize {
   TabController _tabController;
 
-  List _boyCategoryNameData = categoryNameData[0];
-  List _girlCategoryNameData = categoryNameData[1];
+  Object _boyCategoryNameData = categoryNameData[0];
+  Object _girlCategoryNameData = categoryNameData[1];
 
   @override
   void initState() {
@@ -74,35 +73,31 @@ class _CategoryPageState extends State<CategoryPage>
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          CategoryContent(
-            categoryData: _boyCategoryNameData,
-          ),
-          CategoryContent(categoryData: _girlCategoryNameData,)
+          CategoryContent(data:_boyCategoryNameData),
+          CategoryContent(data:_girlCategoryNameData),
         ],
       ),
     );
   }
 }
 
-
 /// 页面内容
 class CategoryContent extends StatefulWidget {
-  final List categoryData;
-
-  CategoryContent({this.categoryData});
+  final Map data;
+  CategoryContent({Key key, this.data});
 
   @override
   _CategoryContentState createState() => _CategoryContentState();
 }
 
 class _CategoryContentState extends State<CategoryContent> with PixelSize, AutomaticKeepAliveClientMixin {
-  List categoryListData;
-  List booksData;
+  List _categoryListData;
+  List _booksData;
   @override
   void initState() {
     super.initState();
-    categoryListData = widget.categoryData[0]['category_name'];
-    booksData = widget.categoryData[0]['books'];
+    _categoryListData = widget.data['category_list'];
+    _booksData = widget.data['books'];
   }
 
   // 控制tabbar切换时不重载
@@ -175,9 +170,9 @@ class _CategoryContentState extends State<CategoryContent> with PixelSize, Autom
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-         _getbtnList(categoryListData[0]),
-         _getbtnList(categoryListData[1]),
-         _getbtnList(categoryListData[2]),
+         _getbtnList(_categoryListData[0]),
+         _getbtnList(_categoryListData[1]),
+         _getbtnList(_categoryListData[2]),
          Divider(),
          _getFeaturebtns(),
          Divider(),
@@ -211,7 +206,7 @@ class _CategoryContentState extends State<CategoryContent> with PixelSize, Autom
       child: Column(
         children: <Widget>[
           _buildCategoryBtnsWidget(),
-          CategoryBookContent(data:booksData)
+          CategoryBookContent(data:_booksData)
         ],
       ),
     );
@@ -228,12 +223,6 @@ class CategoryBookContent extends StatefulWidget {
 }
 
 class _CategoryBookContentState extends State<CategoryBookContent> with PixelSize{
-  List _data;
-  @override
-  initState() {
-    super.initState();
-    _data = widget.data;
-  }
   
   Widget _buildBookWidget(data) {
     return Container(
@@ -295,7 +284,7 @@ class _CategoryBookContentState extends State<CategoryBookContent> with PixelSiz
                                   width: getPixe(5, context),
                                 ),
                                 _getCategoryWidget(
-                                    name: data['category_name'][1]),
+                                    name: data['category_name'][1],),
                               ],
                             ),
                             Text(
@@ -340,7 +329,7 @@ class _CategoryBookContentState extends State<CategoryBookContent> with PixelSiz
       padding: EdgeInsets.all(getPixe(10, context)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: _getListItem(_data)
+        children: _getListItem(widget.data)
       ),
     );
   }

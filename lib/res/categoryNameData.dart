@@ -19,10 +19,6 @@ List categoryNameData = [
         {'id': 1, 'name': '连载'},
         {'id': 2, 'name': '完结'},
       ],
-      [
-        {'id': 1, 'name': '最新'},
-        {'id': 2, 'name': '评分'},
-      ],
     ],
     'books': [
       {
@@ -122,10 +118,6 @@ List categoryNameData = [
       [
         {'id': 1, 'name': '连载'},
         {'id': 2, 'name': '完结'},
-      ],
-      [
-        {'id': 1, 'name': '最新'},
-        {'id': 2, 'name': '评分'},
       ],
     ],
     'books': [
