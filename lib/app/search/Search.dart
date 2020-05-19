@@ -73,7 +73,8 @@ class _SearchState extends State<Search> with PixelSize, Common {
           child: Padding(
               padding: EdgeInsets.fromLTRB(
                   getPixe(10, context), 0, getPixe(10, context), 0),
-              child: TextField(
+              child: Center(
+                child: TextField(
                 decoration: InputDecoration(
                   icon: Icon(
                     Iconfont.sousuo,
@@ -86,7 +87,9 @@ class _SearchState extends State<Search> with PixelSize, Common {
                 onChanged: (value) {
                   this._input = value;
                 },
-              )),
+              ),
+              ),
+            ),
           decoration: BoxDecoration(
             color: Color(0x99ededed),
             borderRadius: BorderRadius.all(
@@ -111,14 +114,14 @@ class _SearchState extends State<Search> with PixelSize, Common {
                 ),
                 onTap: () {
                   if (empty(this._input)) {
-                    setState(() {
+                    // setState(() {
                       if (inArray(Path.recen, this._input)) {
                         Path.recen.remove(this._input);
                       }
                       Path.recen.add(this._input);
                       this._isReccent = true;
                       _getResult(this._input);
-                    });
+                    // });
                   }
                 },
               )),
@@ -332,14 +335,14 @@ class _SearchState extends State<Search> with PixelSize, Common {
       textColor: Colors.black,
       color: Color(0x99e2e2e2),
       onPressed: () {
-        setState(() {
+        // setState(() {
           if (inArray(Path.recen, text)) {
             Path.recen.remove(text);
           }
           Path.recen.add(text);
           this._isReccent = true;
           _getResult(text);
-        });
+        // });
       },
     );
   }
