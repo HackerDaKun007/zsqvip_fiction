@@ -8,10 +8,12 @@
  * @see         书城页面
 */
 
-import 'package:fiction/public/public.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fiction/res/todayHotChartsData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+
+import 'package:fiction/public/public.dart';
+
 
 class HomePage extends StatelessWidget with PixelSize {
   final getCurrenIndex;
@@ -24,22 +26,25 @@ class HomePage extends StatelessWidget with PixelSize {
           backgroundColor: Color(0xfff4f4f4),
           elevation: 1,
           title: Container(
-            decoration: BoxDecoration(
-              color: Color(0xfffcfcfc),
-            ),
+            margin: EdgeInsets.only(right: getPixe(10, context)),
+            height: getPixe(44, context),
             child: Container(
+              color: Color(0xfffcfcfc),
               padding: EdgeInsets.only(left: getPixe(10, context)),
               child: TextField(
                 readOnly: true,
+                textAlignVertical: TextAlignVertical(y: -1),
                 decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(left: getPixe(10, context)),
                     icon: Icon(
                       Iconfont.sousuo,
                       color: Color(0xffb5b5b5),
                     ),
                     hintText: '搜索书名或作者',
                     hintStyle: TextStyle(
-                        fontSize: getPixe(14, context),
-                        color: Color(0xffb5b5b5)),
+                      fontSize: getPixe(16, context),
+                      color: Color(0xffb5b5b5),
+                    ),
                     border: InputBorder.none),
                 onTap: () {
                   Navigator.pushNamed(context, '/search');
@@ -74,7 +79,8 @@ class HomeBody extends StatefulWidget {
   _HomeBodyState createState() => _HomeBodyState();
 }
 
-class _HomeBodyState extends State<HomeBody> {
+class _HomeBodyState extends State<HomeBody>
+    with SingleTickerProviderStateMixin {
   List<String> swiperList = [
     'https://images.pexels.com/photos/1667071/pexels-photo-1667071.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
@@ -82,14 +88,22 @@ class _HomeBodyState extends State<HomeBody> {
 
   double rpx = Config.width / 750; // 自适应像素
 
+  TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: <Widget>[
         _buildSwiperWidget(), // 轮播图
         _buildCustomNavBarWidget(), // 导航栏
         _buildRecommendWidget(), // 编辑推荐
+        _buildHotChartsWidget(),
         _buildGuessYouLikeWidget(), // 猜你喜欢
         _buildInfinityListWidget() // 无限列表
       ],
@@ -341,7 +355,7 @@ class _HomeBodyState extends State<HomeBody> {
               ],
             ),
             SizedBox(
-              height: 50 * rpx,
+              height: 30 * rpx,
             ),
             Expanded(
                 flex: 1,
@@ -393,7 +407,7 @@ class _HomeBodyState extends State<HomeBody> {
               style: TextStyle(fontSize: 34 * rpx, fontWeight: FontWeight.bold),
             ),
             SizedBox(
-              height: 50 * rpx,
+              height: 30 * rpx,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -428,15 +442,12 @@ class _HomeBodyState extends State<HomeBody> {
       padding: EdgeInsets.fromLTRB(30 * rpx, 10 * rpx, 10 * rpx, 10 * rpx),
       child: Stack(
         children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Column(
+            Column(
               children: <Widget>[
                 Expanded(
                   flex: 1,
                   child: Container(
-                      padding:
-                          EdgeInsets.fromLTRB(0, 20 * rpx, 20 * rpx, 20 * rpx),
+                      padding:EdgeInsets.fromLTRB(0, 20 * rpx, 20 * rpx, 20 * rpx),
                       child: Column(
                         children: <Widget>[
                           Material(
@@ -494,7 +505,6 @@ class _HomeBodyState extends State<HomeBody> {
                     ))
               ],
             ),
-          ),
           Positioned(
               top: 0,
               right: 0,
@@ -510,6 +520,179 @@ class _HomeBodyState extends State<HomeBody> {
         ],
       ),
     );
+  }
+
+  /// 今日热榜
+  Widget _buildHotChartsWidget() {
+    return Container(
+        width: Config.width,
+        height: 500 * rpx,
+        margin: EdgeInsets.all(20 * rpx),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    '今日热榜',
+                    style: TextStyle(
+                        fontSize: 34 * rpx, fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                      padding: EdgeInsets.only(right: 20 * rpx),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/topcharts');
+                        },
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              '全部榜单',
+                              style: TextStyle(
+                                  color: Colors.grey, fontSize: 26 * rpx),
+                            ),
+                            Icon(
+                              Icons.chevron_right,
+                              size: 40 * rpx,
+                              color: Colors.grey[400],
+                            )
+                          ],
+                        ),
+                      ))
+                ],
+              ),
+              SizedBox(
+                height: 30 * rpx,
+              ),
+              _getHotChartsTab()
+            ]));
+  }
+
+  Widget _getHotChartsTab() {
+    return Expanded(
+        flex: 1,
+        child: Column(children: <Widget>[
+          TabBar(
+            controller: _tabController,
+            unselectedLabelColor: Color(0xff333333),
+            labelStyle:
+                TextStyle(fontSize: 28 * rpx, fontWeight: FontWeight.w700),
+            unselectedLabelStyle: TextStyle(fontSize: 28 * rpx),
+            indicatorPadding: EdgeInsets.only(left: 70 * rpx, right: 70 * rpx),
+            tabs: <Widget>[
+              Text('男生人气'),
+              Text('男生新书'),
+              Text('女生人气'),
+              Text('女生新书'),
+            ],
+          ),
+          SizedBox(height: 30 * rpx),
+          Expanded(
+            flex: 1,
+            child: TabBarView(
+              controller: _tabController,
+              children: <Widget>[
+                _getTabViewItem(_hotChartsData[0]),
+                _getTabViewItem(_hotChartsData[1]),
+                _getTabViewItem(_hotChartsData[2]),
+                _getTabViewItem(_hotChartsData[3]),
+              ],
+            ),
+          ),
+        ]));
+  }
+
+  Widget _getTabViewItem(data) {
+    return Container(
+      width: Config.width,
+      padding: EdgeInsets.symmetric(horizontal: 10*rpx),
+      child: Wrap(
+        verticalDirection: VerticalDirection.down,
+        direction: Axis.vertical,
+        runSpacing: 30*rpx,
+        spacing: 10*rpx,
+        children: _getHotChartList(data),
+      ),
+    );
+  }
+  List _hotChartsData = todayHotChartsData;
+
+  _getHotChartList(data) {
+    List<Widget> wrapList = List<Widget>();
+
+    for (var i=0; i<data.length; i++) {
+      wrapList.add(_getHotChartsListItem(i, data[i]));
+    }
+    return wrapList;
+  } 
+   
+  Widget _getHotChartsListItem(int index, data){
+    bool isLeftNum = index <= 2;
+    Color bgColor;
+    String imgUrl;
+
+    switch (index) {
+      case 0:
+        bgColor = Colors.orange[50];
+        imgUrl = 'images/first.png';
+        break;
+      case 1:
+        bgColor = Colors.grey[200];
+        imgUrl = 'images/second.png';
+        break;
+      case 2:
+        bgColor = Colors.deepOrange[50];
+        imgUrl = 'images/third.png';
+        break;
+      default:
+      bgColor = Colors.blueGrey[50];
+      imgUrl = 'images/first.png';
+    }
+
+    return InkWell(
+        onTap: () {},
+        child: Container(
+          width: Config.width / 2 - (50*rpx),
+          child: Row(
+            children: <Widget>[
+              isLeftNum ?
+              Image.asset(
+                imgUrl,
+                width: 38*rpx,
+                fit: BoxFit.fitWidth,
+              ) :
+              Container(
+                padding: EdgeInsets.symmetric(horizontal:4*rpx, vertical: 2*rpx),
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                  borderRadius: BorderRadius.circular(4*rpx)
+                ),
+                child: Container(
+                  height: 30*rpx,
+                  width: 30*rpx,
+                  padding: EdgeInsets.only(top: 1*rpx),
+                  child: Text('${index+1}', style: TextStyle(color: Colors.white, fontSize: 22*rpx), textAlign: TextAlign.center,)
+                ),
+              ),
+              SizedBox(width: 10*rpx,),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15*rpx, vertical: 10*rpx),
+                  decoration: BoxDecoration(
+                    color: bgColor,
+                    borderRadius: BorderRadius.circular(6*rpx)
+                  ),
+                  child: Text(data['book_name'], style: TextStyle(fontSize: 24*rpx, ),overflow: TextOverflow.ellipsis,),
+                )
+              )
+            ],
+          ),
+        ),
+      )
+    ;
   }
 }
 
@@ -596,7 +779,7 @@ class BookContentWidget extends StatelessWidget {
                             Text(
                               '连载人气 · ${bookActivityCount}万人气',
                               style: TextStyle(
-                                  color: Colors.grey[400], fontSize: 20 * rpx),
+                                  color: Colors.grey[400], fontSize: 20*rpx),
                             )
                           ],
                         )
@@ -605,6 +788,7 @@ class BookContentWidget extends StatelessWidget {
           ],
         ));
   }
+
 
   // 分类
   Widget _getCategoryWidget({String name, double rpx}) {

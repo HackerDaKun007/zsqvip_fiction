@@ -7,9 +7,12 @@
  * 
  * @see         书单页面
 */
+
+import 'package:flutter/material.dart';
+
 import 'package:fiction/public/public.dart';
 import 'package:fiction/res/booklistData.dart';
-import 'package:flutter/material.dart';
+
 
 class BookListPage extends StatefulWidget {
   @override

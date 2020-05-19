@@ -1,4 +1,4 @@
-/**
+/*
  * @author      Yuri Chen <pluto401zz@gmail.com>
  * @Remarks     无
  * @copyright   GPL
