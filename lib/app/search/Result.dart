@@ -108,7 +108,7 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
             onTap: () {},
             child: Container(
               width: double.infinity,
-              height: getPixe(160, context),
+              height: getPixe(140, context),
               color: Colors.yellow,
               child: Padding(
                 padding: EdgeInsets.fromLTRB(
@@ -119,8 +119,8 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
                 child: Row(
                   children: <Widget>[
                     Container(
-                      height: getPixe(135, context),
-                      width: getPixe(100, context),
+                      height: getPixe(115, context),
+                      width: getPixe(85, context),
                        decoration: BoxDecoration(
                         borderRadius:BorderRadius.circular(getPixe(5, context)),
                         image: DecorationImage(
@@ -136,9 +136,19 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(height: getPixe(5, context)),
-                          Text('213'),
-                          Text('213'),
-                          Text('213'),
+                          Text('我是大神仙', style: TextStyle(
+                            fontSize: getPixe(18, context),
+                          ),),
+                          SizedBox(height: getPixe(5, context)),
+                          Text('盛世卡漫', style: TextStyle(
+                            fontSize: getPixe(14, context),
+                            color: Color(0x99e2e2e2)
+                          )),
+                          SizedBox(height: getPixe(5, context)),
+                          Text('年仅七岁却超速生长的短命神童时江，为恢复正常生活，带着寄宿体内的某位大神仙闯入仙界，从此走上成为仙界大亨的传奇之路', style: TextStyle(
+                            fontSize: getPixe(14, context),
+                            color: Color(0x99d2d2d2)
+                          ), maxLines: 2, overflow: TextOverflow.ellipsis,),
                         ],
                       ),
                     ),
