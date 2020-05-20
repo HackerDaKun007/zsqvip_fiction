@@ -68,8 +68,13 @@ class HomePage extends StatelessWidget with PixelSize {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: HomeBody(getCurrenIndex: getCurrenIndex),
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: HomeBody(getCurrenIndex: getCurrenIndex),
+            ),
+            TabsAd()
+          ]
         ));
   }
 }

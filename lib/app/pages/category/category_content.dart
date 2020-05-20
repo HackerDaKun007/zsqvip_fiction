@@ -26,30 +26,27 @@ class _CategoryContentState extends State<CategoryContent>
   List _categoryListData;
   List _booksData;
 
-  int _firstSelectedIndex;  // 第一组筛选
+  int _firstSelectedIndex; // 第一组筛选
   int _secondSelectedIndex; // 第二组筛选
   int _thirdSelectedIndex; // 第三组筛选
   int _featureSelectedIndex; // 第四组筛选
 
   /// 第一组筛选控制
   hanldeFirstSelect(index) {
-    print('$index  -- $_firstSelectedIndex');
     if (index == _firstSelectedIndex) return;
-    
+
     setState(() {
       _firstSelectedIndex = index;
     });
-
   }
 
   /// 第二组筛选控制
   hanldeSecondSelect(index) {
     if (index == _secondSelectedIndex) return;
-    
+
     setState(() {
       _secondSelectedIndex = index;
     });
-
   }
 
   @override
@@ -71,7 +68,10 @@ class _CategoryContentState extends State<CategoryContent>
   _getbtns(data) {
     List<Widget> list = List<Widget>();
     for (var i = 1; i < data.length; i++) {
-      list.add(CategoryBtn(callback: ()=>hanldeFirstSelect(i), name: data[i]['name'], index: i, selectIndex: _firstSelectedIndex));
+      list.add(CategoryBtn(
+        callback: () => hanldeFirstSelect(i),
+        name: data[i]['name'],
+      ));
     }
     return list;
   }
@@ -87,7 +87,10 @@ class _CategoryContentState extends State<CategoryContent>
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          CategoryBtn(callback: hanldeFirstSelect(0), name: data[0]['name'], index: 0, selectIndex: index,),
+          CategoryBtn(
+            callback: hanldeFirstSelect(0),
+            name: data[0]['name'],
+          ),
           SizedBox(
             width: getPixe(20, context),
           ),
@@ -113,7 +116,11 @@ class _CategoryContentState extends State<CategoryContent>
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          CategoryBtn(callback: null, name: '热门', index: 0, selectIndex: _featureSelectedIndex,),
+          CategoryBtn(
+            callback: null,
+            name: '热门',
+
+          ),
           SizedBox(
             width: getPixe(20, context),
           ),
@@ -124,8 +131,14 @@ class _CategoryContentState extends State<CategoryContent>
                 spacing: getPixe(20, context),
                 runSpacing: getPixe(10, context),
                 children: <Widget>[
-                  CategoryBtn(callback: null, name: '最新', index: 1, selectIndex: _featureSelectedIndex),
-                  CategoryBtn(callback: null, name: '评分', index: 2, selectIndex: _featureSelectedIndex,),
+                  CategoryBtn(
+                    callback: null,
+                    name: '最新',
+                  ),
+                  CategoryBtn(
+                    callback: null,
+                    name: '评分',
+                  ),
                 ],
               )),
         ],
@@ -165,45 +178,39 @@ class _CategoryContentState extends State<CategoryContent>
   }
 }
 
-
 class CategoryBtnListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-    );
+    return Container();
   }
 }
 
-
 class CategoryBtn extends StatefulWidget {
   final String name;
-  final int index; 
-  final int selectIndex;
+  final bool isActive;
   final Function callback;
 
-  CategoryBtn({this.name, this.index, this.selectIndex, this.callback});
+  CategoryBtn({this.name, this.isActive, this.callback});
 
   @override
   _CategoryBtnState createState() => _CategoryBtnState();
 }
 
-class _CategoryBtnState extends State<CategoryBtn> with PixelSize{
+class _CategoryBtnState extends State<CategoryBtn> with PixelSize {
   bool isActive;
 
   @override
   void initState() {
     super.initState();
-    isActive = widget.index == widget.selectIndex ? true : false;
+    isActive = widget.isActive != null ? widget.isActive : false;
   }
-
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         setState(() {
-          isActive = !isActive;
+          isActive = widget.isActive;
         });
       },
       child: Container(

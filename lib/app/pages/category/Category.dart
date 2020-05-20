@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
 
+import '../../ad/Tabsad.dart';
+
 class CategoryPage extends StatefulWidget {
 
   @override
@@ -71,12 +73,17 @@ class _CategoryPageState extends State<CategoryPage>
           ),
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-          CategoryContent(data:_boyCategoryNameData),
-          CategoryContent(data:_girlCategoryNameData),
-        ],
+      body: Stack(
+        children: [
+          TabBarView(
+            controller: _tabController,
+            children: <Widget>[
+              CategoryContent(data:_boyCategoryNameData),
+              CategoryContent(data:_girlCategoryNameData),
+            ],
+          ),
+          TabsAd()
+        ]
       ),
     );
   }
