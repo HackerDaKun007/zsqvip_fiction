@@ -20,7 +20,7 @@ import 'package:fiction/app/pages/bookshelf/Recording.dart';  //阅读记录
 import 'package:fiction/app/search/Search.dart';  //搜索页面
 import 'package:fiction/app/search/Result.dart';  //搜索结果页面
 
-import 'package:fiction/app/pages/Category.dart';  //分类
+import 'package:fiction/app/pages/category/Category.dart';  //分类
 import 'package:fiction/app/pages/My.dart';  //我的
 
 //Yuri配置_路由区域
