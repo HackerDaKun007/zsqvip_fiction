@@ -13,7 +13,7 @@ import 'package:fiction/public/public.dart';
 //导航栏目地址
 import 'package:fiction/app/pages/home/Home.dart'; //书城
 import 'package:fiction/app/pages/bookshelf/Bookshelf.dart'; //书架
-import 'package:fiction/app/pages/Category.dart'; //分类
+import 'package:fiction/app/pages/category/Category.dart'; //分类
 import 'package:fiction/app/pages/My.dart'; //我的
 
 

@@ -5,111 +5,50 @@
  * @since       1.0 version
  *
  *
- * @see         分类
+ * @see         分类-内容
 */
-import 'package:fiction/res/categoryNameData.dart';
+import 'package:fiction/app/pages/category/category_book_content.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
 
-class CategoryPage extends StatefulWidget {
-  CategoryPage({Key key}) : super(key: key);
 
-  @override
-  _CategoryPageState createState() => _CategoryPageState();
-}
-
-class _CategoryPageState extends State<CategoryPage>
-    with SingleTickerProviderStateMixin, PixelSize {
-  TabController _tabController;
-
-  List _boyCategoryNameData = categoryNameData[0];
-  List _girlCategoryNameData = categoryNameData[1];
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    double indicatorWidth = Config.width / 5 + 10;
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0),
-        child: AppBar(
-          leading: SizedBox(width: 0),
-          elevation: 0,
-          titleSpacing: 0,
-          actions: <Widget>[
-            Container(
-                padding: EdgeInsets.only(
-                    bottom: getPixe(6, context), right: getPixe(6, context)),
-                child: IconButton(
-                  icon: Icon(Iconfont.sousuo),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/search');
-                  },
-                ))
-          ],
-          title: TabBar(
-            controller: _tabController,
-            labelPadding: EdgeInsets.only(bottom: getPixe(5, context)),
-            labelColor: Colors.lightBlue,
-            unselectedLabelColor: Colors.black54,
-            labelStyle: TextStyle(
-                fontSize: getPixe(16, context), fontWeight: FontWeight.bold),
-            unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
-            indicatorPadding: EdgeInsets.symmetric(
-                horizontal: getPixe(indicatorWidth, context)),
-            tabs: <Widget>[
-              Text('男生频道'),
-              Text('女生频道'),
-            ],
-          ),
-        ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-          CategoryContent(
-            categoryData: _boyCategoryNameData,
-          ),
-          CategoryContent(categoryData: _girlCategoryNameData,)
-        ],
-      ),
-    );
-  }
-}
-
+/// 页面内容
 class CategoryContent extends StatefulWidget {
-  final List categoryData;
-
-  CategoryContent({this.categoryData});
+  final Map data;
+  CategoryContent({Key key, this.data});
 
   @override
   _CategoryContentState createState() => _CategoryContentState();
 }
 
 class _CategoryContentState extends State<CategoryContent> with PixelSize, AutomaticKeepAliveClientMixin {
+  List _categoryListData;
+  List _booksData;
+  @override
+  void initState() {
+    super.initState();
+    _categoryListData = widget.data['category_list'];
+    _booksData = widget.data['books'];
+  }
 
+  // 控制tabbar切换时不重载
   @override
   bool get wantKeepAlive => true;
 
+  /// 拿到分类按钮
   _getbtns(data) {
-    print(data);
     List<Widget> list = List<Widget>();
     for (var i=0; i<data.length; i++) {
       list.add(_getCategoryBtn(callback: null, name: data[i]['name']));
     }
     return list;
   }
-
+  /// 分类按钮列表
   Widget _getbtnList(data) {
     return Container(
            width: Config.width,
-           padding: EdgeInsets.only(bottom: getPixe(10, context)),
+           padding: EdgeInsets.only(bottom: getPixe(10, context), right: getPixe(20, context), left: getPixe(20, context)),
            child: Row(
              crossAxisAlignment: CrossAxisAlignment.start,
              children: <Widget>[
@@ -128,11 +67,11 @@ class _CategoryContentState extends State<CategoryContent> with PixelSize, Autom
            ),
          );
   }
-
+  /// 热门分类按钮列表
   Widget _getFeaturebtns() {
      return Container(
            width: Config.width,
-           padding: EdgeInsets.symmetric(vertical: getPixe(5, context)),
+           padding: EdgeInsets.symmetric(vertical: getPixe(5, context), horizontal: getPixe(20, context)),
            child: Row(
              crossAxisAlignment: CrossAxisAlignment.start,
              children: <Widget>[
@@ -159,15 +98,13 @@ class _CategoryContentState extends State<CategoryContent> with PixelSize, Autom
   Widget _buildCategoryBtnsWidget() {
     return Container(
       width: Config.width,
-      height: getPixe(300, context),
-      // margin: EdgeInsets.symmetric(vertical: getPixe(10, context)),
-      padding: EdgeInsets.all(getPixe(20, context)),
+      margin: EdgeInsets.symmetric(vertical: getPixe(10, context)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-         _getbtnList(widget.categoryData[0]),
-         _getbtnList(widget.categoryData[1]),
-         _getbtnList(widget.categoryData[2]),
+         _getbtnList(_categoryListData[0]),
+         _getbtnList(_categoryListData[1]),
+         _getbtnList(_categoryListData[2]),
          Divider(),
          _getFeaturebtns(),
          Divider(),
@@ -194,12 +131,6 @@ class _CategoryContentState extends State<CategoryContent> with PixelSize, Autom
     );
   }
 
-  /// 分类详情列表
-  Widget _buildCategoryListWidget() {
-    return Container(
-      width: Config.width,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -207,9 +138,11 @@ class _CategoryContentState extends State<CategoryContent> with PixelSize, Autom
       child: Column(
         children: <Widget>[
           _buildCategoryBtnsWidget(),
-          _buildCategoryListWidget()
+          CategoryBookContent(data:_booksData)
         ],
       ),
     );
   }
 }
+
+

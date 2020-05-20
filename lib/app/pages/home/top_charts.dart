@@ -82,7 +82,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> with Automa
   int indexItem;
   List _chartsData;
 
-  // 保持tab bar切换时不重载
+  // 保持tabbar切换时不重载
   @override
   bool get wantKeepAlive => true;
 
