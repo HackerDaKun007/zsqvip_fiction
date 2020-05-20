@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
 import 'package:fiction/res/RecordingData.dart';
-import 'package:fiction/public/widget/Bounced.dart';
+import 'package:fiction/public/utils/Bounced.dart';
 import 'package:fiction/public/widget/Prompt.dart';
 
 class Recording extends StatefulWidget {
