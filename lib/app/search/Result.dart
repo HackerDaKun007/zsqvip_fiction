@@ -31,6 +31,7 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:Colors.white,
       appBar: AppBar(
         // centerTitle: true,
         elevation: 1,
@@ -39,7 +40,7 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
           child: IconButton(
             icon: Icon(
               Iconfont.zuo,
-              size: getPixe(30, context),
+              size: getPixe(28, context),
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -60,7 +61,8 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
                   text: this.title,
                 ),
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical: getPixe(11.2, context)),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: getPixe(11.2, context)),
                   icon: Icon(
                     Iconfont.sousuo,
                     size: getPixe(22, context),
@@ -127,68 +129,65 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
           child: Container(
             width: double.infinity,
             height: getPixe(135, context),
+            padding: EdgeInsets.fromLTRB(
+                getPixe(10, context),
+                getPixe(25, context),
+                getPixe(10, context),
+                getPixe(10, context)),
             // color: Colors.yellow,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                  getPixe(10, context),
-                  getPixe(25, context),
-                  getPixe(10, context),
-                  getPixe(10, context)),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    height: getPixe(110, context),
-                    width: getPixe(83, context),
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(getPixe(3, context)),
-                        image: DecorationImage(
-                          image: NetworkImage(value['imageUrl']),
-                          fit: BoxFit.cover,
-                        )),
-                  ),
-                  SizedBox(
-                    width: getPixe(10, context),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(height: getPixe(5, context)),
-                        Text(
-                          "${value['title']}",
-                          style: TextStyle(
-                            fontSize: getPixe(18, context),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  height: getPixe(110, context),
+                  width: getPixe(83, context),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(getPixe(3, context)),
+                      image: DecorationImage(
+                        image: NetworkImage(value['imageUrl']),
+                        fit: BoxFit.cover,
+                      )),
+                ),
+                SizedBox(
+                  width: getPixe(10, context),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(height: getPixe(5, context)),
+                      Text(
+                        "${value['title']}",
+                        style: TextStyle(
+                          fontSize: getPixe(18, context),
+                        ),
+                      ),
+                      SizedBox(height: getPixe(5, context)),
+                      Row(
+                        children: <Widget>[
+                          Text("${value['author']}",
+                              style: TextStyle(
+                                  fontSize: getPixe(14, context),
+                                  color: Color(0x997e7e7e))),
+                          Row(
+                            children: _getCategory(value['category']),
                           ),
-                        ),
-                        SizedBox(height: getPixe(5, context)),
-                        Row(
-                          children: <Widget>[
-                            Text("${value['author']}",
-                                style: TextStyle(
-                                    fontSize: getPixe(14, context),
-                                    color: Color(0x997e7e7e))),
-                            Row(
-                              children: _getCategory(value['category']),
-                            ),
-                            // _getCategory(value['category']),
-                          ],
-                        ),
-                        SizedBox(height: getPixe(5, context)),
-                        Text(
-                          "${value['sutitle']}",
-                          style: TextStyle(
-                              fontSize: getPixe(14, context),
-                              color: Color(0x99151515)),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
+                          // _getCategory(value['category']),
+                        ],
+                      ),
+                      SizedBox(height: getPixe(5, context)),
+                      Text(
+                        "${value['sutitle']}",
+                        style: TextStyle(
+                            fontSize: getPixe(14, context),
+                            color: Color(0x99151515)),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ));
@@ -202,13 +201,13 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
     List<Widget> _category = new List();
     int _num = 1; //分类长度最大2
     data.forEach((value) {
-      if(_num <= 2) {
+      if (_num <= 2) {
         _category.add(Container(
           margin: EdgeInsets.symmetric(horizontal: getPixe(5.0, context)),
           padding: EdgeInsets.symmetric(horizontal: getPixe(5.0, context)),
           decoration: BoxDecoration(
-              border: Border.all(
-                  width: getPixe(1, context), color: Config.color),
+              border:
+                  Border.all(width: getPixe(1, context), color: Config.color),
               borderRadius: BorderRadius.circular(2)),
           child: Text(
             value,

@@ -16,13 +16,10 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fiction/public/public.dart';
 // import 'package:fiction/res/listData.dart';
 
-
 //引入页面
 import 'package:fiction/app/pages/bookshelf/Columnleft.dart'; //顶部左边导航
 import 'package:fiction/app/pages/bookshelf/Content.dart'; //内容模块
 import 'package:fiction/app/ad/Tabsad.dart'; //底部广告位置
-
-
 
 //阅读分钟
 // int Path.minute = 0;
@@ -37,8 +34,6 @@ class BookShelfPage extends StatefulWidget {
 }
 
 class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
-
-
   final int appbarAlpha = 100; //滚动最大值
   //修改顶部透明值
   double appBarAlpha = 0;
@@ -56,11 +51,10 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
       columnLetTime.currentState.updateOpacity(this.appBarAlpha);
     }
   }
-  
+
   @override
   void initState() {
     super.initState();
-
   }
 
   Widget build(BuildContext context) {
@@ -84,7 +78,6 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                 this._recommendedContent(),
                 //列表内容
                 Content(getOut: (number) => _getOut()),
-       
               ],
             ),
           ),
@@ -204,51 +197,65 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                 ),
                 onPressed: () {
                   showMenu(
-                      context: context,
-                      position: RelativeRect.fromLTRB(getPixe(500, context),
-                          getPixe(74, context), getPixe(10, context), 0),
-                      items: [
-                        PopupMenuItem(
-                          child: Row(
-                            children: <Widget>[
-                              Icon(
-                                Icons.history,
-                                color: Colors.blue,
-                                size: getPixe(21, context),
+                    context: context,
+                    position: RelativeRect.fromLTRB(getPixe(500, context),
+                        getPixe(74, context), getPixe(10, context), 0),
+                    items: <PopupMenuEntry<String>>[
+                      PopupMenuItem(
+                        value: '1',
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Icon(
+                              Icons.history,
+                              color: Colors.blue,
+                              size: getPixe(21, context),
+                            ),
+                            Container(
+                              padding: EdgeInsets.fromLTRB(
+                                  getPixe(10, context), 0, 0, 0),
+                              child: Text(
+                                "记录",
+                                style:
+                                    TextStyle(fontSize: getPixe(14, context)),
                               ),
-                              Container(
-                                padding: EdgeInsets.fromLTRB(
-                                    getPixe(10, context), 0, 0, 0),
-                                child: Text(
-                                  "记录",
-                                  style:
-                                      TextStyle(fontSize: getPixe(14, context)),
-                                ),
-                              )
-                            ],
-                          ),
+                            )
+                          ],
                         ),
-                        PopupMenuItem(
-                          child: Row(
-                            children: <Widget>[
-                              Icon(
-                                Iconfont.bianji,
-                                color: Colors.blue,
-                                size: getPixe(21, context),
+                      ),
+                      PopupMenuDivider(),
+                      PopupMenuItem(
+                        value: '2',
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Icon(
+                              Iconfont.bianji,
+                              color: Colors.blue,
+                              size: getPixe(21, context),
+                            ),
+                            Container(
+                              padding: EdgeInsets.fromLTRB(
+                                  getPixe(11, context), 0, 0, 0),
+                              child: Text(
+                                "编辑",
+                                style:
+                                    TextStyle(fontSize: getPixe(14, context)),
                               ),
-                              Container(
-                                padding: EdgeInsets.fromLTRB(
-                                    getPixe(11, context), 0, 0, 0),
-                                child: Text(
-                                  "编辑",
-                                  style:
-                                      TextStyle(fontSize: getPixe(14, context)),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ]);
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ).then<void>((String value) {
+                    // Navigator.pop(context);
+                    if (value == '1') {
+                      Navigator.pushNamed(context, '/recording');
+                    } else {
+                      Navigator.pushNamed(context, '/recording');
+                    }
+                    // pop.onSelected(value);
+                  });
                 },
               ),
             ],
@@ -257,6 +264,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
       ),
     );
   }
+
 
   //推荐内容
   Widget _recommendedContent() {
@@ -348,8 +356,4 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   void _getOut() {
     widget.getCurrenIndex(1);
   }
-
 }
-
-
-
