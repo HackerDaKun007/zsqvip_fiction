@@ -21,7 +21,7 @@ import 'package:fiction/app/search/Search.dart';  //搜索页面
 import 'package:fiction/app/search/Result.dart';  //搜索结果页面
 
 import 'package:fiction/app/pages/category/Category.dart';  //分类
-import 'package:fiction/app/pages/My.dart';  //我的
+import 'package:fiction/app/pages/my/My.dart';  //我的
 
 //Yuri配置_路由区域
 import 'package:fiction/app/pages/home/top_charts.dart'; // 排行榜
