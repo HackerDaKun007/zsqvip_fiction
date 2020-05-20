@@ -1,7 +1,18 @@
+/**
+ * @author      HackerDaKun007 <hackerdakun007@gmail.com> 
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ *
+ * @see         弹出层
+*/
+
 import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
-//质询框
+
+
 class Bounced  with PixelSize {
   // const Bounced({Key key}) : super(key: key);
 
