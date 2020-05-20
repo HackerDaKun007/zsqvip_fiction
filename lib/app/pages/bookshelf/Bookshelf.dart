@@ -1,4 +1,3 @@
-import 'package:fiction/app/search/Search.dart';
 /**
  * @author      HackerDaKun007 <hackerdakun007@gmail.com> 
  * @Remarks     无
@@ -12,9 +11,7 @@ import 'package:fiction/app/search/Search.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_swiper/flutter_swiper.dart';
-
 import 'package:fiction/public/public.dart';
-// import 'package:fiction/res/listData.dart';
 
 //引入页面
 import 'package:fiction/app/pages/bookshelf/Columnleft.dart'; //顶部左边导航
