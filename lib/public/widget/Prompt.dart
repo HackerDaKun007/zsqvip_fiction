@@ -9,7 +9,6 @@
 */
 
 import 'package:flutter/material.dart';
-
 import 'package:fiction/public/public.dart';
 
 class Prompt extends StatelessWidget with PixelSize{
