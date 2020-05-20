@@ -204,7 +204,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             Icon(
-                              Icons.history,
+                              Icons.query_builder,
                               color: Colors.blue,
                               size: getPixe(21, context),
                             ),
@@ -248,8 +248,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                     // Navigator.pop(context);
                     if (value == '1') {
                       Navigator.pushNamed(context, '/recording');
-                    } else {
-                      Navigator.pushNamed(context, '/recording');
+                    } else if (value == '2') {
+                      Navigator.pushNamed(context, '/editbookshelf');
                     }
                     // pop.onSelected(value);
                   });
