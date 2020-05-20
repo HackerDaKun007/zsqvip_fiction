@@ -1,5 +1,3 @@
-import 'package:fiction/app/book_list/book_list_detail.dart';
-import 'package:fiction/app/book_list/book_list_page.dart';
 /**
  * @author      HackerDaKun007 <hackerdakun007@gmail.com>
  * @Remarks     无
@@ -24,7 +22,10 @@ import 'package:fiction/app/pages/category/Category.dart';  //分类
 import 'package:fiction/app/pages/my/My.dart';  //我的
 
 //Yuri配置_路由区域
-import 'package:fiction/app/pages/home/top_charts.dart'; // 排行榜
+import 'package:fiction/app/pages/home/top_charts.dart'; // 排行榜页面
+import 'package:fiction/app/book_list/book_list_detail.dart'; // 书单详情页面
+import 'package:fiction/app/book_list/book_list_page.dart'; // 书单页面
+import 'package:fiction/app/pages/my/settings_page.dart'; // 设置页面
 
 //配置命令路由
 final routes = {
@@ -43,7 +44,7 @@ final routes = {
   '/topcharts': (context) => TopChartsPage(),
   '/booklist': (context) => BookListPage(),
   '/booklistdetail': (context, {arguments}) => BookListDetail(arguments:arguments),
-  
+  '/settings': (context) => SettingsPage(),
 };
 
 var onGenerateRoute = (RouteSettings settings) {
