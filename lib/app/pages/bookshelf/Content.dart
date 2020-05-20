@@ -21,24 +21,34 @@ class Content extends StatefulWidget {
 }
 
 class _ContentState extends State<Content> with PixelSize {
+
+  //添加书架
+  void getAddListData() {
+    listData.add({
+      "title": '',
+      "author": '',
+      "imageUrl": 'images/jia.png',
+      "system": 1,
+    });
+  }
+  
   @override
   void initState() {
     super.initState();
-   
-    
-    //添加一项追加数据
-    if (listData[(listData.length - 1)]['system'] == null) {
-      //防止数据追加
-      //添加书架
-      listData.add({
-        "title": '',
-        "author": '',
-        "imageUrl": 'images/jia.png',
-        "system": 1,
-      });
-    }
+
   }
   Widget build(BuildContext context) {
+    //过滤数据第一个,删除系统追加
+    if (listData.length > 1 && listData[0]['system'] == 1) {
+      listData.removeAt(0);
+    }
+    //添加一项追加数据
+    if (listData.length == 0) {
+      this.getAddListData();
+    } else if (listData[(listData.length - 1)]['system'] == null) {
+      this.getAddListData();
+    }
+
     return Padding(
       padding: EdgeInsets.all(10),
       child: GridView.builder(
