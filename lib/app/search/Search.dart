@@ -364,6 +364,7 @@ class _SearchState extends State<Search> with PixelSize, Common {
     }
   }
 
+  
   //广告位置
   Widget _getAd() {
     if (this._isAd) {

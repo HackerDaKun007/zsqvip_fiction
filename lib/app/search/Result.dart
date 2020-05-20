@@ -1,3 +1,13 @@
+/**
+ * @author      HackerDaKun007 <hackerdakun007@gmail.com>
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ *
+ * @see         搜索页面 - 结果
+*/
+
 import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
