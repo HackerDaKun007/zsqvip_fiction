@@ -5,13 +5,15 @@
  * @since       1.0 version
  *
  *
- * @see         分类
+ * @see         分类-主页
 */
 import 'package:fiction/app/pages/category/category_content.dart';
 import 'package:fiction/res/categoryNameData.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
+
+import '../../ad/Tabsad.dart';
 
 class CategoryPage extends StatefulWidget {
 
@@ -71,12 +73,17 @@ class _CategoryPageState extends State<CategoryPage>
           ),
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-          CategoryContent(data:_boyCategoryNameData),
-          CategoryContent(data:_girlCategoryNameData),
-        ],
+      body: Stack(
+        children: [
+          TabBarView(
+            controller: _tabController,
+            children: <Widget>[
+              CategoryContent(data:_boyCategoryNameData),
+              CategoryContent(data:_girlCategoryNameData),
+            ],
+          ),
+          TabsAd()
+        ]
       ),
     );
   }

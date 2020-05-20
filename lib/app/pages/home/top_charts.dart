@@ -42,6 +42,13 @@ class _TopChartsPageState extends State<TopChartsPage>
         ),
         centerTitle: true,
         elevation: 0,
+        leading: IconButton(
+          icon: Icon(Iconfont.zuo),
+          iconSize: getPixe(30, context),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         bottom: TabBar(
           controller: _controller,
           labelPadding: EdgeInsets.only(bottom: 10 * rpx),

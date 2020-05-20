@@ -9,6 +9,8 @@
 */
 import 'package:flutter/material.dart';
 
+import 'package:fiction/public/public.dart';
+
 class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -96,11 +98,13 @@ class _MineBodyState extends State<MineBody> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                _getHeaderRowListItem(title: '积分', countNum: 0, isNav: true),
-                _getHeaderRowListItem(title: '卡券', countNum: 5, isNav: true),
+                _getHeaderRowListItem(title: '积分', countNum: 0, isNav: true, callback: (){
+                  Navigator.pushNamed(context, '/booklist');
+                }),
+                // _getHeaderRowListItem(title: '卡券', countNum: 5, isNav: true),
                 _getHeaderRowListItem(
                   title: '今日已读(分钟)',
-                  countNum: 54,
+                  countNum: Path.minute,
                 ),
               ],
             ),
@@ -111,21 +115,21 @@ class _MineBodyState extends State<MineBody> {
   }
 
   Widget _getHeaderRowListItem(
-      {String title, int countNum, bool isNav = false}) {
+      {String title, int countNum, bool isNav = false, Function callback}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
           '$countNum',
-          style: TextStyle(fontSize: 42 * rpx, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 44 * rpx, fontWeight: FontWeight.bold),
         ),
         InkWell(
-          onTap: () {},
+          onTap: callback,
           child: Row(
             children: <Widget>[
               Text(
                 title,
-                style: TextStyle(color: Colors.grey[600], fontSize: 22 * rpx),
+                style: TextStyle(color: Colors.grey[600], fontSize: 24 * rpx),
               ),
               isNav
                   ? Icon(
@@ -172,16 +176,18 @@ class _MineBodyState extends State<MineBody> {
       child: Column(
         children: <Widget>[
           _getListItem(title: '意见反馈', icon: Icons.error_outline),
-          _getListItem(title: '设置', icon: Icons.settings),
+          _getListItem(title: '设置', icon: Icons.settings, callback: () {
+            Navigator.pushNamed(context, '/settings');
+          }),
         ],
       ),
     );
   }
 
   Widget _getListItem(
-      {IconData icon, @required String title, String subtitle}) {
+      {IconData icon, @required String title, String subtitle, Function callback}) {
     return InkWell(
-      onTap: () {print('========== pressed ===========');},
+      onTap: callback,
       child: Ink(
         height: 115 * rpx,
         width: 750 * rpx,

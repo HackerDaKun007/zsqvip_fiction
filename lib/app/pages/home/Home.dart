@@ -5,11 +5,13 @@
  * @since       1.0 version
  *
  * 
- * @see         书城页面
+ * @see         书城页面-主页
 */
 
 import 'package:fiction/app/ad/Tabsad.dart';
-import 'package:fiction/res/todayHotChartsData.dart';
+import 'package:fiction/app/pages/home/home_build_book.dart';
+import 'package:fiction/app/pages/home/home_guess_you_like.dart';
+import 'package:fiction/app/pages/home/home_hot_charts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -66,8 +68,13 @@ class HomePage extends StatelessWidget with PixelSize {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: HomeBody(getCurrenIndex: getCurrenIndex),
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: HomeBody(getCurrenIndex: getCurrenIndex),
+            ),
+            TabsAd()
+          ]
         ));
   }
 }
@@ -93,7 +100,7 @@ class HomeBody extends StatelessWidget {
         _buildCustomNavBarWidget(context), // 导航栏
         _buildRecommendWidget(), // 编辑推荐
         HotChartsWidget(), // 今日热榜
-        _buildGuessYouLikeWidget(), // 猜你喜欢
+        GuessYouLike(), // 猜你喜欢
         _buildInfinityListWidget(), // 无限列表
       ],
     );
@@ -298,90 +305,6 @@ class HomeBody extends StatelessWidget {
     );
   }
 
-  /// 猜你喜欢
-  Widget _buildGuessYouLikeWidget() {
-    return Container(
-      width: 750 * rpx,
-      height: 770 * rpx,
-      margin: EdgeInsets.all(20 * rpx),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Text(
-                  '猜你喜欢',
-                  style: TextStyle(
-                      fontSize: 34 * rpx, fontWeight: FontWeight.bold),
-                ),
-                Container(
-                    padding: EdgeInsets.only(right: 20 * rpx),
-                    child: InkWell(
-                      onTap: () {
-                        print(
-                            '=========== pressed to change list content ==========');
-                      },
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            '换一换',
-                            style: TextStyle(
-                                color: Colors.black54, fontSize: 26 * rpx),
-                          ),
-                          SizedBox(
-                            width: 10 * rpx,
-                          ),
-                          Icon(
-                            Icons.loop,
-                            size: 32 * rpx,
-                            color: Colors.grey[400],
-                          )
-                        ],
-                      ),
-                    ))
-              ],
-            ),
-            SizedBox(
-              height: 30 * rpx,
-            ),
-            Expanded(
-                flex: 1,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    BookContentWidget(
-                      bookName: '无无无',
-                      imageUrl:
-                          'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                      bookActivityCount: 45,
-                      bookCategory: ['仙侠', '传奇'],
-                      bookDesc: '测试数据',
-                    ),
-                    BookContentWidget(
-                      bookName: '无无无',
-                      imageUrl:
-                          'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                      bookActivityCount: 10,
-                      bookCategory: ['古风', '传奇'],
-                      bookDesc: '测试数据',
-                    ),
-                    BookContentWidget(
-                      bookName: '无无无',
-                      imageUrl:
-                          'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                      bookActivityCount: 50,
-                      bookCategory: ['现代', '传奇'],
-                      bookDesc:
-                          '测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据',
-                    ),
-                  ],
-                ))
-          ]),
-    );
-  }
 
   /// 无限列表
   Widget _buildInfinityListWidget() {
@@ -512,330 +435,4 @@ class HomeBody extends StatelessWidget {
   }
 
   
-}
-
-/// 今日热榜
-class HotChartsWidget extends StatefulWidget {
-  @override
-  _HotChartsWidgetState createState() => _HotChartsWidgetState();
-}
-
-class _HotChartsWidgetState extends State<HotChartsWidget> with SingleTickerProviderStateMixin{
-  TabController _tabController;
-  double rpx = Config.width / 750;
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 4, vsync: this);    
-  }
-
-  List _hotChartsData = todayHotChartsData;
-  Widget _getHotChartsTab() {
-    return Column(children: <Widget>[
-          TabBar(
-            controller: _tabController,
-            unselectedLabelColor: Color(0xff333333),
-            labelStyle:
-                TextStyle(fontSize: 28 * rpx, fontWeight: FontWeight.w700),
-            unselectedLabelStyle: TextStyle(fontSize: 28 * rpx),
-            indicatorPadding: EdgeInsets.only(left: 70 * rpx, right: 70 * rpx),
-            tabs: <Widget>[
-              Text('男生人气'),
-              Text('男生新书'),
-              Text('女生人气'),
-              Text('女生新书'),
-            ],
-          ),
-          SizedBox(height: 30 * rpx),
-          Expanded(
-            flex: 1,
-            child: TabBarView(
-              controller: _tabController,
-              children: <Widget>[
-                HotChartsTabView(data: _hotChartsData[0]),
-                HotChartsTabView(data: _hotChartsData[1]),
-                HotChartsTabView(data: _hotChartsData[2]),
-                HotChartsTabView(data: _hotChartsData[3]),
-              ],
-            ),
-          ),
-        ]);
-  }
-  
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: Config.width,
-        height: 500 * rpx,
-        margin: EdgeInsets.all(20 * rpx),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    '今日热榜',
-                    style: TextStyle(
-                        fontSize: 34 * rpx, fontWeight: FontWeight.bold),
-                  ),
-                  Container(
-                      padding: EdgeInsets.only(right: 20 * rpx),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/topcharts');
-                        },
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              '全部榜单',
-                              style: TextStyle(
-                                  color: Colors.grey, fontSize: 26 * rpx),
-                            ),
-                            Icon(
-                              Icons.chevron_right,
-                              size: 40 * rpx,
-                              color: Colors.grey[400],
-                            )
-                          ],
-                        ),
-                      ))
-                ],
-              ),
-              SizedBox(
-                height: 30 * rpx,
-              ),
-              Expanded(
-                flex: 1,
-                child:  _getHotChartsTab()
-              ) 
-            ]));
-  }
-}
-
-/// 今日热榜列表内容
-class HotChartsTabView extends StatefulWidget {
-
-  final List data;
-
-  HotChartsTabView({this.data});  
-  @override
-  _HotChartsTabViewState createState() => _HotChartsTabViewState();
-}
-
-class _HotChartsTabViewState extends State<HotChartsTabView>
-    with AutomaticKeepAliveClientMixin {
-  double rpx = Config.width /750;
-
-  @override
-  bool get wantKeepAlive => true;
-
-  _getHotChartList(data) {
-    List<Widget> wrapList = List<Widget>();
-    for (var i = 0; i < data.length; i++) {
-      wrapList.add(_getHotChartsListItem(i, data[i]));
-    }
-    return wrapList;
-  }
-
-  Widget _getHotChartsListItem(int index, data) {
-    bool isLeftNum = index <= 2;
-    Color bgColor;
-    String imgUrl;
-
-    switch (index) {
-      case 0:
-        bgColor = Colors.orange[50];
-        imgUrl = 'images/first.png';
-        break;
-      case 1:
-        bgColor = Colors.grey[200];
-        imgUrl = 'images/second.png';
-        break;
-      case 2:
-        bgColor = Colors.deepOrange[50];
-        imgUrl = 'images/third.png';
-        break;
-      default:
-        bgColor = Colors.blueGrey[50];
-        imgUrl = 'images/first.png';
-    }
-
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        width: Config.width / 2 - (50 * rpx),
-        child: Row(
-          children: <Widget>[
-            isLeftNum
-                ? Image.asset(
-                    imgUrl,
-                    width: 38 * rpx,
-                    fit: BoxFit.fitWidth,
-                  )
-                : Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 4 * rpx, vertical: 2 * rpx),
-                    decoration: BoxDecoration(
-                        color: Colors.blue[100],
-                        borderRadius: BorderRadius.circular(4 * rpx)),
-                    child: Container(
-                        height: 30 * rpx,
-                        width: 30 * rpx,
-                        padding: EdgeInsets.only(top: 1 * rpx),
-                        child: Text(
-                          '${index + 1}',
-                          style: TextStyle(
-                              color: Colors.white, fontSize: 22 * rpx),
-                          textAlign: TextAlign.center,
-                        )),
-                  ),
-            SizedBox(
-              width: 10 * rpx,
-            ),
-            Expanded(
-                flex: 1,
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 15 * rpx, vertical: 10 * rpx),
-                  decoration: BoxDecoration(
-                      color: bgColor,
-                      borderRadius: BorderRadius.circular(6 * rpx)),
-                  child: Text(
-                    data['book_name'],
-                    style: TextStyle(
-                      fontSize: 24 * rpx,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ))
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: Config.width,
-      padding: EdgeInsets.symmetric(horizontal: 10 * rpx),
-      child: Wrap(
-        verticalDirection: VerticalDirection.down,
-        direction: Axis.vertical,
-        runSpacing: 30 * rpx,
-        spacing: 10 * rpx,
-        children: _getHotChartList(widget.data),
-      ),
-    );
-  }
-}
-
-// 书本信息展示
-class BookContentWidget extends StatelessWidget {
-  final String imageUrl; // 图片
-  final String bookName; // 书名
-  final String bookDesc; // 介绍
-  final int bookActivityCount; // 人气人数
-  final List<String> bookCategory; // 分类
-  final bool isElevation; // 是否要有阴影
-  final bool isInfinity; // 是否是无限列表
-
-  BookContentWidget(
-      {this.imageUrl,
-      this.bookName,
-      this.bookDesc,
-      this.bookCategory,
-      this.bookActivityCount,
-      this.isElevation = false,
-      this.isInfinity = false});
-
-  @override
-  Widget build(BuildContext context) {
-    double rpx = MediaQuery.of(context).size.width / 750;
-    return Container(
-        width: 750 * rpx,
-        height: 190 * rpx,
-        margin: EdgeInsets.only(bottom: isInfinity ? 50 * rpx : 0 * rpx),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Material(
-              elevation: isElevation ? 2 : 0,
-              color: Colors.transparent,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(6 * rpx),
-                child: Image.network(
-                  imageUrl,
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 10 * rpx,
-            ),
-            Expanded(
-                flex: 1,
-                child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15 * rpx),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          bookName,
-                          style: TextStyle(
-                              fontSize: 30 * rpx, color: Colors.black),
-                        ),
-                        Text(
-                          bookDesc,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.black38, fontSize: 26 * rpx),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                _getCategoryWidget(
-                                    name: bookCategory[0], rpx: rpx),
-                                SizedBox(
-                                  width: 10 * rpx,
-                                ),
-                                _getCategoryWidget(
-                                    name: bookCategory[1], rpx: rpx),
-                              ],
-                            ),
-                            Text(
-                              '连载人气 · ${bookActivityCount}万人气',
-                              style: TextStyle(
-                                  color: Colors.grey[400], fontSize: 20 * rpx),
-                            )
-                          ],
-                        )
-                      ],
-                    )))
-          ],
-        ));
-  }
-
-  // 分类
-  Widget _getCategoryWidget({String name, double rpx}) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10 * rpx),
-      decoration: BoxDecoration(
-          border: Border.all(width: 1 * rpx, color: Colors.lightBlue[200]),
-          borderRadius: BorderRadius.circular(2)),
-      child: Text(
-        name,
-        style: TextStyle(color: Colors.lightBlue, fontSize: 20 * rpx),
-      ),
-    );
-  }
 }
