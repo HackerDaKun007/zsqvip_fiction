@@ -51,84 +51,86 @@ class _SearchState extends State<Search> with PixelSize, Common {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  AppBar(
-          // centerTitle: true,
-          elevation: 1,
-          leading: Container(
-            width: getPixe(70, context),
-            child: IconButton(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        // centerTitle: true,
+        elevation: 1,
+        leading: Container(
+          width: getPixe(70, context),
+          child: IconButton(
             icon: Icon(
               Iconfont.zuo,
-              size: getPixe(30, context),
+              size: getPixe(28, context),
             ),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
-          ),
-          titleSpacing: 0.0,
-          title: Container(
-            // color: Colors.yellow,
-            width: double.infinity,
-            height: getPixe(44, context),
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                  getPixe(10, context), 0, getPixe(10, context), 0),
-              child: Center(
-                child: TextField(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: getPixe(11.2, context)),
-                    icon: Icon(
-                      Iconfont.sousuo,
-                      size: getPixe(22, context),
-                      color: Color(0x993c3c3c),
-                    ),
-                    hintText: '搜索书名或作者',
-                    border: InputBorder.none,
+        ),
+        titleSpacing: 0.0,
+        title: Container(
+          // color: Colors.yellow,
+          width: double.infinity,
+          height: getPixe(44, context),
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+                getPixe(10, context), 0, getPixe(10, context), 0),
+            child: Center(
+              child: TextField(
+                decoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: getPixe(11.2, context)),
+                  icon: Icon(
+                    Iconfont.sousuo,
+                    size: getPixe(22, context),
+                    color: Color(0x993c3c3c),
                   ),
-                  onChanged: (value) {
-                    this._input = value;
-                  },
-                  style: TextStyle(fontSize: getPixe(16.0, context)),
+                  hintText: '搜索书名或作者',
+                  border: InputBorder.none,
                 ),
-              ),
-            ),
-            decoration: BoxDecoration(
-              color: Color(0x99ededed),
-              borderRadius: BorderRadius.all(
-                Radius.circular(getPixe(100, context)),
+                onChanged: (value) {
+                  this._input = value;
+                },
+                style: TextStyle(fontSize: getPixe(16.0, context)),
               ),
             ),
           ),
-          // elevation:
-          actions: <Widget>[
-            Container(
-                width: getPixe(70, context),
-                // height: 40,
-                // color: Colors.red,
-                child: GestureDetector(
-                  child: Center(
-                    child: Text(
-                      '搜索',
-                      style: TextStyle(
-                        fontSize: getPixe(16, context),
-                      ),
+          decoration: BoxDecoration(
+            color: Color(0x99ededed),
+            borderRadius: BorderRadius.all(
+              Radius.circular(getPixe(100, context)),
+            ),
+          ),
+        ),
+        // elevation:
+        actions: <Widget>[
+          Container(
+              width: getPixe(70, context),
+              // height: 40,
+              // color: Colors.red,
+              child: GestureDetector(
+                child: Center(
+                  child: Text(
+                    '搜索',
+                    style: TextStyle(
+                      fontSize: getPixe(16, context),
                     ),
                   ),
-                  onTap: () {
-                    if (empty(this._input)) {
-                      // setState(() {
-                      if (inArray(Path.recen, this._input)) {
-                        Path.recen.remove(this._input);
-                      }
-                      Path.recen.add(this._input);
-                      this._isReccent = true;
-                      _getResult(this._input);
-                      // });
+                ),
+                onTap: () {
+                  if (empty(this._input)) {
+                    // setState(() {
+                    if (inArray(Path.recen, this._input)) {
+                      Path.recen.remove(this._input);
                     }
-                  },
-                )),
-          ],
+                    Path.recen.add(this._input);
+                    this._isReccent = true;
+                    _getResult(this._input);
+                    // });
+                  }
+                },
+              )),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(getPixe(10, context), getPixe(20, context),
@@ -322,30 +324,35 @@ class _SearchState extends State<Search> with PixelSize, Common {
       }
     }
 
-    return FlatButton(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: getPixe(14, context),
+    return GestureDetector(
+      child: Container(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: getPixe(14, context),
+              ),
             ),
-          ),
-          _isIconValidata(),
-        ],
+            _isIconValidata(),
+          ],
+        ),
+        padding: EdgeInsets.fromLTRB(getPixe(10, context), getPixe(5, context),
+            getPixe(10, context), getPixe(5, context)),
+        margin: EdgeInsets.fromLTRB(0, 0, 0, getPixe(10, context)),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(getPixe(3, context)),
+          color: Color(0x99e2e2e2),
+        ),
       ),
-      textColor: Colors.black,
-      color: Color(0x99e2e2e2),
-      onPressed: () {
-        // setState(() {
+      onTap: () {
         if (inArray(Path.recen, text)) {
           Path.recen.remove(text);
         }
         Path.recen.add(text);
         this._isReccent = true;
         _getResult(text);
-        // });
       },
     );
   }
@@ -357,6 +364,7 @@ class _SearchState extends State<Search> with PixelSize, Common {
     }
   }
 
+  
   //广告位置
   Widget _getAd() {
     if (this._isAd) {
