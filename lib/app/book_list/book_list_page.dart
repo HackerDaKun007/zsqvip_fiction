@@ -19,7 +19,7 @@ class BookListPage extends StatefulWidget {
   _BookListPageState createState() => _BookListPageState();
 }
 
-class _BookListPageState extends State<BookListPage> {
+class _BookListPageState extends State<BookListPage> with PixelSize{
   double rpx = Config.width / 750;
   int listIndex;
 
@@ -66,6 +66,13 @@ class _BookListPageState extends State<BookListPage> {
         title: Text('精选书单', style: TextStyle(fontSize: 36 * rpx),),
         centerTitle: true,
         elevation: 0,
+        leading: IconButton(
+          icon: Icon(Iconfont.zuo),
+          iconSize: getPixe(30, context),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: ListView.builder(
         itemCount: bookListData.length,

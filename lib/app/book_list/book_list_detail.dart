@@ -8,6 +8,7 @@
  * @see         书单单个列表详情页面
 */
 
+import 'package:fiction/public/public.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiction/res/booklistData.dart';
@@ -19,7 +20,7 @@ class BookListDetail extends StatefulWidget {
   _BookListDetailState createState() => _BookListDetailState();
 }
 
-class _BookListDetailState extends State<BookListDetail> {
+class _BookListDetailState extends State<BookListDetail> with PixelSize {
   double rpx;
   dynamic _data;
 
@@ -46,18 +47,18 @@ class _BookListDetailState extends State<BookListDetail> {
         margin: EdgeInsets.only(bottom: 30 * rpx),
         child: Row(
           children: <Widget>[
-              Material(
-                elevation: 5,
-                color: Colors.transparent,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4 * rpx),
-                  child: Image.network(
-                    _data['list'][index]['image'],
-                    height: 190 * rpx,
-                    fit: BoxFit.fill,
-                  ),
+            Material(
+              elevation: 5,
+              color: Colors.transparent,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(4 * rpx),
+                child: Image.network(
+                  _data['list'][index]['image'],
+                  height: 190 * rpx,
+                  fit: BoxFit.fill,
                 ),
               ),
+            ),
             SizedBox(
               width: 20 * rpx,
             ),
@@ -81,11 +82,11 @@ class _BookListDetailState extends State<BookListDetail> {
                         width: 10 * rpx,
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal:6*rpx),
+                        padding: EdgeInsets.symmetric(horizontal: 6 * rpx),
                         decoration: BoxDecoration(
-                          border: Border.all(width:1*rpx,color:Colors.blue[100]),
-                          borderRadius: BorderRadius.circular(6*rpx)
-                        ),
+                            border: Border.all(
+                                width: 1 * rpx, color: Colors.blue[100]),
+                            borderRadius: BorderRadius.circular(6 * rpx)),
                         child: Text(
                           _data['list'][index]['category'][0],
                           style: TextStyle(
@@ -113,14 +114,21 @@ class _BookListDetailState extends State<BookListDetail> {
   Widget build(BuildContext context) {
     rpx = MediaQuery.of(context).size.width / 750;
     return Scaffold(
-      body: CustomScrollView(
+        body: CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
             pinned: true,
             floating: true,
             expandedHeight: 350 * rpx,
             elevation: 0,
-            flexibleSpace: FlexibleSpaceBar(             
+            leading: IconButton(
+              icon: Icon(Iconfont.zuo),
+              iconSize: getPixe(30, context),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            flexibleSpace: FlexibleSpaceBar(
               title: Text(
                 _data['title'],
                 style: TextStyle(),
@@ -138,5 +146,3 @@ class _BookListDetailState extends State<BookListDetail> {
     ));
   }
 }
-
-
