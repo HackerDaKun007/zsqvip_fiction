@@ -2,6 +2,7 @@ List categoryNameData = [
   {
     'category_list': [
       [
+        {'id': 0, 'name': '全部'},
         {'id': 1, 'name': '都市'},
         {'id': 2, 'name': '玄幻'},
         {'id': 3, 'name': '仙侠'},
@@ -11,11 +12,13 @@ List categoryNameData = [
         {'id': 7, 'name': '奇幻'},
       ],
       [
+        {'id': 0, 'name': '全部'},
         {'id': 1, 'name': '100万字以下'},
         {'id': 2, 'name': '100-200万字'},
         {'id': 3, 'name': '200万字以上'},
       ],
       [
+        {'id': 0, 'name': '全部'},
         {'id': 1, 'name': '连载'},
         {'id': 2, 'name': '完结'},
       ],
@@ -103,6 +106,7 @@ List categoryNameData = [
   {
     'category_list': [
       [
+        {'id': 0, 'name': '全部'},
         {'id': 1, 'name': '现代言情'},
         {'id': 2, 'name': '古代言情'},
         {'id': 3, 'name': '浪漫言情'},
@@ -111,11 +115,14 @@ List categoryNameData = [
         {'id': 6, 'name': 'N次元'},
       ],
       [
+        
+        {'id': 0, 'name': '全部'},
         {'id': 1, 'name': '100万字以下'},
         {'id': 2, 'name': '100-200万字'},
         {'id': 3, 'name': '200万字以上'},
       ],
       [
+        {'id': 0, 'name': '全部'},
         {'id': 1, 'name': '连载'},
         {'id': 2, 'name': '完结'},
       ],
@@ -127,7 +134,7 @@ List categoryNameData = [
         'category_id': 3,
         'author': '金庸',
         'activity_count': 80,
-        'total_num': 255541280,
+        'total_num': 25554120,
         'score': 9.8,
         'status': 2, // 状态1：连载、2：完结
         'update_time': 1589957222,
@@ -173,7 +180,7 @@ List categoryNameData = [
         'category_id': 3,
         'author': '金庸',
         'activity_count': 1000,
-        'total_num': 25554128,
+        'total_num': 2555412,
         'score': 9.8,
         'status': 2, // 状态1：连载、2：完结
         'update_time': 1589887254,

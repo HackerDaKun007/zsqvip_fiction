@@ -7,9 +7,10 @@
  *
  * @see         分类-书本列表
 */
+import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
-import 'package:flutter/material.dart';
+
 
 class CategoryBookContent extends StatefulWidget {
   final List data;
@@ -20,8 +21,9 @@ class CategoryBookContent extends StatefulWidget {
 }
 
 class _CategoryBookContentState extends State<CategoryBookContent> with PixelSize{
-  
+
   Widget _buildBookWidget(data) {
+    num totalNum = (data['total_num'] / 10000).round();
     return Container(
         width: Config.width,
         height: getPixe(90, context),
@@ -85,7 +87,7 @@ class _CategoryBookContentState extends State<CategoryBookContent> with PixelSiz
                               ],
                             ),
                             Text(
-                              '连载人气 · 100万人气',
+                              '${data['status'] == 1 ? '连载' : '完结'} · ${totalNum}万人气',
                               style: TextStyle(
                                   color: Colors.black38, fontSize: getPixe(10, context)),
                             )
