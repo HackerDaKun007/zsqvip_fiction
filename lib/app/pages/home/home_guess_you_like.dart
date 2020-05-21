@@ -51,7 +51,7 @@ class _GuessYouLikeState extends State<GuessYouLike> {
     return Container(
       width: 750 * rpx,
       height: 770 * rpx,
-      margin: EdgeInsets.all(20 * rpx),
+      margin: EdgeInsets.symmetric(horizontal: 20 * rpx, vertical: 30*rpx),
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
