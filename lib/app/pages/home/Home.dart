@@ -8,6 +8,7 @@
  * @see         书城页面-主页
 */
 
+import 'package:fiction/app/pages/home/home_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -30,7 +31,6 @@ class HomePage extends StatelessWidget with PixelSize {
           backgroundColor: Color(0xfff4f4f4),
           elevation: 1,
           title: Container(
-            margin: EdgeInsets.only(right: getPixe(10, context)),
             height: getPixe(44, context),
             child: Container(
               color: Color(0xfffcfcfc),
@@ -57,30 +57,42 @@ class HomePage extends StatelessWidget with PixelSize {
             ),
           ),
           actions: <Widget>[
-            InkWell(
-              onTap: () {},
-              child: Ink(
-                padding: EdgeInsets.only(right: getPixe(10, context)),
-                child: Image.asset(
-                  'images/box.png',
-                  fit: BoxFit.fitWidth,
-                  width: getPixe(30, context),
-                ),
+            GestureDetector(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: getPixe(5, context)),
+                child: Stack(
+                  fit: StackFit.passthrough,
+                  children: [
+                    Image.asset('images/li.png', width: getPixe(70, context), fit:BoxFit.fitWidth),
+                    Positioned(
+                      top: getPixe(22, context),
+                      left: getPixe(35, context),
+                      child: Text(
+                        '签到',
+                        style: TextStyle(
+                            fontSize: getPixe(12, context), color: Colors.brown),
+                      ),
+                    )
+                  ]
+                )
               ),
+              onTap: () {
+                print('签到');
+                // setState(() {
+                //   Path.minute += 1;
+                // });
+              },
             ),
           ],
         ),
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: HomeBody(getCurrenIndex: getCurrenIndex),
-            ),
-            TabsAd()
-          ]
-        ));
+        body: Stack(children: [
+          SingleChildScrollView(
+            child: HomeBody(getCurrenIndex: getCurrenIndex),
+          ),
+          TabsAd()
+        ]));
   }
 }
-
 
 class HomeBody extends StatelessWidget {
   final getCurrenIndex;
@@ -103,6 +115,7 @@ class HomeBody extends StatelessWidget {
         EditorsRecommend(), // 编辑推荐
         HotChartsWidget(), // 今日热榜
         GuessYouLike(), // 猜你喜欢
+        AdWidget(),
         _buildInfinityListWidget(), // 无限列表
       ],
     );
@@ -224,8 +237,6 @@ class HomeBody extends StatelessWidget {
         ));
   }
 
-
-
   /// 无限列表
   Widget _buildInfinityListWidget() {
     return Container(
@@ -244,12 +255,8 @@ class HomeBody extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                BookContentWidget(
-                   data: _listData[0],
-                    isInfinity: true),
-                BookContentWidget(
-                    data:_listData[2],
-                    isInfinity: true),
+                BookContentWidget(data: _listData[0], isInfinity: true),
+                BookContentWidget(data: _listData[2], isInfinity: true),
               ],
             )
           ]),
@@ -343,6 +350,4 @@ class HomeBody extends StatelessWidget {
       ),
     );
   }
-
-  
 }
