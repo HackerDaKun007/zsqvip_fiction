@@ -82,7 +82,7 @@ class _BookListDetailState extends State<BookListDetail> with PixelSize {
                         width: 10 * rpx,
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 6 * rpx),
+                        padding: EdgeInsets.symmetric(horizontal: 6 * rpx, vertical: 1*rpx),
                         decoration: BoxDecoration(
                             border: Border.all(
                                 width: 1 * rpx, color: Colors.blue[100]),
