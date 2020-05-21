@@ -165,6 +165,9 @@ class _MineBodyState extends State<MineBody> {
           _getListItem(
             title: '阅读记录',
             icon: Icons.access_time,
+            callback: () {
+              Navigator.pushNamed(context, '/recording');
+            }
           ),
         ],
       ),
