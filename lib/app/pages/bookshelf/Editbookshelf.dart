@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
 import 'package:fiction/res/listData.dart';
-import 'package:fiction/public/widget/Prompt.dart';
-import 'package:fiction/public/utils/Bounced.dart';
+import 'package:fiction/public/widget/prompt.dart';
+import 'package:fiction/public/utils/bounced.dart';
 
 class EditBookShelf extends StatefulWidget {
   EditBookShelf({Key key}) : super(key: key);

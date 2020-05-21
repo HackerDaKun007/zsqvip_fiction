@@ -14,9 +14,9 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fiction/public/public.dart';
 
 //引入页面
-import 'package:fiction/app/pages/bookshelf/Columnleft.dart'; //顶部左边导航
-import 'package:fiction/app/pages/bookshelf/Content.dart'; //内容模块
-import 'package:fiction/app/ad/Tabsad.dart'; //底部广告位置
+import 'package:fiction/app/pages/bookShelf/columnleft.dart'; //顶部左边导航
+import 'package:fiction/app/pages/bookShelf/content.dart'; //内容模块
+import 'package:fiction/app/ad/tabsAd.dart'; //底部广告位置
 
 //阅读分钟
 // int Path.minute = 0;

@@ -10,9 +10,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
-import 'package:fiction/res/RecordingData.dart';
-import 'package:fiction/public/utils/Bounced.dart';
-import 'package:fiction/public/widget/Prompt.dart';
+import 'package:fiction/res/recordingData.dart';
+import 'package:fiction/public/utils/bounced.dart';
+import 'package:fiction/public/widget/prompt.dart';
 
 class Recording extends StatefulWidget {
   Recording({Key key}) : super(key: key);

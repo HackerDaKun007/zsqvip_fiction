@@ -10,7 +10,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:fiction/route/Route.dart'; //路由文件
+import 'package:fiction/route/route.dart'; //路由文件
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(MyApp());

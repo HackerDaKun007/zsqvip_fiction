@@ -12,16 +12,16 @@ import 'package:flutter/cupertino.dart';  //动画执行
 
 //大坤配置_路由区域
 // import 'package:fiction/app/Text.dart';  //测试
-import 'package:fiction/app/tabs/Tabs.dart';  //首页底部导航栏目
-import 'package:fiction/app/pages/home/Home.dart';  //书城
-import 'package:fiction/app/pages/bookshelf/BookShelf.dart'; //书架
-import 'package:fiction/app/pages/bookshelf/Recording.dart';  //阅读记录
-import 'package:fiction/app/pages/bookshelf/EditBookShelf.dart';  //编辑书架
-import 'package:fiction/app/search/Search.dart';  //搜索页面
-import 'package:fiction/app/search/Result.dart';  //搜索结果页面
+import 'package:fiction/app/tabs/tabs.dart';  //首页底部导航栏目
+import 'package:fiction/app/pages/home/home.dart';  //书城
+import 'package:fiction/app/pages/bookshelf/bookShelf.dart'; //书架
+import 'package:fiction/app/pages/bookShelf/recorDing.dart';  //阅读记录
+import 'package:fiction/app/pages/bookShelf/editBookShelf.dart';  //编辑书架
+import 'package:fiction/app/search/search.dart';  //搜索页面
+import 'package:fiction/app/search/result.dart';  //搜索结果页面
 
-import 'package:fiction/app/pages/category/Category.dart';  //分类
-import 'package:fiction/app/pages/my/My.dart';  //我的
+import 'package:fiction/app/pages/category/category.dart';  //分类
+import 'package:fiction/app/pages/my/my.dart';  //我的
 
 //Yuri配置_路由区域
 import 'package:fiction/app/pages/home/top_charts.dart'; // 排行榜页面
