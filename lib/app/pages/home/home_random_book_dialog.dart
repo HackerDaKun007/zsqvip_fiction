@@ -23,7 +23,6 @@ class _RandomBookDialogState extends State<RandomBookDialog> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _data.shuffle();
   }
