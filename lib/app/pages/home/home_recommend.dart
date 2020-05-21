@@ -5,7 +5,7 @@
  * @since       1.0 version
  *
  * 
- * @see         书城页面-编辑推荐板块
+ * @see         书城页面-编辑推荐版块
 */
 
 import 'package:fiction/res/guessYouLikeData.dart';

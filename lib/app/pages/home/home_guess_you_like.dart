@@ -5,7 +5,7 @@
  * @since       1.0 version
  *
  * 
- * @see         书城页面-猜你喜欢
+ * @see         书城页面-猜你喜欢版块
 */
 import 'package:fiction/public/public.dart';
 import 'package:fiction/res/guessYouLikeData.dart';
