@@ -5,7 +5,7 @@
  * @since       1.0 version
  *
  *
- * @see         分类-内容
+ * @see         分类界面-分类按钮内容
 */
 import 'package:fiction/app/pages/category/category_book_content.dart';
 import 'package:flutter/material.dart';
@@ -26,27 +26,47 @@ class _CategoryContentState extends State<CategoryContent>
   List _categoryListData;
   List _booksData;
 
+  List _tempBooksList;
+  List<int> _categoryIndex = List(4);
+
   int _firstSelectedIndex; // 第一组筛选
   int _secondSelectedIndex; // 第二组筛选
   int _thirdSelectedIndex; // 第三组筛选
   int _featureSelectedIndex; // 第四组筛选
 
   /// 第一组筛选控制
-  hanldeFirstSelect(index) {
-    if (index == _firstSelectedIndex) return;
+  hanldeFirstSelect(id) {
+    List _tempData = List();
 
-    setState(() {
-      _firstSelectedIndex = index;
-    });
+    if (id == 0) {
+      _tempData = _tempBooksList;
+    } else {
+      for (var i = 0; i < _booksData.length; i++) {
+        if (_booksData[i]['category_id'] == id) {
+          _tempData.add(_booksData);
+        }
+      }
+    }
+
+    _tempBooksList = _tempData;
   }
 
   /// 第二组筛选控制
   hanldeSecondSelect(index) {
-    if (index == _secondSelectedIndex) return;
+    
+  }
 
-    setState(() {
-      _secondSelectedIndex = index;
-    });
+  /// 第三组筛选控制
+  hanldeThirdSelect(index) {
+    List _tempData = List();
+    if (index == 0) {
+
+    }
+  }
+
+  handlerSelect() {
+    bool isNotSelect = _categoryIndex.every((item)=> item == 0);
+    _tempBooksList = isNotSelect ? _booksData : _tempBooksList;
   }
 
   @override
@@ -54,6 +74,13 @@ class _CategoryContentState extends State<CategoryContent>
     super.initState();
     _categoryListData = widget.data['category_list'];
     _booksData = widget.data['books'];
+    _tempBooksList = _booksData;
+
+    _categoryIndex[0] = 0;
+    _categoryIndex[1] = 0;
+    _categoryIndex[2] = 0;
+    _categoryIndex[3] = 0;
+
     _firstSelectedIndex = 0;
     _secondSelectedIndex = 0;
     _thirdSelectedIndex = 0;
@@ -119,7 +146,7 @@ class _CategoryContentState extends State<CategoryContent>
           CategoryBtn(
             callback: null,
             name: '热门',
-
+            isActive: true,
           ),
           SizedBox(
             width: getPixe(20, context),
@@ -210,7 +237,7 @@ class _CategoryBtnState extends State<CategoryBtn> with PixelSize {
     return InkWell(
       onTap: () {
         setState(() {
-          isActive = widget.isActive;
+          isActive = !isActive;
         });
       },
       child: Container(

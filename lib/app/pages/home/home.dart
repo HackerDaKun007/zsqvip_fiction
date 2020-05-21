@@ -35,12 +35,12 @@ class HomePage extends StatelessWidget with PixelSize {
             height: getPixe(44, context),
             child: Container(
               color: Color(0xfffcfcfc),
-              padding: EdgeInsets.only(left: getPixe(10, context)),
+              padding: EdgeInsets.only(left: getPixe(5, context)),
               child: TextField(
                 readOnly: true,
                 textAlignVertical: TextAlignVertical(y: -1),
                 decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(left: getPixe(10, context)),
+                    contentPadding: EdgeInsets.only(left: getPixe(5, context)),
                     icon: Icon(
                       Iconfont.sousuo,
                       color: Color(0xffb5b5b5),
@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget with PixelSize {
           actions: <Widget>[
             GestureDetector(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: getPixe(5, context)),
+                padding: EdgeInsets.only(left: getPixe(5, context), right: getPixe(10, context)),
                 child: Stack(
                   fit: StackFit.passthrough,
                   children: [
