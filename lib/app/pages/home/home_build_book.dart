@@ -107,7 +107,7 @@ class BookContentWidget extends StatelessWidget {
   // 分类
   Widget _getCategoryWidget({String name, double rpx}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10 * rpx),
+      padding: EdgeInsets.symmetric(horizontal: 10 * rpx, vertical: 1*rpx),
       decoration: BoxDecoration(
           border: Border.all(width: 1 * rpx, color: Colors.lightBlue[200]),
           borderRadius: BorderRadius.circular(2)),
