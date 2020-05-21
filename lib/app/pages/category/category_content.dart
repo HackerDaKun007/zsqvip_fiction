@@ -8,6 +8,7 @@
  * @see         分类界面-分类按钮内容
 */
 import 'package:fiction/app/pages/category/category_book_content.dart';
+import 'package:fiction/res/categoryNameData.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
@@ -64,9 +65,14 @@ class _CategoryContentState extends State<CategoryContent>
     }
   }
 
-  handlerSelect() {
+  handleSelect() {
     bool isNotSelect = _categoryIndex.every((item)=> item == 0);
-    _tempBooksList = isNotSelect ? _booksData : _tempBooksList;
+
+    if (isNotSelect) {
+      _tempBooksList = _booksData;
+      return;
+    }
+    
   }
 
   @override
@@ -91,7 +97,7 @@ class _CategoryContentState extends State<CategoryContent>
   @override
   bool get wantKeepAlive => true;
 
-  /// 拿到分类按钮
+/// 拿到分类按钮
   _getbtns(data) {
     List<Widget> list = List<Widget>();
     for (var i = 1; i < data.length; i++) {
@@ -101,37 +107,6 @@ class _CategoryContentState extends State<CategoryContent>
       ));
     }
     return list;
-  }
-
-  /// 分类按钮列表
-  Widget _getbtnList(data, index) {
-    return Container(
-      width: Config.width,
-      padding: EdgeInsets.only(
-          bottom: getPixe(10, context),
-          right: getPixe(20, context),
-          left: getPixe(20, context)),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          CategoryBtn(
-            callback: hanldeFirstSelect(0),
-            name: data[0]['name'],
-          ),
-          SizedBox(
-            width: getPixe(20, context),
-          ),
-          Expanded(
-              flex: 1,
-              child: Wrap(
-                direction: Axis.horizontal,
-                spacing: getPixe(20, context),
-                runSpacing: getPixe(10, context),
-                children: _getbtns(data),
-              )),
-        ],
-      ),
-    );
   }
 
   /// 热门分类按钮列表
@@ -174,30 +149,30 @@ class _CategoryContentState extends State<CategoryContent>
   }
 
   /// 分类按钮
-  Widget _buildCategoryBtnsWidget() {
-    return Container(
-      width: Config.width,
-      margin: EdgeInsets.symmetric(vertical: getPixe(10, context)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _getbtnList(_categoryListData[0], _firstSelectedIndex),
-          _getbtnList(_categoryListData[1], _secondSelectedIndex),
-          _getbtnList(_categoryListData[2], _thirdSelectedIndex),
-          Divider(),
-          _getFeaturebtns(),
-          Divider(),
-        ],
-      ),
-    );
-  }
+  // Widget _buildCategoryBtnsWidget() {
+  //   return Container(
+  //     width: Config.width,
+  //     margin: EdgeInsets.symmetric(vertical: getPixe(10, context)),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: <Widget>[
+  //         _getbtnList(_categoryListData[0], _firstSelectedIndex),
+  //         _getbtnList(_categoryListData[1], _secondSelectedIndex),
+  //         _getbtnList(_categoryListData[2], _thirdSelectedIndex),
+  //         Divider(),
+  //         _getFeaturebtns(),
+  //         Divider(),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          _buildCategoryBtnsWidget(),
+          // _buildCategoryBtnsWidget(),
           CategoryBookContent(data: _booksData)
         ],
       ),
@@ -205,12 +180,8 @@ class _CategoryContentState extends State<CategoryContent>
   }
 }
 
-class CategoryBtnListWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+
+
 
 class CategoryBtn extends StatefulWidget {
   final String name;
@@ -254,6 +225,75 @@ class _CategoryBtnState extends State<CategoryBtn> with PixelSize {
           textAlign: TextAlign.center,
         ),
       ),
+    );
+  }
+}
+
+
+
+class FirstCategory extends StatefulWidget {
+  final List data;
+
+  FirstCategory({this.data});
+
+  @override
+  _FirstCategoryState createState() => _FirstCategoryState();
+}
+
+class _FirstCategoryState extends State<FirstCategory> with PixelSize{
+  List storeIndex = List();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+/// 拿到分类按钮
+  _getbtns(data) {
+    List<Widget> list = List<Widget>();
+    for (var i = 1; i < data.length; i++) {
+      list.add(CategoryBtn(
+        callback: null,
+        name: data[i]['name'],
+      ));
+    }
+    return list;
+  }
+   /// 分类按钮列表
+  Widget _getbtnList(data, index) {
+    return Container(
+      width: Config.width,
+      padding: EdgeInsets.only(
+          bottom: getPixe(10, context),
+          right: getPixe(20, context),
+          left: getPixe(20, context)),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CategoryBtn(
+            callback: null,
+            name: data[0]['name'],
+          ),
+          SizedBox(
+            width: getPixe(20, context),
+          ),
+          Expanded(
+              flex: 1,
+              child: Wrap(
+                direction: Axis.horizontal,
+                spacing: getPixe(20, context),
+                runSpacing: getPixe(10, context),
+                children: _getbtns(data),
+              )),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      
     );
   }
 }
