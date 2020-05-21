@@ -9,6 +9,7 @@
 */
 
 import 'package:fiction/app/pages/home/home_ad.dart';
+import 'package:fiction/app/pages/home/home_random_book_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -187,7 +188,8 @@ class HomeBody extends StatelessWidget {
                       builder: (context) {
                         return Dialog(
                             backgroundColor: Colors.white,
-                            child: _showRandomBookDialog(context));
+                            child: RandomBookDialog()
+                          );
                       });
                 }),
             _getCustomNavBarItem(
@@ -260,91 +262,5 @@ class HomeBody extends StatelessWidget {
     );
   }
 
-  /// 随便看看弹框
-  Widget _showRandomBookDialog(context) {
-    return Container(
-      height: 620 * rpx,
-      width: 450 * rpx,
-      padding: EdgeInsets.fromLTRB(30 * rpx, 10 * rpx, 10 * rpx, 10 * rpx),
-      child: Stack(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Container(
-                    padding:
-                        EdgeInsets.fromLTRB(0, 20 * rpx, 20 * rpx, 20 * rpx),
-                    child: Column(
-                      children: <Widget>[
-                        Material(
-                          elevation: 8,
-                          color: Colors.transparent,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8 * rpx),
-                            child: Image.network(
-                                'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                                height: 190 * rpx,
-                                fit: BoxFit.fill),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20 * rpx,
-                        ),
-                        Text(
-                          '无无无',
-                          style: TextStyle(
-                              fontSize: 36 * rpx, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: 10 * rpx,
-                        ),
-                        Text(
-                          '无无',
-                          style:
-                              TextStyle(color: Colors.grey, fontSize: 26 * rpx),
-                        ),
-                        SizedBox(
-                          height: 10 * rpx,
-                        ),
-                        Text(
-                          '测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据',
-                          style: TextStyle(
-                              color: Colors.black54, fontSize: 26 * rpx),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      ],
-                    )),
-              ),
-              Container(
-                  padding: EdgeInsets.only(right: 20 * rpx),
-                  width: 450 * rpx,
-                  child: FlatButton(
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    // padding: EdgeInsets.symmetric(horizontal:150*rpx),
-                    child: Text('立即阅读'),
-                    onPressed: () {
-                      print('====== pressed =====');
-                    },
-                  ))
-            ],
-          ),
-          Positioned(
-              top: 0,
-              right: 0,
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.close,
-                  color: Colors.grey,
-                ),
-              ))
-        ],
-      ),
-    );
-  }
+
 }
