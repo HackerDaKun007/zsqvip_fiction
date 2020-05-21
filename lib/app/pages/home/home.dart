@@ -31,10 +31,12 @@ class HomePage extends StatelessWidget with PixelSize {
         appBar: AppBar(
           backgroundColor: Color(0xfff4f4f4),
           elevation: 1,
+          titleSpacing: 0,
           title: Container(
             height: getPixe(44, context),
             child: Container(
               color: Color(0xfffcfcfc),
+              margin: EdgeInsets.only(left: getPixe(15, context)),
               padding: EdgeInsets.only(left: getPixe(5, context)),
               child: TextField(
                 readOnly: true,
@@ -60,7 +62,7 @@ class HomePage extends StatelessWidget with PixelSize {
           actions: <Widget>[
             GestureDetector(
               child: Container(
-                padding: EdgeInsets.only(left: getPixe(5, context), right: getPixe(10, context)),
+                padding: EdgeInsets.only(left: getPixe(5, context), right: getPixe(5, context)),
                 child: Stack(
                   fit: StackFit.passthrough,
                   children: [
