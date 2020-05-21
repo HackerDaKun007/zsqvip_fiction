@@ -46,6 +46,7 @@ class _EditorsRecommendState extends State<EditorsRecommend> {
             flex: 1,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
                   data['title'],
