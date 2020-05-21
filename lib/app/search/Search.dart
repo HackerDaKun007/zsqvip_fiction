@@ -29,8 +29,8 @@ class _SearchState extends State<Search> with PixelSize, Common {
 
   //new随机类
   var _random = new Random();
-  int _randomLength = 0; //随机大家都搜索长度
-  List<Widget> _list = new List(); //大家都搜索保留数据
+  static int _randomLength = 0; //随机大家都搜索长度
+  static List<Widget> _list = new List(); //大家都搜索保留数据
 
   //搜索框记本
   String _input = '';
@@ -40,13 +40,16 @@ class _SearchState extends State<Search> with PixelSize, Common {
   //初始化数据
   void initState() {
     super.initState();
-    //大家都搜索打乱数据
-    listData.shuffle();
-    //随机大家都搜索长度
-    this._randomLength = _random.nextInt(listData.length);
-    if (this._randomLength == 0) {
-      this._randomLength = _random.nextInt(listData.length);
+    if (_list.length < 1) {
+      //大家都搜索打乱数据
+      listData.shuffle();
+        //随机大家都搜索长度
+        _randomLength = _random.nextInt(listData.length);
+        if (_randomLength == 0) {
+          _randomLength = _random.nextInt(listData.length);
+      }
     }
+    
   }
 
   Widget build(BuildContext context) {
@@ -204,10 +207,10 @@ class _SearchState extends State<Search> with PixelSize, Common {
               setState(() {
                 listData.shuffle();
                 //随机长度
-                this._randomLength = _random.nextInt(listData.length);
-                if (this._randomLength == 0) {
+                _randomLength = _random.nextInt(listData.length);
+                if (_randomLength == 0) {
                   //如果大家都搜索长度为0重新请求一下
-                  this._randomLength = _random.nextInt(listData.length);
+                  _randomLength = _random.nextInt(listData.length);
                 }
               });
             },
@@ -219,10 +222,9 @@ class _SearchState extends State<Search> with PixelSize, Common {
 
   //大家都在搜索内容
   Widget _getEveryoneContent() {
-    this._list = [];
-    for (int i = 0; i < this._randomLength; i++) {
-      this
-          ._list
+    _list = [];
+    for (int i = 0; i < _randomLength; i++) {
+      _list
           .add(this._myButton(listData[i]['title'], listData[i]['renme']));
     }
     return Container(
@@ -230,7 +232,7 @@ class _SearchState extends State<Search> with PixelSize, Common {
       child: Wrap(
         spacing: getPixe(10, context),
         alignment: WrapAlignment.start,
-        children: this._list,
+        children: _list,
       ),
     );
   }
