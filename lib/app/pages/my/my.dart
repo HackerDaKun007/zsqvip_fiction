@@ -98,9 +98,13 @@ class _MineBodyState extends State<MineBody> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                _getHeaderRowListItem(title: '积分', countNum: 0, isNav: true, callback: (){
-                  Navigator.pushNamed(context, '/booklist');
-                }),
+                _getHeaderRowListItem(
+                    title: '积分',
+                    countNum: 0,
+                    isNav: true,
+                    callback: () {
+                      Navigator.pushNamed(context, '/booklist');
+                    }),
                 // _getHeaderRowListItem(title: '卡券', countNum: 5, isNav: true),
                 _getHeaderRowListItem(
                   title: '今日已读(分钟)',
@@ -151,14 +155,13 @@ class _MineBodyState extends State<MineBody> {
     return Container(
       margin: EdgeInsets.only(top: 20 * rpx),
       width: 750 * rpx,
-      height: 460 * rpx,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _getListItem(title: '福利中心', icon: Icons.redeem, subtitle: '抽大奖'),
           _getListItem(title: '积分商城', icon: Icons.store, subtitle: '兑换好礼'),
-          _getListItem(
-              title: '阅读兴趣', icon: Icons.favorite_border, subtitle: '精选推荐好书'),
+          // _getListItem(
+          //     title: '阅读兴趣', icon: Icons.favorite_border, subtitle: '精选推荐好书'),
           _getListItem(
             title: '阅读记录',
             icon: Icons.access_time,
@@ -172,61 +175,64 @@ class _MineBodyState extends State<MineBody> {
     return Container(
       margin: EdgeInsets.only(top: 20 * rpx),
       width: 750 * rpx,
-      height: 230 * rpx,
       child: Column(
         children: <Widget>[
           _getListItem(title: '意见反馈', icon: Icons.error_outline),
-          _getListItem(title: '设置', icon: Icons.settings, callback: () {
-            Navigator.pushNamed(context, '/settings');
-          }),
+          _getListItem(
+              title: '设置',
+              icon: Icons.settings,
+              callback: () {
+                Navigator.pushNamed(context, '/settings');
+              }),
         ],
       ),
     );
   }
 
   Widget _getListItem(
-      {IconData icon, @required String title, String subtitle, Function callback}) {
+      {IconData icon,
+      @required String title,
+      String subtitle,
+      Function callback}) {
     return InkWell(
-      onTap: callback,
-      child: Ink(
-        height: 115 * rpx,
-        width: 750 * rpx,
-        color: Colors.white,
-        padding: EdgeInsets.symmetric(horizontal: 20 * rpx),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Icon(
-                  icon,
-                  color: Colors.black,
-                ),
-                SizedBox(width: 20 * rpx),
-                Text(
-                  title,
-                  style: TextStyle(fontSize: 28 * rpx),
-                ),
-              ],
-            ),
-            Row(
-                  children: <Widget>[
-                    subtitle != null
-                        ? Text(subtitle,
-                            style: TextStyle(
-                                color: Colors.grey[600], fontSize: 24 * rpx))
-                        : SizedBox(width: 0),
-                    Icon(
-                      Icons.chevron_right,
-                      color: Colors.grey,
-                      size: 38 * rpx,
-                    )
-                  ],
-                )
-          ],
-        ),
-      )
-    );
+        onTap: callback,
+        child: Ink(
+          height: 115 * rpx,
+          width: 750 * rpx,
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(horizontal: 20 * rpx),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Icon(
+                    icon,
+                    color: Colors.black,
+                  ),
+                  SizedBox(width: 20 * rpx),
+                  Text(
+                    title,
+                    style: TextStyle(fontSize: 28 * rpx),
+                  ),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  subtitle != null
+                      ? Text(subtitle,
+                          style: TextStyle(
+                              color: Colors.grey[600], fontSize: 24 * rpx))
+                      : SizedBox(width: 0),
+                  Icon(
+                    Icons.chevron_right,
+                    color: Colors.grey,
+                    size: 38 * rpx,
+                  )
+                ],
+              )
+            ],
+          ),
+        ));
   }
-
 }
