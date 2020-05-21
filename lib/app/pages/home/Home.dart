@@ -8,14 +8,16 @@
  * @see         书城页面-主页
 */
 
-import 'package:fiction/app/ad/Tabsad.dart';
-import 'package:fiction/app/pages/home/home_build_book.dart';
-import 'package:fiction/app/pages/home/home_guess_you_like.dart';
-import 'package:fiction/app/pages/home/home_hot_charts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'package:fiction/public/public.dart';
+import 'package:fiction/app/ad/Tabsad.dart';
+import 'package:fiction/app/pages/home/home_build_book.dart';
+import 'package:fiction/app/pages/home/home_guess_you_like.dart';
+import 'package:fiction/app/pages/home/home_hot_charts.dart';
+import 'package:fiction/app/pages/home/home_recommend.dart';
+import 'package:fiction/res/guessYouLikeData.dart';
 
 class HomePage extends StatelessWidget with PixelSize {
   final getCurrenIndex;
@@ -90,7 +92,7 @@ class HomeBody extends StatelessWidget {
   ];
 
   final double rpx = Config.width / 750; // 自适应像素
-
+  final List _listData = guessYouLikeData;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +100,7 @@ class HomeBody extends StatelessWidget {
       children: <Widget>[
         _buildSwiperWidget(), // 轮播图
         _buildCustomNavBarWidget(context), // 导航栏
-        _buildRecommendWidget(), // 编辑推荐
+        EditorsRecommend(), // 编辑推荐
         HotChartsWidget(), // 今日热榜
         GuessYouLike(), // 猜你喜欢
         _buildInfinityListWidget(), // 无限列表
@@ -222,88 +224,6 @@ class HomeBody extends StatelessWidget {
         ));
   }
 
-  /// 编辑推荐
-  Widget _buildRecommendWidget() {
-    return Container(
-      width: 750 * rpx,
-      height: 600 * rpx,
-      margin: EdgeInsets.all(20 * rpx),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            '编辑力荐',
-            style: TextStyle(fontSize: 34 * rpx, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 25 * rpx,
-          ),
-          BookContentWidget(
-            bookName: '无无无',
-            imageUrl:
-                'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-            bookActivityCount: 20,
-            bookCategory: ['仙侠', '传奇'],
-            bookDesc: '测试数据',
-            isElevation: true,
-          ),
-          SizedBox(
-            height: 40 * rpx,
-          ),
-          Container(
-            height: 280 * rpx,
-            width: 750 * rpx,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _getLeftRecommendItem(),
-                _getLeftRecommendItem(),
-                _getLeftRecommendItem(),
-                _getLeftRecommendItem(),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  /// 其余推荐
-  Widget _getLeftRecommendItem() {
-    return Container(
-      width: (750 / 5) * rpx,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(6 * rpx),
-            child: Image.network(
-              'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-              height: 190 * rpx,
-              fit: BoxFit.fill,
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                '无无无无无无无无',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: TextStyle(fontSize: 28 * rpx),
-              ),
-              Text(
-                '110万人气',
-                style: TextStyle(fontSize: 22 * rpx, color: Colors.black54),
-                textAlign: TextAlign.left,
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
 
 
   /// 无限列表
@@ -325,20 +245,10 @@ class HomeBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 BookContentWidget(
-                    bookName: '无无无',
-                    imageUrl:
-                        'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                    bookActivityCount: 45,
-                    bookCategory: ['仙侠', '传奇'],
-                    bookDesc: '测试数据',
+                   data: _listData[0],
                     isInfinity: true),
                 BookContentWidget(
-                    bookName: '无无无',
-                    imageUrl:
-                        'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                    bookActivityCount: 45,
-                    bookCategory: ['仙侠', '传奇'],
-                    bookDesc: '测试数据',
+                    data:_listData[2],
                     isInfinity: true),
               ],
             )
