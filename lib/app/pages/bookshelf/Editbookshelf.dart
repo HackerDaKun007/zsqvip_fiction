@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 import 'package:fiction/res/listData.dart';
 import 'package:fiction/public/widget/Prompt.dart';
+import 'package:fiction/public/utils/Bounced.dart';
 
 class EditBookShelf extends StatefulWidget {
   EditBookShelf({Key key}) : super(key: key);
@@ -22,6 +23,8 @@ class EditBookShelf extends StatefulWidget {
 }
 
 class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
+  var bounced = Bounced(); //配置弹出层
+
   List _data = new List(); //数据
   List _dataAction = new List(); //保存选中数据坐标key
   List _dataActionData = new List(); //备份存储保存选中数据坐标key
@@ -35,6 +38,8 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
 
   var _deleteColos = Colors.blue[100]; //删除默认颜色
   // var _deleteColos = Config.color;
+
+  @override
   void initState() {
     super.initState();
     listData.forEach((value) {
@@ -42,20 +47,22 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
         this._data.add(value);
         this._dataActionData.add(value['id']);
         //存储颜色
-        this._dataColor.add({'id':value['id'],'color':Color(0xff9e9e9e)});
-        this._dataColorBack.add({'id':value['id'],'color':Color(0xff9e9e9e)});
-        this._dataColorBackAction.add({'id':value['id'],'color':Config.color});
+        this._dataColor.add({'id': value['id'], 'color': Color(0xff9e9e9e)});
+        this
+            ._dataColorBack
+            .add({'id': value['id'], 'color': Color(0xff9e9e9e)});
+        this
+            ._dataColorBackAction
+            .add({'id': value['id'], 'color': Config.color});
       }
 
       //广告
       if (value['ad'] == 1) {
         this._adData.add(value);
       }
-
     });
   }
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -120,49 +127,57 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
                     child: Text(
                       '删除',
                       style: TextStyle(
-                          fontSize: getPixe(16, context), color: this._deleteColos),
+                          fontSize: getPixe(16, context),
+                          color: this._deleteColos),
                     ),
                   ),
                 ),
                 onTap: () {
                   if (this._dataAction.length > 0) {
-                     
-                     setState(() {
-                       //如全选,不需要经过循环
-                       if (this._dataAction.length == this._data.length) {
-                         listData = List();
-                         this._data = List();
-                       } else {
-                         this._dataAction.forEach((value) {
-                          listData.removeWhere((v) => v['id'] == value);
-                          this._data.removeWhere((v) => v['id'] == value);
-                          this._dataColor.removeWhere((v) => v['id'] == value);
-                          this._dataColorBack.removeWhere((v) => v['id'] == value);
-                          this._dataColorBackAction.removeWhere((v) => v['id'] == value);
-                         });
-                       }
-                      this._dataAction = List();
-                      this._updateDelteColors();
-                     });
+                    bounced.confirm('提示', '确定要删除么？', context).then((value) {
+                      if (value) {
+                        setState(() {
+                          //如全选,不需要经过循环
+                          if (this._dataAction.length == this._data.length) {
+                            listData = List();
+                            this._data = List();
+                          } else {
+                            this._dataAction.forEach((value) {
+                              listData.removeWhere((v) => v['id'] == value);
+                              this._data.removeWhere((v) => v['id'] == value);
+                              this
+                                  ._dataColor
+                                  .removeWhere((v) => v['id'] == value);
+                              this
+                                  ._dataColorBack
+                                  .removeWhere((v) => v['id'] == value);
+                              this
+                                  ._dataColorBackAction
+                                  .removeWhere((v) => v['id'] == value);
+                            });
+                          }
+                          this._dataAction = List();
+                          this._updateDelteColors();
+                        });
 
-
-                    //删除广告
-                    if (this._data.length > 0) {
-                      //判断广告数量 - 10 = 2， 5 = 1
-                      int adNum = ((this._data.length) / 5).floor();
-                      int number = this._adData.length;
-                      this._adData.forEach((value) {
-                        if (number > adNum || adNum == 0) {
-                          print(number);
-                          print(adNum);
-                          listData.removeWhere((v) => v['id'] == value['id']);
-                          number --;
+                        //删除广告
+                        if (this._data.length > 0) {
+                          //判断广告数量 - 10 = 2， 5 = 1
+                          int adNum = ((this._data.length) / 5).floor();
+                          int number = this._adData.length;
+                          this._adData.forEach((value) {
+                            if (number > adNum || adNum == 0) {
+                              listData
+                                  .removeWhere((v) => v['id'] == value['id']);
+                              number--;
+                            }
+                          });
                         }
-                      });
-                    }
-                    
+                      }
+                    });
+
                     // if (this._data.length < 5) {
-                      
+
                     // } else {
                     //   int adNum = this._data.length / 2;
                     // }
@@ -206,7 +221,11 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
                   Positioned(
                     top: getPixe(7, context),
                     right: getPixe(7, context),
-                    child: Icon(Icons.check_circle, size: getPixe(22, context), color:this._dataColor[index]['color'], ),
+                    child: Icon(
+                      Icons.check_circle,
+                      size: getPixe(22, context),
+                      color: this._dataColor[index]['color'],
+                    ),
                   ),
                 ],
               ),
@@ -235,10 +254,12 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
           // print(this._data[index]['title']);
           setState(() {
             //切换选中按钮
-            if (this._dataColor[index]['color'] == Config.color) { //选中状态
+            if (this._dataColor[index]['color'] == Config.color) {
+              //选中状态
               this._dataColor[index]['color'] = Color(0xff9e9e9e);
               this._dataAction.remove(this._data[index]['id']);
-            } else { //未选中状态
+            } else {
+              //未选中状态
               this._dataColor[index]['color'] = Config.color;
               this._dataAction.add(this._data[index]['id']);
             }
@@ -255,7 +276,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
 
   void _updateDelteColors() {
     if (this._dataAction.length > 0) {
-        _deleteColos = Config.color;
+      _deleteColos = Config.color;
     } else {
       _deleteColos = Colors.blue[100];
     }
@@ -266,25 +287,25 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
     // print(this._dataAction.length);
     if (this._dataAction.length > 0) {
       return Container(
-              width: getPixe(70, context),
-              // height: 40,
-              // color: Colors.red,
-              child: GestureDetector(
-                child: Center(
-                  child: Text(
-                    '取消',
-                    style: TextStyle(
-                        fontSize: getPixe(18, context), color: Colors.grey),
-                  ),
-                ),
-                onTap: () {
-                  setState(() {
-                    this._dataColor = this._dataColorBack;
-                    this._dataAction = List();
-                    this._updateDelteColors();
-                  });
-                },
-              ));
+          width: getPixe(70, context),
+          // height: 40,
+          // color: Colors.red,
+          child: GestureDetector(
+            child: Center(
+              child: Text(
+                '取消',
+                style: TextStyle(
+                    fontSize: getPixe(18, context), color: Colors.grey),
+              ),
+            ),
+            onTap: () {
+              setState(() {
+                this._dataColor = this._dataColorBack;
+                this._dataAction = List();
+                this._updateDelteColors();
+              });
+            },
+          ));
     } else {
       return Text('');
     }
@@ -294,23 +315,22 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
   Widget _getData() {
     if (this._data.length > 0) {
       return Padding(
-            padding: EdgeInsets.all(10),
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, //控制一行多个
-                crossAxisSpacing: 10.0, //左右距离
-                mainAxisSpacing: 10.0, //上下距离
-                childAspectRatio: 0.63, //子级的高度、宽度的比例
-              ),
-              itemCount: _data.length,
-              itemBuilder: this._getListData,
-            ),
-          );
+        padding: EdgeInsets.all(10),
+        child: GridView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3, //控制一行多个
+            crossAxisSpacing: 10.0, //左右距离
+            mainAxisSpacing: 10.0, //上下距离
+            childAspectRatio: 0.63, //子级的高度、宽度的比例
+          ),
+          itemCount: _data.length,
+          itemBuilder: this._getListData,
+        ),
+      );
     } else {
       return Prompt('暂无任何书架可编辑');
     }
   }
-
 }
