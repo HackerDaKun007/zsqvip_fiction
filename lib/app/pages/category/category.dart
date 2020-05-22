@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
 
-import '../../ad/Tabsad.dart';
+import 'package:fiction/app/ad/Tabsad.dart';
 
 class CategoryPage extends StatefulWidget {
 
@@ -36,7 +36,7 @@ class _CategoryPageState extends State<CategoryPage>
 
   @override
   Widget build(BuildContext context) {
-    double indicatorWidth = Config.width / 5 + 10;
+    double indicatorWidth = getWidth(context) / 5 + 10;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
