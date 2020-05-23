@@ -5,8 +5,10 @@
  * @since       1.0 version
  *
  * 
- * @see         书城页面-猜你喜欢
+ * @see         书城页面-猜你喜欢版块
 */
+import 'package:fiction/public/public.dart';
+import 'package:fiction/res/guessYouLikeData.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiction/app/pages/home/home_build_book.dart';
@@ -19,13 +21,37 @@ class GuessYouLike extends StatefulWidget {
 }
 
 class _GuessYouLikeState extends State<GuessYouLike> {
+  List<Map> _listData = guessYouLikeData;
+  final double rpx = Config.width / 750;
+
+  @override
+  void initState() {
+    super.initState();
+    _listData.shuffle();
+  }
+
+  /// 换一换
+  _shuffleContent() {
+    setState(() {
+      _listData.shuffle();
+    });
+  }
+
+  _getBookListItem(data) {
+    List<Widget> _list = List();
+
+    for(var i=0; i<3; i++) {
+      _list.add(BookContentWidget(data:data[i]));
+    }
+    return _list;
+  }
+
   @override
   Widget build(BuildContext context) {
-    double rpx = MediaQuery.of(context).size.width / 750;
     return Container(
       width: 750 * rpx,
       height: 770 * rpx,
-      margin: EdgeInsets.all(20 * rpx),
+      margin: EdgeInsets.symmetric(horizontal: 20 * rpx, vertical: 30*rpx),
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -42,8 +68,7 @@ class _GuessYouLikeState extends State<GuessYouLike> {
                     padding: EdgeInsets.only(right: 20 * rpx),
                     child: InkWell(
                       onTap: () {
-                        print(
-                            '=========== pressed to change list content ==========');
+                        _shuffleContent();
                       },
                       child: Row(
                         children: <Widget>[
@@ -73,33 +98,7 @@ class _GuessYouLikeState extends State<GuessYouLike> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    BookContentWidget(
-                      bookName: '无无无',
-                      imageUrl:
-                          'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                      bookActivityCount: 45,
-                      bookCategory: ['仙侠', '传奇'],
-                      bookDesc: '测试数据',
-                    ),
-                    BookContentWidget(
-                      bookName: '无无无',
-                      imageUrl:
-                          'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                      bookActivityCount: 10,
-                      bookCategory: ['古风', '传奇'],
-                      bookDesc: '测试数据',
-                    ),
-                    BookContentWidget(
-                      bookName: '无无无',
-                      imageUrl:
-                          'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                      bookActivityCount: 50,
-                      bookCategory: ['现代', '传奇'],
-                      bookDesc:
-                          '测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据',
-                    ),
-                  ],
+                  children: _getBookListItem(_listData),
                 ))
           ]),
     );

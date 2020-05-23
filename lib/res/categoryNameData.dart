@@ -22,6 +22,11 @@ List categoryNameData = [
         {'id': 1, 'name': '连载'},
         {'id': 2, 'name': '完结'},
       ],
+      [
+        {'id': 0, 'name': '热门'},
+        {'id': 1, 'name': '最新'},
+        {'id': 2, 'name': '评分'},
+      ],
     ],
     'books': [
       {
@@ -125,6 +130,11 @@ List categoryNameData = [
         {'id': 0, 'name': '全部'},
         {'id': 1, 'name': '连载'},
         {'id': 2, 'name': '完结'},
+      ],
+      [
+        {'id': 0, 'name': '热门'},
+        {'id': 1, 'name': '最新'},
+        {'id': 2, 'name': '评分'},
       ],
     ],
     'books': [

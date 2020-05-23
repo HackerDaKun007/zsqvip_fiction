@@ -8,14 +8,18 @@
  * @see         书城页面-主页
 */
 
-import 'package:fiction/app/ad/Tabsad.dart';
-import 'package:fiction/app/pages/home/home_build_book.dart';
-import 'package:fiction/app/pages/home/home_guess_you_like.dart';
-import 'package:fiction/app/pages/home/home_hot_charts.dart';
+import 'package:fiction/app/pages/home/home_ad.dart';
+import 'package:fiction/app/pages/home/home_random_book_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'package:fiction/public/public.dart';
+import 'package:fiction/app/ad/Tabsad.dart';
+import 'package:fiction/app/pages/home/home_build_book.dart';
+import 'package:fiction/app/pages/home/home_guess_you_like.dart';
+import 'package:fiction/app/pages/home/home_hot_charts.dart';
+import 'package:fiction/app/pages/home/home_recommend.dart';
+import 'package:fiction/res/guessYouLikeData.dart';
 
 class HomePage extends StatelessWidget with PixelSize {
   final getCurrenIndex;
@@ -27,17 +31,18 @@ class HomePage extends StatelessWidget with PixelSize {
         appBar: AppBar(
           backgroundColor: Color(0xfff4f4f4),
           elevation: 1,
+          titleSpacing: 0,
           title: Container(
-            margin: EdgeInsets.only(right: getPixe(10, context)),
             height: getPixe(44, context),
             child: Container(
               color: Color(0xfffcfcfc),
-              padding: EdgeInsets.only(left: getPixe(10, context)),
+              margin: EdgeInsets.only(left: getPixe(15, context)),
+              padding: EdgeInsets.only(left: getPixe(5, context)),
               child: TextField(
                 readOnly: true,
                 textAlignVertical: TextAlignVertical(y: -1),
                 decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(left: getPixe(10, context)),
+                    contentPadding: EdgeInsets.only(left: getPixe(5, context)),
                     icon: Icon(
                       Iconfont.sousuo,
                       color: Color(0xffb5b5b5),
@@ -55,30 +60,39 @@ class HomePage extends StatelessWidget with PixelSize {
             ),
           ),
           actions: <Widget>[
-            InkWell(
-              onTap: () {},
-              child: Ink(
-                padding: EdgeInsets.only(right: getPixe(10, context)),
-                child: Image.asset(
-                  'images/box.png',
-                  fit: BoxFit.fitWidth,
-                  width: getPixe(30, context),
-                ),
+            GestureDetector(
+              child: Container(
+                padding: EdgeInsets.only(left: getPixe(5, context), right: getPixe(5, context)),
+                child: Stack(
+                  fit: StackFit.passthrough,
+                  children: [
+                    Image.asset('images/li.png', width: getPixe(70, context), fit:BoxFit.fitWidth),
+                    Positioned(
+                      top: getPixe(22, context),
+                      left: getPixe(35, context),
+                      child: Text(
+                        '签到',
+                        style: TextStyle(
+                            fontSize: getPixe(12, context), color: Colors.brown),
+                      ),
+                    )
+                  ]
+                )
               ),
+              onTap: () {
+                print('签到');
+              },
             ),
           ],
         ),
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: HomeBody(getCurrenIndex: getCurrenIndex),
-            ),
-            TabsAd()
-          ]
-        ));
+        body: Stack(children: [
+          SingleChildScrollView(
+            child: HomeBody(getCurrenIndex: getCurrenIndex),
+          ),
+          TabsAd()
+        ]));
   }
 }
-
 
 class HomeBody extends StatelessWidget {
   final getCurrenIndex;
@@ -90,7 +104,7 @@ class HomeBody extends StatelessWidget {
   ];
 
   final double rpx = Config.width / 750; // 自适应像素
-
+  final List _listData = guessYouLikeData;
 
   @override
   Widget build(BuildContext context) {
@@ -98,9 +112,10 @@ class HomeBody extends StatelessWidget {
       children: <Widget>[
         _buildSwiperWidget(), // 轮播图
         _buildCustomNavBarWidget(context), // 导航栏
-        _buildRecommendWidget(), // 编辑推荐
+        EditorsRecommend(), // 编辑推荐
         HotChartsWidget(), // 今日热榜
         GuessYouLike(), // 猜你喜欢
+        AdWidget(),
         _buildInfinityListWidget(), // 无限列表
       ],
     );
@@ -175,7 +190,8 @@ class HomeBody extends StatelessWidget {
                       builder: (context) {
                         return Dialog(
                             backgroundColor: Colors.white,
-                            child: _showRandomBookDialog(context));
+                            child: RandomBookDialog()
+                          );
                       });
                 }),
             _getCustomNavBarItem(
@@ -222,90 +238,6 @@ class HomeBody extends StatelessWidget {
         ));
   }
 
-  /// 编辑推荐
-  Widget _buildRecommendWidget() {
-    return Container(
-      width: 750 * rpx,
-      height: 600 * rpx,
-      margin: EdgeInsets.all(20 * rpx),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            '编辑力荐',
-            style: TextStyle(fontSize: 34 * rpx, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 25 * rpx,
-          ),
-          BookContentWidget(
-            bookName: '无无无',
-            imageUrl:
-                'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-            bookActivityCount: 20,
-            bookCategory: ['仙侠', '传奇'],
-            bookDesc: '测试数据',
-            isElevation: true,
-          ),
-          SizedBox(
-            height: 40 * rpx,
-          ),
-          Container(
-            height: 280 * rpx,
-            width: 750 * rpx,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _getLeftRecommendItem(),
-                _getLeftRecommendItem(),
-                _getLeftRecommendItem(),
-                _getLeftRecommendItem(),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  /// 其余推荐
-  Widget _getLeftRecommendItem() {
-    return Container(
-      width: (750 / 5) * rpx,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(6 * rpx),
-            child: Image.network(
-              'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-              height: 190 * rpx,
-              fit: BoxFit.fill,
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                '无无无无无无无无',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: TextStyle(fontSize: 28 * rpx),
-              ),
-              Text(
-                '110万人气',
-                style: TextStyle(fontSize: 22 * rpx, color: Colors.black54),
-                textAlign: TextAlign.left,
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-
   /// 无限列表
   Widget _buildInfinityListWidget() {
     return Container(
@@ -324,115 +256,13 @@ class HomeBody extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                BookContentWidget(
-                    bookName: '无无无',
-                    imageUrl:
-                        'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                    bookActivityCount: 45,
-                    bookCategory: ['仙侠', '传奇'],
-                    bookDesc: '测试数据',
-                    isInfinity: true),
-                BookContentWidget(
-                    bookName: '无无无',
-                    imageUrl:
-                        'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                    bookActivityCount: 45,
-                    bookCategory: ['仙侠', '传奇'],
-                    bookDesc: '测试数据',
-                    isInfinity: true),
+                BookContentWidget(data: _listData[0], isInfinity: true),
+                BookContentWidget(data: _listData[2], isInfinity: true),
               ],
             )
           ]),
     );
   }
 
-  /// 随便看看弹框
-  Widget _showRandomBookDialog(context) {
-    return Container(
-      height: 620 * rpx,
-      width: 450 * rpx,
-      padding: EdgeInsets.fromLTRB(30 * rpx, 10 * rpx, 10 * rpx, 10 * rpx),
-      child: Stack(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Container(
-                    padding:
-                        EdgeInsets.fromLTRB(0, 20 * rpx, 20 * rpx, 20 * rpx),
-                    child: Column(
-                      children: <Widget>[
-                        Material(
-                          elevation: 8,
-                          color: Colors.transparent,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8 * rpx),
-                            child: Image.network(
-                                'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1',
-                                height: 190 * rpx,
-                                fit: BoxFit.fill),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20 * rpx,
-                        ),
-                        Text(
-                          '无无无',
-                          style: TextStyle(
-                              fontSize: 36 * rpx, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: 10 * rpx,
-                        ),
-                        Text(
-                          '无无',
-                          style:
-                              TextStyle(color: Colors.grey, fontSize: 26 * rpx),
-                        ),
-                        SizedBox(
-                          height: 10 * rpx,
-                        ),
-                        Text(
-                          '测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据',
-                          style: TextStyle(
-                              color: Colors.black54, fontSize: 26 * rpx),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      ],
-                    )),
-              ),
-              Container(
-                  padding: EdgeInsets.only(right: 20 * rpx),
-                  width: 450 * rpx,
-                  child: FlatButton(
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    // padding: EdgeInsets.symmetric(horizontal:150*rpx),
-                    child: Text('立即阅读'),
-                    onPressed: () {
-                      print('====== pressed =====');
-                    },
-                  ))
-            ],
-          ),
-          Positioned(
-              top: 0,
-              right: 0,
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.close,
-                  color: Colors.grey,
-                ),
-              ))
-        ],
-      ),
-    );
-  }
 
-  
 }

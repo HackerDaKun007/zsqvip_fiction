@@ -11,22 +11,12 @@
 import 'package:flutter/material.dart';
 
 class BookContentWidget extends StatelessWidget {
-  final String imageUrl; // 图片
-  final String bookName; // 书名
-  final String bookDesc; // 介绍
-  final int bookActivityCount; // 人气人数
-  final List<String> bookCategory; // 分类
+  final Map data; // 数据
   final bool isElevation; // 是否要有阴影
   final bool isInfinity; // 是否是无限列表
-  final int bookStatus; // 状态：1为连载，2为完结
 
   BookContentWidget(
-      {this.imageUrl,
-      this.bookName,
-      this.bookDesc,
-      this.bookCategory,
-      this.bookActivityCount,
-      this.bookStatus = 1,
+      {@required this.data,
       this.isElevation = false,
       this.isInfinity = false});
 
@@ -48,7 +38,7 @@ class BookContentWidget extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(6 * rpx),
                 child: Image.network(
-                  imageUrl,
+                  data['imageUrl'],
                   fit: BoxFit.fill,
                 ),
               ),
@@ -65,12 +55,12 @@ class BookContentWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          bookName,
+                          data['title'],
                           style: TextStyle(
                               fontSize: 30 * rpx, color: Colors.black),
                         ),
                         Text(
-                          bookDesc,
+                          data['sutitle'],
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -83,16 +73,16 @@ class BookContentWidget extends StatelessWidget {
                             Row(
                               children: <Widget>[
                                 _getCategoryWidget(
-                                    name: bookCategory[0], rpx: rpx),
+                                    name: data['category'][0], rpx: rpx),
                                 SizedBox(
                                   width: 10 * rpx,
                                 ),
                                 _getCategoryWidget(
-                                    name: bookCategory[1], rpx: rpx),
+                                    name: data['category'][1], rpx: rpx),
                               ],
                             ),
                             Text(
-                              '${bookStatus < 2 ? '连载' : '完结'} · ${bookActivityCount}万人气',
+                              '${data['update_status']} · 100万人气',
                               style: TextStyle(
                                   color: Colors.grey[400], fontSize: 20 * rpx),
                             )

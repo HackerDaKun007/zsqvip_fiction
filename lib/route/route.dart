@@ -30,7 +30,8 @@ import 'package:fiction/app/article/present.dart';  //介绍
 import 'package:fiction/app/pages/home/top_charts.dart'; // 排行榜页面
 import 'package:fiction/app/book_list/book_list_detail.dart'; // 书单详情页面
 import 'package:fiction/app/book_list/book_list_page.dart'; // 书单页面
-import 'package:fiction/app/pages/my/settings_page.dart'; // 设置页面
+import 'package:fiction/app/pages/my/settings/settings_page.dart'; // 设置页面
+import 'package:fiction/app/pages/my/settings/aboutus.dart';  // 关于我们页面
 
 //配置命令路由
 final routes = {
@@ -57,6 +58,7 @@ final routes = {
   '/booklist': (context) => BookListPage(),
   '/booklistdetail': (context, {arguments}) => BookListDetail(arguments:arguments),
   '/settings': (context) => SettingsPage(),
+  '/aboutus': (context) => AboutUsPage(),
 };
 
 var onGenerateRoute = (RouteSettings settings) {
