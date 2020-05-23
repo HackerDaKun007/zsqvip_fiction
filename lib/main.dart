@@ -13,31 +13,37 @@ import 'package:flutter/material.dart';
 import 'package:fiction/route/route.dart'; //路由文件
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'package:provider/provider.dart'; //provider
+import 'package:fiction/provider/config.dart'; //provider配置文件
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      //配置国际中文
-      localizationsDelegates: [
-        //此处
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      //配置国际中文
-      supportedLocales: [
-        //此处
-        const Locale('zh', 'CH'),
-        const Locale('en', 'US'),
-      ],
-      debugShowCheckedModeBanner: false, //移除左上角的图标
-      initialRoute: '/', //初始化加载路由
+    return MultiProvider(
+      providers: provider,
+      child: MaterialApp(
+        //配置国际中文
+        localizationsDelegates: [
+          //此处
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        //配置国际中文
+        supportedLocales: [
+          //此处
+          const Locale('zh', 'CH'),
+          const Locale('en', 'US'),
+        ],
+        debugShowCheckedModeBanner: false, //移除左上角的图标
+        initialRoute: '/', //初始化加载路由
 
-      onGenerateRoute: onGenerateRoute,
-      theme: ThemeData(
-          primaryColor: Colors.white, splashColor: Colors.transparent),
+        onGenerateRoute: onGenerateRoute,
+        theme: ThemeData(
+            primaryColor: Colors.white, splashColor: Colors.transparent),
+      ),
     );
   }
 }
