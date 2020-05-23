@@ -1,44 +1,24 @@
-import 'package:fiction/app/pages/category/category_book_content.dart';
-import 'package:provider/provider.dart';
+/*
+ * @author      Yuri Chen <pluto401zz@gmail.com>
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ *
+ * @see         分类界面-分类按钮内容
+*/
+
 import 'package:fiction/providers/categoryProvider.dart';
 import 'package:fiction/public/public.dart';
 import 'package:flutter/material.dart';
 
 
-class CategoryContent extends StatelessWidget {
-  final Map data;
-  CategoryContent({this.data});
-
-  @override
-  Widget build(BuildContext context) {
-    List _booksData = data['books'];
-    List _categoryNameData = data['category_list'];
-    
-    return MultiProvider(
-      providers: [
-          ChangeNotifierProvider(
-            create: (context) => CategoryProvider(),
-          )
-        ],
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            CategoryBtnsWidget(data: _categoryNameData,),
-            CategoryBookContent(data: _booksData)
-          ],
-        )
-    ),
-    );
-  }
-}
-
-
 class CategoryBtnsWidget extends StatelessWidget with PixelSize {
 
   final List data;
-  CategoryBtnsWidget({this.data});
+  final CategoryProvider provider;
+  CategoryBtnsWidget({this.data, this.provider});
 
-  CategoryProvider provider;
   /// 分类按钮列表
   Widget _getbtnList({data, BuildContext context, bool isLastOne=false, int index}) {
     return Container(
@@ -91,7 +71,6 @@ class CategoryBtnsWidget extends StatelessWidget with PixelSize {
 
   @override
   Widget build(BuildContext context) {
-    provider = Provider.of<CategoryProvider>(context);
     return Container(
       width: Config.width,
       margin: EdgeInsets.symmetric(vertical: getPixe(10, context)),
@@ -110,7 +89,7 @@ class CategoryBtnsWidget extends StatelessWidget with PixelSize {
   }
 }
 
-
+/// 创建分类按钮
 class CategoryBtn extends StatelessWidget with PixelSize{
   final String name;
   final int index;
@@ -120,8 +99,7 @@ class CategoryBtn extends StatelessWidget with PixelSize{
 
   @override
   Widget build(BuildContext context) {
-    bool isActive = provider.isSelect;
-    // print(provider.boyStatusIndexList);
+    bool isActive = provider.statusList[parentIndex][index];
     return InkWell(
       onTap: () {
         provider.setBtnStatus(index, parentIndex);

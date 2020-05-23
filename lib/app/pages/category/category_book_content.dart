@@ -25,7 +25,7 @@ class _CategoryBookContentState extends State<CategoryBookContent> with PixelSiz
   Widget _buildBookWidget(data) {
     num totalNum = (data['total_num'] / 10000).round();
     return Container(
-        width: Config.width,
+        width: getWidth(context),
         height: getPixe(90, context),
         margin: EdgeInsets.only(bottom: getPixe(20, context)),
         padding: EdgeInsets.only(left: getPixe(10, context)),
@@ -101,7 +101,7 @@ class _CategoryBookContentState extends State<CategoryBookContent> with PixelSiz
 
   Widget _getCategoryWidget({String name}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: getPixe(5, context)),
+      padding: EdgeInsets.symmetric(horizontal: getPixe(5, context),vertical: getPixe(1, context)),
       decoration: BoxDecoration(
           border: Border.all(width: getPixe(0.5, context), color: Colors.grey[400]),
           borderRadius: BorderRadius.circular(2)),
