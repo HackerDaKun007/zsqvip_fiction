@@ -27,8 +27,13 @@ class _TopChartsPageState extends State<TopChartsPage>
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 2, vsync: this);
-    
+    _controller = TabController(length: 2, vsync: this); 
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override

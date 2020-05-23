@@ -31,14 +31,44 @@ List categoryNameData = [
     'books': [
       {
         'id': 1,
-        'category_id': 2,
+        'category_id': 5,
         'bookname': '神医',
         'author': '佚名',
         'activity_count': 100,
-        'total_num': 1205444,
-        'score': 9.8,
+        'total_num': 9214510,
+        'score': 8.8,
         'status': 1, // 状态1：连载、2：完结
         'update_time': 1589857222,
+        'category_name': ['玄幻', '传奇'],
+        'desc': '测试测试测试测试测试测试测试测试测试测试',
+        'image':
+            'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1'
+      },
+      {
+        'id': 1,
+        'category_id': 6,
+        'bookname': '小于100万',
+        'author': '佚名',
+        'activity_count': 100,
+        'total_num': 987411,
+        'score': 7.8,
+        'status': 1, // 状态1：连载、2：完结
+        'update_time': 1589857702,
+        'category_name': ['玄幻', '传奇'],
+        'desc': '测试测试测试测试测试测试测试测试测试测试',
+        'image':
+            'https://tse1-mm.cn.bing.net/th/id/OIP.60drNS4gbPF8T1r5poePMAAAAA?pid=Api&rs=1'
+      },
+      {
+        'id': 1,
+        'category_id': 5,
+        'bookname': '神医',
+        'author': '佚名',
+        'activity_count': 100,
+        'total_num': 858574,
+        'score': 9.2,
+        'status': 1, // 状态1：连载、2：完结
+        'update_time': 1589857255,
         'category_name': ['玄幻', '传奇'],
         'desc': '测试测试测试测试测试测试测试测试测试测试',
         'image':
@@ -51,7 +81,7 @@ List categoryNameData = [
         'author': '佚名',
         'activity_count': 100,
         'total_num': 1205444,
-        'score': 9.8,
+        'score': 9.1,
         'status': 1, // 状态1：连载、2：完结
         'update_time': 1589857222,
         'category_name': ['玄幻', '传奇'],
@@ -65,8 +95,8 @@ List categoryNameData = [
         'category_id': 3,
         'author': '金庸',
         'activity_count': 1000,
-        'total_num': 25554128,
-        'score': 9.8,
+        'total_num': 1245741,
+        'score': 9.3,
         'status': 2, // 状态1：连载、2：完结
         'update_time': 1589887254,
         'category_name': ['仙侠', '传奇'],
@@ -77,7 +107,7 @@ List categoryNameData = [
       {
         'id': 2,
         'bookname': '射雕英雄传',
-        'category_id': 3,
+        'category_id': 4,
         'author': '金庸',
         'activity_count': 200,
         'total_num': 88884111,
@@ -112,12 +142,12 @@ List categoryNameData = [
     'category_list': [
       [
         {'id': 0, 'name': '全部'},
-        {'id': 1, 'name': '现代言情'},
-        {'id': 2, 'name': '古代言情'},
-        {'id': 3, 'name': '浪漫言情'},
-        {'id': 4, 'name': '玄幻言情'},
-        {'id': 5, 'name': '仙侠奇缘'},
-        {'id': 6, 'name': 'N次元'},
+        {'id': 12, 'name': '现代言情'},
+        {'id': 85, 'name': '古代言情'},
+        {'id': 16, 'name': '浪漫言情'},
+        {'id': 28, 'name': '玄幻言情'},
+        {'id': 34, 'name': '仙侠奇缘'},
+        {'id': 19, 'name': 'N次元'},
       ],
       [
         
@@ -141,11 +171,11 @@ List categoryNameData = [
       {
         'id': 3,
         'bookname': '倚天屠龙记',
-        'category_id': 3,
+        'category_id': 16,
         'author': '金庸',
         'activity_count': 80,
         'total_num': 25554120,
-        'score': 9.8,
+        'score': 9.0,
         'status': 2, // 状态1：连载、2：完结
         'update_time': 1589957222,
         'category_name': ['仙侠', '传奇'],
@@ -156,12 +186,12 @@ List categoryNameData = [
       },
       {
         'id': 1,
-        'category_id': 2,
+        'category_id': 28,
         'bookname': '神医',
         'author': '佚名',
         'activity_count': 100,
         'total_num': 1205444,
-        'score': 9.8,
+        'score': 8.1,
         'status': 1, // 状态1：连载、2：完结
         'update_time': 1589857222,
         'category_name': ['玄幻', '传奇'],
@@ -171,7 +201,7 @@ List categoryNameData = [
       },
       {
         'id': 1,
-        'category_id': 2,
+        'category_id': 85,
         'bookname': '神医',
         'author': '佚名',
         'activity_count': 100,
@@ -187,11 +217,11 @@ List categoryNameData = [
       {
         'id': 1,
         'bookname': '神雕侠侣',
-        'category_id': 3,
+        'category_id': 12,
         'author': '金庸',
         'activity_count': 1000,
         'total_num': 2555412,
-        'score': 9.8,
+        'score': 9.7,
         'status': 2, // 状态1：连载、2：完结
         'update_time': 1589887254,
         'category_name': ['仙侠', '传奇'],
@@ -202,7 +232,7 @@ List categoryNameData = [
       {
         'id': 2,
         'bookname': '射雕英雄传',
-        'category_id': 3,
+        'category_id': 12,
         'author': '金庸',
         'activity_count': 200,
         'total_num': 88884111,
@@ -215,7 +245,38 @@ List categoryNameData = [
         'desc':
             '南宋末年，金兵入侵，朝廷奸臣当道。全真派丘处机因杀死汉奸王道乾，被官兵追杀，逃到江南一个小村牛家庄，与隐居在此处的爱国义土郭啸天和杨铁心一见如故，以“靖、康”为他俩即将出生的孩子命名，并留下一对短剑作为信物'
       },
-      
+      {
+        'id': 2,
+        'bookname': '射雕英雄传19',
+        'category_id': 19,
+        'author': '金庸',
+        'activity_count': 200,
+        'total_num': 1024184,
+        'score': 9.0,
+        'status': 2, // 状态1：连载、2：完结
+        'update_time': 1589807222,
+        'category_name': ['仙侠', '传奇'],
+        'image':
+            'https://img3.doubanio.com/view/subject/s/public/s28267663.jpg',
+        'desc':
+            '南宋末年，金兵入侵，朝廷奸臣当道。全真派丘处机因杀死汉奸王道乾，被官兵追杀，逃到江南一个小村牛家庄，与隐居在此处的爱国义土郭啸天和杨铁心一见如故，以“靖、康”为他俩即将出生的孩子命名，并留下一对短剑作为信物'
+      },
+      {
+        'id': 2,
+        'bookname': '射雕英雄传34',
+        'category_id': 34,
+        'author': '金庸',
+        'activity_count': 200,
+        'total_num': 124874,
+        'score': 9.0,
+        'status': 2, // 状态1：连载、2：完结
+        'update_time': 1589807222,
+        'category_name': ['仙侠', '传奇'],
+        'image':
+            'https://img3.doubanio.com/view/subject/s/public/s28267663.jpg',
+        'desc':
+            '南宋末年，金兵入侵，朝廷奸臣当道。全真派丘处机因杀死汉奸王道乾，被官兵追杀，逃到江南一个小村牛家庄，与隐居在此处的爱国义土郭啸天和杨铁心一见如故，以“靖、康”为他俩即将出生的孩子命名，并留下一对短剑作为信物'
+      },
     ]
   }
 ];

@@ -7,13 +7,18 @@
  *
  * @see         分类-主页
 */
-import 'package:fiction/app/pages/category/category_content.dart';
+
+import 'package:fiction/app/pages/category/category_btns_widget.dart';
+import 'package:fiction/providers/categoryProvider.dart';
 import 'package:fiction/res/categoryNameData.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
 
 import 'package:fiction/app/ad/Tabsad.dart';
+import 'package:provider/provider.dart';
+
+import 'category_book_content.dart';
 
 class CategoryPage extends StatefulWidget {
 
@@ -32,6 +37,12 @@ class _CategoryPageState extends State<CategoryPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();    
   }
 
   @override
@@ -78,13 +89,57 @@ class _CategoryPageState extends State<CategoryPage>
           TabBarView(
             controller: _tabController,
             children: <Widget>[
-              CategoryContent(data:_boyCategoryNameData),
-              CategoryContent(data:_girlCategoryNameData),
+              ChangeNotifierProvider(
+                create: (context) => CategoryProvider(_boyCategoryNameData),
+                child: CategoryContent(data:_boyCategoryNameData),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => CategoryProvider(_girlCategoryNameData),
+                child: CategoryContent(data:_girlCategoryNameData),
+              ),
             ],
           ),
           TabsAd()
         ]
       ),
+    );
+  }
+}
+
+class CategoryContent extends StatefulWidget {
+  final Map data;
+  CategoryContent({Key key, this.data});
+
+  @override
+  _CategoryContentState createState() => _CategoryContentState();
+}
+
+class _CategoryContentState extends State<CategoryContent>
+    with PixelSize, AutomaticKeepAliveClientMixin {
+    List _booksData = List();
+    List _categoryNameData = List();
+
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    super.initState();
+    _categoryNameData = widget.data['category_list'];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    CategoryProvider provider = Provider.of<CategoryProvider>(context);
+    _booksData = provider.booksList;
+    return SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            CategoryBtnsWidget(data: _categoryNameData, provider: provider,),
+            CategoryBookContent(data: _booksData)
+          ],
+        )
     );
   }
 }

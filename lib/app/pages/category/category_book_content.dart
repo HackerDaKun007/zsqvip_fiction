@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
 
+
 class CategoryBookContent extends StatefulWidget {
   final List data;
   CategoryBookContent({this.data});
@@ -25,7 +26,7 @@ class _CategoryBookContentState extends State<CategoryBookContent> with PixelSiz
   Widget _buildBookWidget(data) {
     num totalNum = (data['total_num'] / 10000).round();
     return Container(
-        width: Config.width,
+        width: getWidth(context),
         height: getPixe(90, context),
         margin: EdgeInsets.only(bottom: getPixe(20, context)),
         padding: EdgeInsets.only(left: getPixe(10, context)),
@@ -101,7 +102,7 @@ class _CategoryBookContentState extends State<CategoryBookContent> with PixelSiz
 
   Widget _getCategoryWidget({String name}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: getPixe(5, context)),
+      padding: EdgeInsets.symmetric(horizontal: getPixe(5, context),vertical: getPixe(1, context)),
       decoration: BoxDecoration(
           border: Border.all(width: getPixe(0.5, context), color: Colors.grey[400]),
           borderRadius: BorderRadius.circular(2)),
@@ -126,10 +127,12 @@ class _CategoryBookContentState extends State<CategoryBookContent> with PixelSiz
     return Container(
       width: Config.width,
       padding: EdgeInsets.all(getPixe(10, context)),
-      child: Column(
+      child: widget.data.isNotEmpty
+       ? Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: _getListItem(widget.data)
-      ),
+      )
+      : Prompt('此分类暂无您想看的书籍', topMargin: 10,),
     );
   }
 }
