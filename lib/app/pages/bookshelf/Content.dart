@@ -164,7 +164,7 @@ class _ContentState extends State<Content> with PixelSize {
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: getPixe(12, context)),
+                            fontSize: getPixe(14, context)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),

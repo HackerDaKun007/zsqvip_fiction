@@ -316,7 +316,7 @@ class RecommendedContent extends StatelessWidget with PixelSize {
                     return Center(
                       child: Text(list[index]['title'],
                           style: TextStyle(
-                            fontSize: getPixe(13, context),
+                            fontSize: getPixe(14, context),
                             color: Color(0x99333333),
                           ),
                           maxLines: 1,

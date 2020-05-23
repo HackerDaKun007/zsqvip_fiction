@@ -11,10 +11,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:fiction/route/route.dart'; //路由文件
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart'; //国际包
 
 import 'package:provider/provider.dart'; //provider
-
 //大坤配置_provider
 import 'package:fiction/providers/readTime.dart'; //阅读时间
 
