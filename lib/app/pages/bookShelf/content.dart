@@ -10,7 +10,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
-import 'package:fiction/res/listData.dart';
+
+
+import 'package:fiction/providers/bookShelf.dart'; //书架数据
+import 'package:provider/provider.dart';
 
 class Content extends StatefulWidget {
   final getOut;
@@ -22,55 +25,66 @@ class Content extends StatefulWidget {
 
 class _ContentState extends State<Content> with PixelSize {
 
-  //添加书架
-  void getAddListData() {
-    listData.add({
-      "title": '',
-      "author": '',
-      "imageUrl": 'images/jia.png',
-      "system": 1,
-    });
-  }
+  // List<Map> listData = [{
+  //     "title": '',
+  //     "author": '',
+  //     "imageUrl": 'images/jia.png',
+  //     "system": 1,
+  //   }];
+  var providerListData;
   
   @override
   void initState() {
     super.initState();
-
+    
   }
   Widget build(BuildContext context) {
+
+    //数据管理状态
+    this.providerListData = Provider.of<BookShelfProviders>(context);
+    // providerListData.data.addAll();
+
     //过滤数据第一个,删除系统追加
-    if (listData.length > 1 && listData[0]['system'] == 1) {
-      listData.removeAt(0);
-    }
+    // if (providerListData.data.length > 1 && listData[0]['system'] == 1) {
+    //   providerListData.data.removeAt(0);
+    // }
     //添加一项追加数据
-    if (listData.length == 0) {
-      this.getAddListData();
-    } else if (listData[(listData.length - 1)]['system'] == null) {
-      this.getAddListData();
-    }
+    // if (providerListData.data.length <= 0) {
+    //   this.getAddListData();
+    // } else if (listData[0]['system'] == null) {
+    //   this.getAddListData();
+    // }
 
     return Padding(
       padding: EdgeInsets.all(10),
-      child: GridView.builder(
+      child: GridView.count(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, //控制一行多个
-          crossAxisSpacing: 10.0, //左右距离
-          mainAxisSpacing: 10.0, //上下距离
-          childAspectRatio: 0.63, //子级的高度、宽度的比例
-        ),
-        itemCount: listData.length,
-        itemBuilder: this._getListData,
+        // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //   crossAxisCount: 3, //控制一行多个
+        //   crossAxisSpacing: 10.0, //左右距离
+        //   mainAxisSpacing: 10.0, //上下距离
+        //   childAspectRatio: 0.63, //子级的高度、宽度的比例
+        // ),
+        // itemCount: providerListData.data.length,
+        // itemBuilder: _getListData(),
+        crossAxisCount: 3, //控制一行多个
+        crossAxisSpacing: 10.0, //左右距离
+        mainAxisSpacing: 10.0, //上下距离
+        childAspectRatio: 0.63, //子级的高度、宽度的比例
+        children: _getListData(),
       ),
     );
   }
 
 
-   Widget _getListData(context, index) {
-    int dataLength = (listData.length - 1);
-    if (index == dataLength) {
-      return Container(
+  List<Widget> _getListData() {
+   List<Widget> dataList = [];
+   int let = (providerListData.data.length-1);
+   
+   for (int i=let; i >= 0; i--) {
+     if (i == 0) {
+       dataList.add(Container(
         child: GestureDetector(
           child: Column(
             children: <Widget>[
@@ -80,13 +94,13 @@ class _ContentState extends State<Content> with PixelSize {
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Image.asset(
-                  listData[index]['imageUrl'],
+                  providerListData.data[i]['imageUrl'],
                 ),
               ),
               Container(
                 padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                 child: Text(
-                  listData[index]['title'],
+                  providerListData.data[i]['title'],
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black, fontSize: getPixe(12, context)),
@@ -101,12 +115,11 @@ class _ContentState extends State<Content> with PixelSize {
             widget.getOut(1);
           },
         ),
-      );
-    } else {
-      //验证是否更新，并且是否点击查看过
-      _isUpdate() {
-        if (listData[index]['click'] == 0 &&
-            listData[index]['chapter'] > listData[index]['watched_chapter'] && listData[index]['ad'] == 0) {
+      ));
+     } else {
+       _isUpdate() {
+        if (providerListData.data[i]['click'] == 0 &&
+            providerListData.data[i]['chapter'] > providerListData.data[i]['watched_chapter'] && providerListData.data[i]['ad'] == 0) {
           return Positioned(
             top: getPixe(10, context),
             left: 0,
@@ -127,8 +140,7 @@ class _ContentState extends State<Content> with PixelSize {
           return Text('');
         }
       }
-
-      return Container(
+      dataList.add(Container(
         child: GestureDetector(
           child: Column(
             children: <Widget>[
@@ -140,7 +152,7 @@ class _ContentState extends State<Content> with PixelSize {
                 child: Stack(
                   children: <Widget>[
                     Image.network(
-                      listData[index]['imageUrl'],
+                      providerListData.data[i]['imageUrl'],
                     ),
                     _isUpdate(),
                   ],
@@ -151,7 +163,7 @@ class _ContentState extends State<Content> with PixelSize {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      listData[index]['ad'] == 1 ? "[广告]" : "",
+                      providerListData.data[i]['ad'] == 1 ? "[广告]" : "",
                       style: TextStyle(
                         color: Color(0x99C9C9C9),
                         fontSize: getPixe(9, context),
@@ -160,7 +172,7 @@ class _ContentState extends State<Content> with PixelSize {
                     Expanded(
                       flex: 1,
                       child: Text(
-                        listData[index]['title'],
+                        providerListData.data[i]['title'],
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             color: Colors.black,
@@ -175,7 +187,7 @@ class _ContentState extends State<Content> with PixelSize {
             ],
           ),
           onTap: () {
-            if (listData[index]['ad'] == 1) {
+            if (providerListData.data[i]['ad'] == 1) {
               print('广告');
             } else {
               // print(listData[index]['title']);
@@ -183,11 +195,14 @@ class _ContentState extends State<Content> with PixelSize {
               // setState(() {
               //   listData[index]['click'] = 1;
               // });
+              providerListData.data.displayUpdate(i);
               Navigator.pushNamed(context, '/present');
             }
           },
         ),
-      );
-    }
+      ));
+     }
+   }
+   return dataList;
   }
 }

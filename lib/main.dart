@@ -16,6 +16,8 @@ import 'package:flutter_localizations/flutter_localizations.dart'; //国际包
 import 'package:provider/provider.dart'; //provider
 //大坤配置_provider
 import 'package:fiction/providers/readTime.dart'; //阅读时间
+import 'package:fiction/providers/bookShelf.dart';//书架数据
+import 'package:fiction/providers/recordingData.dart'; //阅读记录数据
 
 //Yuri_provider
 
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ReadTimeProvider()), //阅读时间
+        ChangeNotifierProvider(create: (_) => BookShelfProviders()), //书架数据
+        ChangeNotifierProvider(create: (_) => RecordingDataProviders()), //阅读记录
       ],
       child: MaterialApp(
         //配置国际中文
