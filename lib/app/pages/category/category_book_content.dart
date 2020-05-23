@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
 
+
 class CategoryBookContent extends StatefulWidget {
   final List data;
   CategoryBookContent({this.data});
@@ -126,10 +127,12 @@ class _CategoryBookContentState extends State<CategoryBookContent> with PixelSiz
     return Container(
       width: Config.width,
       padding: EdgeInsets.all(getPixe(10, context)),
-      child: Column(
+      child: widget.data.isNotEmpty
+       ? Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: _getListItem(widget.data)
-      ),
+      )
+      : Prompt('此分类暂无您想看的书籍', topMargin: 10,),
     );
   }
 }

@@ -94,7 +94,7 @@ class _CategoryPageState extends State<CategoryPage>
                 child: CategoryContent(data:_boyCategoryNameData),
               ),
               ChangeNotifierProvider(
-                create: (context) => CategoryProvider(_boyCategoryNameData),
+                create: (context) => CategoryProvider(_girlCategoryNameData),
                 child: CategoryContent(data:_girlCategoryNameData),
               ),
             ],
