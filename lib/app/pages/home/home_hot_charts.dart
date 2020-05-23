@@ -13,6 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 import 'package:fiction/res/todayHotChartsData.dart';
 
+import '../../../public/public.dart';
+import '../../../public/public.dart';
+
 
 /// 今日热榜
 class HotChartsWidget extends StatefulWidget {
@@ -20,13 +23,21 @@ class HotChartsWidget extends StatefulWidget {
   _HotChartsWidgetState createState() => _HotChartsWidgetState();
 }
 
-class _HotChartsWidgetState extends State<HotChartsWidget> with SingleTickerProviderStateMixin{
+class _HotChartsWidgetState extends State<HotChartsWidget> with SingleTickerProviderStateMixin, PixelSize{
   TabController _tabController;
-  double rpx = Config.width / 750;
+  double rpx;
+  double screenWidth;
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);    
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
   }
 
   List _hotChartsData = todayHotChartsData;
@@ -64,8 +75,10 @@ class _HotChartsWidgetState extends State<HotChartsWidget> with SingleTickerProv
   
   @override
   Widget build(BuildContext context) {
+    screenWidth = getWidth(context);
+    rpx = screenWidth / 750;
     return Container(
-        width: Config.width,
+        width: screenWidth,
         height: 500 * rpx,
         margin: EdgeInsets.all(20 * rpx),
         child: Column(
@@ -125,9 +138,10 @@ class HotChartsTabView extends StatefulWidget {
 }
 
 class _HotChartsTabViewState extends State<HotChartsTabView>
-    with AutomaticKeepAliveClientMixin {
-  double rpx = Config.width /750;
+    with AutomaticKeepAliveClientMixin, PixelSize {
 
+  double rpx;
+  double screenWidth;
   @override
   bool get wantKeepAlive => true;
 
@@ -165,7 +179,7 @@ class _HotChartsTabViewState extends State<HotChartsTabView>
     return InkWell(
       onTap: () {},
       child: Container(
-        width: Config.width / 2 - (50 * rpx),
+        width: screenWidth / 2 - (50 * rpx),
         child: Row(
           children: <Widget>[
             isLeftNum
@@ -218,8 +232,10 @@ class _HotChartsTabViewState extends State<HotChartsTabView>
 
   @override
   Widget build(BuildContext context) {
+    screenWidth = getWidth(context);
+    rpx = screenWidth / 750;
     return Container(
-      width: Config.width,
+      width: screenWidth,
       padding: EdgeInsets.symmetric(horizontal: 10 * rpx),
       child: Wrap(
         verticalDirection: VerticalDirection.down,
