@@ -11,13 +11,20 @@ import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
 import 'package:fiction/app/readTime/readTime.dart'; //阅读时间
+import 'package:fiction/app/ad/Tabsad.dart';
 
-class MyPage extends StatelessWidget {
+
+class MyPage extends StatelessWidget with PixelSize{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff7f7f7),
-      body: SingleChildScrollView(child: MineBody()),
+      body: Stack(
+        children: [
+          SingleChildScrollView(child: MineBody()),
+          TabsAd()
+        ]
+      ),
     );
   }
 }
@@ -27,12 +34,12 @@ class MineBody extends StatefulWidget {
   _MineBodyState createState() => _MineBodyState();
 }
 
-class _MineBodyState extends State<MineBody> {
+class _MineBodyState extends State<MineBody> with PixelSize{
   double rpx;
 
   @override
   Widget build(BuildContext context) {
-    rpx = MediaQuery.of(context).size.width / 750;
+    rpx = getWidth(context) / 750;
     return Container(
         child: Column(
       children: <Widget>[
@@ -41,7 +48,8 @@ class _MineBodyState extends State<MineBody> {
           children: <Widget>[_serviceListWiget(), _helpListWidget()],
         )
       ],
-    ));
+    )
+    );
   }
 
   /// 顶部内容
@@ -167,6 +175,9 @@ class _MineBodyState extends State<MineBody> {
           _getListItem(
             title: '阅读记录',
             icon: Icons.access_time,
+            callback: () {
+              Navigator.pushNamed(context, '/recording');
+            }
           ),
         ],
       ),

@@ -144,6 +144,13 @@ class BookShelfProviders with ChangeNotifier{
   addData(Map value) {
     // this._listData.removeAt((this._listData.length - 1));
     this._listData.add(value);
+    // initEdit();
+    this._data.add(value);
+    this._dataActionData.add(value['id']);
+    //存储颜色
+    this._dataColor.add({'id': value['id'], 'color': 0xff9e9e9e});
+    this._dataColorBack.add({'id': value['id'], 'color': 0xff9e9e9e});
+    this._dataColorBackAction.add({'id': value['id'], 'color': 0xff42a5f5});
     notifyListeners();
   }
 

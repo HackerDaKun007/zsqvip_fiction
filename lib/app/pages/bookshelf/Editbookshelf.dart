@@ -28,19 +28,7 @@ class EditBookShelf extends StatefulWidget {
 class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
   var bounced = Bounced(); //配置弹出层
 
-  // List _data = new List(); //数据
-  // List _dataAction = new List(); //保存选中数据坐标key
-  // List _dataActionData = new List(); //备份存储保存选中数据坐标key
-
-  // List _dataColor = new List(); //颜色
-  // List _dataColorBack = new List(); //备份未选中颜色 - 取消
-  // List _dataColorBackAction = new List(); //备份选中颜色 - 全部
-
-  //广告
-  List _adData = List();
   var providerListData;
-  // var _deleteColos = Colors.blue[100]; //删除默认颜色
-  // var _deleteColos = Config.color;
 
   @override
   void initState() {
@@ -112,7 +100,11 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
                   ),
                 ),
                 onTap: () {
-                  providerListData.editDel();
+                  bounced.confirm('提示', '确定要删除么？', context).then((value) {
+                    if (value) {
+                      providerListData.editDel();
+                    }
+                  });
                 },
               ),
             ),
@@ -162,17 +154,14 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
   //是否展示内容
   Widget _getData() {
     if (providerListData.editData.length > 0) {
-    var gridView = GridView.builder(
+    var gridView = GridView.count(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, //控制一行多个
-        crossAxisSpacing: 10.0, //左右距离
-        mainAxisSpacing: 10.0, //上下距离
-        childAspectRatio: 0.63, //子级的高度、宽度的比例
-      ),
-      itemCount: providerListData.editData.length,
-      itemBuilder: _getListData,
+      crossAxisCount: 3, //控制一行多个
+      crossAxisSpacing: 10.0, //左右距离
+      mainAxisSpacing: 10.0, //上下距离
+      childAspectRatio: 0.63, //子级的高度、宽度的比例
+      children: _getListData(),
       // itemBuilder: 
     );
     return Padding(
@@ -183,8 +172,11 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
       return Prompt('暂无任何书架可编辑');
     }
   }
-  Widget _getListData(context, index) {
-    return Container(
+  List<Widget> _getListData() {
+    List<Widget> listData = [];
+    int let = (providerListData.editData.length-1);
+    for (int i=let; i >= 0; i--) {
+      listData.add(Container(
       child: GestureDetector(
         child: Column(
           children: <Widget>[
@@ -196,7 +188,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
               child: Stack(
                 children: <Widget>[
                   Image.network(
-                    providerListData.editData[index]['imageUrl'],
+                    providerListData.editData[i]['imageUrl'],
                   ),
                   Positioned(
                     top: getPixe(7, context),
@@ -204,7 +196,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
                     child: Icon(
                       Icons.check_circle,
                       size: getPixe(22, context),
-                      color: Color(providerListData.dataColor[index]['color']),
+                      color: Color(providerListData.dataColor[i]['color']),
                     ),
                   ),
                 ],
@@ -217,7 +209,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      providerListData.editData[index]['title'],
+                      providerListData.editData[i]['title'],
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           color: Colors.black, fontSize: getPixe(12, context)),
@@ -231,10 +223,11 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
           ],
         ),
         onTap: () {
-          providerListData.editAction(index);
+          providerListData.editAction(i);
         },
       ),
-    );
-    // }
+    ));
+    }
+    return listData;
   }
 }
