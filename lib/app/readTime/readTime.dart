@@ -8,7 +8,7 @@
  * @see        阅读时间
 */
 import 'package:flutter/material.dart';
-import 'package:fiction/provider/readTime.dart'; //阅读时间
+import 'package:fiction/providers/readTime.dart'; //阅读时间
 import 'package:provider/provider.dart';
 
 class ReadTime extends StatefulWidget {

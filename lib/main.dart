@@ -14,7 +14,11 @@ import 'package:fiction/route/route.dart'; //路由文件
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:provider/provider.dart'; //provider
-import 'package:fiction/provider/config.dart'; //provider配置文件
+
+//大坤配置_provider
+import 'package:fiction/providers/readTime.dart'; //阅读时间
+
+//Yuri_provider
 
 void main() => runApp(MyApp());
 
@@ -23,7 +27,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: provider,
+      providers: [
+        ChangeNotifierProvider(create: (_) => ReadTimeProvider()), //阅读时间
+      ],
       child: MaterialApp(
         //配置国际中文
         localizationsDelegates: [
