@@ -10,6 +10,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
+import 'package:fiction/app/readTime/readTime.dart'; //阅读时间
 
 class MyPage extends StatelessWidget {
   @override
@@ -104,7 +105,8 @@ class _MineBodyState extends State<MineBody> {
                 // _getHeaderRowListItem(title: '卡券', countNum: 5, isNav: true),
                 _getHeaderRowListItem(
                   title: '今日已读(分钟)',
-                  countNum: Path.minute,
+                  // countNum: Path.minute,
+                  countNum: 10,
                 ),
               ],
             ),

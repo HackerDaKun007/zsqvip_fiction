@@ -178,11 +178,12 @@ class _ContentState extends State<Content> with PixelSize {
             if (listData[index]['ad'] == 1) {
               print('广告');
             } else {
-              print(listData[index]['title']);
-              print(123);
-              setState(() {
-                listData[index]['click'] = 1;
-              });
+              // print(listData[index]['title']);
+              // print(123);
+              // setState(() {
+              //   listData[index]['click'] = 1;
+              // });
+              Navigator.pushNamed(context, '/present');
             }
           },
         ),

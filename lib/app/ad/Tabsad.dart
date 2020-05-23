@@ -30,7 +30,7 @@ class _TabsAdState extends State<TabsAd> with PixelSize {
         height: getPixe(60, context),
         child: GestureDetector(
           child: Center(
-            child: Text('${_num}', style: TextStyle(
+            child: Text("$_num", style: TextStyle(
               color: Colors.red,
             ),),
           ),

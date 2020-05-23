@@ -17,6 +17,8 @@ import 'package:fiction/public/public.dart';
 import 'package:fiction/app/pages/bookShelf/columnleft.dart'; //顶部左边导航
 import 'package:fiction/app/pages/bookShelf/content.dart'; //内容模块
 import 'package:fiction/app/ad/tabsAd.dart'; //底部广告位置
+import 'package:fiction/app/readTime/readTime.dart'; //阅读时间
+
 
 //阅读分钟
 // int Path.minute = 0;
@@ -72,7 +74,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
               children: <Widget>[
                 this._readTime(),
                 //推荐内容
-                this._recommendedContent(),
+                RecommendedContent(),
                 //列表内容
                 Content(getOut: (number) => _getOut()),
               ],
@@ -111,10 +113,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                       Padding(
                         padding:
                             EdgeInsets.fromLTRB(0, getPixe(100, context), 0, 0),
-                        child: Text(
-                          '${Path.minute}',
-                          style: TextStyle(fontSize: getPixe(50, context)),
-                        ),
+                        child: ReadTime(style: TextStyle(fontSize: getPixe(50, context)),),
                       ),
                       Text(
                         '今日已读 / 分钟',
@@ -263,15 +262,23 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   }
 
 
-  //推荐内容
-  Widget _recommendedContent() {
-    List<Map> list = [
+  //修改父级组件
+  void _getOut() {
+    widget.getCurrenIndex(1);
+  }
+}
+
+//推荐内容
+class RecommendedContent extends StatelessWidget with PixelSize {
+  List<Map> list = [
       {"title": "我把你当兄弟你居然想上我？", "id": 1},
       {"title": "穿越异界，成为一代邪君！", "id": 2},
       {"title": "守护我方轩宇，千秋在线刚枪", "id": 3},
       {"title": "守护我方轩宇，千秋在线刚枪", "id": 4},
       {"title": "最强斗神重生复活，再战丧尸末世", "id": 5},
     ];
+  @override
+  Widget build(BuildContext context) {
     return Container(
       child: Row(
         children: <Widget>[
@@ -347,10 +354,5 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
       margin: EdgeInsets.fromLTRB(
           getPixe(25, context), 0, getPixe(25, context), getPixe(10, context)),
     );
-  }
-
-  //修改父级组件
-  void _getOut() {
-    widget.getCurrenIndex(1);
   }
 }
