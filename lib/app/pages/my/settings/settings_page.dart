@@ -70,7 +70,7 @@ class SettingsPage extends StatelessWidget with PixelSize {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Iconfont.zuo),
-          iconSize: getPixe(30, context),
+          iconSize: getPixe(26, context),
           onPressed: () {
             Navigator.pop(context);
           },
