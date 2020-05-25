@@ -1,4 +1,5 @@
 import 'package:fiction/public/public.dart';
+import 'package:fiction/res/guessYouLikeData.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
@@ -203,53 +204,6 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
     );
   }
 
-  /// 推荐
-  Widget _buildRecommend() {
-    return Container(
-      margin: EdgeInsets.only(bottom: getPixe(20, context)),
-      height: getPixe(500, context),
-      color: Colors.grey,
-      child: Column(
-        children: <Widget>[
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Text(
-                  '编辑推荐',
-                  style: TextStyle(
-                      fontSize: getPixe(20, context), fontWeight: FontWeight.w500),
-                ),
-                Container(
-                    padding: EdgeInsets.only(right: getPixe(10, context)),
-                    child: InkWell(
-                      onTap: () {
-                        // _shuffleContent();
-                      },
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            '换一批',
-                            style: TextStyle(
-                                color: Colors.black45, fontSize: getPixe(14, context)),
-                          ),
-                          SizedBox(
-                            width: getPixe(5, context),
-                          ),
-                          Icon(
-                            Icons.loop,
-                            size: getPixe(16, context),
-                            color: Colors.grey[400],
-                          )
-                        ],
-                      ),
-                    ))
-              ],
-            ),
-        ],
-      ),
-    );
-  } 
 
   @override
   Widget build(BuildContext context) {
@@ -266,7 +220,7 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
                     children: <Widget>[
                       PageHeader(data: _data,),
                       _buildNovelDesc(),
-                      _buildRecommend(),
+                      Recommend(),
                     ],
                   ),
                 ),
@@ -373,6 +327,78 @@ class PageHeader extends StatelessWidget with PixelSize{
       child: BackdropFilter(
         filter: ui.ImageFilter.blur(sigmaX: 20, sigmaY: 20),
         child: _buildHeaderContent(context)
+      ),
+    );
+  }
+}
+
+
+
+class Recommend extends StatefulWidget {
+  @override
+  _RecommendState createState() => _RecommendState();
+}
+
+class _RecommendState extends State<Recommend> with PixelSize {
+  List<Map> _listData = guessYouLikeData;
+
+  @override
+  void initState() {
+    super.initState();
+    _listData.shuffle();
+  }
+
+  /// 换一换
+  _shuffleContent() {
+    setState(() {
+      _listData.shuffle();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+     return Container(
+      margin: EdgeInsets.only(bottom: getPixe(20, context)),
+      height: getPixe(500, context),
+      color: Colors.grey,
+      child: Column(
+        children: <Widget>[
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  '编辑推荐',
+                  style: TextStyle(
+                      fontSize: getPixe(20, context), fontWeight: FontWeight.w500),
+                ),
+                Container(
+                    padding: EdgeInsets.only(right: getPixe(10, context)),
+                    child: InkWell(
+                      onTap: () {
+                        _shuffleContent();
+                      },
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            '换一换',
+                            style: TextStyle(
+                                color: Colors.black45, fontSize: getPixe(14, context)),
+                          ),
+                          SizedBox(
+                            width: getPixe(5, context),
+                          ),
+                          Icon(
+                            Icons.loop,
+                            size: getPixe(16, context),
+                            color: Colors.grey[400],
+                          )
+                        ],
+                      ),
+                    ))
+              ],
+            ),
+        ],
       ),
     );
   }
