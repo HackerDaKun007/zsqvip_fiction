@@ -12,12 +12,10 @@ import 'package:fiction/public/public.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiction/res/booklistData.dart';
-import 'package:flutter/services.dart';
 
 class BookListDetail extends StatefulWidget {
   final arguments;
   BookListDetail({this.arguments});
-
   @override
   _BookListDetailState createState() => _BookListDetailState();
 }
@@ -84,8 +82,7 @@ class _BookListDetailState extends State<BookListDetail> with PixelSize {
                         width: 10 * rpx,
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 6 * rpx, vertical: 1 * rpx),
+                        padding: EdgeInsets.symmetric(horizontal: 6 * rpx, vertical: 1*rpx),
                         decoration: BoxDecoration(
                             border: Border.all(
                                 width: 1 * rpx, color: Colors.blue[100]),
@@ -116,38 +113,36 @@ class _BookListDetailState extends State<BookListDetail> with PixelSize {
   @override
   Widget build(BuildContext context) {
     rpx = MediaQuery.of(context).size.width / 750;
-    return AnnotatedRegion(
-      value: SystemUiOverlayStyle.light,
-      child: Scaffold(
-          body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-              pinned: true,
-              floating: true,
-              expandedHeight: 350 * rpx,
-              elevation: 0,
-              leading: IconButton(
-                icon: Icon(Iconfont.zuo),
-                iconSize: getPixe(26, context),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+    return Scaffold(
+        body: CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+            pinned: true,
+            floating: true,
+            expandedHeight: 350 * rpx,
+            elevation: 0,
+            leading: IconButton(
+              icon: Icon(Iconfont.zuo),
+              iconSize: getPixe(26, context),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(
+                _data['title'],
+                style: TextStyle(),
               ),
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text(
-                  _data['title'],
-                ),
-                background: Image.network(
-                  _data['image'],
-                  fit: BoxFit.fitWidth,
-                ),
-              )),
-          SliverPadding(
-            padding: EdgeInsets.all(40 * rpx),
-            sliver: _listViewWidget(),
-          )
-        ],
-      ))
-    );
+              background: Image.network(
+                _data['image'],
+                fit: BoxFit.fitWidth,
+              ),
+            )),
+        SliverPadding(
+          padding: EdgeInsets.all(40 * rpx),
+          sliver: _listViewWidget(),
+        )
+      ],
+    ));
   }
 }

@@ -15,6 +15,8 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
   },
   {
     'id': 2,
@@ -33,6 +35,9 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 451271,
+    'desc_word': ['神医流', '桃花']
+
   },
   {
     'id': 3,
@@ -51,6 +56,9 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 2484211,
+    'desc_word': ['神医流', '桃花']
+
   },
   {
     'id': 4,
@@ -69,6 +77,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 0,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 5,
@@ -87,6 +99,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 6,
@@ -105,6 +121,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 7,
@@ -123,6 +143,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 0,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 8,
@@ -141,6 +165,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 0,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 9,
@@ -159,6 +187,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '一',
     'read_chapter_title':'介绍漫画',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 10,
@@ -177,6 +209,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 11,
@@ -195,6 +231,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 12,
@@ -213,6 +253,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   
 
@@ -234,6 +278,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 14,
@@ -252,6 +300,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 15,
@@ -270,6 +322,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 16,
@@ -288,6 +344,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 17,
@@ -306,6 +366,10 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
   {
     'id': 18,
@@ -324,5 +388,9 @@ List<Map> guessYouLikeData = [
     'read_chapter': '三',
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
+    'total_num': 215484,
+    'desc_word': ['神医流', '桃花']
+
+    
   },
 ];
