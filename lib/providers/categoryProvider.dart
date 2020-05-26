@@ -25,7 +25,11 @@ class CategoryProvider extends ChangeNotifier {
     categorydata = this.data['category_list'];
     booksData = this.data['books'];
     booksList = booksData;
+    _initData();
+  }
 
+  /// 初始化数据
+  _initData() {
     List.generate(categorydata.length, (index) => selectIndexs.add(0));
 
     List.generate(categorydata.length, (index) => statusList.add([]));
@@ -44,6 +48,7 @@ class CategoryProvider extends ChangeNotifier {
       });
     }
   }
+
 
   setBtnStatus(index, parentIndex) {
     if (selectIndexs[parentIndex] == index) return;
