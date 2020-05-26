@@ -24,9 +24,18 @@ class _InternetState extends State<Internet> with PixelSize {
   var subscription;
   String stateText;
   bool isInternet = true;
-  Widget centent;
-  
-  _InternetState(this.centent) {
+  Widget centent; //内容值
+
+  _InternetState(this.centent);
+
+  @override
+  dispose() {
+    super.dispose();
+    subscription.cancel();  //注意,销毁内存
+  }
+
+  void initState() {
+    super.initState();
     subscription = Connectivity()
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
@@ -49,12 +58,6 @@ class _InternetState extends State<Internet> with PixelSize {
     });
   }
 
-  @override
-  dispose() {
-    super.dispose();
-    subscription.cancel();  //注意,销毁内存
-  }
-
   Widget build(BuildContext context) {
     return init(this.centent);
   }
@@ -69,8 +72,8 @@ class _InternetState extends State<Internet> with PixelSize {
           children: <Widget>[
             Container(
               margin: EdgeInsets.fromLTRB(
-                  0, getPixe(20, context), 0, getPixe(10, context)),
-              height: getPixe(150, context),
+                  0, getPixe(220, context), 0, getPixe(10, context)),
+              height: getPixe(80, context),
               child: Image.asset('images/internet.png', fit: BoxFit.fill),
             ),
             Text(
