@@ -9,7 +9,6 @@
 */
 
 import 'package:flutter/cupertino.dart';
-import 'package:fiction/public/public.dart';
 
 class PixelSize {
   // var win = window.physicalSize; //获取屏幕
@@ -23,10 +22,8 @@ class PixelSize {
     int defaultValue = 750;
     if (width == 0.0) {
       width = getMediaQuery(context).size.width;
-      Config.width = width;
-      // print(Config.width);
     }
-    return (number * 1.83) * (Config.width / defaultValue);
+    return (number * 1.83) * (getWidth(context)/ defaultValue);
   }
 
   //返回当前屏幕高度

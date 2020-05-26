@@ -94,7 +94,7 @@ class HomePage extends StatelessWidget with PixelSize {
   }
 }
 
-class HomeBody extends StatelessWidget {
+class HomeBody extends StatelessWidget with PixelSize{
   final getCurrenIndex;
   HomeBody({this.getCurrenIndex});
 
@@ -103,11 +103,14 @@ class HomeBody extends StatelessWidget {
     'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
   ];
 
-  final double rpx = Config.width / 750; // 自适应像素
+  double screenWidth;
+  double rpx;
   final List _listData = guessYouLikeData;
 
   @override
   Widget build(BuildContext context) {
+    screenWidth = getWidth(context);
+    rpx = screenWidth /750;
     return Column(
       children: <Widget>[
         _buildSwiperWidget(), // 轮播图
@@ -126,7 +129,7 @@ class HomeBody extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(26 * rpx)),
       padding: EdgeInsets.symmetric(horizontal: 30 * rpx, vertical: 20 * rpx),
-      width: Config.width,
+      width: screenWidth,
       height: 300 * rpx,
       child: Container(
         decoration:

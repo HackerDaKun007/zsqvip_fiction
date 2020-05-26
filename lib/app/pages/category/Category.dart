@@ -89,11 +89,11 @@ class _CategoryPageState extends State<CategoryPage>
           TabBarView(
             controller: _tabController,
             children: <Widget>[
-              ChangeNotifierProvider(
+              ChangeNotifierProvider<CategoryProvider>(
                 create: (context) => CategoryProvider(_boyCategoryNameData),
                 child: CategoryContent(data:_boyCategoryNameData),
               ),
-              ChangeNotifierProvider(
+              ChangeNotifierProvider<CategoryProvider>(
                 create: (context) => CategoryProvider(_girlCategoryNameData),
                 child: CategoryContent(data:_girlCategoryNameData),
               ),
