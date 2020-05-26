@@ -23,9 +23,6 @@ import 'package:fiction/app/search/result.dart';  //搜索结果页面
 import 'package:fiction/app/pages/category/category.dart';  //分类
 import 'package:fiction/app/pages/my/my.dart';  //我的
 
-//文章目录
-import 'package:fiction/app/article/present.dart';  //介绍
-
 //Yuri配置_路由区域
 import 'package:fiction/app/pages/home/top_charts.dart'; // 排行榜页面
 import 'package:fiction/app/bookList/book_list_detail.dart'; // 书单详情页面
@@ -50,9 +47,6 @@ final routes = {
 
   '/categorypage': (context) => CategoryPage(),
   '/mypage': (context) => MyPage(),
-
-  //文章
-  '/present': (context) => Present(), //介绍
 
   //Yuri配置_路由区域
   '/topcharts': (context) => TopChartsPage(),
