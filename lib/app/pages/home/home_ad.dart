@@ -31,7 +31,7 @@ class _AdWidgetState extends State<AdWidget> with PixelSize{
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Config.width,
+      width: getWidth(context),
       height: getPixe(180, context),
       margin: EdgeInsets.symmetric(horizontal: getPixe(10, context), vertical: getPixe(15, context)),
       child: InkWell(
@@ -45,7 +45,7 @@ class _AdWidgetState extends State<AdWidget> with PixelSize{
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(getPixe(8, context)),
-              child: Image.network(_adData.last['image'], width: Config.width,fit: BoxFit.fitWidth,),
+              child: Image.network(_adData.last['image'], width: getWidth(context),fit: BoxFit.fitWidth,),
             ),
             Positioned(
               bottom: getPixe(10, context),

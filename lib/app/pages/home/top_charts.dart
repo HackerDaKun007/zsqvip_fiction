@@ -22,7 +22,7 @@ class TopChartsPage extends StatefulWidget {
 class _TopChartsPageState extends State<TopChartsPage>
     with SingleTickerProviderStateMixin, PixelSize {
   TabController _controller;
-  double rpx = Config.width /750;
+  double rpx;
 
   @override
   void initState() {
@@ -38,7 +38,8 @@ class _TopChartsPageState extends State<TopChartsPage>
 
   @override
   Widget build(BuildContext context) {
-    double indicatorWidth = Config.width / 2 - 30;
+    rpx = getWidth(context) / 750;
+    double indicatorWidth = getWidth(context) / 2 - 30;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -89,8 +90,8 @@ class TabViewContentWidget extends StatefulWidget {
   _TabViewContentWidgetState createState() => _TabViewContentWidgetState();
 }
 
-class _TabViewContentWidgetState extends State<TabViewContentWidget> with AutomaticKeepAliveClientMixin{
-  double rpx = Config.width / 750;
+class _TabViewContentWidgetState extends State<TabViewContentWidget> with AutomaticKeepAliveClientMixin, PixelSize{
+  double rpx;
   int indexItem;
   List _chartsData;
 
@@ -283,6 +284,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> with Automa
 
   @override
   Widget build(BuildContext context) {
+    rpx = getWidth(context) / 750;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[

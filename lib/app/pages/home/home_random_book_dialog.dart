@@ -17,8 +17,8 @@ class RandomBookDialog extends StatefulWidget {
   _RandomBookDialogState createState() => _RandomBookDialogState();
 }
 
-class _RandomBookDialogState extends State<RandomBookDialog> {
-  final double rpx = Config.width / 750;
+class _RandomBookDialogState extends State<RandomBookDialog> with PixelSize{
+  double rpx;
   List<Map> _data = guessYouLikeData;
 
   @override
@@ -29,6 +29,7 @@ class _RandomBookDialogState extends State<RandomBookDialog> {
 
   @override
   Widget build(BuildContext context) {
+    rpx = getWidth(context) / 750;
     return Container(
       height: 620 * rpx,
       width: 450 * rpx,

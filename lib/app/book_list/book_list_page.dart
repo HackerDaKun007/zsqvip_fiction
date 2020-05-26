@@ -20,7 +20,7 @@ class BookListPage extends StatefulWidget {
 }
 
 class _BookListPageState extends State<BookListPage> with PixelSize{
-  double rpx = Config.width / 750;
+  double rpx;
   int listIndex;
 
   Widget _getBookListWidget(int index) {  
@@ -61,6 +61,7 @@ class _BookListPageState extends State<BookListPage> with PixelSize{
 
   @override
   Widget build(BuildContext context) {
+    rpx = getWidth(context) / 750;
     return Scaffold(
       appBar: AppBar(
         title: Text('精选书单', style: TextStyle(fontSize: 36 * rpx),),

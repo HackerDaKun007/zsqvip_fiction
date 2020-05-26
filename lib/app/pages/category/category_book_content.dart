@@ -125,7 +125,7 @@ class _CategoryBookContentState extends State<CategoryBookContent> with PixelSiz
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Config.width,
+      width: getWidth(context),
       padding: EdgeInsets.all(getPixe(10, context)),
       child: widget.data.isNotEmpty
        ? Column(

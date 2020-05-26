@@ -15,7 +15,7 @@ import 'package:fiction/public/public.dart';
 class SettingsPage extends StatelessWidget with PixelSize {
   Widget _buildContent(context) {
     return Container(
-      width: Config.width,
+      width: getWidth(context),
       padding: EdgeInsets.symmetric(vertical: getPixe(10, context)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +35,7 @@ class SettingsPage extends StatelessWidget with PixelSize {
         child: Ink(
           padding: EdgeInsets.symmetric(
           horizontal: getPixe(15, context), vertical: getPixe(20, context)),
-          width: Config.width,
+          width: getWidth(context),
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border(bottom: BorderSide(color: Colors.grey[200],))

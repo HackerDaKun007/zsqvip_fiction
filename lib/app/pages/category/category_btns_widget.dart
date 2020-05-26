@@ -22,7 +22,7 @@ class CategoryBtnsWidget extends StatelessWidget with PixelSize {
   /// 分类按钮列表
   Widget _getbtnList({data, BuildContext context, bool isLastOne=false, int index}) {
     return Container(
-      width: Config.width,
+      width: getWidth(context),
       padding: isLastOne ? 
         EdgeInsets.symmetric(
           vertical: getPixe(5, context), horizontal: getPixe(20, context))
@@ -72,7 +72,7 @@ class CategoryBtnsWidget extends StatelessWidget with PixelSize {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Config.width,
+      width: getWidth(context),
       margin: EdgeInsets.symmetric(vertical: getPixe(10, context)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

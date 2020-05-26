@@ -20,9 +20,9 @@ class EditorsRecommend extends StatefulWidget {
   _EditorsRecommendState createState() => _EditorsRecommendState();
 }
 
-class _EditorsRecommendState extends State<EditorsRecommend> {
+class _EditorsRecommendState extends State<EditorsRecommend> with PixelSize{
 
-  final double rpx = Config.width / 750;
+  double rpx;
   Map _firstRecommendData; // 第一个推荐
   List<Map> _listData = guessYouLikeData;
 
@@ -94,6 +94,7 @@ class _EditorsRecommendState extends State<EditorsRecommend> {
 
   @override
   Widget build(BuildContext context) {
+    rpx = getWidth(context) / 750;
     return Container(
       width: 750 * rpx,
       height: 630 * rpx,

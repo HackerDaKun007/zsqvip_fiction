@@ -20,9 +20,9 @@ class GuessYouLike extends StatefulWidget {
   _GuessYouLikeState createState() => _GuessYouLikeState();
 }
 
-class _GuessYouLikeState extends State<GuessYouLike> {
+class _GuessYouLikeState extends State<GuessYouLike> with PixelSize{
   List<Map> _listData = guessYouLikeData;
-  final double rpx = Config.width / 750;
+  double rpx;
 
   @override
   void initState() {
@@ -48,6 +48,7 @@ class _GuessYouLikeState extends State<GuessYouLike> {
 
   @override
   Widget build(BuildContext context) {
+    rpx = getWidth(context) / 750;
     return Container(
       width: 750 * rpx,
       height: 770 * rpx,
