@@ -1,4 +1,4 @@
-/**
+/*
  * @author      HackerDaKun007 <hackerdakun007@gmail.com>
  * @Remarks     无
  * @copyright   GPL
@@ -9,7 +9,6 @@
 */
 
 import 'package:flutter/cupertino.dart';
-import 'package:fiction/public/public.dart';
 
 class PixelSize {
   // var win = window.physicalSize; //获取屏幕

@@ -19,6 +19,8 @@ import 'package:fiction/app/pages/bookShelf/content.dart'; //内容模块
 import 'package:fiction/app/ad/tabsAd.dart'; //底部广告位置
 import 'package:fiction/app/readTime/readTime.dart'; //阅读时间
 
+//网络状态
+import 'package:fiction/public/widget/internet.dart';
 
 //阅读分钟
 // int Path.minute = 0;
@@ -57,6 +59,11 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   }
 
   Widget build(BuildContext context) {
+    return Internet(init());
+  }
+
+  //主体内容
+  Widget init() {
     return Stack(
       children: <Widget>[
         MediaQuery.removePadding(

@@ -1,4 +1,4 @@
-/**
+/*
  * @author      HackerDaKun007 <hackerdakun007@gmail.com> 
  * @Remarks     无
  * @copyright   GPL
@@ -11,7 +11,7 @@
 import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
-class Prompt extends StatelessWidget with PixelSize{
+class Prompt extends StatelessWidget with PixelSize {
   String _content = '当前没有任何内容';
   double topMargin; // 顶部margin
   Prompt(this._content, {Key key, this.topMargin}) : super(key: key);
@@ -22,14 +22,21 @@ class Prompt extends StatelessWidget with PixelSize{
       child: Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.fromLTRB(0, getPixe(this.topMargin!=null ? this.topMargin : 200, context), 0, getPixe(10, context)),
+            margin: EdgeInsets.fromLTRB(
+                0,
+                getPixe(this.topMargin != null ? this.topMargin : 200, context),
+                0,
+                getPixe(10, context)),
             height: getPixe(150, context),
-            child: Image.asset('images/back1.png',fit:BoxFit.fill),
+            child: Image.asset('images/back1.png', fit: BoxFit.fill),
           ),
-          Text(this._content, style: TextStyle(
-            fontSize: getPixe(14, context),
-            color: Colors.grey,
-          ),),
+          Text(
+            this._content,
+            style: TextStyle(
+              fontSize: getPixe(14, context),
+              color: Colors.grey,
+            ),
+          ),
         ],
       ),
     );
