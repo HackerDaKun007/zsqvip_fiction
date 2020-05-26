@@ -20,6 +20,7 @@ import 'package:fiction/providers/bookShelf.dart';//书架数据
 import 'package:fiction/providers/recordingData.dart'; //阅读记录数据
 
 //Yuri_provider
+import 'package:fiction/providers/bookDetailProvider.dart'; // 书籍管理
 
 void main() => runApp(MyApp());
 
@@ -32,6 +33,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ReadTimeProvider()), //阅读时间
         ChangeNotifierProvider(create: (_) => BookShelfProviders()), //书架数据
         ChangeNotifierProvider(create: (_) => RecordingDataProviders()), //阅读记录
+        ChangeNotifierProvider(create: (_) => RecordingDataProviders()), //阅读记录
+        ChangeNotifierProvider(create: (_) => BookDetailProvider()), //书籍管理
       ],
       child: MaterialApp(
         //配置国际中文

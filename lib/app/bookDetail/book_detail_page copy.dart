@@ -11,26 +11,60 @@
 
 import 'package:fiction/app/bookDetail/book_detail_header.dart';
 import 'package:fiction/app/bookDetail/book_detail_recommend.dart';
-import 'package:fiction/providers/bookDetailProvider.dart';
 import 'package:fiction/public/public.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
-
-
-class BookDetailPage extends StatelessWidget with PixelSize{
+class BookDetailPage extends StatefulWidget {
   final arguments;
   BookDetailPage({this.arguments});
 
-  double paddingTop;
-  double screenWidth;
+  @override
+  _BookDetailPageState createState() => _BookDetailPageState();
+}
+
+class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
+
   dynamic _data;
-  var provider;
-  
+  ScrollController _scrollController = ScrollController();
+  double alpha = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _data = widget.arguments['data'];
+    // 滚动监听
+    _scrollController.addListener(() {
+      var offset = _scrollController.offset;
+      if (offset < 0) {
+        if (alpha != 0) {
+          setState(() {
+            alpha = 0;
+          });
+        }
+      } else if (offset < 50) {
+        setState(() {
+          alpha = 1 - (50 - offset) / 50;
+        });
+      } else if (alpha != 1) {
+        setState(() {
+          alpha = 1;
+        });
+      }
+
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
   /// AppBar
-  Widget _buildAppBar(context) {
+  Widget _buildAppBar() {
+    double paddingTop = getMediaQuery(context).padding.top;
     return Stack(
       children: <Widget>[
         Container(
@@ -43,7 +77,7 @@ class BookDetailPage extends StatelessWidget with PixelSize{
           ),
         ),
         Opacity(
-          opacity: provider.alpha,
+          opacity: alpha,
           child: Container(
             decoration: BoxDecoration(color: Colors.white,),
             padding: EdgeInsets.only(left: getPixe(5, context), top: getPixe(paddingTop, context)),
@@ -71,9 +105,9 @@ class BookDetailPage extends StatelessWidget with PixelSize{
   }
 
   /// 内容简介
-  Widget _buildNovelDesc(context) {
+  Widget _buildNovelDesc() {
     return Container(
-      width: screenWidth,
+      width: getWidth(context),
       margin: EdgeInsets.symmetric(vertical: getPixe(10, context)),
       padding: EdgeInsets.all(getPixe(15, context)),
       child: Column(
@@ -147,10 +181,10 @@ class BookDetailPage extends StatelessWidget with PixelSize{
 
 
   /// 底部工具栏
-  Widget _buildToolBar(context) {
-    double buttonPadding = screenWidth / 6;
+  Widget _buildToolBar() {
+    double buttonPadding = getWidth(context) / 6;
     return Container(
-      width: screenWidth,
+      width: getWidth(context),
       padding: EdgeInsets.all(getPixe(5, context)),
       height: getMediaQuery(context).padding.bottom + 50,
       child: Row(
@@ -183,35 +217,29 @@ class BookDetailPage extends StatelessWidget with PixelSize{
   }
 
 
-
-
   @override
   Widget build(BuildContext context) {
-    paddingTop = getMediaQuery(context).padding.top;
-    screenWidth = getWidth(context);
-    _data = arguments['data'];
-    provider = Provider.of<BookDetailProvider>(context);
     return Scaffold(
       body: AnnotatedRegion(
-        value: provider.alpha > 0.5 ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
+        value: alpha > 0.5 ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
         child: Stack(
           children: <Widget>[
             Column(
               children: <Widget>[
                 Expanded(
                   child: ListView(
-                    controller: provider.scrollController,
+                    controller: _scrollController,
                     children: <Widget>[
                       BookDetailHeader(data: _data,),  // 头部
-                      _buildNovelDesc(context),  // 内容介绍
+                      _buildNovelDesc(),  // 内容介绍
                       BookDetailRecommend(), // 推荐
                     ],
                   ),
                 ),
-                _buildToolBar(context)
+                _buildToolBar()
               ],
             ),
-            _buildAppBar(context)
+            _buildAppBar()
           ],
         ),
       ),

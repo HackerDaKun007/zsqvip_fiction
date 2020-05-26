@@ -83,3 +83,4 @@ class _BookDetailRecommendState extends State<BookDetailRecommend> with PixelSiz
     );
   }
 }
+
