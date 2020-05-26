@@ -15,10 +15,12 @@ class BookDetailProvider extends ChangeNotifier {
   ScrollController scrollController; // 滚动控制
   double alpha; // 透明度
   List<Map> recommendData; // 推荐数据
+  bool isBookShelf; // 是否已在书架
 
   BookDetailProvider() {
     scrollController = ScrollController();
     alpha = 0;
+    isBookShelf = false;
     _initData();
     scrollController.addListener(() {
       var offset = scrollController.offset;
@@ -44,6 +46,12 @@ class BookDetailProvider extends ChangeNotifier {
   /// 随机数据
   shuffleRecommendData() {
     recommendData.shuffle();
+    notifyListeners();
+  }
+
+  /// 书架管理
+  handleBookShelf() {
+    isBookShelf = !isBookShelf;
     notifyListeners();
   }
 

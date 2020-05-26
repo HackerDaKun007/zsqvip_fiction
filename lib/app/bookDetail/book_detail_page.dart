@@ -56,7 +56,7 @@ class PageBody extends StatelessWidget with PixelSize{
         Container(
           width: getPixe(44, context),
           height: kToolbarHeight + paddingTop,
-          padding: EdgeInsets.only(left: getPixe(5, context), top: getPixe(paddingTop, context)),
+          padding: EdgeInsets.only(left: getPixe(7, context), top: getPixe(paddingTop, context)),
           child: InkWell(
             onTap: ()=>Navigator.pop(context),
             child: Icon(Iconfont.zuo, color: Colors.black,),
@@ -130,7 +130,7 @@ class PageBody extends StatelessWidget with PixelSize{
             data['sutitle'],
             style: TextStyle(
               color: Colors.black54,
-              fontSize: getPixe(17, context),
+              fontSize: getPixe(16, context),
             ),
             maxLines: 4,
             overflow: TextOverflow.clip,
@@ -176,13 +176,13 @@ class PageBody extends StatelessWidget with PixelSize{
       child: Row(
         children: <Widget>[
           InkWell(
-            onTap: () {},
+            onTap: provider.handleBookShelf,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(getPixe(8, context))
               ),
               padding: EdgeInsets.symmetric(horizontal: getPixe(buttonPadding, context), vertical: getPixe(10, context)),
-              child: Text('加入书架',style: TextStyle(color: Config.color)),
+              child: provider.isBookShelf ? Text('已在书架',style: TextStyle(color: Colors.grey)) : Text('加入书架',style: TextStyle(color: Config.color)),
             )
           ),
           Spacer(),
