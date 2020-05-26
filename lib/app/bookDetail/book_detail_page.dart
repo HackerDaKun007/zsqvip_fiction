@@ -1,7 +1,18 @@
+/*
+ * @author      Yuri Chen <pluto401zz@gmail.com>
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ * 
+ * @see         书籍界面
+*/
+
+
+import 'package:fiction/app/bookDetail/book_detail_header.dart';
+import 'package:fiction/app/bookDetail/book_detail_recommend.dart';
 import 'package:fiction/public/public.dart';
-import 'package:fiction/res/guessYouLikeData.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
 
 import 'package:flutter/services.dart';
 
@@ -14,6 +25,7 @@ class BookDetailPage extends StatefulWidget {
 }
 
 class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
+
   dynamic _data;
   ScrollController _scrollController = ScrollController();
   double alpha = 0;
@@ -22,7 +34,7 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
   void initState() {
     super.initState();
     _data = widget.arguments['data'];
-
+    // 滚动监听
     _scrollController.addListener(() {
       var offset = _scrollController.offset;
       if (offset < 0) {
@@ -96,7 +108,7 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
   Widget _buildNovelDesc() {
     return Container(
       width: getWidth(context),
-      margin: EdgeInsets.only(bottom: getPixe(10, context)),
+      margin: EdgeInsets.symmetric(vertical: getPixe(10, context)),
       padding: EdgeInsets.all(getPixe(15, context)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,9 +230,9 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
                   child: ListView(
                     controller: _scrollController,
                     children: <Widget>[
-                      PageHeader(data: _data,),
-                      _buildNovelDesc(),
-                      Recommend(),
+                      BookDetailHeader(data: _data,),  // 头部
+                      _buildNovelDesc(),  // 内容介绍
+                      BookDetailRecommend(), // 推荐
                     ],
                   ),
                 ),
@@ -230,175 +242,6 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
             _buildAppBar()
           ],
         ),
-      ),
-    );
-  }
-}
-
-
-class PageHeader extends StatelessWidget with PixelSize{
-  
-  final dynamic data;
-  PageHeader({this.data});
-
-  Widget _buildHeaderContent(context) {
-    double paddingTop = getMediaQuery(context).padding.top;
-    return Container(
-      height: getPixe(220, context),
-      width: getWidth(context),
-      padding: EdgeInsets.fromLTRB(
-          getPixe(15, context), getPixe(58 + paddingTop, context), getPixe(10, context), 0),
-      child: Row(
-        children: <Widget>[
-          Material(
-            elevation: 5,
-            color: Colors.transparent,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(getPixe(4, context)),
-              child: Image.network(
-                data['imageUrl'],
-                width: getPixe(100, context),
-                fit: BoxFit.fitHeight,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: getPixe(20, context),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                data['title'],
-                maxLines: 2,
-                style: TextStyle(
-                    fontSize: getPixe(22, context),
-                    fontWeight: FontWeight.w500),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    data['author'],
-                    style: TextStyle(
-                      fontSize: getPixe(14, context),
-                      color: Colors.black45
-                    )
-                  ),
-                  SizedBox(height: getPixe(5, context),),
-                  Text(
-                    '${data['category'][0]} · ${data['update_status']} · ${(data['total_num'] / 10000).floor()}万字',
-                    style: TextStyle(
-                      fontSize: getPixe(13, context),
-                      color: Colors.black45
-                    )
-                  ),
-                  SizedBox(height: getPixe(5, context),),
-                  Text(
-                    '${(data['total_num'] / 10000).round()} 万人气',
-                    style: TextStyle(
-                      fontSize: getPixe(16, context),
-                    )
-                  ),
-                ],
-              )
-            ],
-          )
-        ],
-      ));
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    double width = getWidth(context);
-    double height = getMediaQuery(context).padding.top + 200;
-    return Container(
-      width: width,
-      height: getPixe(height, context),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(data['imageUrl']),
-          fit: BoxFit.cover,
-          colorFilter: ColorFilter.linearToSrgbGamma(),
-        )
-      ),
-      child: BackdropFilter(
-        filter: ui.ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-        child: _buildHeaderContent(context)
-      ),
-    );
-  }
-}
-
-
-
-class Recommend extends StatefulWidget {
-  @override
-  _RecommendState createState() => _RecommendState();
-}
-
-class _RecommendState extends State<Recommend> with PixelSize {
-  List<Map> _listData = guessYouLikeData;
-
-  @override
-  void initState() {
-    super.initState();
-    _listData.shuffle();
-  }
-
-  /// 换一换
-  _shuffleContent() {
-    setState(() {
-      _listData.shuffle();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-     return Container(
-      margin: EdgeInsets.only(bottom: getPixe(20, context)),
-      height: getPixe(500, context),
-      color: Colors.grey,
-      child: Column(
-        children: <Widget>[
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Text(
-                  '编辑推荐',
-                  style: TextStyle(
-                      fontSize: getPixe(20, context), fontWeight: FontWeight.w500),
-                ),
-                Container(
-                    padding: EdgeInsets.only(right: getPixe(10, context)),
-                    child: InkWell(
-                      onTap: () {
-                        _shuffleContent();
-                      },
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            '换一换',
-                            style: TextStyle(
-                                color: Colors.black45, fontSize: getPixe(14, context)),
-                          ),
-                          SizedBox(
-                            width: getPixe(5, context),
-                          ),
-                          Icon(
-                            Icons.loop,
-                            size: getPixe(16, context),
-                            color: Colors.grey[400],
-                          )
-                        ],
-                      ),
-                    ))
-              ],
-            ),
-        ],
       ),
     );
   }

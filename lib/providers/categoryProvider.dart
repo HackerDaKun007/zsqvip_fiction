@@ -14,9 +14,9 @@ class CategoryProvider extends ChangeNotifier {
   List statusList = List(); // 存储状态
 
   final Map data;
-  List categorydata = List();
-  List booksData =  List();
-  List booksList = List();
+  List categorydata = List(); // 分类名数据
+  List booksData = List(); // 书籍数据
+  List booksList = List(); // 存储书籍改动数据
 
   List<int> selectIndexs = List<int>(); // 存储每组选择的下标
   List<int> categoryIDs = List<int>(); // 存储分类ID
@@ -25,6 +25,11 @@ class CategoryProvider extends ChangeNotifier {
     categorydata = this.data['category_list'];
     booksData = this.data['books'];
     booksList = booksData;
+    _initData();
+  }
+
+  /// 初始化数据
+  _initData() {
     List.generate(categorydata.length, (index) => selectIndexs.add(0));
 
     List.generate(categorydata.length, (index) => statusList.add([]));
@@ -44,6 +49,7 @@ class CategoryProvider extends ChangeNotifier {
     }
   }
 
+
   setBtnStatus(index, parentIndex) {
     if (selectIndexs[parentIndex] == index) return;
 
@@ -59,6 +65,7 @@ class CategoryProvider extends ChangeNotifier {
 
   filterData() {
     List _data = booksData;
+
     if (selectIndexs.every((element) => element == 0)) {
       _data = booksData;
     } else {
@@ -90,14 +97,13 @@ class CategoryProvider extends ChangeNotifier {
     return _list;
   }
 
-  /// 过滤第二个分类数据，根据字数过滤
+  /// 过滤第二个分类数据，根据书籍字数过滤
   _secondFilter(data) {
     int index = selectIndexs[1];
     List _list = List();
     data.forEach((item) {
       bool isFit = (index == 1 && item['total_num'] < 1000000) ||
-          (index == 2 &&
-              (item['total_num'] <= 2000000 && item['total_num'] >= 1000000)) ||
+          (index == 2 && (item['total_num'] <= 2000000 && item['total_num'] >= 1000000)) ||
           (index == 3 && item['total_num'] > 2000000);
       if (isFit) {
         _list.add(item);
@@ -106,32 +112,38 @@ class CategoryProvider extends ChangeNotifier {
     return _list;
   }
 
-  /// 过滤第三个分类数据, 根据状态过滤
+  /// 过滤第三个分类数据, 根据书籍当前状态过滤
   _thirdFilter(data) {
     int index = selectIndexs[2];
     List _list = List();
     data.forEach((item) {
       bool isFit = item['status'] == index;
-      if(isFit) {
+      if (isFit) {
         _list.add(item);
       }
     });
     return _list;
   }
 
-
   /// 过滤第四个分类数据，根据时间和评分排序
   _fourthFilter(data) {
     int index = selectIndexs[3];
     List _list = data;
-    if (index == 1) {
-      _list.sort((a, b) {
-        return b['update_time'].compareTo(a['update_time']);
-      });
-    } else if (index == 2){
-      _list.sort((a, b) {
-        return b['score'].compareTo(a['score']);
-      });
+
+    switch (index) {
+      case 1:
+        _list.sort((a, b) {
+          return b['update_time'].compareTo(a['update_time']);
+        });
+        break;
+      case 2:
+        _list.sort((a, b) {
+          return b['score'].compareTo(a['score']);
+        });
+        break;
+      default:
+       _list = _list;
+       break;
     }
     return _list;
   }
