@@ -32,6 +32,7 @@ import 'package:fiction/app/book_list/book_list_detail.dart'; // 书单详情页
 import 'package:fiction/app/book_list/book_list_page.dart'; // 书单页面
 import 'package:fiction/app/pages/my/settings/settings_page.dart'; // 设置页面
 import 'package:fiction/app/pages/my/settings/aboutus.dart';  // 关于我们页面
+import 'package:fiction/app/pages/bookDetail/book_detail_page.dart'; // 书籍详情页面
 
 //配置命令路由
 final routes = {
@@ -59,6 +60,7 @@ final routes = {
   '/booklistdetail': (context, {arguments}) => BookListDetail(arguments:arguments),
   '/settings': (context) => SettingsPage(),
   '/aboutus': (context) => AboutUsPage(),
+  '/bookdetail': (context, {arguments}) => BookDetailPage(arguments:arguments),
 };
 
 var onGenerateRoute = (RouteSettings settings) {

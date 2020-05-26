@@ -7,11 +7,13 @@
  *
  * @see         个人页面
 */
+import 'package:fiction/providers/readTime.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
 import 'package:fiction/app/readTime/readTime.dart'; //阅读时间
 import 'package:fiction/app/ad/Tabsad.dart';
+import 'package:provider/provider.dart';
 
 
 class MyPage extends StatelessWidget with PixelSize{
@@ -39,11 +41,12 @@ class _MineBodyState extends State<MineBody> with PixelSize{
 
   @override
   Widget build(BuildContext context) {
+    ReadTimeProvider providerReadTime = Provider.of<ReadTimeProvider>(context);
     rpx = getWidth(context) / 750;
     return Container(
         child: Column(
       children: <Widget>[
-        _topWidget(),
+        _topWidget(providerReadTime),
         Column(
           children: <Widget>[_serviceListWiget(), _helpListWidget()],
         )
@@ -53,7 +56,7 @@ class _MineBodyState extends State<MineBody> with PixelSize{
   }
 
   /// 顶部内容
-  Widget _topWidget() {
+  Widget _topWidget(provider) {
     return Container(
       height: 400 * rpx,
       width: 750 * rpx,
@@ -117,8 +120,7 @@ class _MineBodyState extends State<MineBody> with PixelSize{
                 // _getHeaderRowListItem(title: '卡券', countNum: 5, isNav: true),
                 _getHeaderRowListItem(
                   title: '今日已读(分钟)',
-                  // countNum: Path.minute,
-                  countNum: 10,
+                  countNum: provider.readTime,
                 ),
               ],
             ),
