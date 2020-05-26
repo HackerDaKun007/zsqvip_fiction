@@ -49,6 +49,13 @@ class BookDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// 书架管理
+  handleBookShelf() {
+    if (isBookShelf) return;
+    isBookShelf = !isBookShelf;
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     super.dispose();

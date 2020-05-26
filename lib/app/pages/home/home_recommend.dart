@@ -29,40 +29,45 @@ class _EditorsRecommendState extends State<EditorsRecommend> with PixelSize{
 
     /// 其余推荐
   Widget _getLeftRecommendItem(Map data) {
-    return Container(
-      width: (750 / 5) * rpx,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(6 * rpx),
-            child: Image.network(
-              data['imageUrl'],
-              height: 190 * rpx,
-              fit: BoxFit.fill,
+    return InkWell(
+      onTap: (){
+        Navigator.pushNamed(context, '/bookdetail', arguments: {'data':data});
+      },
+      child: Container(
+        width: ((750-100) / 4 ) * rpx,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6 * rpx),
+              child: Image.network(
+                data['imageUrl'],
+                height: 200 * rpx,
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  data['title'],
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: TextStyle(fontSize: 28 * rpx),
-                ),
-                Text(
-                  '110万人气',
-                  style: TextStyle(fontSize: 22 * rpx, color: Colors.black54),
-                  textAlign: TextAlign.left,
-                ),
-              ],
+            Expanded(
+              flex: 1,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    data['title'],
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(fontSize: 28 * rpx),
+                  ),
+                  Text(
+                    '110万人气',
+                    style: TextStyle(fontSize: 22 * rpx, color: Colors.black54),
+                    textAlign: TextAlign.left,
+                  ),
+                ],
+              )
             )
-          )
-        ],
-      ),
+          ],
+        ),
+      )
     );
   }
 
