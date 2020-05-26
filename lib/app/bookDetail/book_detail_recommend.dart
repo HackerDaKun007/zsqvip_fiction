@@ -89,7 +89,7 @@ class BookDetailRecommend extends StatelessWidget with PixelSize {
 
   Widget _buildContentItem(data, context) {
     return Container(
-      width: (getWidth(context) - 70) / 3,
+      width: (getWidth(context) - 100) / 3,
       height: getPixe(190, context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,8 +103,13 @@ class BookDetailRecommend extends StatelessWidget with PixelSize {
               child: Image.network(data['imageUrl'], fit: BoxFit.fitWidth),
             )
           ),
-          Text(data['title'], style: TextStyle(fontSize: getPixe(14, context)),),
-          Text('${(data['total_num'] / 10000).floor()} 万人气', style: TextStyle(fontSize: getPixe(12, context), color: Colors.grey),)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(data['title'], style: TextStyle(fontSize: getPixe(14, context)),),
+              Text('${(data['total_num'] / 10000).floor()} 万人气', style: TextStyle(fontSize: getPixe(12, context), color: Colors.grey),)
+            ],
+          )
         ],
       ),
     );
@@ -138,7 +143,6 @@ class BookDetailRecommend extends StatelessWidget with PixelSize {
       margin: EdgeInsets.only(bottom: getPixe(20, context)),
       padding: EdgeInsets.all(getPixe(15, context)),
       height: getPixe(500, context),
-      // color: Colors.grey,
       child: Column(
         children: <Widget>[
           Row(

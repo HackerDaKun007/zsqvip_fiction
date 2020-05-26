@@ -268,39 +268,47 @@ class PageBody extends StatelessWidget with PixelSize {
   /// 底部工具栏
   Widget _buildToolBar(context, provider) {
     double buttonPadding = screenWidth / 6;
-    return Container(
-      width: screenWidth,
-      padding: EdgeInsets.all(getPixe(5, context)),
-      height: getMediaQuery(context).padding.bottom + 50,
-      child: Row(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(getPixe(8, context))),
-            padding: EdgeInsets.symmetric(
-                horizontal: getPixe(buttonPadding, context),
-                vertical: getPixe(10, context)),
-            child: provider.isBookShelf
-                ? Text('已在书架', style: TextStyle(color: Colors.grey))
-                : Text('加入书架', style: TextStyle(color: Config.color)),
-          ),
-          Spacer(),
-          InkWell(
-              onTap: () {},
+    return Material(
+      elevation: 3,
+      color: Colors.transparent,
+      child: Container(
+        width: screenWidth,
+        color: Colors.white,
+        padding: EdgeInsets.all(getPixe(5, context)),
+        height: getMediaQuery(context).padding.bottom + 50,
+        child: Row(
+          children: <Widget>[
+            GestureDetector(
+              onTap: provider.handleBookShelf,
               child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(getPixe(8, context))),
                 padding: EdgeInsets.symmetric(
                     horizontal: getPixe(buttonPadding, context),
                     vertical: getPixe(10, context)),
-                decoration: BoxDecoration(
-                    color: Config.color,
-                    borderRadius: BorderRadius.circular(getPixe(8, context))),
-                child: Text(
-                  '免费阅读',
-                  style: TextStyle(color: Colors.white),
-                ),
-              )),
-        ],
-      ),
+                child: provider.isBookShelf
+                    ? Text('已在书架', style: TextStyle(color: Colors.grey))
+                    : Text('加入书架', style: TextStyle(color: Config.color)),
+              )
+            ),
+            Spacer(),
+            InkWell(
+                onTap: () {},
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getPixe(buttonPadding, context),
+                      vertical: getPixe(10, context)),
+                  decoration: BoxDecoration(
+                      color: Config.color,
+                      borderRadius: BorderRadius.circular(getPixe(8, context))),
+                  child: Text(
+                    '免费阅读',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )),
+          ],
+        ),
+      )
     );
   }
 
