@@ -23,75 +23,82 @@ class BookContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double rpx = MediaQuery.of(context).size.width / 750;
-    return Container(
-        width: 750 * rpx,
-        height: 190 * rpx,
-        margin: EdgeInsets.only(bottom: isInfinity ? 50 * rpx : 0 * rpx),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Material(
-              elevation: isElevation ? 2 : 0,
-              color: Colors.transparent,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(6 * rpx),
-                child: Image.network(
-                  data['imageUrl'],
-                  fit: BoxFit.fill,
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '/bookdetail', arguments: {
+          'data': data,
+        });
+      },
+      child: Container(
+          width: 750 * rpx,
+          height: 190 * rpx,
+          margin: EdgeInsets.only(bottom: isInfinity ? 50 * rpx : 0 * rpx),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Material(
+                elevation: isElevation ? 2 : 0,
+                color: Colors.transparent,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(6 * rpx),
+                  child: Image.network(
+                    data['imageUrl'],
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: 10 * rpx,
-            ),
-            Expanded(
-                flex: 1,
-                child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15 * rpx),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          data['title'],
-                          style: TextStyle(
-                              fontSize: 30 * rpx, color: Colors.black),
-                        ),
-                        Text(
-                          data['sutitle'],
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.black38, fontSize: 26 * rpx),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                _getCategoryWidget(
-                                    name: data['category'][0], rpx: rpx),
-                                SizedBox(
-                                  width: 10 * rpx,
-                                ),
-                                _getCategoryWidget(
-                                    name: data['category'][1], rpx: rpx),
-                              ],
-                            ),
-                            Text(
-                              '${data['update_status']} · 100万人气',
-                              style: TextStyle(
-                                  color: Colors.grey[400], fontSize: 20 * rpx),
-                            )
-                          ],
-                        )
-                      ],
-                    )))
-          ],
-        ));
+              SizedBox(
+                width: 10 * rpx,
+              ),
+              Expanded(
+                  flex: 1,
+                  child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15 * rpx),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            data['title'],
+                            style: TextStyle(
+                                fontSize: 30 * rpx, color: Colors.black),
+                          ),
+                          Text(
+                            data['sutitle'],
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Colors.black38, fontSize: 26 * rpx),
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  _getCategoryWidget(
+                                      name: data['category'][0], rpx: rpx),
+                                  SizedBox(
+                                    width: 10 * rpx,
+                                  ),
+                                  _getCategoryWidget(
+                                      name: data['category'][1], rpx: rpx),
+                                ],
+                              ),
+                              Text(
+                                '${data['update_status']} · 100万人气',
+                                style: TextStyle(
+                                    color: Colors.grey[400], fontSize: 20 * rpx),
+                              )
+                            ],
+                          )
+                        ],
+                      )))
+            ],
+          ))
+    );
   }
 
   // 分类
