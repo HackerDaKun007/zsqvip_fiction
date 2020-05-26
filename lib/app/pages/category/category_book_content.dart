@@ -132,7 +132,7 @@ class _CategoryBookContentState extends State<CategoryBookContent> with PixelSiz
         crossAxisAlignment: CrossAxisAlignment.start,
         children: _getListItem(widget.data)
       )
-      : Prompt('此分类暂无您想看的书籍', topMargin: 10,),
+      : Prompt('此分类暂无您想看的书籍', topMargin: 10,),  // 当分类无内容时
     );
   }
 }
