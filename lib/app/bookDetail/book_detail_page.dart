@@ -25,6 +25,7 @@ class BookDetailPage extends StatefulWidget {
 }
 
 class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
+
   dynamic _data;
   ScrollController _scrollController = ScrollController();
   double alpha = 0;
@@ -33,7 +34,7 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
   void initState() {
     super.initState();
     _data = widget.arguments['data'];
-
+    // 滚动监听
     _scrollController.addListener(() {
       var offset = _scrollController.offset;
       if (offset < 0) {
