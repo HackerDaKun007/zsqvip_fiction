@@ -36,7 +36,7 @@ class BookDetailProvider extends ChangeNotifier {
   }
 
   /// 初始化
-  void _initData() {
+  _initData() {
     recommendData = guessYouLikeData;
     recommendData.shuffle(); 
   }

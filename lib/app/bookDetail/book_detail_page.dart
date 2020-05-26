@@ -20,17 +20,37 @@ import 'package:provider/provider.dart';
 
 
 
-class BookDetailPage extends StatelessWidget with PixelSize{
+class BookDetailPage extends StatelessWidget {
   final arguments;
   BookDetailPage({this.arguments});
+  dynamic _data;
+  
 
+
+
+  @override
+  Widget build(BuildContext context) {
+    _data = arguments['data'];
+    return ChangeNotifierProvider(
+      create: (context) => BookDetailProvider(),
+      child: Scaffold(
+        body: PageBody(data: _data,),
+      )
+    );
+  }
+}
+
+class PageBody extends StatelessWidget with PixelSize{
+  final data;
+  PageBody({this.data});
+
+  
   double paddingTop;
   double screenWidth;
-  dynamic _data;
-  var provider;
   
-  /// AppBar
-  Widget _buildAppBar(context) {
+
+    /// AppBar
+  Widget _buildAppBar(context, provider) {
     return Stack(
       children: <Widget>[
         Container(
@@ -56,7 +76,7 @@ class BookDetailPage extends StatelessWidget with PixelSize{
                 ),
                 Expanded(
                   child: Text(
-                    _data['title'],
+                    data['title'],
                     style: TextStyle(fontSize: getPixe(20, context), fontWeight: FontWeight.w500),
                     textAlign: TextAlign.center,
                   ),
@@ -92,7 +112,7 @@ class BookDetailPage extends StatelessWidget with PixelSize{
                     color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(getPixe(4, context))
                   ),
-                  child: Text('${_data['desc_word'][0]}', style: TextStyle(fontSize: getPixe(12, context) ,color: Config.color),),
+                  child: Text('${data['desc_word'][0]}', style: TextStyle(fontSize: getPixe(12, context) ,color: Config.color),),
                 ),
                 Container(
                   margin: EdgeInsets.only(right: getPixe(10, context)),
@@ -101,13 +121,13 @@ class BookDetailPage extends StatelessWidget with PixelSize{
                     color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(getPixe(4, context))
                   ),
-                  child: Text('${_data['desc_word'][1]}', style: TextStyle(fontSize: getPixe(12, context) ,color: Config.color),),
+                  child: Text('${data['desc_word'][1]}', style: TextStyle(fontSize: getPixe(12, context) ,color: Config.color),),
                 ),
               ],
             )
           ),
           Text(
-            _data['sutitle'],
+            data['sutitle'],
             style: TextStyle(
               color: Colors.black54,
               fontSize: getPixe(17, context),
@@ -127,7 +147,7 @@ class BookDetailPage extends StatelessWidget with PixelSize{
                     children: [
                       Text('目录', style: TextStyle(fontSize: getPixe(16, context), fontWeight: FontWeight.w500),),
                       SizedBox(width: getPixe(10, context),),
-                      Text('连载至${_data['chapter']}章', style: TextStyle(color: Colors.black38, fontSize: getPixe(12, context)),)
+                      Text('连载至${data['chapter']}章', style: TextStyle(color: Colors.black38, fontSize: getPixe(12, context)),)
                     ]
                   ),
                   Row(
@@ -147,7 +167,7 @@ class BookDetailPage extends StatelessWidget with PixelSize{
 
 
   /// 底部工具栏
-  Widget _buildToolBar(context) {
+  Widget _buildToolBar(context, provider) {
     double buttonPadding = screenWidth / 6;
     return Container(
       width: screenWidth,
@@ -184,37 +204,33 @@ class BookDetailPage extends StatelessWidget with PixelSize{
 
 
 
-
   @override
   Widget build(BuildContext context) {
+    BookDetailProvider provider = Provider.of<BookDetailProvider>(context);
     paddingTop = getMediaQuery(context).padding.top;
     screenWidth = getWidth(context);
-    _data = arguments['data'];
-    provider = Provider.of<BookDetailProvider>(context);
-    return Scaffold(
-      body: AnnotatedRegion(
-        value: provider.alpha > 0.5 ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
-        child: Stack(
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Expanded(
-                  child: ListView(
-                    controller: provider.scrollController,
-                    children: <Widget>[
-                      BookDetailHeader(data: _data,),  // 头部
-                      _buildNovelDesc(context),  // 内容介绍
-                      BookDetailRecommend(), // 推荐
-                    ],
+    return  AnnotatedRegion(
+          value: provider.alpha > 0.5 ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
+          child: Stack(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Expanded(
+                    child: ListView(
+                      controller: provider.scrollController,
+                      children: <Widget>[
+                        BookDetailHeader(data: data,),  // 头部
+                        _buildNovelDesc(context),  // 内容介绍
+                        BookDetailRecommend(provider: provider), // 推荐
+                      ],
+                    ),
                   ),
-                ),
-                _buildToolBar(context)
-              ],
-            ),
-            _buildAppBar(context)
-          ],
-        ),
-      ),
-    );
+                  _buildToolBar(context, provider)
+                ],
+              ),
+              _buildAppBar(context, provider)
+            ],
+          ),
+        );
   }
 }

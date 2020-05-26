@@ -87,28 +87,47 @@ class BookDetailRecommend extends StatelessWidget with PixelSize {
   final provider;
   BookDetailRecommend({this.provider});
 
+  Widget _buildContentItem(data, context) {
+    return Container(
+      width: (getWidth(context) - 70) / 3,
+      height: getPixe(190, context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Material(
+            elevation: 3,
+            color: Colors.transparent,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(getPixe(4, context)),
+              child: Image.network(data['imageUrl'], fit: BoxFit.fitWidth),
+            )
+          ),
+          Text(data['title'], style: TextStyle(fontSize: getPixe(14, context)),),
+          Text('${(data['total_num'] / 10000).floor()} 万人气', style: TextStyle(fontSize: getPixe(12, context), color: Colors.grey),)
+        ],
+      ),
+    );
+  }
+
+  _getContentList(context) {
+    List<Widget> _list = List<Widget>();
+    for(var i=0; i<6; i++) {
+      _list.add(_buildContentItem(provider.recommendData[i], context));
+    }
+    return _list;
+  }
+
   Widget _buildRecommendContent(context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: getPixe(10,context)),
+      margin: EdgeInsets.only(top: getPixe(20, context)),
+      padding: EdgeInsets.symmetric(vertical: getPixe(10, context)),
       child: Wrap(
         direction: Axis.horizontal,
         spacing: getPixe(20, context),
         runSpacing: getPixe(20, context),
         verticalDirection: VerticalDirection.down,
-        children: <Widget>[
-          Container(
-            width: (getWidth(context) - 70) / 3,
-            height: getPixe(150, context),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(getPixe(4, context)),
-                )
-              ],
-            ),
-          )
-        ],
+        children: _getContentList(context),
       ),
     );
   }
@@ -119,7 +138,7 @@ class BookDetailRecommend extends StatelessWidget with PixelSize {
       margin: EdgeInsets.only(bottom: getPixe(20, context)),
       padding: EdgeInsets.all(getPixe(15, context)),
       height: getPixe(500, context),
-      color: Colors.grey,
+      // color: Colors.grey,
       child: Column(
         children: <Widget>[
           Row(
@@ -159,9 +178,7 @@ class BookDetailRecommend extends StatelessWidget with PixelSize {
                   ))
             ],
           ),
-          Expanded(
-            child: _buildRecommendContent(context)
-          )
+          Expanded(child: _buildRecommendContent(context))
         ],
       ),
     );
