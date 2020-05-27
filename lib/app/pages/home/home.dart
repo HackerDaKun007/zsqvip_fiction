@@ -222,8 +222,8 @@ class HomeBody extends StatelessWidget with PixelSize{
               child: Image.asset(
                 imageUrl,
                 fit: BoxFit.fill,
-                height: 65 * rpx,
-                width: 65 * rpx,
+                height: 62 * rpx,
+                width: 62 * rpx,
               ),
               color: Colors.white.withOpacity(0),
               shadowColor: Colors.black.withOpacity(0.5),
