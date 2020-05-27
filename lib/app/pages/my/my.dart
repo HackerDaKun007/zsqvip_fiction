@@ -68,7 +68,7 @@ class _MineBodyState extends State<MineBody> with PixelSize{
       decoration: BoxDecoration(
           image:const DecorationImage(
               image: AssetImage(
-                'images/bg.jpg',
+                'images/myBack.jpg',
               ),
               fit: BoxFit.cover)),
       padding: MediaQuery.of(context).padding,
