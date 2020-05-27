@@ -21,7 +21,6 @@ import 'package:fiction/app/readTime/readTime.dart'; //阅读时间
 
 //状态管理
 import 'package:fiction/providers/bookShelf.dart'; //书架数据
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 //网络状态

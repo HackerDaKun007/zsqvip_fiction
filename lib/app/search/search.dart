@@ -15,7 +15,7 @@ import 'package:fiction/public/utils/shared.dart';
 
 import 'child/searchAd.dart'; //广告组件
 import 'child/everyoneTitle.dart'; //大家都在搜索
-import 'child/Recent.dart'; //最近搜索
+import 'child/recent.dart'; //最近搜索
 
 import 'package:fiction/public/widget/internet.dart';
 
