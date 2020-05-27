@@ -21,6 +21,7 @@ import 'package:fiction/app/readTime/readTime.dart'; //阅读时间
 
 //状态管理
 import 'package:fiction/providers/bookShelf.dart'; //书架数据
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 //网络状态
@@ -68,10 +69,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
     //数据管理状态
     this.providerListData = Provider.of<BookShelfProviders>(context);
     return Internet(_init(), providerListData.isData);
-    // return _error();
   }
-
-  
 
   //主体内容
   Widget _init() {
@@ -131,7 +129,9 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                       Padding(
                         padding:
                             EdgeInsets.fromLTRB(0, getPixe(100, context), 0, 0),
-                        child: ReadTime(style: TextStyle(fontSize: getPixe(50, context)),),
+                        child: ReadTime(
+                          style: TextStyle(fontSize: getPixe(50, context)),
+                        ),
                       ),
                       Text(
                         '今日已读 / 分钟',
@@ -279,25 +279,21 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
     );
   }
 
-
   //修改父级组件
   void _getOut() {
     widget.getCurrenIndex(1);
   }
-
-
-
 }
 
 //推荐内容
 class RecommendedContent extends StatelessWidget with PixelSize {
   List<Map> list = [
-      {"title": "我把你当兄弟你居然想上我？", "id": 1},
-      {"title": "穿越异界，成为一代邪君！", "id": 2},
-      {"title": "守护我方轩宇，千秋在线刚枪", "id": 3},
-      {"title": "守护我方轩宇，千秋在线刚枪", "id": 4},
-      {"title": "最强斗神重生复活，再战丧尸末世", "id": 5},
-    ];
+    {"title": "我把你当兄弟你居然想上我？", "id": 1},
+    {"title": "穿越异界，成为一代邪君！", "id": 2},
+    {"title": "守护我方轩宇，千秋在线刚枪", "id": 3},
+    {"title": "守护我方轩宇，千秋在线刚枪", "id": 4},
+    {"title": "最强斗神重生复活，再战丧尸末世", "id": 5},
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
