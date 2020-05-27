@@ -49,6 +49,7 @@ class _InternetState extends State<Internet> with PixelSize {
 
   void initState() {
     super.initState();
+    print(1232);
     subscription = Connectivity()
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
@@ -78,6 +79,7 @@ class _InternetState extends State<Internet> with PixelSize {
 
   //初始化定义数据
   Widget _init(Widget centent) {
+    
     //判断网络 true网络正常，false网站不正常
     if (isInternet) {
       if (isError) { //isLoad: true返回请求失败， false返回请求成功
@@ -109,6 +111,7 @@ class _InternetState extends State<Internet> with PixelSize {
       );
     }
   }
+
 
   //加载动画
   Widget _load(String value) {

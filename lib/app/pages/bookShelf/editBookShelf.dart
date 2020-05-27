@@ -31,13 +31,15 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
   var bounced = Bounced(); //配置弹出层
 
   var providerListData;
-
+  int number = 0;
   @override
   void initState() {
     super.initState();
   }
 
   Widget build(BuildContext context) {
+    number += 1;
+    print(number);
     this.providerListData = Provider.of<BookShelfProviders>(context);
     return Internet(_init(), providerListData.isData);
   }
@@ -87,7 +89,9 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
                   ),
                 ),
                 onTap: () {
-                  providerListData.editSelectAll();
+                  setState(() {
+                    providerListData.editSelectAll();
+                  });
                 },
               ),
             ),
