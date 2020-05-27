@@ -50,5 +50,4 @@ class PixelSize {
       return mediaQuery;
   }
   
-
 } 

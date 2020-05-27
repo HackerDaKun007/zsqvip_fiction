@@ -1,8 +1,8 @@
 library common;
 
-export 'fonts/Iconfont.dart';
-export 'utils/PixelSize.dart';
-export 'utils/Common.dart';
-export 'configs/Config.dart';
-export 'configs/Path.dart';
+export 'fonts/iconfont.dart';
+export 'utils/pixelSize.dart';
+export 'utils/common.dart';
+export 'configs/config.dart';
+export 'configs/path.dart';
 export 'widget/prompt.dart';
