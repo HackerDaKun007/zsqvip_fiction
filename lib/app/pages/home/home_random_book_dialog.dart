@@ -92,7 +92,7 @@ class _RandomBookDialogState extends State<RandomBookDialog> with PixelSize{
                     textColor: Colors.white,
                     child: const Text('立即阅读'),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/bookdetail', arguments: {'data':_data});
+                      Navigator.pushNamed(context, '/bookdetail', arguments: {'data':_data.first});
                     },
                   ))
             ],
