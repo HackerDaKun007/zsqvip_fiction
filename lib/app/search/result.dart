@@ -181,7 +181,7 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
                       Text(
                         "${value['title']}",
                         style: TextStyle(
-                          fontSize: getPixe(18, context),
+                          fontSize: getPixe(16, context),
                         ),
                       ),
                       SizedBox(height: getPixe(5, context)),
@@ -189,7 +189,7 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
                         children: <Widget>[
                           Text("${value['author']}",
                               style: TextStyle(
-                                  fontSize: getPixe(14, context),
+                                  fontSize: getPixe(12, context),
                                   color: Color(0x997e7e7e))),
                           Row(
                             children: _getCategory(value['category']),
@@ -234,7 +234,7 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
           child: Text(
             value,
             style: TextStyle(
-                color: Config.color, fontSize: getPixe(12.0, context)),
+                color: Config.color, fontSize: getPixe(10.0, context)),
           ),
         ));
         _num++;
