@@ -41,50 +41,10 @@ class PageBody extends StatelessWidget with PixelSize {
   double paddingTop;
   double screenWidth;
 
-  /// AppBar
-  Widget _buildAppBar(context, provider) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(provider.alpha),
-          ),
-          padding: EdgeInsets.only(
-              left: getPixe(5, context), top: getPixe(paddingTop, context)),
-          height: kToolbarHeight + paddingTop,
-          child: Row(
-            children: <Widget>[
-              IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: Icon(
-                    Iconfont.zuo,
-                    color: Colors.black,
-                    size: getPixe(26, context),
-                  )),
-              Expanded(
-                child: Opacity(
-                  opacity: provider.alpha,
-                  child: Text(
-                    data['title'],
-                    style: TextStyle(
-                        fontSize: getPixe(20, context),
-                        fontWeight: FontWeight.w500),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              Container(width: getPixe(44, context)),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  /// 内容简介
-  Widget _buildNovelDesc(context) {
+  /// 内容
+  Widget _buildNovelContent(context) {
     return Container(
-      width: screenWidth,
+      width: getWidth(context),
       margin: EdgeInsets.symmetric(vertical: getPixe(10, context)),
       padding: EdgeInsets.all(getPixe(15, context)),
       child: Column(
@@ -148,11 +108,11 @@ class PageBody extends StatelessWidget with PixelSize {
                 onTap: () {
                   showModalBottomSheet(
                       context: context,
-                      isScrollControlled:true,  // 设置为true即可设置高度
+                      isScrollControlled: true, // 设置为true即可设置高度
                       builder: (BuildContext context) {
                         return Container(
                           height: getHeight(context) * 0.75,
-                          child: _buildBottomSheet(context),
+                          child: BookDetailDesc(data: data,),
                         );
                       });
                 },
@@ -198,75 +158,43 @@ class PageBody extends StatelessWidget with PixelSize {
       ),
     );
   }
- 
-  /// 目录详情
-  Widget _buildBottomSheet(context) {
-    return Column(
+
+  /// AppBar
+  Widget _buildAppBar(context, provider) {
+    return Stack(
       children: <Widget>[
         Container(
-          width: getWidth(context),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(provider.alpha),
+          ),
+          padding: EdgeInsets.only(
+              left: getPixe(5, context), top: getPixe(paddingTop, context)),
+          height: kToolbarHeight + paddingTop,
           child: Row(
             children: <Widget>[
-              Spacer(
-                flex: 1,
-              ),
+              IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(
+                    Iconfont.zuo,
+                    color: Colors.black,
+                    size: getPixe(26, context),
+                  )),
               Expanded(
-                flex: 6,
-                child: Text(
-                  '目录',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: getPixe(18, context),
-                      fontWeight: FontWeight.w500),
+                child: Opacity(
+                  opacity: provider.alpha,
+                  child: Text(
+                    data['title'],
+                    style: TextStyle(
+                        fontSize: getPixe(20, context),
+                        fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
-              IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Icon(Icons.close),
-                color: Colors.grey,
-              )
+              Container(width: getPixe(44, context)),
             ],
           ),
         ),
-        Container(
-          width: getWidth(context),
-          padding: EdgeInsets.symmetric(horizontal: getPixe(15, context)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                '共${data['chapter']}章',
-                style: TextStyle(
-                    fontSize: getPixe(12, context), color: Config.color),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.swap_vert),
-                color: Config.color,
-                iconSize: getPixe(20, context),
-              )
-            ],
-          ),
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: 20,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                  onTap: () {
-                    print('=========第${index + 1}章=========');
-                  },
-                  child: Ink(
-                    height: getPixe(50, context),
-                    padding: EdgeInsets.symmetric(
-                        vertical: getPixe(10, context),
-                        horizontal: getPixe(20, context)),
-                    child:
-                        Text('第${index + 1}章  ${data['read_chapter_title']}'),
-                  ));
-            },
-          ),
-        )
       ],
     );
   }
@@ -340,7 +268,7 @@ class PageBody extends StatelessWidget with PixelSize {
                         BookDetailHeader(
                           data: data,
                         ), // 头部
-                        _buildNovelDesc(context), // 内容介绍
+                        _buildNovelContent(context), // 内容介绍
                         BookDetailRecommend(provider: provider), // 推荐
                       ]),
                     )
@@ -353,6 +281,136 @@ class PageBody extends StatelessWidget with PixelSize {
           _buildAppBar(context, provider)
         ],
       ),
+    );
+  }
+}
+
+List catalogueData = [
+  '初次出手',
+  '初次出手1',
+  '初次出手2',
+  '初次出手3',
+  '初次出手3',
+  '初次出手3',
+  '初次出手3',
+  '初次出手3',
+  '初次出手3',
+  '初次出手3',
+  '初次出手3',
+  '初次出手3',
+  '初次出手3',
+  '初次出手3',
+  '初次出手3',
+  '初次出手3',
+  '初次出手3',
+  '初次出手5',
+  '初次出手5',
+  '初次出手5',
+  '初次出手5',
+  '初次出手9',
+];
+
+class BookDetailDesc extends StatefulWidget {
+  final Map data;
+  BookDetailDesc({this.data});
+
+  @override
+  _BookDetailDescState createState() => _BookDetailDescState();
+}
+
+class _BookDetailDescState extends State<BookDetailDesc> with PixelSize {
+  List<Widget> catalogueList = List<Widget>();
+  List<Widget> reversedCatalogueList = List<Widget>();
+  Map data;
+  bool _isReversed;
+
+  @override
+  void initState() {
+    super.initState();
+    data = widget.data;
+    _isReversed = false;
+    List.generate(
+        catalogueData.length,
+        (index) => catalogueList
+            .add(_buildCatalogueItem(index, catalogueData[index])));
+    reversedCatalogueList = catalogueList.reversed.toList();
+  }
+
+  /// 目录倒转
+  _handleCatalogueReverse() {
+    setState(() {
+      _isReversed = !_isReversed;
+    });
+  }
+
+  Widget _buildCatalogueItem(index, chapter) {
+    return InkWell(
+        onTap: () {
+          print('=========第${index + 1}章=========');
+        },
+        child: Ink(
+          height: getPixe(50, context),
+          padding: EdgeInsets.symmetric(
+              vertical: getPixe(10, context), horizontal: getPixe(20, context)),
+          child: Text('第${index + 1}章  $chapter'),
+        ));
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          width: getWidth(context),
+          child: Row(
+            children: <Widget>[
+              Spacer(
+                flex: 1,
+              ),
+              Expanded(
+                flex: 6,
+                child: Text(
+                  '目录',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: getPixe(18, context),
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+              IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: Icon(Icons.close),
+                color: Colors.grey,
+              )
+            ],
+          ),
+        ),
+        Container(
+          width: getWidth(context),
+          padding: EdgeInsets.symmetric(horizontal: getPixe(15, context)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                '共${data['chapter']}章',
+                style: TextStyle(
+                    fontSize: getPixe(12, context), color: Config.color),
+              ),
+              IconButton(
+                onPressed: _handleCatalogueReverse,
+                icon: Icon(Icons.swap_vert),
+                color: Config.color,
+                iconSize: getPixe(20, context),
+              )
+            ],
+          ),
+        ),
+        Expanded(child: ListView(
+          children: _isReversed ? reversedCatalogueList : catalogueList,
+        )
+        )
+      ],
     );
   }
 }

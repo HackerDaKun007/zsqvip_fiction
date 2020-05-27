@@ -8,14 +8,19 @@
  * @see         状态管理-书籍界面
 */
 
+import 'package:fiction/public/public.dart';
 import 'package:fiction/res/guessYouLikeData.dart';
 import 'package:flutter/material.dart';
 
-class BookDetailProvider extends ChangeNotifier {
+
+
+
+class BookDetailProvider extends ChangeNotifier with PixelSize{
   ScrollController scrollController; // 滚动控制
   double alpha; // 透明度
   List<Map> recommendData; // 推荐数据
   bool isBookShelf; // 是否已在书架
+
 
   BookDetailProvider() {
     scrollController = ScrollController();
@@ -36,6 +41,7 @@ class BookDetailProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
+
 
   /// 初始化
   _initData() {

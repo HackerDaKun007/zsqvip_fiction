@@ -16,7 +16,7 @@ List<Map> guessYouLikeData = [
     'read_chapter_title':'初次出手',
     'book_shelf': 1,
     'total_num': 215484,
-    'desc_word': ['神医流', '桃花']
+    'desc_word': ['神医流', '桃花'],
   },
   {
     'id': 2,
