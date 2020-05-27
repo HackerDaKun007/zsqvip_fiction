@@ -148,9 +148,10 @@ class PageBody extends StatelessWidget with PixelSize {
                 onTap: () {
                   showModalBottomSheet(
                       context: context,
+                      isScrollControlled:true,  // 设置为true即可设置高度
                       builder: (BuildContext context) {
                         return Container(
-                          height: getHeight(context) * 0.8,
+                          height: getHeight(context) * 0.75,
                           child: _buildBottomSheet(context),
                         );
                       });
@@ -197,7 +198,8 @@ class PageBody extends StatelessWidget with PixelSize {
       ),
     );
   }
-
+ 
+  /// 目录详情
   Widget _buildBottomSheet(context) {
     return Column(
       children: <Widget>[
@@ -251,13 +253,17 @@ class PageBody extends StatelessWidget with PixelSize {
             itemCount: 20,
             itemBuilder: (BuildContext context, int index) {
               return InkWell(
-                onTap: (){print('=========第${index+1}章=========');},
-                child: Ink(
-                  height: getPixe(50, context),
-                  padding: EdgeInsets.symmetric(vertical: getPixe(10, context), horizontal: getPixe(20, context)),
-                  child: Text('第${index+1}章  ${data['read_chapter_title']}'),
-                )
-              );
+                  onTap: () {
+                    print('=========第${index + 1}章=========');
+                  },
+                  child: Ink(
+                    height: getPixe(50, context),
+                    padding: EdgeInsets.symmetric(
+                        vertical: getPixe(10, context),
+                        horizontal: getPixe(20, context)),
+                    child:
+                        Text('第${index + 1}章  ${data['read_chapter_title']}'),
+                  ));
             },
           ),
         )
@@ -269,47 +275,47 @@ class PageBody extends StatelessWidget with PixelSize {
   Widget _buildToolBar(context, provider) {
     double buttonPadding = screenWidth / 6;
     return Material(
-      elevation: 3,
-      color: Colors.transparent,
-      child: Container(
-        width: screenWidth,
-        color: Colors.white,
-        padding: EdgeInsets.all(getPixe(5, context)),
-        height: getMediaQuery(context).padding.bottom + 50,
-        child: Row(
-          children: <Widget>[
-            GestureDetector(
-              onTap: provider.handleBookShelf,
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(getPixe(8, context))),
-                padding: EdgeInsets.symmetric(
-                    horizontal: getPixe(buttonPadding, context),
-                    vertical: getPixe(10, context)),
-                child: provider.isBookShelf
-                    ? Text('已在书架', style: TextStyle(color: Colors.grey))
-                    : Text('加入书架', style: TextStyle(color: Config.color)),
-              )
-            ),
-            Spacer(),
-            InkWell(
-                onTap: () {},
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getPixe(buttonPadding, context),
-                      vertical: getPixe(10, context)),
-                  decoration: BoxDecoration(
-                      color: Config.color,
-                      borderRadius: BorderRadius.circular(getPixe(8, context))),
-                  child: Text(
-                    '免费阅读',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                )),
-          ],
-        ),
-      )
-    );
+        elevation: 3,
+        color: Colors.transparent,
+        child: Container(
+          width: screenWidth,
+          color: Colors.white,
+          padding: EdgeInsets.all(getPixe(5, context)),
+          height: getMediaQuery(context).padding.bottom + 50,
+          child: Row(
+            children: <Widget>[
+              GestureDetector(
+                  onTap: provider.handleBookShelf,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(getPixe(8, context))),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getPixe(buttonPadding, context),
+                        vertical: getPixe(10, context)),
+                    child: provider.isBookShelf
+                        ? Text('已在书架', style: TextStyle(color: Colors.grey))
+                        : Text('加入书架', style: TextStyle(color: Config.color)),
+                  )),
+              Spacer(),
+              InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getPixe(buttonPadding, context),
+                        vertical: getPixe(10, context)),
+                    decoration: BoxDecoration(
+                        color: Config.color,
+                        borderRadius:
+                            BorderRadius.circular(getPixe(8, context))),
+                    child: Text(
+                      '免费阅读',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )),
+            ],
+          ),
+        ));
   }
 
   @override
@@ -326,17 +332,19 @@ class PageBody extends StatelessWidget with PixelSize {
           Column(
             children: <Widget>[
               Expanded(
-                child: SingleChildScrollView(
+                child: CustomScrollView(
                   controller: provider.scrollController,
-                  child: Column(
-                    children: <Widget>[
-                      BookDetailHeader(
-                        data: data,
-                      ), // 头部
-                      _buildNovelDesc(context), // 内容介绍
-                      BookDetailRecommend(provider: provider), // 推荐
-                    ]
-                  ),
+                  slivers: <Widget>[
+                    SliverToBoxAdapter(
+                      child: Column(children: <Widget>[
+                        BookDetailHeader(
+                          data: data,
+                        ), // 头部
+                        _buildNovelDesc(context), // 内容介绍
+                        BookDetailRecommend(provider: provider), // 推荐
+                      ]),
+                    )
+                  ],
                 ),
               ),
               _buildToolBar(context, provider)
