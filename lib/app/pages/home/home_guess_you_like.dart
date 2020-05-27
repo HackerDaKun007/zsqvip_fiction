@@ -16,6 +16,7 @@ import 'package:fiction/app/pages/home/home_build_book.dart';
 
 
 class GuessYouLike extends StatefulWidget {
+  GuessYouLike({Key key}):super(key:key);
   @override
   _GuessYouLikeState createState() => _GuessYouLikeState();
 }

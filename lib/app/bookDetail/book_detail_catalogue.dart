@@ -38,7 +38,7 @@ List catalogueData = [
 
 class BookDetailCatalogue extends StatefulWidget {
   final Map data;
-  BookDetailCatalogue({this.data});
+  BookDetailCatalogue({Key key, this.data}):super(key: key);
 
   @override
   _BookDetailCatalogueState createState() => _BookDetailCatalogueState();
@@ -111,7 +111,7 @@ class _BookDetailCatalogueState extends State<BookDetailCatalogue>
               ),
               IconButton(
                 onPressed: () => Navigator.pop(context),
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 color: Colors.grey,
               )
             ],
@@ -130,7 +130,7 @@ class _BookDetailCatalogueState extends State<BookDetailCatalogue>
               ),
               IconButton(
                 onPressed: _handleCatalogueReverse,
-                icon: Icon(Icons.swap_vert),
+                icon: const Icon(Icons.swap_vert),
                 color: Config.color,
                 iconSize: getPixe(20, context),
               )

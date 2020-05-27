@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
 class SettingsPage extends StatelessWidget with PixelSize {
+  SettingsPage({Key key}):super(key: key);
+
   Widget _buildContent(context) {
     return Container(
       width: getWidth(context),
@@ -60,7 +62,7 @@ class SettingsPage extends StatelessWidget with PixelSize {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff7f7f7),
+      backgroundColor: const Color(0xfff7f7f7),
       appBar: AppBar(
         title: Text(
           '设置',
@@ -69,7 +71,7 @@ class SettingsPage extends StatelessWidget with PixelSize {
         centerTitle: true,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Iconfont.zuo),
+          icon: const Icon(Iconfont.zuo),
           iconSize: getPixe(26, context),
           onPressed: () {
             Navigator.pop(context);

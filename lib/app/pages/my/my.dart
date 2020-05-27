@@ -16,10 +16,12 @@ import 'package:provider/provider.dart';
 
 
 class MyPage extends StatelessWidget with PixelSize{
+  MyPage({Key key}):super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff7f7f7),
+      backgroundColor: const Color(0xfff7f7f7),
       body: Container(
         width: getWidth(context),
         height: double.infinity,
@@ -35,6 +37,7 @@ class MyPage extends StatelessWidget with PixelSize{
 }
 
 class MineBody extends StatefulWidget {
+  MineBody({Key key}):super(key: key);
   @override
   _MineBodyState createState() => _MineBodyState();
 }
@@ -63,7 +66,7 @@ class _MineBodyState extends State<MineBody> with PixelSize{
       height: 400 * rpx,
       width: 750 * rpx,
       decoration: BoxDecoration(
-          image: DecorationImage(
+          image:const DecorationImage(
               image: AssetImage(
                 'images/bg.jpg',
               ),
@@ -173,8 +176,6 @@ class _MineBodyState extends State<MineBody> with PixelSize{
         children: <Widget>[
           _getListItem(title: '福利中心', icon: Icons.redeem, subtitle: '抽大奖'),
           _getListItem(title: '积分商城', icon: Icons.store, subtitle: '兑换好礼'),
-          // _getListItem(
-          //     title: '阅读兴趣', icon: Icons.favorite_border, subtitle: '精选推荐好书'),
           _getListItem(
             title: '阅读记录',
             icon: Icons.access_time,

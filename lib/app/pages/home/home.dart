@@ -29,13 +29,13 @@ class HomePage extends StatelessWidget with PixelSize {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xfff4f4f4),
+          backgroundColor:const Color(0xfff4f4f4),
           elevation: 1,
           titleSpacing: 0,
           title: Container(
             height: getPixe(44, context),
             child: Container(
-              color: Color(0xfffcfcfc),
+              color: const Color(0xfffcfcfc),
               margin: EdgeInsets.only(left: getPixe(15, context)),
               padding: EdgeInsets.only(left: getPixe(5, context)),
               child: TextField(
@@ -43,14 +43,14 @@ class HomePage extends StatelessWidget with PixelSize {
                 textAlignVertical: TextAlignVertical(y: -1),
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(left: getPixe(5, context)),
-                    icon: Icon(
+                    icon: const Icon(
                       Iconfont.sousuo,
                       color: Color(0xffb5b5b5),
                     ),
                     hintText: '搜索书名或作者',
                     hintStyle: TextStyle(
                       fontSize: getPixe(16, context),
-                      color: Color(0xffb5b5b5),
+                      color: const Color(0xffb5b5b5),
                     ),
                     border: InputBorder.none),
                 onTap: () {
@@ -125,7 +125,7 @@ class HomeBody extends StatelessWidget with PixelSize{
   }
 
   /// 轮播图
-  Widget _buildSwiperWidget() {
+  _buildSwiperWidget() {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(26 * rpx)),
       padding: EdgeInsets.symmetric(horizontal: 30 * rpx, vertical: 20 * rpx),

@@ -12,6 +12,8 @@ import 'package:fiction/public/public.dart';
 import 'package:flutter/material.dart';
 
 class AboutUsPage extends StatelessWidget with PixelSize {
+  AboutUsPage({Key key}):super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +25,7 @@ class AboutUsPage extends StatelessWidget with PixelSize {
         centerTitle: true,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Iconfont.zuo),
+          icon: const Icon(Iconfont.zuo),
           iconSize: getPixe(26, context),
           onPressed: () {
             Navigator.pop(context);

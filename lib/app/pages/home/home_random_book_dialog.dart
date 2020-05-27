@@ -13,6 +13,7 @@ import 'package:fiction/res/guessYouLikeData.dart';
 import 'package:flutter/material.dart';
 
 class RandomBookDialog extends StatefulWidget {
+  RandomBookDialog({Key key}):super(key: key);
   @override
   _RandomBookDialogState createState() => _RandomBookDialogState();
 }
@@ -89,9 +90,9 @@ class _RandomBookDialogState extends State<RandomBookDialog> with PixelSize{
                   child: FlatButton(
                     color: Colors.blue,
                     textColor: Colors.white,
-                    child: Text('立即阅读'),
+                    child: const Text('立即阅读'),
                     onPressed: () {
-                      print('====== pressed =====');
+                      Navigator.pushNamed(context, '/bookdetail', arguments: {'data':_data});
                     },
                   ))
             ],
@@ -103,7 +104,7 @@ class _RandomBookDialogState extends State<RandomBookDialog> with PixelSize{
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.close,
                   color: Colors.grey,
                 ),

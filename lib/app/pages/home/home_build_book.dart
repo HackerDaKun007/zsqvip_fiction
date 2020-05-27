@@ -18,7 +18,8 @@ class BookContentWidget extends StatelessWidget {
   BookContentWidget(
       {@required this.data,
       this.isElevation = false,
-      this.isInfinity = false});
+      this.isInfinity = false,
+      Key key}):super(key:key);
 
   @override
   Widget build(BuildContext context) {

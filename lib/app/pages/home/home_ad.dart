@@ -13,6 +13,7 @@ import 'package:fiction/res/adData.dart';
 import 'package:flutter/material.dart';
 
 class AdWidget extends StatefulWidget {
+  AdWidget({Key key}):super(key:key);
   @override
   _AdWidgetState createState() => _AdWidgetState();
 }
@@ -23,7 +24,6 @@ class _AdWidgetState extends State<AdWidget> with PixelSize{
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _adData.shuffle();
   }

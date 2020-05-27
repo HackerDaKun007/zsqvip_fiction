@@ -17,7 +17,7 @@ class CategoryBtnsWidget extends StatelessWidget with PixelSize {
 
   final List data;
   final CategoryProvider provider;
-  CategoryBtnsWidget({this.data, this.provider});
+  CategoryBtnsWidget({Key key, this.data, this.provider}):super(key: key);
 
   /// 分类按钮列表
   Widget _getbtnList({data, BuildContext context, bool isLastOne=false, int index}) {

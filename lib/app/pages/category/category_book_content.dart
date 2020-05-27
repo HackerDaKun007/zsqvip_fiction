@@ -15,7 +15,7 @@ import 'package:fiction/public/public.dart';
 
 class CategoryBookContent extends StatefulWidget {
   final List data;
-  CategoryBookContent({this.data});
+  CategoryBookContent({this.data, Key key}):super(key:key);
 
   @override
   _CategoryBookContentState createState() => _CategoryBookContentState();
@@ -35,7 +35,7 @@ class _CategoryBookContentState extends State<CategoryBookContent> with PixelSiz
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-           ClipRRect(
+            ClipRRect(
                 borderRadius: BorderRadius.circular(getPixe(4, context)),
                 child: Image.network(
                   data['image'],

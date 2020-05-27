@@ -15,6 +15,8 @@ import 'package:fiction/res/guessYouLikeData.dart';
 
 
 class BookDetailRecommend extends StatefulWidget {
+  BookDetailRecommend({Key key}):super(key: key);
+
   @override
   _BookDetailRecommendState createState() => _BookDetailRecommendState();
 }
@@ -80,7 +82,6 @@ class _BookDetailRecommendState extends State<BookDetailRecommend> with PixelSiz
         direction: Axis.horizontal,
         spacing: getPixe(20, context),
         runSpacing: getPixe(20, context),
-        verticalDirection: VerticalDirection.down,
         children: _getContentList(context),
       ),
     );

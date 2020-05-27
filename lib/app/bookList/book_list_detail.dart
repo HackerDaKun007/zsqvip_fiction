@@ -15,7 +15,7 @@ import 'package:fiction/res/booklistData.dart';
 
 class BookListDetail extends StatefulWidget {
   final arguments;
-  BookListDetail({this.arguments});
+  BookListDetail({Key key, this.arguments}) : super(key: key);
   @override
   _BookListDetailState createState() => _BookListDetailState();
 }
@@ -82,7 +82,8 @@ class _BookListDetailState extends State<BookListDetail> with PixelSize {
                         width: 10 * rpx,
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 6 * rpx, vertical: 1*rpx),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 6 * rpx, vertical: 1 * rpx),
                         decoration: BoxDecoration(
                             border: Border.all(
                                 width: 1 * rpx, color: Colors.blue[100]),
@@ -122,7 +123,7 @@ class _BookListDetailState extends State<BookListDetail> with PixelSize {
             expandedHeight: 350 * rpx,
             elevation: 0,
             leading: IconButton(
-              icon: Icon(Iconfont.zuo),
+              icon: const Icon(Iconfont.zuo),
               iconSize: getPixe(26, context),
               onPressed: () {
                 Navigator.pop(context);

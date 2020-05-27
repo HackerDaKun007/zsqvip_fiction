@@ -16,6 +16,9 @@ import 'package:fiction/app/pages/home/home_build_book.dart';
 
 
 class EditorsRecommend extends StatefulWidget {
+
+  EditorsRecommend({Key key}):super(key: key);
+
   @override
   _EditorsRecommendState createState() => _EditorsRecommendState();
 }
@@ -94,7 +97,6 @@ class _EditorsRecommendState extends State<EditorsRecommend> with PixelSize{
       _firstRecommendData = _listData[0];
     });
   }
-
 
 
   @override

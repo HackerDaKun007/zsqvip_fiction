@@ -13,9 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 import 'package:fiction/res/todayHotChartsData.dart';
 
-import '../../../public/public.dart';
-import '../../../public/public.dart';
-
 
 /// 今日热榜
 class HotChartsWidget extends StatefulWidget {
@@ -51,10 +48,10 @@ class _HotChartsWidgetState extends State<HotChartsWidget> with SingleTickerProv
             unselectedLabelStyle: TextStyle(fontSize: 28 * rpx),
             indicatorPadding: EdgeInsets.only(left: 70 * rpx, right: 70 * rpx),
             tabs: <Widget>[
-              Text('男生人气'),
-              Text('男生新书'),
-              Text('女生人气'),
-              Text('女生新书'),
+              const Text('男生人气'),
+              const Text('男生新书'),
+              const Text('女生人气'),
+              const Text('女生新书'),
             ],
           ),
           SizedBox(height: 30 * rpx),
@@ -132,7 +129,7 @@ class HotChartsTabView extends StatefulWidget {
 
   final List data;
 
-  HotChartsTabView({this.data});  
+  HotChartsTabView({this.data, Key key}):super(key:key);  
   @override
   _HotChartsTabViewState createState() => _HotChartsTabViewState();
 }

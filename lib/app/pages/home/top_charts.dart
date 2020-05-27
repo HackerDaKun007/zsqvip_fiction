@@ -49,7 +49,7 @@ class _TopChartsPageState extends State<TopChartsPage>
         centerTitle: true,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Iconfont.zuo),
+          icon: const Icon(Iconfont.zuo),
           iconSize: getPixe(26, context),
           onPressed: () {
             Navigator.pop(context);
@@ -66,8 +66,8 @@ class _TopChartsPageState extends State<TopChartsPage>
           indicatorPadding: EdgeInsets.only(
               left: indicatorWidth * rpx, right: indicatorWidth * rpx),
           tabs: <Widget>[
-            Text('男生频道'),
-            Text('女生频道'),
+            const Text('男生频道'),
+            const Text('女生频道'),
           ],
         ),
       ),
@@ -98,7 +98,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> with Automa
   // 保持tabbar切换时不重载
   @override
   bool get wantKeepAlive => true;
-
+ 
   @override
   void initState() {
     super.initState();
@@ -221,7 +221,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> with Automa
                               end: Alignment.bottomRight)),
                       child: Text(
                         '$topNum',
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -291,7 +291,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> with Automa
         Expanded(
           flex: 2,
           child: Container(
-            color: Color(0xfff4f4f4),
+            color: const Color(0xfff4f4f4),
             child: ListView.builder(
               itemCount: _chartsData.length,
               itemBuilder: (BuildContext context, int index) {

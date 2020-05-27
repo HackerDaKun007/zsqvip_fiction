@@ -17,7 +17,7 @@ import 'package:fiction/public/public.dart';
 class BookDetailHeader extends StatelessWidget with PixelSize{
   
   final dynamic data;
-  BookDetailHeader({this.data});
+  BookDetailHeader({this.data, Key key}):super(key: key);
 
   Widget _buildHeaderContent(context) {
     double paddingTop = getMediaQuery(context).padding.top;

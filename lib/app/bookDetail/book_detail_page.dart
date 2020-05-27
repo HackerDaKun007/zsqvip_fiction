@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 
 class BookDetailPage extends StatefulWidget {
   final arguments;
-  BookDetailPage({this.arguments});
+  BookDetailPage({this.arguments, Key key}):super(key: key);
 
   @override
   _BookDetailPageState createState() => _BookDetailPageState();
@@ -255,8 +255,8 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
                         horizontal: getPixe(buttonPadding, context),
                         vertical: getPixe(10, context)),
                     child: isBookShelf
-                        ? Text('已在书架', style: TextStyle(color: Colors.grey))
-                        : Text('加入书架', style: TextStyle(color: Config.color)),
+                        ? const Text('已在书架', style: TextStyle(color: Colors.grey))
+                        : const Text('加入书架', style: TextStyle(color: Colors.lightBlue)),
                   )),
               Spacer(),
               InkWell(

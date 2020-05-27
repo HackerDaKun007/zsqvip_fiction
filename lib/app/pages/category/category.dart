@@ -61,7 +61,7 @@ class _CategoryPageState extends State<CategoryPage>
                 padding: EdgeInsets.only(
                     bottom: getPixe(6, context), right: getPixe(6, context)),
                 child: IconButton(
-                  icon: Icon(Iconfont.sousuo),
+                  icon: const Icon(Iconfont.sousuo),
                   onPressed: () {
                     Navigator.pushNamed(context, '/search');
                   },
@@ -78,8 +78,8 @@ class _CategoryPageState extends State<CategoryPage>
             indicatorPadding: EdgeInsets.symmetric(
                 horizontal: getPixe(indicatorWidth, context)),
             tabs: <Widget>[
-              Text('男生频道'),
-              Text('女生频道'),
+              const Text('男生频道'),
+              const Text('女生频道'),
             ],
           ),
         ),
