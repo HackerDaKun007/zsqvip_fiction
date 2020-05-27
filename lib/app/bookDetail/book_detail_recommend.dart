@@ -89,7 +89,7 @@ class BookDetailRecommend extends StatelessWidget with PixelSize {
 
   Widget _buildContentItem(data, context) {
     return Container(
-      width: (getWidth(context) - 100) / 3,
+      width: (getWidth(context) - 80) / 3,
       height: getPixe(190, context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
