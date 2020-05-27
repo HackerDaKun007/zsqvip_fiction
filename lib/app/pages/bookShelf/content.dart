@@ -36,25 +36,13 @@ class _ContentState extends State<Content> with PixelSize {
   @override
   void initState() {
     super.initState();
-
+    //更新父级方法
+    // widget.updateIsDate(123);
   }
   Widget build(BuildContext context) {
 
     //数据管理状态
     this.providerListData = Provider.of<BookShelfProviders>(context);
-    // providerListData.data.addAll();
-
-    //过滤数据第一个,删除系统追加
-    // if (providerListData.data.length > 1 && listData[0]['system'] == 1) {
-    //   providerListData.data.removeAt(0);
-    // }
-    //添加一项追加数据
-    // if (providerListData.data.length <= 0) {
-    //   this.getAddListData();
-    // } else if (listData[0]['system'] == null) {
-    //   this.getAddListData();
-    // }
-
     return Padding(
       padding: EdgeInsets.all(10),
       child: GridView.count(

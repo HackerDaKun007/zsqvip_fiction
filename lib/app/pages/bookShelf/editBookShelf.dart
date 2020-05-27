@@ -32,20 +32,15 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
 
   var providerListData;
   int number = 0;
+
   @override
   void initState() {
     super.initState();
   }
 
   Widget build(BuildContext context) {
-    number += 1;
-    print(number);
+    
     this.providerListData = Provider.of<BookShelfProviders>(context);
-    return Internet(_init(), providerListData.isData);
-  }
-
-  //主体内容
-  Widget _init() {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -67,11 +62,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
           _getCancel(),
         ],
       ),
-      body: ListView(
-        children: <Widget>[
-          _getData(),
-        ],
-      ),
+      body: Internet(_init(), providerListData.isData),
       bottomNavigationBar: Container(
         height: getPixe(80, context),
         child: Row(
@@ -135,6 +126,15 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
     );
   }
 
+  //主体内容
+  Widget _init() {
+    return ListView(
+        children: <Widget>[
+          _getData(),
+        ],
+      );
+  }
+
   //是否展示取消按钮
   Widget _getCancel() {
     // print(this._dataAction.length);
@@ -184,6 +184,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
   List<Widget> _getListData() {
     List<Widget> listData = [];
     int let = (providerListData.editData.length-1);
+    // print(providerListData.dataColor);
     for (int i=let; i >= 0; i--) {
       listData.add(Container(
       child: GestureDetector(

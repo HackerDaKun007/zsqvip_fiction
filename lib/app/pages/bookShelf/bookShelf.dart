@@ -68,6 +68,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
     //数据管理状态
     this.providerListData = Provider.of<BookShelfProviders>(context);
     return Internet(_init(), providerListData.isData);
+    // return _init();
   }
 
   //主体内容

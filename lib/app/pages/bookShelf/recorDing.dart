@@ -39,11 +39,6 @@ class _RecordingState extends State<Recording> with PixelSize {
   Widget build(BuildContext context) {
     this.dataProvider = Provider.of<RecordingDataProviders>(context);
     this.providerListData = Provider.of<BookShelfProviders>(context);
-
-    return Internet(_init(), providerListData.isData);
-  }
-
-  Widget _init() {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -63,15 +58,19 @@ class _RecordingState extends State<Recording> with PixelSize {
           _getColumnEmpty(),
         ],
       ),
-      body: ListView(
+      body: Internet(_init(), providerListData.isData),
+    );
+  }
+
+  Widget _init() {
+    return ListView(
         children: <Widget>[
           Column(
             // children: this._getData(),
             children: this._getData(),
           ),
         ],
-      ),
-    );
+      );
   }
 
   //顶部清空按钮
