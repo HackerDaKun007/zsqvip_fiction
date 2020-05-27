@@ -136,4 +136,11 @@ class Iconfont {
     fontFamily: 'myIcon',
     matchTextDirection: true
   );
+
+  //警告
+  static const IconData jinggao = const IconData(
+    0xe6aa,
+    fontFamily: 'myIcon',
+    matchTextDirection: true
+  );
 }

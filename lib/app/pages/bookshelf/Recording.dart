@@ -20,6 +20,8 @@ import 'package:fiction/providers/bookShelf.dart'; //书架数据
 
 import 'package:provider/provider.dart';
 
+import 'package:fiction/public/widget/internet.dart';
+
 class Recording extends StatefulWidget {
   Recording({Key key}) : super(key: key);
 
@@ -38,6 +40,10 @@ class _RecordingState extends State<Recording> with PixelSize {
     this.dataProvider = Provider.of<RecordingDataProviders>(context);
     this.providerListData = Provider.of<BookShelfProviders>(context);
 
+    return Internet(_init(), providerListData.isData);
+  }
+
+  Widget _init() {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

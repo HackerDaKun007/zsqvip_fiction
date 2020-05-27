@@ -13,6 +13,8 @@ import 'package:fiction/public/public.dart';
 
 import 'package:fiction/res/listData.dart';
 
+import 'package:fiction/public/widget/internet.dart';
+
 class ResultSearch extends StatefulWidget {
   Map arguments;
   ResultSearch({Key key, this.arguments}) : super(key: key);
@@ -27,10 +29,15 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
   String title; //
   String _input; //
   Map arguments;
+
+  bool _isData = false; //判断数据是否请求下来
   //构造函数
   _ResultSearchState({this.arguments}) {
     this.title = this.arguments['title'];
     this._input = this.arguments['title'];
+
+    //请求成功下来
+    _isData = true;
   }
 
   @override
@@ -40,6 +47,11 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
   // }
 
   Widget build(BuildContext context) {
+    return Internet(_init(), this._isData);
+  }
+
+  //主体内容
+  Widget _init() {
     return Scaffold(
       backgroundColor:Colors.white,
       appBar: AppBar(

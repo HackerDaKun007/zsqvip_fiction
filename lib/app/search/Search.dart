@@ -17,6 +17,7 @@ import 'child/searchAd.dart'; //广告组件
 import 'child/everyoneTitle.dart'; //大家都在搜索
 import 'child/Recent.dart'; //最近搜索
 
+import 'package:fiction/public/widget/internet.dart';
 
 // import 'package:shared_preferences/shared_preferences.dart';
 
@@ -36,6 +37,11 @@ class _SearchState extends State<Search> with PixelSize, Common {
 
   Widget build(BuildContext context) {
 
+    return Internet(_init(), true);
+  }
+
+  //主体内容
+  Widget _init() {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -133,9 +139,8 @@ class _SearchState extends State<Search> with PixelSize, Common {
           ],
         ),
       ),
-    ) ;
+    );
   }
-
   
 
   //公共点击按钮点击事件

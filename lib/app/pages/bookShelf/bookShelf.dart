@@ -19,6 +19,10 @@ import 'package:fiction/app/pages/bookShelf/content.dart'; //内容模块
 import 'package:fiction/app/ad/tabsAd.dart'; //底部广告位置
 import 'package:fiction/app/readTime/readTime.dart'; //阅读时间
 
+//状态管理
+import 'package:fiction/providers/bookShelf.dart'; //书架数据
+import 'package:provider/provider.dart';
+
 //网络状态
 import 'package:fiction/public/widget/internet.dart';
 
@@ -35,6 +39,8 @@ class BookShelfPage extends StatefulWidget {
 }
 
 class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
+  var providerListData; //状态
+
   final int appbarAlpha = 100; //滚动最大值
   //修改顶部透明值
   double appBarAlpha = 0;
@@ -59,11 +65,16 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   }
 
   Widget build(BuildContext context) {
-    return Internet(init());
+    //数据管理状态
+    this.providerListData = Provider.of<BookShelfProviders>(context);
+    return Internet(_init(), providerListData.isData);
+    // return _error();
   }
 
+  
+
   //主体内容
-  Widget init() {
+  Widget _init() {
     return Stack(
       children: <Widget>[
         MediaQuery.removePadding(
@@ -83,7 +94,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                 //推荐内容
                 RecommendedContent(),
                 //列表内容
-                Content(getOut: (number) => _getOut()),
+                Content(getOut: () => _getOut()),
               ],
             ),
           ),
@@ -273,6 +284,9 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   void _getOut() {
     widget.getCurrenIndex(1);
   }
+
+
+
 }
 
 //推荐内容
