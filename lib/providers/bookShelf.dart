@@ -24,10 +24,10 @@ class BookShelfProviders with ChangeNotifier{
   List<Map> _data = []; //数据
   List _dataAction = []; //保存选中数据坐标key
   List _dataActionData = []; //备份存储保存选中数据坐标key
-  List<Map> _dataColor = []; //颜色
-  List<Map> _dataColorBack = []; //备份未选中颜色 - 取消
-  List<Map> _dataColorBackAction = []; //备份选中颜色 - 全部
-  List<Map> _adData = [];      //广告
+  List _dataColor = []; //颜色
+  List _dataColorBack = []; //备份未选中颜色 - 取消
+  List _dataColorBackAction = []; //备份选中颜色 - 全部
+  List _adData = [];      //广告
   Color _deleteColos = Colors.blue[100]; //删除默认颜色
 
 
@@ -76,6 +76,7 @@ class BookShelfProviders with ChangeNotifier{
 
   //编辑全选
   void editSelectAll() {
+    print(1);
     this._dataColor = JSON.jsonDecode(JSON.jsonEncode(this._dataColorBackAction));
     this._dataAction = JSON.jsonDecode(JSON.jsonEncode(this._dataActionData));
     this.updateDelteColors();
