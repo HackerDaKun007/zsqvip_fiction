@@ -8,41 +8,112 @@
  * @see         书籍界面
 */
 
+import 'package:fiction/app/bookDetail/book_detail_catalogue.dart';
 import 'package:fiction/app/bookDetail/book_detail_header.dart';
 import 'package:fiction/app/bookDetail/book_detail_recommend.dart';
-import 'package:fiction/providers/bookDetailProvider.dart';
 import 'package:fiction/public/public.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-
-class BookDetailPage extends StatelessWidget {
+class BookDetailPage extends StatefulWidget {
   final arguments;
   BookDetailPage({this.arguments});
 
   @override
-  Widget build(BuildContext context) {
-    dynamic _data = arguments['data'];
-    return ChangeNotifierProvider(
-        create: (context) => BookDetailProvider(),
-        child: Scaffold(
-          body: PageBody(
-            data: _data,
-          ),
-        ));
-  }
+  _BookDetailPageState createState() => _BookDetailPageState();
 }
 
-class PageBody extends StatelessWidget with PixelSize {
-  final data;
-  PageBody({this.data});
-
+class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
+  Map data;
   double paddingTop;
   double screenWidth;
+  ScrollController scrollController; // 滚动控制
+  double alpha; // 透明度
+  bool isBookShelf; // 是否已在书架
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    data = widget.arguments['data'];
+    scrollController = ScrollController();
+    alpha = 0;
+    isBookShelf = false;
+
+    scrollController.addListener(() {
+      var offset = scrollController.offset;
+      if (offset < 0) {
+        if (alpha != 0) {
+          setState(() {
+            alpha = 0;
+          });
+        }
+      } else if (offset < 50) {
+        setState(() {
+          alpha = 1 - (50 - offset) / 50;
+        });
+      } else if (alpha != 1) {
+        setState(() {
+          alpha = 1;
+        });
+      }
+    });
+  }
+
+  /// 书架管理
+  handleBookShelf() {
+    if (isBookShelf) return;
+    setState(() {
+      isBookShelf = !isBookShelf;
+    });
+  }
+
+  /// AppBar
+  Widget _buildAppBar() {
+    return Stack(
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(alpha),
+          ),
+          padding: EdgeInsets.only(
+              left: getPixe(5, context), top: getPixe(paddingTop, context)),
+          height: kToolbarHeight + paddingTop,
+          child: Row(
+            children: <Widget>[
+              IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(
+                    Iconfont.zuo,
+                    color: Colors.black,
+                    size: getPixe(26, context),
+                  )),
+              Expanded(
+                child: Opacity(
+                  opacity: alpha,
+                  child: Text(
+                    data['title'],
+                    style: TextStyle(
+                        fontSize: getPixe(20, context),
+                        fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              Container(width: getPixe(44, context)),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 
   /// 内容
-  Widget _buildNovelContent(context) {
+  Widget _buildNovelContent() {
     return Container(
       width: getWidth(context),
       margin: EdgeInsets.symmetric(vertical: getPixe(10, context)),
@@ -112,7 +183,9 @@ class PageBody extends StatelessWidget with PixelSize {
                       builder: (BuildContext context) {
                         return Container(
                           height: getHeight(context) * 0.75,
-                          child: BookDetailDesc(data: data,),
+                          child: BookDetailCatalogue(
+                            data: data,
+                          ),
                         );
                       });
                 },
@@ -159,48 +232,8 @@ class PageBody extends StatelessWidget with PixelSize {
     );
   }
 
-  /// AppBar
-  Widget _buildAppBar(context, provider) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(provider.alpha),
-          ),
-          padding: EdgeInsets.only(
-              left: getPixe(5, context), top: getPixe(paddingTop, context)),
-          height: kToolbarHeight + paddingTop,
-          child: Row(
-            children: <Widget>[
-              IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: Icon(
-                    Iconfont.zuo,
-                    color: Colors.black,
-                    size: getPixe(26, context),
-                  )),
-              Expanded(
-                child: Opacity(
-                  opacity: provider.alpha,
-                  child: Text(
-                    data['title'],
-                    style: TextStyle(
-                        fontSize: getPixe(20, context),
-                        fontWeight: FontWeight.w500),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              Container(width: getPixe(44, context)),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
   /// 底部工具栏
-  Widget _buildToolBar(context, provider) {
+  Widget _buildToolBar() {
     double buttonPadding = screenWidth / 6;
     return Material(
         elevation: 3,
@@ -213,7 +246,7 @@ class PageBody extends StatelessWidget with PixelSize {
           child: Row(
             children: <Widget>[
               GestureDetector(
-                  onTap: provider.handleBookShelf,
+                  onTap: handleBookShelf,
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius:
@@ -221,7 +254,7 @@ class PageBody extends StatelessWidget with PixelSize {
                     padding: EdgeInsets.symmetric(
                         horizontal: getPixe(buttonPadding, context),
                         vertical: getPixe(10, context)),
-                    child: provider.isBookShelf
+                    child: isBookShelf
                         ? Text('已在书架', style: TextStyle(color: Colors.grey))
                         : Text('加入书架', style: TextStyle(color: Config.color)),
                   )),
@@ -248,169 +281,36 @@ class PageBody extends StatelessWidget with PixelSize {
 
   @override
   Widget build(BuildContext context) {
-    BookDetailProvider provider = Provider.of<BookDetailProvider>(context);
     paddingTop = getMediaQuery(context).padding.top;
     screenWidth = getWidth(context);
-    return AnnotatedRegion(
-      value: provider.alpha > 0.5
-          ? SystemUiOverlayStyle.dark
-          : SystemUiOverlayStyle.light,
-      child: Stack(
+    return Scaffold(
+      body: Stack(
         children: <Widget>[
           Column(
             children: <Widget>[
               Expanded(
                 child: CustomScrollView(
-                  controller: provider.scrollController,
+                  controller: scrollController,
                   slivers: <Widget>[
                     SliverToBoxAdapter(
                       child: Column(children: <Widget>[
                         BookDetailHeader(
                           data: data,
                         ), // 头部
-                        _buildNovelContent(context), // 内容介绍
-                        BookDetailRecommend(provider: provider), // 推荐
+                        _buildNovelContent(), // 内容介绍
+                        BookDetailRecommend(), // 推荐
                       ]),
                     )
                   ],
                 ),
               ),
-              _buildToolBar(context, provider)
+              _buildToolBar()
             ],
           ),
-          _buildAppBar(context, provider)
+          _buildAppBar()
         ],
       ),
     );
   }
 }
 
-List catalogueData = [
-  '初次出手',
-  '初次出手1',
-  '初次出手2',
-  '初次出手3',
-  '初次出手3',
-  '初次出手3',
-  '初次出手3',
-  '初次出手3',
-  '初次出手3',
-  '初次出手3',
-  '初次出手3',
-  '初次出手3',
-  '初次出手3',
-  '初次出手3',
-  '初次出手3',
-  '初次出手3',
-  '初次出手3',
-  '初次出手5',
-  '初次出手5',
-  '初次出手5',
-  '初次出手5',
-  '初次出手9',
-];
-
-class BookDetailDesc extends StatefulWidget {
-  final Map data;
-  BookDetailDesc({this.data});
-
-  @override
-  _BookDetailDescState createState() => _BookDetailDescState();
-}
-
-class _BookDetailDescState extends State<BookDetailDesc> with PixelSize {
-  List<Widget> catalogueList = List<Widget>();
-  List<Widget> reversedCatalogueList = List<Widget>();
-  Map data;
-  bool _isReversed;
-
-  @override
-  void initState() {
-    super.initState();
-    data = widget.data;
-    _isReversed = false;
-    List.generate(
-        catalogueData.length,
-        (index) => catalogueList
-            .add(_buildCatalogueItem(index, catalogueData[index])));
-    reversedCatalogueList = catalogueList.reversed.toList();
-  }
-
-  /// 目录倒转
-  _handleCatalogueReverse() {
-    setState(() {
-      _isReversed = !_isReversed;
-    });
-  }
-
-  Widget _buildCatalogueItem(index, chapter) {
-    return InkWell(
-        onTap: () {
-          print('=========第${index + 1}章=========');
-        },
-        child: Ink(
-          height: getPixe(50, context),
-          padding: EdgeInsets.symmetric(
-              vertical: getPixe(10, context), horizontal: getPixe(20, context)),
-          child: Text('第${index + 1}章  $chapter'),
-        ));
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          width: getWidth(context),
-          child: Row(
-            children: <Widget>[
-              Spacer(
-                flex: 1,
-              ),
-              Expanded(
-                flex: 6,
-                child: Text(
-                  '目录',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: getPixe(18, context),
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-              IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Icon(Icons.close),
-                color: Colors.grey,
-              )
-            ],
-          ),
-        ),
-        Container(
-          width: getWidth(context),
-          padding: EdgeInsets.symmetric(horizontal: getPixe(15, context)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                '共${data['chapter']}章',
-                style: TextStyle(
-                    fontSize: getPixe(12, context), color: Config.color),
-              ),
-              IconButton(
-                onPressed: _handleCatalogueReverse,
-                icon: Icon(Icons.swap_vert),
-                color: Config.color,
-                iconSize: getPixe(20, context),
-              )
-            ],
-          ),
-        ),
-        Expanded(child: ListView(
-          children: _isReversed ? reversedCatalogueList : catalogueList,
-        )
-        )
-      ],
-    );
-  }
-}
