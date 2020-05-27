@@ -37,9 +37,11 @@ class _EditorsRecommendState extends State<EditorsRecommend> with PixelSize{
         Navigator.pushNamed(context, '/bookdetail', arguments: {'data':data});
       },
       child: Container(
-        width: ((750-100) / 4 ) * rpx,
+        width: ((750-70) / 4 ) * rpx,
+        padding: EdgeInsets.symmetric(horizontal: 10*rpx),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             ClipRRect(
               borderRadius: BorderRadius.circular(6 * rpx),
@@ -49,6 +51,7 @@ class _EditorsRecommendState extends State<EditorsRecommend> with PixelSize{
                 fit: BoxFit.fill,
               ),
             ),
+            SizedBox(height: 10*rpx,),
             Expanded(
               flex: 1,
               child: Column(
@@ -58,11 +61,11 @@ class _EditorsRecommendState extends State<EditorsRecommend> with PixelSize{
                     data['title'],
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    style: TextStyle(fontSize: 28 * rpx),
+                    style: TextStyle(fontSize: 24 * rpx),
                   ),
                   Text(
                     '110万人气',
-                    style: TextStyle(fontSize: 22 * rpx, color: Colors.black54),
+                    style: TextStyle(fontSize: 20 * rpx, color: Colors.black54),
                     textAlign: TextAlign.left,
                   ),
                 ],
@@ -145,7 +148,7 @@ class _EditorsRecommendState extends State<EditorsRecommend> with PixelSize{
               ],
             ),
           SizedBox(
-            height: 25 * rpx,
+            height: 30 * rpx,
           ),
           BookContentWidget(
             data: _firstRecommendData,
