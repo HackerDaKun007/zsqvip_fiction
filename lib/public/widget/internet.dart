@@ -18,10 +18,11 @@ class Internet extends StatefulWidget {
   //加载动画
   String value; //提示文本
   bool isLoad;
-  Internet(this.centent, this.isLoad, {Key key, this.value:'加载中...'}) : super(key: key);
+  bool isError;  //数据是否请求失败
+  Internet(this.centent, this.isLoad, {this.value= '加载中...', this.isError=false, Key key}) : super(key: key);
 
   @override
-  _InternetState createState() => _InternetState(centent=this.centent, isLoad=this.isLoad,value:this.value);
+  _InternetState createState() => _InternetState(centent=this.centent, isLoad=this.isLoad,value:this.value, isError: this.isError);
 }
 
 class _InternetState extends State<Internet> with PixelSize {
@@ -36,7 +37,9 @@ class _InternetState extends State<Internet> with PixelSize {
   //加载动画
   String value; //提示文本
   bool isLoad;
-  _InternetState(this.centent, this.isLoad, {this.value});
+  //数据是否请求失败
+  bool isError ;
+  _InternetState(this.centent, this.isLoad, {this.value, this.isError});
 
   @override
   dispose() {
@@ -77,8 +80,9 @@ class _InternetState extends State<Internet> with PixelSize {
   Widget _init(Widget centent) {
     //判断网络 true网络正常，false网站不正常
     if (isInternet) {
-      //isLoad: true返回正常内容， false返回加载内容
-      if (isLoad) {
+      if (isError) { //isLoad: true返回请求失败， false返回请求成功
+        return _error();
+      } else if (isLoad) {  //isLoad: true返回正常内容， false返回加载内容
         return centent;
       } else {
         return _load(this.value);
@@ -132,6 +136,35 @@ class _InternetState extends State<Internet> with PixelSize {
                 SizedBox(height: getPixe(15, context),),
                  Text(
                 value,
+                style: TextStyle(fontSize: 16.0, color:Colors.white),
+              )
+              ],
+            ),
+          ),
+        ),
+      );
+  }
+
+  //数据请求失败展示
+  Widget _error() {
+    return Center(
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Container(
+            width: getPixe(120, context),
+            height: getPixe(120, context),
+            // padding: EdgeInsets.all(getPixe(20, context),
+            decoration: BoxDecoration(
+              color: Colors.black38,
+              borderRadius: BorderRadius.circular(getPixe(4, context)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Icon(Iconfont.jinggao, size: getPixe(35, context),color: Colors.white),
+                SizedBox(height: getPixe(15, context),),
+                 Text('数据请求失败',
                 style: TextStyle(fontSize: 16.0, color:Colors.white),
               )
               ],
