@@ -222,16 +222,15 @@ class HomeBody extends StatelessWidget with PixelSize{
               child: Image.asset(
                 imageUrl,
                 fit: BoxFit.fill,
-                height: 60 * rpx,
-                width: 60 * rpx,
+                height: 62 * rpx,
+                width: 62 * rpx,
               ),
               color: Colors.white.withOpacity(0),
-              elevation: 16,
               shadowColor: Colors.black.withOpacity(0.5),
               clipBehavior: Clip.antiAlias,
             ),
             SizedBox(
-              height: 15 * rpx,
+              height: 10 * rpx,
             ),
             Text(
               title,

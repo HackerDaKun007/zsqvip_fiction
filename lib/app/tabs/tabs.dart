@@ -50,7 +50,9 @@ class _TabsState extends State<Tabs> with PixelSize{
            type: BottomNavigationBarType.fixed, //未选中显示字体
           fixedColor: Config.color,
           unselectedItemColor:Colors.grey,
-          selectedFontSize: 12.0,
+          iconSize: getPixe(23, context),
+          selectedFontSize: getPixe(11, context),
+          unselectedFontSize: getPixe(11, context),
           currentIndex: this._currenIndex,
           onTap: (int index) {
             _getCurren(index);
@@ -58,32 +60,24 @@ class _TabsState extends State<Tabs> with PixelSize{
           //创建栏目
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Iconfont.book, size: getPixe(20, context) ),
-              activeIcon: Icon(Iconfont.book_active, size: getPixe(20, context) ),
-              title: Text('书架', style: TextStyle(
-                fontSize: getPixe(13, context)
-              )),
+              icon: Icon(Iconfont.book ),
+              activeIcon: Icon(Iconfont.book_active ),
+              title: Text('书架', ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Iconfont.home, size: getPixe(20, context) ),
-              activeIcon: Icon(Iconfont.home_active, size: getPixe(20, context) ),
-              title: Text('书城', style: TextStyle(
-                fontSize: getPixe(13, context)
-              )),
+              icon: Icon(Iconfont.home ),
+              activeIcon: Icon(Iconfont.home_active ),
+              title: Text('书城', ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Iconfont.category, size: getPixe(20, context) ),
-              activeIcon: Icon(Iconfont.category_active, size: getPixe(20, context) ),
-              title: Text('分类', style: TextStyle(
-                fontSize: getPixe(13, context)
-              )),
+              icon: Icon(Iconfont.category ),
+              activeIcon: Icon(Iconfont.category_active ),
+              title: Text('分类', ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Iconfont.mine, size: getPixe(20, context) ),
-              activeIcon: Icon(Iconfont.mine_active, size: getPixe(20, context) ),
-              title: Text('我的', style: TextStyle(
-                fontSize: getPixe(13, context)
-              ),),
+              icon: Icon(Iconfont.mine ),
+              activeIcon: Icon(Iconfont.mine_active ),
+              title: Text('我的', ),
             ),
           ],
 

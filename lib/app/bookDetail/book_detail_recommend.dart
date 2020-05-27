@@ -39,30 +39,35 @@ class _BookDetailRecommendState extends State<BookDetailRecommend> with PixelSiz
 
 
   Widget _buildContentItem(data, context) {
-    return Container(
-      width: (getWidth(context) - 80) / 3,
-      height: getPixe(190, context),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Material(
-            elevation: 3,
-            color: Colors.transparent,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(getPixe(4, context)),
-              child: Image.network(data['imageUrl'], fit: BoxFit.fitWidth),
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '/bookdetail', arguments: {'data': data});
+      },
+      child: Container(
+        width: (getWidth(context) - 80) / 3,
+        height: getPixe(190, context),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Material(
+              elevation: 3,
+              color: Colors.transparent,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(getPixe(4, context)),
+                child: Image.network(data['imageUrl'], fit: BoxFit.fitWidth),
+              )
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(data['title'], style: TextStyle(fontSize: getPixe(14, context)),),
+                Text('${(data['total_num'] / 10000).floor()} 万人气', style: TextStyle(fontSize: getPixe(12, context), color: Colors.grey),)
+              ],
             )
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(data['title'], style: TextStyle(fontSize: getPixe(14, context)),),
-              Text('${(data['total_num'] / 10000).floor()} 万人气', style: TextStyle(fontSize: getPixe(12, context), color: Colors.grey),)
-            ],
-          )
-        ],
-      ),
+          ],
+        ),
+      )
     );
   }
 
