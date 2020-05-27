@@ -18,6 +18,8 @@ import 'package:fiction/public/utils/bounced.dart';
 import 'package:fiction/providers/bookShelf.dart'; //书架数据
 import 'package:provider/provider.dart';
 
+import 'package:fiction/public/widget/internet.dart';
+
 class EditBookShelf extends StatefulWidget {
   EditBookShelf({Key key}) : super(key: key);
 
@@ -37,7 +39,11 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
 
   Widget build(BuildContext context) {
     this.providerListData = Provider.of<BookShelfProviders>(context);
+    return Internet(_init(), providerListData.isData);
+  }
 
+  //主体内容
+  Widget _init() {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -124,7 +130,6 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
       // controller: ,
     );
   }
-
 
   //是否展示取消按钮
   Widget _getCancel() {

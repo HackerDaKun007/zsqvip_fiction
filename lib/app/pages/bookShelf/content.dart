@@ -36,7 +36,7 @@ class _ContentState extends State<Content> with PixelSize {
   @override
   void initState() {
     super.initState();
-    
+
   }
   Widget build(BuildContext context) {
 
@@ -60,14 +60,6 @@ class _ContentState extends State<Content> with PixelSize {
       child: GridView.count(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //   crossAxisCount: 3, //控制一行多个
-        //   crossAxisSpacing: 10.0, //左右距离
-        //   mainAxisSpacing: 10.0, //上下距离
-        //   childAspectRatio: 0.63, //子级的高度、宽度的比例
-        // ),
-        // itemCount: providerListData.data.length,
-        // itemBuilder: _getListData(),
         crossAxisCount: 3, //控制一行多个
         crossAxisSpacing: 10.0, //左右距离
         mainAxisSpacing: 10.0, //上下距离
@@ -83,6 +75,7 @@ class _ContentState extends State<Content> with PixelSize {
    int let = (providerListData.data.length-1);
    
    for (int i=let; i >= 0; i--) {
+     
      if (i == 0) {
        dataList.add(Container(
         child: GestureDetector(
@@ -112,10 +105,11 @@ class _ContentState extends State<Content> with PixelSize {
           ),
           onTap: () {
             //修改父级组件
-            widget.getOut(1);
+            widget.getOut();
           },
         ),
       ));
+      
      } else {
        _isUpdate() {
         if (providerListData.data[i]['click'] == 0 &&

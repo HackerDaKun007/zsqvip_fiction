@@ -30,10 +30,14 @@ class BookShelfProviders with ChangeNotifier{
   List _adData = [];      //广告
   Color _deleteColos = Colors.blue[100]; //删除默认颜色
 
+  //
+  bool _isData = false; //判断数据是否请求成功
 
   BookShelfProviders() {
     this._listData.addAll(listData);
     initEdit();
+
+    _isData = true;
   }
 
   //编辑书架数据
@@ -64,6 +68,8 @@ class BookShelfProviders with ChangeNotifier{
   Color get deleteColos => this._deleteColos;
   List get dataColor => this._dataColor;
 
+  bool get isData => this._isData;
+
   //修改删除颜色
   void updateDelteColors() {
     if (this._dataAction.length > 0) {
@@ -76,7 +82,6 @@ class BookShelfProviders with ChangeNotifier{
 
   //编辑全选
   void editSelectAll() {
-    print(1);
     this._dataColor = JSON.jsonDecode(JSON.jsonEncode(this._dataColorBackAction));
     this._dataAction = JSON.jsonDecode(JSON.jsonEncode(this._dataActionData));
     this.updateDelteColors();
