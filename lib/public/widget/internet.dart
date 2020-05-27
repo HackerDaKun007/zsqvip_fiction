@@ -148,9 +148,7 @@ class _InternetState extends State<Internet> with PixelSize {
   //数据请求失败展示
   Widget _error() {
     return Center(
-        child: Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Container(
+        child: Container(
             width: getPixe(120, context),
             height: getPixe(120, context),
             // padding: EdgeInsets.all(getPixe(20, context),
@@ -170,7 +168,6 @@ class _InternetState extends State<Internet> with PixelSize {
               ],
             ),
           ),
-        ),
       );
   }
 }
