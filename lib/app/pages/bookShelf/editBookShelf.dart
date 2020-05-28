@@ -222,7 +222,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
                       providerListData.editData[i]['title'],
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                          color: Colors.black, fontSize: getPixe(12, context)),
+                          color: Colors.black, fontSize: getPixe(14, context)),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

@@ -13,7 +13,7 @@ import 'package:fiction/public/public.dart';
 
 class Load  with PixelSize { 
 
-  OverlayEntry _overlayLoad; //toast靠它加到屏幕上
+  OverlayEntry _overlayLoad; //加到屏幕上
 
   /*
    * 启动加载动画 
