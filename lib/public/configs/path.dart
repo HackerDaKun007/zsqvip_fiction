@@ -6,5 +6,6 @@ class Path {
     'everyoneCount': 'everyoneCount',       //大家都搜索长度 - 本地存储
     'everyoneUser': 'everyoneUser',         //大家都搜索存储名称 - 本地存储
     'everyoneRen': 'everyoneRen',          //大家都搜索存储是否热门 - 本地存储
+    'isLogin': 'isLogin',                  // 是否登录 - 本地存储
   }; 
 }

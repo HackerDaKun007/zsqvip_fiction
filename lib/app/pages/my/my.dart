@@ -120,7 +120,7 @@ class _MineBodyState extends State<MineBody> with PixelSize{
                     countNum: 0,
                     isNav: true,
                     callback: () {
-                      Navigator.pushNamed(context, '/booklist');
+                      Navigator.pushNamed(context, '/benefit');
                     }),
                 _getHeaderRowListItem(
                   title: '今日已读(分钟)',
@@ -174,7 +174,9 @@ class _MineBodyState extends State<MineBody> with PixelSize{
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _getListItem(title: '福利中心', icon: Icons.redeem, subtitle: '抽大奖'),
+          _getListItem(title: '福利中心', icon: Icons.redeem, subtitle: '抽大奖', callback: () {
+            Navigator.pushNamed(context, '/benefit');
+          }),
           _getListItem(title: '积分商城', icon: Icons.store, subtitle: '兑换好礼'),
           _getListItem(
             title: '阅读记录',
