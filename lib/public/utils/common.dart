@@ -27,16 +27,24 @@ class Common {
   
   /*
    * 判断数组指定字符是否存在
-   * @param {List} 数组
-   * @param {String} 字符
+   * @param {List} arr 数组(一维，二维)
+   * @param {String} str 对比字符
+   * @param {String} key 用于二维数组的键值
    * @return Bool 存在返回true, 否则返回false
    */
-  bool inArray(List arr, String str) {
+  bool inArray(List arr, String str, {String key}) {
     bool isBool = false;
     arr.forEach((value){
-      if (str == value) {
-        isBool = true;
-        return;
+      if (key != null) {
+        if (str == value[key]) {
+          isBool = true;
+          return;
+        }
+      } else {
+        if (str == value) {
+          isBool = true;
+          return;
+        }
       }
     });
     return isBool;
