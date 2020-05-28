@@ -11,7 +11,6 @@
 import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
-
 import 'package:fiction/providers/bookShelf.dart'; //书架数据
 import 'package:provider/provider.dart';
 
@@ -23,7 +22,7 @@ class Content extends StatefulWidget {
   _ContentState createState() => _ContentState();
 }
 
-class _ContentState extends State<Content> with PixelSize {
+class _ContentState extends State<Content> with PixelSize, Common {
 
   // List<Map> listData = [{
   //     "title": '',
@@ -74,6 +73,9 @@ class _ContentState extends State<Content> with PixelSize {
                   borderRadius: BorderRadiusDirectional.circular(5),
                 ),
                 clipBehavior: Clip.antiAlias,
+                // child: Image.asset(
+                //   providerListData.data[i]['imageUrl'],
+                // ),
                 child: Image.asset(
                   providerListData.data[i]['imageUrl'],
                 ),
@@ -133,9 +135,7 @@ class _ContentState extends State<Content> with PixelSize {
                 clipBehavior: Clip.antiAlias,
                 child: Stack(
                   children: <Widget>[
-                    Image.network(
-                      providerListData.data[i]['imageUrl'],
-                    ),
+                     cacheImages(providerListData.data[i]['imageUrl']),
                     _isUpdate(),
                   ],
                 ),
