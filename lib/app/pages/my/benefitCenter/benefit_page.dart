@@ -29,7 +29,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
             height: getPixe(200, context),
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('images/bg.jpg'), fit: BoxFit.cover)),
+                    image: AssetImage('images/welfare.jpg'), fit: BoxFit.cover)),
             child: Container(
               padding: EdgeInsets.only(top: getPixe(30, context)),
               child: Column(
@@ -38,7 +38,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                   Text(
                     '登录可领取积分、兑换大奖',
                     style: TextStyle(
-                        color: Color(0xffdaa520),
+                        color: Colors.white,
                         fontSize: getPixe(12, context)),
                   ),
                   SizedBox(
@@ -52,7 +52,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                             vertical: getPixe(6, context)),
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
-                                colors: [Colors.deepOrange, Colors.orange[600]],
+                                colors: [Colors.blue[600], Colors.blue[300]],
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight),
                             borderRadius: BorderRadius.circular(20)),
