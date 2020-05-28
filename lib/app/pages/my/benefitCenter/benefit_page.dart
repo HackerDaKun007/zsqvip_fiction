@@ -14,7 +14,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   @override
   void initState() {
     super.initState();
-    isLogin = false;
+    isLogin = true;
     isTodayRegister = false;
   }
 
@@ -29,39 +29,64 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
             height: getPixe(200, context),
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('images/welfare.jpg'), fit: BoxFit.cover)),
+                    image: AssetImage('images/welfare.jpg'),
+                    fit: BoxFit.cover)),
             child: Container(
-              padding: EdgeInsets.only(top: getPixe(30, context)),
+              padding: EdgeInsets.only(top: getPixe(25, context)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    '登录可领取积分、兑换大奖',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: getPixe(12, context)),
-                  ),
-                  SizedBox(
-                    height: getPixe(15, context),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getPixe(35, context),
-                            vertical: getPixe(6, context)),
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                colors: [Colors.blue[600], Colors.blue[300]],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Text(
-                          '立即登录',
-                          style: TextStyle(color: Colors.white, fontSize: getPixe(14, context)),
-                        )),
-                  )
-                ],
+                children: isLogin
+                    ? <Widget>[
+                        Text(
+                          '当前积分',
+                          style: TextStyle(
+                              fontSize: getPixe(12, context),
+                              color: Colors.white54),
+                        ),
+                        SizedBox(
+                          height: getPixe(10, context),
+                        ),
+                        Text(
+                          '50',
+                          style: TextStyle(
+                            fontSize: getPixe(45, context),
+                            color: Colors.white,
+                          ),
+                        )
+                      ]
+                    : <Widget>[
+                        Text(
+                          '登录可领取积分、兑换大奖',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: getPixe(12, context)),
+                        ),
+                        SizedBox(
+                          height: getPixe(15, context),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: getPixe(35, context),
+                                  vertical: getPixe(6, context)),
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: [
+                                        Colors.blue[600],
+                                        Colors.blue[300]
+                                      ],
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Text(
+                                '立即登录',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: getPixe(14, context)),
+                              )),
+                        )
+                      ],
               ),
             ),
           ),
@@ -77,7 +102,6 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
       margin: EdgeInsets.symmetric(horizontal: getPixe(10, context)),
       padding: EdgeInsets.all(getPixe(15, context)),
       width: mainWidth,
-      height: getPixe(240, context),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(
@@ -93,7 +117,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
               Text(
                 '积分商城',
                 style: TextStyle(
-                    color: Colors.white70,
+                    color: Colors.white,
                     fontWeight: FontWeight.w500,
                     fontSize: getPixe(18, context)),
               ),
@@ -119,11 +143,67 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
             ],
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(getPixe(10, context),
-                getPixe(15, context), getPixe(10, context), 0),
+            padding: EdgeInsets.fromLTRB(
+                getPixe(10, context),
+                getPixe(15, context),
+                getPixe(10, context),
+                getPixe(10, context)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
+                Container(
+                  height: getPixe(160, context),
+                  width: childWidth,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        width: childWidth,
+                        height: childWidth,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Center(
+                          child: Image.asset(
+                            'images/2.jpg',
+                            width: childWidth - 15,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '小米手机',
+                        style: TextStyle(fontSize: getPixe(12, context)),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getPixe(20, context),
+                            vertical: getPixe(5, context)),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(1, 3),
+                                blurRadius: 2,
+                                color: Color(0xccff7043)),
+                            BoxShadow(
+                                offset: Offset(1, 2),
+                                blurRadius: 0,
+                                color: Color(0x22ffffff)),
+                          ],
+                          gradient: LinearGradient(
+                              colors: [Colors.deepOrange, Colors.orange[700]],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight),
+                        ),
+                        child: Text('立即兑换',
+                            style: TextStyle(
+                                fontSize: getPixe(13, context),
+                                color: Colors.white)),
+                      )
+                    ],
+                  ),
+                ),
                 Container(
                   height: getPixe(160, context),
                   width: childWidth,
@@ -155,8 +235,14 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
-                            BoxShadow(offset: Offset(1, 3), blurRadius: 2, color: Color(0xccff7043)),
-                            BoxShadow(offset: Offset(1, 2), blurRadius: 0, color: Color(0x22ffffff)),
+                            BoxShadow(
+                                offset: Offset(1, 3),
+                                blurRadius: 2,
+                                color: Color(0xccff7043)),
+                            BoxShadow(
+                                offset: Offset(1, 2),
+                                blurRadius: 0,
+                                color: Color(0x22ffffff)),
                           ],
                           gradient: LinearGradient(
                               colors: [Colors.deepOrange, Colors.orange[700]],
@@ -171,7 +257,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                     ],
                   ),
                 ),
-                 Container(
+                Container(
                   height: getPixe(160, context),
                   width: childWidth,
                   child: Column(
@@ -202,55 +288,14 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
-                            BoxShadow(offset: Offset(1, 3), blurRadius: 2, color: Color(0xccff7043)),
-                            BoxShadow(offset: Offset(1, 2), blurRadius: 0, color: Color(0x22ffffff)),
-                          ],
-                          gradient: LinearGradient(
-                              colors: [Colors.deepOrange, Colors.orange[700]],
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight),
-                        ),
-                        child: Text('立即兑换',
-                            style: TextStyle(
-                                fontSize: getPixe(13, context),
-                                color: Colors.white)),
-                      )
-                    ],
-                  ),
-                ),
-                 Container(
-                  height: getPixe(160, context),
-                  width: childWidth,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        width: childWidth,
-                        height: childWidth,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Center(
-                          child: Image.asset(
-                            'images/2.jpg',
-                            width: childWidth - 10,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        '小米手机',
-                        style: TextStyle(fontSize: getPixe(12, context)),
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: getPixe(20, context),
-                            vertical: getPixe(5, context)),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(offset: Offset(1, 3), blurRadius: 2, color: Color(0xccff7043)),
-                            BoxShadow(offset: Offset(1, 2), blurRadius: 0, color: Color(0x22ffffff)),
+                            BoxShadow(
+                                offset: Offset(1, 3),
+                                blurRadius: 2,
+                                color: Color(0xccff7043)),
+                            BoxShadow(
+                                offset: Offset(1, 2),
+                                blurRadius: 0,
+                                color: Color(0x22ffffff)),
                           ],
                           gradient: LinearGradient(
                               colors: [Colors.deepOrange, Colors.orange[700]],
@@ -274,7 +319,95 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   }
 
   /// 日常福利
-  Widget _buildDailyBenefit() {}
+  Widget _buildDailyBenefit() {
+    return Container(
+      margin: EdgeInsets.symmetric(
+          horizontal: getPixe(10, context), vertical: getPixe(10, context)),
+      padding: EdgeInsets.all(getPixe(10, context)),
+      height: getPixe(400, context),
+      width: getWidth(context),
+      decoration: BoxDecoration(
+        color: Color(0xfffffffe),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(
+                left: getPixe(10, context), bottom: getPixe(10, context)),
+            child: Text(
+              '日常福利',
+              style: TextStyle(
+                  color: Color(0xffE3B967),
+                  fontWeight: FontWeight.w500,
+                  fontSize: getPixe(18, context)),
+            ),
+          ),
+          Container(
+            height: getPixe(80, context),
+            padding: EdgeInsets.all(getPixe(10, context)),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/bg.jpg'),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(6)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      '每日签到',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: getPixe(17, context)),
+                    ),
+                    SizedBox(
+                      height: getPixe(5, context),
+                    ),
+                    Text(
+                      '连续签到赚更多积分',
+                      style: TextStyle(
+                          color: Colors.black45,
+                          fontSize: getPixe(13, context)),
+                    )
+                  ],
+                ),
+                InkWell(
+                  onTap: (){},
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getPixe(15, context),
+                        vertical: getPixe(5, context)),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.orange[800],
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(1, 2),
+                            blurRadius: 1,
+                            color: Color(0xccff7043)),
+                      ],
+                    ),
+                    child: Text(
+                      '去签到',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: getPixe(14, context),
+                          fontWeight: FontWeight.w500),
+                    ),
+                  )
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   /// 新手福利
   Widget _buildBeginnerBenefit() {}
@@ -294,6 +427,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff7f7f7),
       appBar: AppBar(
         title: Text(
           '福利中心',
@@ -327,7 +461,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[_buildHeader()],
+          children: <Widget>[_buildHeader(), _buildDailyBenefit()],
         ),
       ),
     );
