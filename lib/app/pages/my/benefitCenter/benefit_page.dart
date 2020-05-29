@@ -554,7 +554,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[_buildHeader(), _buildDailyBenefit(), _buildBeginnerBenefit()],
+          children: <Widget>[_buildHeader(), _buildDailyBenefit(), _buildBeginnerBenefit(), _buildFooterInfo()],
         ),
       ),
     );

@@ -27,7 +27,7 @@ class _H5AdState extends State<H5Ad> with PixelSize {
     //执行dio网络请求方案
     this.data = {
       'title': '远离高利息， 有钱花日息，最快5分钟到账',
-      'url': 'https://www.baidu.com/',
+      'url': 'http://sports.sina.com.cn/l/2020-05-29/doc-iircuyvi5657180.shtml',
     };
 
     //发送广告统计到服务器
