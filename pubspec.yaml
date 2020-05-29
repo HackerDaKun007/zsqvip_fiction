@@ -32,6 +32,7 @@ dependencies:
   provider: ^4.1.2
   connectivity: ^0.4.8+6
   cached_network_image: ^2.2.0+1
+  flutter_inappwebview: ^3.2.0
 
   # cached_network_image: ^2.2.0+1
   # flutter_cupertino_date_picker: ^1.0.24

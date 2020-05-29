@@ -1,6 +1,9 @@
+import 'package:dio/dio.dart';
+import 'package:fiction/providers/tabIndexProvider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
+import 'package:provider/provider.dart';
 
 class BenefitPage extends StatefulWidget {
   @override
@@ -10,12 +13,28 @@ class BenefitPage extends StatefulWidget {
 class _BenefitPageState extends State<BenefitPage> with PixelSize {
   bool isLogin; // 是否登录
   bool isTodayRegister; // 今日是否签到
-
+  TabIndexProvider tabProvider;
   @override
   void initState() {
     super.initState();
     isLogin = true;
     isTodayRegister = false;
+  }
+
+  /// 转到登录页
+  void toLoginPage() {
+    Navigator.pushNamed(context, '/login');
+  }
+
+  /// 转到书架页
+  void toBookShelfPage() {
+    Navigator.pop(context);
+    tabProvider.changeCurrentIndex(0);
+  }
+
+  /// 转到积分商城页
+  void toStorePage() {
+    Navigator.pushNamed(context, '/store');
   }
 
   /// 头部
@@ -324,7 +343,6 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
       margin: EdgeInsets.symmetric(
           horizontal: getPixe(10, context), vertical: getPixe(10, context)),
       padding: EdgeInsets.all(getPixe(10, context)),
-      height: getPixe(400, context),
       width: getWidth(context),
       decoration: BoxDecoration(
         color: Color(0xfffffffe),
@@ -345,8 +363,9 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
             ),
           ),
           Container(
-            height: getPixe(80, context),
+            height: getPixe(70, context),
             padding: EdgeInsets.all(getPixe(10, context)),
+            margin: EdgeInsets.only(bottom: getPixe(15, context)),
             decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('images/bg.jpg'),
@@ -377,35 +396,180 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                   ],
                 ),
                 InkWell(
-                  onTap: (){},
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: getPixe(15, context),
-                        vertical: getPixe(5, context)),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.orange[800],
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(1, 2),
-                            blurRadius: 1,
-                            color: Color(0xccff7043)),
-                      ],
-                    ),
-                    child: Text(
-                      '去签到',
+                    onTap: () {
+                      print('============= 签到 ===========');
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: getPixe(15, context),
+                          vertical: getPixe(5, context)),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.orange[800],
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(1, 2),
+                              blurRadius: 1,
+                              color: Color(0xccff7043)),
+                        ],
+                      ),
+                      child: Text(
+                        '去签到',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: getPixe(14, context),
+                            fontWeight: FontWeight.w500),
+                      ),
+                    )),
+              ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: getPixe(5, context),
+            ),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Text(
+                      '读享快乐',
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: getPixe(14, context),
+                          fontSize: getPixe(16, context),
                           fontWeight: FontWeight.w500),
                     ),
-                  )
+                    SizedBox(
+                      width: getPixe(5, context),
+                    ),
+                    Text(
+                      '每日阅读轻松赚积分',
+                      style: TextStyle(
+                          fontSize: getPixe(12, context),
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w500),
+                    )
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getPixe(5, context),
+                      vertical: getPixe(10, context)),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 6,
+                        child: Padding(
+                            padding:
+                                EdgeInsets.only(right: getPixe(15, context)),
+                            child: Column(
+                              children: <Widget>[
+                                _getReadTimeContent(
+                                    isFirst: true,
+                                    isActive: true,
+                                    time: 5,
+                                    earnNum: 10),
+                                _getReadTimeContent(time: 15, earnNum: 20),
+                                _getReadTimeContent(time: 30, earnNum: 20),
+                                _getReadTimeContent(time: 60, earnNum: 30),
+                                _getReadTimeContent(time: 90, earnNum: 30),
+                                _getReadTimeContent(time: 120, earnNum: 40),
+                                _getReadTimeContent(
+                                    isLast: true, time: 180, earnNum: 60),
+                              ],
+                            )),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Center(
+                          child:_buildButton(title: '去阅读', onTabHandler: toBookShelfPage)
+                        ),
+                      )
+                    ],
+                  ),
                 )
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildButton({String title, VoidCallback onTabHandler}) {
+    return InkWell(
+      onTap: isLogin ? onTabHandler : toLoginPage,
+      child: Container(
+          padding: EdgeInsets.symmetric(
+              horizontal: getPixe(15, context), vertical: getPixe(5, context)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(getPixe(20, context)),
+              gradient: LinearGradient(
+                  colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
+                  end: Alignment.centerLeft,
+                  begin: Alignment.centerRight)),
+          child: Text(
+            title,
+            style: TextStyle(
+                fontSize: getPixe(15, context), fontWeight: FontWeight.w500),
+          )),
+    );
+  }
+
+  _getReadTimeContent(
+      {bool isFirst = false,
+      bool isLast = false,
+      bool isActive = false,
+      int time,
+      int earnNum}) {
+    Color _bgColor = isActive ? Colors.deepOrange : Colors.grey[300];
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Row(children: [
+          Column(children: [
+            Container(
+              width: getPixe(2, context),
+              height: getPixe(10, context),
+              color: isFirst ? Colors.transparent : _bgColor,
+            ),
+            Container(
+              width: getPixe(13, context),
+              height: getPixe(13, context),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: _bgColor,
+              ),
+              child: isActive
+                  ? Icon(
+                      Icons.check,
+                      size: getPixe(10, context),
+                      color: Colors.white,
+                    )
+                  : SizedBox(),
+            ),
+            Container(
+              width: getPixe(2, context),
+              height: getPixe(10, context),
+              color: isLast ? Colors.transparent : _bgColor,
+            ),
+          ]),
+          SizedBox(
+            width: getPixe(10, context),
+          ),
+          Text(
+            '阅读$time分钟',
+            style: TextStyle(
+                fontWeight: FontWeight.w600, fontSize: getPixe(14, context)),
+          ),
+        ]),
+        Text(
+          '$earnNum积分',
+          style: TextStyle(
+              fontWeight: FontWeight.w500,
+              color: Colors.deepOrange,
+              fontSize: getPixe(12, context)),
+        )
+      ],
     );
   }
 
@@ -426,6 +590,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
 
   @override
   Widget build(BuildContext context) {
+    tabProvider = Provider.of<TabIndexProvider>(context);
     return Scaffold(
       backgroundColor: Color(0xfff7f7f7),
       appBar: AppBar(
@@ -453,7 +618,9 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                     child: Text(
                       '积分商城',
                       style: TextStyle(
-                          color: Colors.grey, fontSize: getPixe(16, context)),
+                          color: Colors.grey,
+                          fontSize: getPixe(16, context),
+                          fontWeight: FontWeight.w500),
                       textAlign: TextAlign.center,
                     ),
                   )))

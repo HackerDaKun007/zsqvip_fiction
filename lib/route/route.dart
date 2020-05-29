@@ -55,8 +55,8 @@ final routes = {
   '/booklistdetail': (context, {arguments}) => BookListDetail(arguments:arguments),
   '/settings': (context) => SettingsPage(),
   '/aboutus': (context) => AboutUsPage(),
-  '/bookdetail': (context, {arguments}) => BookDetailPage(arguments:arguments),
   '/benefit': (context) => BenefitPage(),
+  '/bookdetail': (context, {arguments}) => BookDetailPage(arguments:arguments),
 };
 
 var onGenerateRoute = (RouteSettings settings) {

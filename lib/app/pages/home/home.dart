@@ -10,6 +10,7 @@
 
 import 'package:fiction/app/pages/home/home_ad.dart';
 import 'package:fiction/app/pages/home/home_random_book_dialog.dart';
+import 'package:fiction/providers/tabIndexProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -20,10 +21,9 @@ import 'package:fiction/app/pages/home/home_guess_you_like.dart';
 import 'package:fiction/app/pages/home/home_hot_charts.dart';
 import 'package:fiction/app/pages/home/home_recommend.dart';
 import 'package:fiction/res/guessYouLikeData.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget with PixelSize {
-  final getCurrenIndex;
-  HomePage({this.getCurrenIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget with PixelSize {
         ),
         body: Stack(children: [
           SingleChildScrollView(
-            child: HomeBody(getCurrenIndex: getCurrenIndex),
+            child: HomeBody(),
           ),
           TabsAd()
         ]));
@@ -81,8 +81,6 @@ class HomePage extends StatelessWidget with PixelSize {
 }
 
 class HomeBody extends StatelessWidget with PixelSize{
-  final getCurrenIndex;
-  HomeBody({this.getCurrenIndex});
 
   final List<String> swiperList = [
     'https://images.pexels.com/photos/1667071/pexels-photo-1667071.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
@@ -150,6 +148,7 @@ class HomeBody extends StatelessWidget with PixelSize{
 
   /// 导航栏
   Widget _buildCustomNavBarWidget(context) {
+    TabIndexProvider tabProvider = Provider.of<TabIndexProvider>(context);
     return Container(
         height: 110 * rpx,
         width: 750 * rpx,
@@ -162,7 +161,7 @@ class HomeBody extends StatelessWidget with PixelSize{
                 imageUrl: 'images/category.png',
                 title: '分类',
                 onTapHandler: () {
-                  getCurrenIndex(2);
+                  tabProvider.changeCurrentIndex(2);
                 }),
             _getCustomNavBarItem(
                 imageUrl: 'images/paihang.png',
