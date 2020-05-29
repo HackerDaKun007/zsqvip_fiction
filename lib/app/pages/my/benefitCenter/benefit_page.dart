@@ -369,7 +369,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                                     isActive: true,
                                     time: 5,
                                     earnNum: 10),
-                                _getReadTimeContent(time: 15, earnNum: 20),
+                                _getReadTimeContent(time: 15, earnNum: 20, isActive: true),
                                 _getReadTimeContent(time: 30, earnNum: 20),
                                 _getReadTimeContent(time: 60, earnNum: 30),
                                 _getReadTimeContent(time: 90, earnNum: 30),
@@ -411,7 +411,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
           child: Text(
             title,
             style: TextStyle(
-                fontSize: getPixe(15, context), fontWeight: FontWeight.w500),
+                fontSize: getPixe(14, context), fontWeight: FontWeight.w600),
           )),
     );
   }
@@ -494,7 +494,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
             child: Text(
               '新手福利',
               style: TextStyle(
-                  color: Colors.orange[700],
+                  color: Colors.orange[800],
                   fontWeight: FontWeight.w500,
                   fontSize: getPixe(18, context)),
             ),
@@ -530,7 +530,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                                  Text(
                                    title,
                                    style: TextStyle(
-                                       fontSize: getPixe(16, context),
+                                       fontSize: getPixe(15, context),
                                        fontWeight: FontWeight.w500),
                                  ),
                                  Text(
