@@ -7,6 +7,7 @@
  *
  * @see         首页底部导航栏目
 */
+import 'package:fiction/providers/tabIndexProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
@@ -14,7 +15,8 @@ import 'package:fiction/public/public.dart';
 import 'package:fiction/app/pages/home/home.dart'; //书城
 import 'package:fiction/app/pages/bookshelf/bookshelf.dart'; //书架
 import 'package:fiction/app/pages/category/category.dart'; //分类
-import 'package:fiction/app/pages/my/my.dart'; //我的
+import 'package:fiction/app/pages/my/my.dart';
+import 'package:provider/provider.dart'; //我的
 
 
 class Tabs extends StatefulWidget{
@@ -26,20 +28,18 @@ class Tabs extends StatefulWidget{
 }
 
 class _TabsState extends State<Tabs> with PixelSize{
-  //控制选中时的数据
-  int _currenIndex = 0;
-
 
   @override
 
   Widget build(BuildContext context) {
+    TabIndexProvider provider = Provider.of<TabIndexProvider>(context);
     return Scaffold(
       body: IndexedStack(
-        index: this._currenIndex,
+        index: provider.tabCurrentIndex,
         //切换底部导航栏数组页面
         children: [
-          BookShelfPage(getCurrenIndex: (number) => _getCurren(number) ),
-          HomePage(getCurrenIndex: (number) => _getCurren(number)),
+          BookShelfPage(),
+          HomePage(),
           CategoryPage(),
           MyPage(),
         ],
@@ -53,9 +53,9 @@ class _TabsState extends State<Tabs> with PixelSize{
           iconSize: getPixe(23, context),
           selectedFontSize: getPixe(11, context),
           unselectedFontSize: getPixe(11, context),
-          currentIndex: this._currenIndex,
+          currentIndex: provider.tabCurrentIndex,
           onTap: (int index) {
-            _getCurren(index);
+            provider.changeCurrentIndex(index);
           },
           //创建栏目
           items: [
@@ -87,12 +87,12 @@ class _TabsState extends State<Tabs> with PixelSize{
   }
 
 
-  //修改切换状态数字
-  void _getCurren(int number) {
-    setState(() {
-      // Path.minute += 1;
-      this._currenIndex = number;
-    });
-  }
+  // //修改切换状态数字
+  // void _getCurren(int number) {
+  //   setState(() {
+  //     // Path.minute += 1;
+  //     this._currenIndex = number;
+  //   });
+  // }
 
 }
