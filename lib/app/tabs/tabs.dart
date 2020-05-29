@@ -86,13 +86,4 @@ class _TabsState extends State<Tabs> with PixelSize{
     );
   }
 
-
-  // //修改切换状态数字
-  // void _getCurren(int number) {
-  //   setState(() {
-  //     // Path.minute += 1;
-  //     this._currenIndex = number;
-  //   });
-  // }
-
 }
