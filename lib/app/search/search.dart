@@ -13,7 +13,7 @@ import 'package:flutter/rendering.dart';
 import 'package:fiction/public/public.dart';
 import 'package:fiction/public/utils/shared.dart';
 
-import 'child/searchAd.dart'; //广告组件
+import 'package:fiction/app/ad/footerAd.dart'; //广告组件
 import 'child/everyoneTitle.dart'; //大家都在搜索
 import 'child/recent.dart'; //最近搜索
 
@@ -135,7 +135,7 @@ class _SearchState extends State<Search> with PixelSize, Common {
             ),
 
             //  广告位置
-            SearchAd(),
+            FooterAd(),
           ],
         ),
       ),
