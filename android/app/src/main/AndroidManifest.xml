@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fiction.zsqvip.com">
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
@@ -13,7 +14,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="热读小说"
         android:icon="@mipmap/ic_launcher"
-       > <!-- 允许HTTP协议  android:networkSecurityConfig="@xml/network_security_config" -->
+        android:networkSecurityConfig="@xml/network_security_config"
+       > <!-- 允许HTTP协议   -->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

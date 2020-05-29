@@ -1,7 +1,5 @@
-<!-- 允许HTTP协议 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fiction.zsqvip.com">
-<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 允许http协议连接 -->
 <network-security-config>
     <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
@@ -9,4 +7,3 @@
         </trust-anchors>
     </base-config>
 </network-security-config>
-</manifest>
