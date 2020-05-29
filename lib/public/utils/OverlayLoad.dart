@@ -11,7 +11,7 @@
 import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
-class Load  with PixelSize { 
+class OverlayLoad  with PixelSize { 
 
   OverlayEntry _overlayLoad; //加到屏幕上
 
@@ -68,7 +68,7 @@ class Load  with PixelSize {
   /*
    * 关闭动画
    */
-  hidLod() {
+  hidLoad() {
     _overlayLoad.remove();
     _overlayLoad = null;
   }
