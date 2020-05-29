@@ -19,9 +19,11 @@ import 'package:fiction/app/pages/bookShelf/recorDing.dart';  //阅读记录
 import 'package:fiction/app/pages/bookShelf/editBookShelf.dart';  //编辑书架
 import 'package:fiction/app/search/search.dart';  //搜索页面
 import 'package:fiction/app/search/result.dart';  //搜索结果页面
+import 'package:fiction/app/ad/h5Ad.dart';  //H5广告页面
 
 import 'package:fiction/app/pages/category/category.dart';  //分类
 import 'package:fiction/app/pages/my/my.dart';  //我的
+
 
 //Yuri配置_路由区域
 import 'package:fiction/app/pages/home/top_charts.dart'; // 排行榜页面
@@ -47,6 +49,9 @@ final routes = {
 
   '/categorypage': (context) => CategoryPage(),
   '/mypage': (context) => MyPage(),
+
+  '/h5ad': (context) => H5Ad(),
+  // '/h5ad': (context, {arguments}) => H5Ad(arguments:arguments),
 
   //Yuri配置_路由区域
   '/topcharts': (context) => TopChartsPage(),
