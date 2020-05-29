@@ -1,28 +1,35 @@
 /*
- * @author      HackerDaKun007 <hackerdakun007@gmail.com>
+ * @author      HackerDaKun007 <hackerdakun007@gmail.com> 
  * @Remarks     无
  * @copyright   GPL
  * @since       1.0 version
  *
  *
- * @see         搜索页面 - 广告组件
+ * @see         底部广告
 */
-
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
-class SearchAd extends StatefulWidget {
-  SearchAd({Key key}) : super(key: key);
+
+class FooterAd extends StatefulWidget {
+  FooterAd({Key key}) : super(key: key);
 
   @override
-  _SearchAdState createState() => _SearchAdState();
+  _FooterAdState createState() => _FooterAdState();
 }
 
-class _SearchAdState extends State<SearchAd> with PixelSize {
+class _FooterAdState extends State<FooterAd> with PixelSize {
 
   //判断是否关闭广告, true开启广告，false关闭广告
   bool _isAd = true;
+  
 
   @override
+
+  void initState() {
+    super.initState();
+    //请求dio广告
+  }
+
   Widget build(BuildContext context) {
     return this._getAd();
   }
@@ -96,4 +103,6 @@ class _SearchAdState extends State<SearchAd> with PixelSize {
       return Text('');
     }
   }
+
+
 }
