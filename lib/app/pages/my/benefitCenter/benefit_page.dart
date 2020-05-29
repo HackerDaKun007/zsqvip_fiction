@@ -170,9 +170,12 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _getStoreCard(childWidth, 'images/welfare_integral_1.png', 'iPhone X'),
-                _getStoreCard(childWidth, 'images/welfare_integral_2.png', 'iPhone X 碎片'),
-                _getStoreCard(childWidth, 'images/welfare_integral_3.png', '免广告'),
+                _getStoreCard(
+                    childWidth, 'images/welfare_integral_1.png', 'iPhone X'),
+                _getStoreCard(
+                    childWidth, 'images/welfare_integral_2.png', 'iPhone X 碎片'),
+                _getStoreCard(
+                    childWidth, 'images/welfare_integral_3.png', '免广告'),
               ],
             ),
           )
@@ -355,10 +358,10 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        flex: 6,
+                        flex: 7,
                         child: Padding(
                             padding:
-                                EdgeInsets.only(right: getPixe(15, context)),
+                                EdgeInsets.only(right: getPixe(50, context)),
                             child: Column(
                               children: <Widget>[
                                 _getReadTimeContent(
@@ -377,7 +380,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                             )),
                       ),
                       Expanded(
-                        flex: 3,
+                        flex: 2,
                         child: Center(
                             child: _buildButton(
                                 title: '去阅读', onTabHandler: toBookShelfPage)),
@@ -496,10 +499,69 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                   fontSize: getPixe(18, context)),
             ),
           ),
-         
+          _getRowItem('首次登录奖励', '登录后可领取更多积分',10, toLoginPage),
+          _getRowItem('首次阅读10分钟', '轻轻松松赚积分',10, toBookShelfPage, isRead: true),
+          _getRowItem('开启精选推送', '开启必要权限及时收取推送',50, toLoginPage),
         ],
       ),
     );
+  }
+
+  _getRowItem(title,subTitle,earnNum, callback, {bool isRead = false}) {
+    return Container(
+            padding: EdgeInsets.symmetric(horizontal: getPixe(10, context)),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: getPixe(10, context)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                     Expanded(
+                       flex: 7,
+                       child: Padding(
+                         padding: EdgeInsets.only(right: getPixe(50, context)),
+                         child: Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           children: [
+                             Column(
+                               crossAxisAlignment: CrossAxisAlignment.start,
+                               children: <Widget>[
+                                 Text(
+                                   title,
+                                   style: TextStyle(
+                                       fontSize: getPixe(16, context),
+                                       fontWeight: FontWeight.w500),
+                                 ),
+                                 Text(
+                                   subTitle,
+                                   style: TextStyle(
+                                       fontSize: getPixe(10, context),
+                                       color: Colors.grey),
+                                 )
+                               ],
+                             ),
+                             Text(
+                               '$earnNum积分',
+                               style: TextStyle(
+                                   fontWeight: FontWeight.w500,
+                                   color: Colors.deepOrange,
+                                   fontSize: getPixe(12, context)),
+                             ),
+                           ]
+                         )
+                       ),
+                     ),
+                      Expanded(
+                        flex: 2,
+                        child: Center(child: _buildButton(title: isRead ? '去阅读': '去完成', onTabHandler: callback),)
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
   }
 
   /// 底部提示信息
@@ -507,7 +569,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
     return Container(
       padding: EdgeInsets.symmetric(vertical: getPixe(15, context)),
       child: Text(
-        '抽奖活动及活动奖牌有热读小说提供',
+        '抽奖活动及活动奖品由热读小说提供',
         style: TextStyle(fontSize: getPixe(12, context), color: Colors.grey),
         textAlign: TextAlign.center,
       ),
@@ -554,7 +616,12 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[_buildHeader(), _buildDailyBenefit(), _buildBeginnerBenefit(), _buildFooterInfo()],
+          children: <Widget>[
+            _buildHeader(),
+            _buildDailyBenefit(),
+            _buildBeginnerBenefit(),
+            _buildFooterInfo()
+          ],
         ),
       ),
     );
