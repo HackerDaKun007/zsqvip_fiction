@@ -18,7 +18,7 @@ class OverlayLoad  with PixelSize {
   /*
    * 启动加载动画 
    */
-  showLoad(BuildContext context, {double top=0.0, double bottom=0.0, String value='加载中...'}) {
+  showOverlayLoad(BuildContext context, {double top=0.0, double bottom=0.0, String value='加载中...'}) {
     //获取OverlayState
     OverlayState overlayState = Overlay.of(context);
     if (_overlayLoad == null) {
@@ -68,7 +68,7 @@ class OverlayLoad  with PixelSize {
   /*
    * 关闭动画
    */
-  hidLoad() {
+  hidOverlayLoad() {
     _overlayLoad.remove();
     _overlayLoad = null;
   }
