@@ -89,6 +89,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
               }
             },
             child: ListView(
+              // shrinkWrap: true, 
               children: <Widget>[
                 this._readTime(),
                 //推荐内容
