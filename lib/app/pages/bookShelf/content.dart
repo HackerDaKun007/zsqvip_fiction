@@ -12,11 +12,11 @@ import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
 import 'package:fiction/providers/bookShelf.dart'; //书架数据
+import 'package:fiction/providers/tabIndexProvider.dart';
 import 'package:provider/provider.dart';
 
 class Content extends StatefulWidget {
-  final getOut;
-  Content({Key key, this.getOut}) : super(key: key);
+  Content({Key key}) : super(key: key);
 
   @override
   _ContentState createState() => _ContentState();
@@ -31,6 +31,7 @@ class _ContentState extends State<Content> with PixelSize, Common {
   //     "system": 1,
   //   }];
   var providerListData;
+  var tabProvider;
   
   @override
   void initState() {
@@ -42,6 +43,8 @@ class _ContentState extends State<Content> with PixelSize, Common {
 
     //数据管理状态
     this.providerListData = Provider.of<BookShelfProviders>(context);
+    this.tabProvider = Provider.of<TabIndexProvider>(context);
+
     return Padding(
       padding: EdgeInsets.all(10),
       child: GridView.count(
@@ -95,7 +98,7 @@ class _ContentState extends State<Content> with PixelSize, Common {
           ),
           onTap: () {
             //修改父级组件
-            widget.getOut();
+            tabProvider.changeCurrentIndex(1);
           },
         ),
       ));
@@ -170,7 +173,7 @@ class _ContentState extends State<Content> with PixelSize, Common {
           ),
           onTap: () {
             if (providerListData.data[i]['ad'] == 1) {
-              print('广告');
+               Navigator.pushNamed(context, '/h5ad', arguments: {"id":1});
             } else {
               // print(listData[index]['title']);
               // print(123);

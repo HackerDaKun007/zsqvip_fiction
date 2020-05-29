@@ -8,7 +8,7 @@
  * @see         书架页面
 */
 
-import 'package:fiction/providers/tabIndexProvider.dart';
+
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -66,15 +66,16 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   }
 
   Widget build(BuildContext context) {
-    //数据管理状态
-    this.providerListData = Provider.of<BookShelfProviders>(context);
+    
     return Internet(_init(), providerListData.isData);
     // return _init();
   }
 
   //主体内容
   Widget _init() {
-    TabIndexProvider tabProvider = Provider.of<TabIndexProvider>(context);
+    
+    //数据管理状态
+    this.providerListData = Provider.of<BookShelfProviders>(context);
     return Stack(
       children: <Widget>[
         MediaQuery.removePadding(
@@ -95,7 +96,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                 //推荐内容
                 RecommendedContent(),
                 //列表内容
-                Content(getOut: () => tabProvider.changeCurrentIndex(1)),  //修改父级组件
+                Content(),  //修改父级组件
               ],
             ),
           ),

@@ -45,6 +45,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 1,
+        centerTitle: true,
         leading: Container(
           width: getPixe(70, context),
           child: IconButton(
