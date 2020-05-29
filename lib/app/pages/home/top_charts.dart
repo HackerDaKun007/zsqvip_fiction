@@ -121,6 +121,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> with Automa
     List data = _updateListData(index);
     return ListView.builder(
         itemCount: data.length,
+        physics: BouncingScrollPhysics(), // 去掉水波纹
         itemBuilder: (BuildContext context, int index) {
           return _getListItem(index, data);
         });
