@@ -51,8 +51,7 @@ final routes = {
   '/categorypage': (context) => CategoryPage(),
   '/mypage': (context) => MyPage(),
 
-  '/h5ad': (context) => H5Ad(),
-  // '/h5ad': (context, {arguments}) => H5Ad(arguments:arguments),
+  '/h5ad': (context, {arguments}) => H5Ad(arguments:arguments),
 
   //Yuri配置_路由区域
   '/topcharts': (context) => TopChartsPage(),
