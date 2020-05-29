@@ -62,25 +62,11 @@ class HomePage extends StatelessWidget with PixelSize {
           actions: <Widget>[
             GestureDetector(
               child: Container(
-                padding: EdgeInsets.only(left: getPixe(5, context), right: getPixe(5, context)),
-                child: Stack(
-                  fit: StackFit.passthrough,
-                  children: [
-                    Image.asset('images/li.png', width: getPixe(70, context), fit:BoxFit.fitWidth),
-                    Positioned(
-                      top: getPixe(22, context),
-                      left: getPixe(35, context),
-                      child: Text(
-                        '签到',
-                        style: TextStyle(
-                            fontSize: getPixe(12, context), color: Colors.brown),
-                      ),
-                    )
-                  ]
-                )
+                padding: EdgeInsets.only(left: getPixe(8, context), right: getPixe(8, context)),
+                child: Image.asset('images/box.png', width: getPixe(42, context), fit:BoxFit.fitWidth),
               ),
               onTap: () {
-                print('签到');
+                Navigator.pushNamed(context, '/benefit');
               },
             ),
           ],
