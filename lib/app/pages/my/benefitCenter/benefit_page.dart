@@ -184,7 +184,28 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
     );
   }
 
-  _getStoreCard(childWidth, imgUrl, productName) {
+  /// 主按钮
+  Widget _buildButton({String title, VoidCallback onTabHandler}) {
+    return InkWell(
+      onTap: isLogin ? onTabHandler : toLoginPage,
+      child: Container(
+          padding: EdgeInsets.symmetric(
+              horizontal: getPixe(15, context), vertical: getPixe(5, context)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(getPixe(20, context)),
+              gradient: LinearGradient(
+                  colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
+                  end: Alignment.centerLeft,
+                  begin: Alignment.centerRight)),
+          child: Text(
+            title,
+            style: TextStyle(
+                fontSize: getPixe(14, context), fontWeight: FontWeight.w600),
+          )),
+    );
+  }
+  /// 
+  Widget _getStoreCard(childWidth, imgUrl, productName) {
     return Container(
       height: getPixe(160, context),
       width: childWidth,
@@ -298,7 +319,33 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                 ),
                 InkWell(
                     onTap: () {
-                      print('============= 签到 ===========');
+                      showDialog(context: context, child: Dialog(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        child: Container(
+                          height: getPixe(380, context),
+                          padding: EdgeInsets.all(getPixe(10, context)),
+                          child: Stack(
+                            children: <Widget>[
+                              Center(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: getPixe(10, context), horizontal: getPixe(10, context)),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Column(
+                                        children: [
+                                          Text('已累计签到2天', style: TextStyle(fontSize: getPixe(22, context)),),
+                                          Text('明天签到可领50积分', style: TextStyle(fontSize: getPixe(12, context), color: Colors.amber[600]),),
+                                        ]
+                                      ),
+                                      _getRegisterDay(index: 2)
+                                    ],
+                                  )
+                                )
+                              ),
+                            ],
+                          ),
+                        ),
+                      ));
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -369,7 +416,8 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                                     isActive: true,
                                     time: 5,
                                     earnNum: 10),
-                                _getReadTimeContent(time: 15, earnNum: 20, isActive: true),
+                                _getReadTimeContent(
+                                    time: 15, earnNum: 20, isActive: true),
                                 _getReadTimeContent(time: 30, earnNum: 20),
                                 _getReadTimeContent(time: 60, earnNum: 30),
                                 _getReadTimeContent(time: 90, earnNum: 30),
@@ -396,23 +444,56 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
     );
   }
 
-  Widget _buildButton({String title, VoidCallback onTabHandler}) {
-    return InkWell(
-      onTap: isLogin ? onTabHandler : toLoginPage,
-      child: Container(
-          padding: EdgeInsets.symmetric(
-              horizontal: getPixe(15, context), vertical: getPixe(5, context)),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(getPixe(20, context)),
-              gradient: LinearGradient(
-                  colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
-                  end: Alignment.centerLeft,
-                  begin: Alignment.centerRight)),
-          child: Text(
-            title,
-            style: TextStyle(
-                fontSize: getPixe(14, context), fontWeight: FontWeight.w600),
-          )),
+  _getRegisterDay({int index}) {
+    List registerEarnList = [10,20,50,30,30,30,100];
+    _getItem(){
+      List<Widget> _list = List<Widget>();
+      for(int i=0;i<registerEarnList.length; i++) {
+        bool isActive = index==(i+1);
+        bool isPassed = i<index;
+        bool isLast = i==registerEarnList.length-1;
+        Color _bgColor = isPassed ? Colors.deepOrange : Colors.amber[200];
+        _list.add(
+          Column(
+            children: [
+             Container(
+               padding: isActive ? EdgeInsets.only(bottom: getPixe(4, context)) : EdgeInsets.only( top: getPixe(2.5, context),bottom: getPixe(6.5, context)),
+               child: Row(
+                 children: <Widget>[
+                             i==0 ? SizedBox():Container(
+                     width: getPixe(10, context),
+                     height: getPixe(2, context),
+                     color: _bgColor,
+                   ),
+                   Container(
+                     padding: isLast ? EdgeInsets.symmetric(vertical: getPixe(4, context),horizontal: getPixe(1, context)) :EdgeInsets.all(getPixe(4, context)),
+                     decoration: BoxDecoration(
+                       borderRadius: BorderRadius.circular(20),
+                       color: _bgColor,
+                     ),
+                     child: Text('${registerEarnList[i]}', style: TextStyle(fontSize: isActive ? getPixe(18, context) : getPixe(13, context), color: Colors.white), )
+                   ),
+                   isLast ? SizedBox():Container(
+                     width: getPixe(10, context),
+                     height: getPixe(2, context),
+                     color: _bgColor,
+                   ),
+                 ],
+               ),
+             ),
+              Text('${i+1}天', style: TextStyle(fontSize: getPixe(10, context),color: Colors.brown),)
+            ]
+          )
+        );
+      }
+      return _list;
+    }
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: getPixe(20, context)),
+      height: getPixe(90, context),
+      child: Row(
+        children: _getItem(),
+      )
     );
   }
 
@@ -499,69 +580,70 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                   fontSize: getPixe(18, context)),
             ),
           ),
-          _getRowItem('首次登录奖励', '登录后可领取更多积分',10, toLoginPage),
-          _getRowItem('首次阅读10分钟', '轻轻松松赚积分',10, toBookShelfPage, isRead: true),
-          _getRowItem('开启精选推送', '开启必要权限及时收取推送',50, toLoginPage),
+          _getRowItem('首次登录奖励', '登录后可领取更多积分', 10, toLoginPage),
+          _getRowItem('首次阅读10分钟', '轻轻松松赚积分', 10, toBookShelfPage, isRead: true),
+          _getRowItem('开启精选推送', '开启必要权限及时收取推送', 50, toLoginPage),
         ],
       ),
     );
   }
 
-  _getRowItem(title,subTitle,earnNum, callback, {bool isRead = false}) {
+  _getRowItem(title, subTitle, earnNum, callback, {bool isRead = false}) {
     return Container(
-            padding: EdgeInsets.symmetric(horizontal: getPixe(10, context)),
-            child: Column(
+      padding: EdgeInsets.symmetric(horizontal: getPixe(10, context)),
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.symmetric(vertical: getPixe(10, context)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: getPixe(10, context)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                     Expanded(
-                       flex: 7,
-                       child: Padding(
-                         padding: EdgeInsets.only(right: getPixe(50, context)),
-                         child: Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           children: [
-                             Column(
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                               children: <Widget>[
-                                 Text(
-                                   title,
-                                   style: TextStyle(
-                                       fontSize: getPixe(15, context),
-                                       fontWeight: FontWeight.w500),
-                                 ),
-                                 Text(
-                                   subTitle,
-                                   style: TextStyle(
-                                       fontSize: getPixe(10, context),
-                                       color: Colors.grey),
-                                 )
-                               ],
-                             ),
-                             Text(
-                               '$earnNum积分',
-                               style: TextStyle(
-                                   fontWeight: FontWeight.w500,
-                                   color: Colors.deepOrange,
-                                   fontSize: getPixe(12, context)),
-                             ),
-                           ]
-                         )
-                       ),
-                     ),
-                      Expanded(
-                        flex: 2,
-                        child: Center(child: _buildButton(title: isRead ? '去阅读': '去完成', onTabHandler: callback),)
-                      )
-                    ],
-                  ),
+                Expanded(
+                  flex: 7,
+                  child: Padding(
+                      padding: EdgeInsets.only(right: getPixe(50, context)),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  title,
+                                  style: TextStyle(
+                                      fontSize: getPixe(15, context),
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(
+                                  subTitle,
+                                  style: TextStyle(
+                                      fontSize: getPixe(10, context),
+                                      color: Colors.grey),
+                                )
+                              ],
+                            ),
+                            Text(
+                              '$earnNum积分',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.deepOrange,
+                                  fontSize: getPixe(12, context)),
+                            ),
+                          ])),
                 ),
+                Expanded(
+                    flex: 2,
+                    child: Center(
+                      child: _buildButton(
+                          title: isRead ? '去阅读' : '去完成',
+                          onTabHandler: callback),
+                    ))
               ],
             ),
-          );
+          ),
+        ],
+      ),
+    );
   }
 
   /// 底部提示信息
