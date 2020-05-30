@@ -204,7 +204,8 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
           )),
     );
   }
-  /// 
+
+  ///
   Widget _getStoreCard(childWidth, imgUrl, productName) {
     return Container(
       height: getPixe(160, context),
@@ -319,33 +320,45 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                 ),
                 InkWell(
                     onTap: () {
-                      showDialog(context: context, child: Dialog(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                        child: Container(
-                          height: getPixe(380, context),
-                          padding: EdgeInsets.all(getPixe(10, context)),
-                          child: Stack(
-                            children: <Widget>[
-                              Center(
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: getPixe(10, context), horizontal: getPixe(10, context)),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Column(
-                                        children: [
-                                          Text('已累计签到2天', style: TextStyle(fontSize: getPixe(22, context)),),
-                                          Text('明天签到可领50积分', style: TextStyle(fontSize: getPixe(12, context), color: Colors.amber[600]),),
-                                        ]
-                                      ),
-                                      _getRegisterDay(index: 2)
-                                    ],
-                                  )
-                                )
+                      showDialog(
+                          context: context,
+                          child: Dialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Container(
+                              height: getPixe(380, context),
+                              padding: EdgeInsets.all(getPixe(10, context)),
+                              child: Stack(
+                                children: <Widget>[
+                                  Center(
+                                      child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: getPixe(10, context),
+                                              horizontal: getPixe(10, context)),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Column(children: [
+                                                Text(
+                                                  '已累计签到2天',
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          getPixe(22, context)),
+                                                ),
+                                                Text(
+                                                  '明天签到可领50积分',
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          getPixe(12, context),
+                                                      color: Colors.amber[600]),
+                                                ),
+                                              ]),
+                                              _getRegisterDay(index: 2)
+                                            ],
+                                          ))),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                      ));
+                            ),
+                          ));
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -445,56 +458,79 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   }
 
   _getRegisterDay({int index}) {
-    List registerEarnList = [10,20,50,30,30,30,100];
-    _getItem(){
+    List registerEarnList = [10, 20, 50, 30, 30, 30, 100];
+    _getItem() {
       List<Widget> _list = List<Widget>();
-      for(int i=0;i<registerEarnList.length; i++) {
-        bool isActive = index==(i+1);
-        bool isPassed = i<index;
-        bool isLast = i==registerEarnList.length-1;
+      for (int i = 0; i < registerEarnList.length; i++) {
+        bool isActive = index == (i + 1);
+        bool isPassed = i < index;
+        bool isFirst = i == 0;
+        bool isLast = i == registerEarnList.length - 1;
         Color _bgColor = isPassed ? Colors.deepOrange : Colors.amber[200];
-        _list.add(
-          Column(
-            children: [
-             Container(
-               padding: isActive ? EdgeInsets.only(bottom: getPixe(4, context)) : EdgeInsets.only( top: getPixe(2.5, context),bottom: getPixe(6.5, context)),
-               child: Row(
-                 children: <Widget>[
-                             i==0 ? SizedBox():Container(
-                     width: getPixe(10, context),
-                     height: getPixe(2, context),
-                     color: _bgColor,
-                   ),
-                   Container(
-                     padding: isLast ? EdgeInsets.symmetric(vertical: getPixe(4, context),horizontal: getPixe(1, context)) :EdgeInsets.all(getPixe(4, context)),
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(20),
-                       color: _bgColor,
-                     ),
-                     child: Text('${registerEarnList[i]}', style: TextStyle(fontSize: isActive ? getPixe(18, context) : getPixe(13, context), color: Colors.white), )
-                   ),
-                   isLast ? SizedBox():Container(
-                     width: getPixe(10, context),
-                     height: getPixe(2, context),
-                     color: _bgColor,
-                   ),
-                 ],
-               ),
-             ),
-              Text('${i+1}天', style: TextStyle(fontSize: getPixe(10, context),color: Colors.brown),)
-            ]
-          )
-        );
+        _list.add(Column(children: [
+          Container(
+            padding: isActive
+                ? EdgeInsets.only(bottom: getPixe(4, context))
+                : EdgeInsets.only(
+                    top: getPixe(2.5, context), bottom: getPixe(6.5, context)),
+            child: Row(
+              children: <Widget>[
+                isFirst
+                    ? SizedBox()
+                    : Container(
+                        width: getPixe(10, context),
+                        height: getPixe(2, context),
+                        color: _bgColor,
+                      ),
+                Container(
+                    padding: isLast
+                        ? EdgeInsets.symmetric(
+                            vertical: getPixe(4, context),
+                            horizontal: getPixe(1, context))
+                        : EdgeInsets.all(getPixe(4, context)),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: _bgColor,
+                    ),
+                    child: Text(
+                      '${registerEarnList[i]}',
+                      style: TextStyle(
+                          fontSize: isActive
+                              ? getPixe(18, context)
+                              : getPixe(13, context),
+                          color: Colors.white),
+                    )),
+                isLast
+                    ? SizedBox()
+                    : Container(
+                        width: getPixe(10, context),
+                        height: getPixe(2, context),
+                        color: _bgColor,
+                      ),
+              ],
+            ),
+          ),
+          Row(children: [
+            isLast ? SizedBox(width: getPixe(10, context),) : SizedBox(),
+            Text(
+              '${i + 1}天',
+              style: TextStyle(
+                  fontSize: getPixe(10, context), color: Colors.brown),
+            ),
+            isFirst ? SizedBox(width: getPixe(10, context),) : SizedBox(),
+          ]),
+          
+        ]));
       }
       return _list;
     }
+
     return Container(
-      padding: EdgeInsets.symmetric(vertical: getPixe(20, context)),
-      height: getPixe(90, context),
-      child: Row(
-        children: _getItem(),
-      )
-    );
+        padding: EdgeInsets.symmetric(vertical: getPixe(20, context)),
+        height: getPixe(90, context),
+        child: Row(
+          children: _getItem(),
+        ));
   }
 
   _getReadTimeContent(
