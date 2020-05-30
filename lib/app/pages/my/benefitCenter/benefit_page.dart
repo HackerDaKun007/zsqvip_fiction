@@ -323,42 +323,9 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                       showDialog(
                           context: context,
                           child: Dialog(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Container(
-                              height: getPixe(380, context),
-                              padding: EdgeInsets.all(getPixe(10, context)),
-                              child: Stack(
-                                children: <Widget>[
-                                  Center(
-                                      child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: getPixe(10, context),
-                                              horizontal: getPixe(10, context)),
-                                          child: Column(
-                                            children: <Widget>[
-                                              Column(children: [
-                                                Text(
-                                                  '已累计签到2天',
-                                                  style: TextStyle(
-                                                      fontSize:
-                                                          getPixe(22, context)),
-                                                ),
-                                                Text(
-                                                  '明天签到可领50积分',
-                                                  style: TextStyle(
-                                                      fontSize:
-                                                          getPixe(12, context),
-                                                      color: Colors.amber[600]),
-                                                ),
-                                              ]),
-                                              _getRegisterDay(index: 2)
-                                            ],
-                                          ))),
-                                ],
-                              ),
-                            ),
-                          ));
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: _buildRegisterDialog()));
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -457,6 +424,52 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
     );
   }
 
+  _buildRegisterDialog() {
+    return Container(
+      height: getPixe(380, context),
+      padding: EdgeInsets.all(getPixe(10, context)),
+      child: Stack(
+        children: <Widget>[
+          Center(
+              child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: getPixe(10, context),
+                      horizontal: getPixe(10, context)),
+                  child: Column(
+                    children: <Widget>[
+                      Column(children: [
+                        Text(
+                          '已累计签到2天',
+                          style: TextStyle(fontSize: getPixe(22, context)),
+                        ),
+                        Text(
+                          '明天签到可领50积分',
+                          style: TextStyle(
+                              fontSize: getPixe(12, context),
+                              color: Colors.amber[600]),
+                        ),
+                      ]),
+                      _getRegisterDay(index: 2)
+                    ],
+                  ))),
+          Positioned(
+            right: 0,
+            top: 0,
+            child: InkWell(
+              child: Icon(
+                Icons.close,
+                color: Colors.grey,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   _getRegisterDay({int index}) {
     List registerEarnList = [10, 20, 50, 30, 30, 30, 100];
     _getItem() {
@@ -470,9 +483,9 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
         _list.add(Column(children: [
           Container(
             padding: isActive
-                ? EdgeInsets.only(bottom: getPixe(4, context))
+                ? EdgeInsets.only(bottom: getPixe(6, context))
                 : EdgeInsets.only(
-                    top: getPixe(2.5, context), bottom: getPixe(6.5, context)),
+                    top: getPixe(1.5, context), bottom: getPixe(7.5, context)),
             child: Row(
               children: <Widget>[
                 isFirst
@@ -496,7 +509,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                       '${registerEarnList[i]}',
                       style: TextStyle(
                           fontSize: isActive
-                              ? getPixe(18, context)
+                              ? getPixe(16, context)
                               : getPixe(13, context),
                           color: Colors.white),
                     )),
@@ -511,15 +524,22 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
             ),
           ),
           Row(children: [
-            isLast ? SizedBox(width: getPixe(10, context),) : SizedBox(),
+            isLast
+                ? SizedBox(
+                    width: getPixe(10, context),
+                  )
+                : SizedBox(),
             Text(
               '${i + 1}天',
               style: TextStyle(
                   fontSize: getPixe(10, context), color: Colors.brown),
             ),
-            isFirst ? SizedBox(width: getPixe(10, context),) : SizedBox(),
+            isFirst
+                ? SizedBox(
+                    width: getPixe(10, context),
+                  )
+                : SizedBox(),
           ]),
-          
         ]));
       }
       return _list;
