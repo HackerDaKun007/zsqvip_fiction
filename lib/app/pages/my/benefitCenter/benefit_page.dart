@@ -33,8 +33,8 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   }
 
   /// 转到积分商城页
-  void toStorePage() {
-    Navigator.pushNamed(context, '/store');
+  void toBonusStorePage() {
+    Navigator.pushNamed(context, '/bonusstore');
   }
 
   /// 头部
@@ -141,7 +141,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                     fontSize: getPixe(18, context)),
               ),
               InkWell(
-                onTap: () {},
+                onTap: toBonusStorePage,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
@@ -230,31 +230,34 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
             productName,
             style: TextStyle(fontSize: getPixe(12, context)),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: getPixe(20, context),
-                vertical: getPixe(5, context)),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                    offset: Offset(1, 3),
-                    blurRadius: 2,
-                    color: Color(0xccff7043)),
-                BoxShadow(
-                    offset: Offset(1, 2),
-                    blurRadius: 0,
-                    color: Color(0x22ffffff)),
-              ],
-              gradient: LinearGradient(
-                  colors: [Colors.deepOrange, Colors.orange[700]],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight),
-            ),
-            child: Text('立即兑换',
-                style: TextStyle(
-                    fontSize: getPixe(13, context), color: Colors.white)),
-          )
+         InkWell(
+           onTap: toBonusStorePage,
+           child: Container(
+             padding: EdgeInsets.symmetric(
+                 horizontal: getPixe(20, context),
+                 vertical: getPixe(5, context)),
+             decoration: BoxDecoration(
+               borderRadius: BorderRadius.circular(20),
+               boxShadow: [
+                 BoxShadow(
+                     offset: Offset(1, 3),
+                     blurRadius: 2,
+                     color: Color(0xccff7043)),
+                 BoxShadow(
+                     offset: Offset(1, 2),
+                     blurRadius: 0,
+                     color: Color(0x22ffffff)),
+               ],
+               gradient: LinearGradient(
+                   colors: [Colors.deepOrange, Colors.orange[700]],
+                   begin: Alignment.centerLeft,
+                   end: Alignment.centerRight),
+             ),
+             child: Text('立即兑换',
+                 style: TextStyle(
+                     fontSize: getPixe(13, context), color: Colors.white)),
+           )
+         )
         ],
       ),
     );
@@ -423,7 +426,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
       ),
     );
   }
-
+  /// 签到弹窗
   _buildRegisterDialog() {
     return Container(
       height: getPixe(380, context),
@@ -735,7 +738,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
         ),
         actions: <Widget>[
           InkWell(
-              onTap: () {},
+              onTap: toBonusStorePage,
               child: Container(
                   padding: EdgeInsets.only(
                     right: getPixe(15, context),
