@@ -1,3 +1,13 @@
+/*
+ * @author      Yuri Chen <pluto401zz@gmail.com>
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ * 
+ * @see         福利中心
+*/
+
 import 'package:dio/dio.dart';
 import 'package:fiction/providers/tabIndexProvider.dart';
 import 'package:flutter/material.dart';

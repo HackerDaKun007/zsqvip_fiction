@@ -155,9 +155,10 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
                   direction: Axis.horizontal,
                   spacing: getPixe(15, context),
                   children: [
-                    _getStoreCard(childWidth, 'images/welfare_integral_1.png',
-                        'iPhone X', ishot: true),
-                    _getStoreCard(childWidth, 'images/welfare_integral_2.png',
+                    _getProductCard(
+                        childWidth, 'images/welfare_integral_1.png', 'iPhone X',
+                        ishot: true),
+                    _getProductCard(childWidth, 'images/welfare_integral_2.png',
                         'iPhone X 碎片'),
                   ],
                 ),
@@ -181,9 +182,12 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
                 spacing: getPixe(15, context),
                 runSpacing: getPixe(30, context),
                 children: [
-                  _getTextCard(childWidth, isNew: true, time: '5分钟', earnNum: 10),
-                  _getTextCard(childWidth, isHot: true, time: '30分钟', earnNum: 120),
-                  _getTextCard(childWidth, isHot: true, time: '1小时', earnNum: 240),
+                  _getTextCard(childWidth,
+                      isNew: true, time: '5分钟', earnNum: 10),
+                  _getTextCard(childWidth,
+                      isHot: true, time: '30分钟', earnNum: 120),
+                  _getTextCard(childWidth,
+                      isHot: true, time: '1小时', earnNum: 240),
                   _getTextCard(childWidth, time: '1天', earnNum: 1200),
                   _getTextCard(childWidth, time: '1周', earnNum: 4000),
                   _getTextCard(childWidth, time: '1个月', earnNum: 8888),
@@ -196,15 +200,29 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
     );
   }
 
-  _getButton({String title, VoidCallback callback}) {
+  /// 按钮
+  Widget _getButton({String title, VoidCallback callback}) {
     return InkWell(
-        onTap: () {},
+        onTap: () {
+          showModalBottomSheet(
+              context: context,
+              isScrollControlled: true, // 设置为true即可设置高度
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(getPixe(16, context)))),
+              builder: (BuildContext context) {
+                return Container(
+                  height: getHeight(context) * 0.35,
+                  child: _buildBottomSheetContent(),
+                );
+              });
+        },
         child: Container(
             padding: EdgeInsets.symmetric(
                 horizontal: getPixe(30, context),
                 vertical: getPixe(3, context)),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(getPixe(20, context)),
+                borderRadius: BorderRadius.circular(getPixe(22, context)),
                 gradient: LinearGradient(
                     colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
                     begin: Alignment.centerLeft,
@@ -218,130 +236,201 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
             )));
   }
 
-  Widget _getTextCard(childWidth,{bool isNew=false, bool isHot = false, String time, int earnNum,}) {
+  Widget _buildBottomSheetContent() {
+    return Container(
+        padding: EdgeInsets.all(getPixe(10, context)),
+        margin: EdgeInsets.only(bottom: getPixe(20, context)),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.symmetric(
+                  vertical: getPixe(30, context),
+                  horizontal: getPixe(20, context)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '免5分钟广告',
+                          style: TextStyle(fontSize: getPixe(24, context)),
+                        ),
+                        SizedBox(
+                          height: getPixe(15, context),
+                        ),
+                        Text(
+                          '兑换后立即生效，可以免除5分钟阅读器内广告，5分钟后自动失效。',
+                          style: TextStyle(fontSize: getPixe(12, context)),
+                        )
+                      ]),
+                      Spacer(),
+                  InkWell(
+                    onTap: toBack,
+                    child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getPixe(120, context),
+                            vertical: getPixe(10, context)),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(getPixe(20, context)),
+                            gradient: LinearGradient(
+                                colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
+                                end: Alignment.centerLeft,
+                                begin: Alignment.centerRight)),
+                        child: Text(
+                          '使用10积分兑换',
+                          style: TextStyle(
+                              fontSize: getPixe(15, context),
+                              color: Colors.deepOrange[900]),
+                        )),
+                  )
+                ],
+              ),
+            ),
+            Positioned(
+              right: 0,
+              child: InkWell(
+                  onTap: toBack,
+                  child: Icon(
+                    Icons.close,
+                    color: Colors.grey,
+                  )),
+            )
+          ],
+        ));
+  }
+
+  /// 文字卡片
+  Widget _getTextCard(
+    childWidth, {
+    bool isNew = false,
+    bool isHot = false,
+    String time,
+    int earnNum,
+  }) {
     List<Color> _newColors = [Colors.deepOrange, Colors.orange[700]];
     List<Color> _hotColors = [Colors.amber[700], Colors.amber[300]];
     bool _isActive = isNew || isHot;
 
-    return Stack(
-        children: [
-        Container(
+    return Stack(children: [
+      Container(
         width: childWidth,
         height: childWidth,
         decoration: BoxDecoration(
           color: Colors.amber[50],
           borderRadius: BorderRadius.circular(8),
         ),
-         child: Center(
-           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-             Column(
-               mainAxisAlignment: MainAxisAlignment.center,
-               children: <Widget>[
-                 Text(
-                   '免$time广告',
-                   style: TextStyle(fontSize: getPixe(15, context)),
-                 ),
-                 Text(
-                   '消耗 $earnNum积分',
-                   style: TextStyle(
-                       fontSize: getPixe(12, context), color: Colors.grey),
-                 )
-               ],
-             ),
-             SizedBox(
-               height: getPixe(10, context),
-             ),
-             _getButton(title: '兑换')
-           ]),
-         ),
-       ),
-       _isActive ? 
-         Positioned(
-          right: 0,
-          child: Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: getPixe(5, context), vertical: getPixe(1, context)),
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: isNew ? _newColors : _hotColors,
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight
+        child: Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  '免$time广告',
+                  style: TextStyle(fontSize: getPixe(15, context)),
                 ),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(getPixe(8, context)),bottomLeft: Radius.circular(getPixe(8, context)),bottomRight: Radius.circular(getPixe(8, context)))
+                Text(
+                  '消耗 $earnNum积分',
+                  style: TextStyle(
+                      fontSize: getPixe(12, context), color: Colors.grey),
+                )
+              ],
             ),
-            child: Text(
-             isNew? '新用户专享':'热门',
-              style:
-                  TextStyle(color: Colors.white, fontSize: getPixe(10, context)),
+            SizedBox(
+              height: getPixe(10, context),
             ),
-          )
-        )
-        : SizedBox()
-      ]);
-  }
-
- 
-  ///
-  Widget _getStoreCard(childWidth, imgUrl, productName, {bool ishot = false}) {
-    return Stack(
-      children: [
-        Container(
-          height: getPixe(160, context),
-          width: childWidth,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                width: childWidth,
-                height: childWidth,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                        color: Colors.grey[300], width: getPixe(1, context))),
-                child: Center(
-                  child: Image.asset(
-                    imgUrl,
-                    width: childWidth - 40,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-              Text(
-                productName,
-                style: TextStyle(fontSize: getPixe(12, context)),
-              ),
-              _getButton(title: '兑换')
-            ],
-          ),
+            _getButton(title: '兑换')
+          ]),
         ),
-        ishot ? 
-        Positioned(
-          right: 0,
-          child: Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: getPixe(5, context), vertical: getPixe(1, context)),
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.deepOrange, Colors.orange[700]],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight
+      ),
+      _isActive
+          ? Positioned(
+              right: 0,
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: getPixe(5, context),
+                    vertical: getPixe(1, context)),
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: isNew ? _newColors : _hotColors,
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(getPixe(8, context)),
+                        bottomLeft: Radius.circular(getPixe(8, context)),
+                        bottomRight: Radius.circular(getPixe(8, context)))),
+                child: Text(
+                  isNew ? '新用户专享' : '热门',
+                  style: TextStyle(
+                      color: Colors.white, fontSize: getPixe(10, context)),
                 ),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(getPixe(8, context)),bottomLeft: Radius.circular(getPixe(8, context)),bottomRight: Radius.circular(getPixe(8, context)))
-            ),
-            child: Text(
-              'HOT',
-              style:
-                  TextStyle(color: Colors.white, fontSize: getPixe(10, context)),
-            ),
-          )
-        ) :
-        SizedBox()
-      ]
-    );
+              ))
+          : SizedBox()
+    ]);
   }
 
-    /// 底部提示信息
+  /// 产品卡片
+  Widget _getProductCard(childWidth, imgUrl, productName,
+      {bool ishot = false}) {
+    return Stack(children: [
+      Container(
+        height: getPixe(160, context),
+        width: childWidth,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              width: childWidth,
+              height: childWidth,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                      color: Colors.grey[300], width: getPixe(1, context))),
+              child: Center(
+                child: Image.asset(
+                  imgUrl,
+                  width: childWidth - 40,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            Text(
+              productName,
+              style: TextStyle(fontSize: getPixe(12, context)),
+            ),
+            _getButton(title: '兑换')
+          ],
+        ),
+      ),
+      ishot
+          ? Positioned(
+              right: 0,
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: getPixe(5, context),
+                    vertical: getPixe(1, context)),
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: [Colors.deepOrange, Colors.orange[700]],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(getPixe(8, context)),
+                        bottomLeft: Radius.circular(getPixe(8, context)),
+                        bottomRight: Radius.circular(getPixe(8, context)))),
+                child: Text(
+                  'HOT',
+                  style: TextStyle(
+                      color: Colors.white, fontSize: getPixe(10, context)),
+                ),
+              ))
+          : SizedBox()
+    ]);
+  }
+
+  /// 底部提示信息
   Widget _buildFooterInfo() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: getPixe(15, context)),
@@ -392,15 +481,11 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
           height: 800,
           child: Stack(children: [
             _buildHeader(),
-              Positioned(
-                top: getPixe(200, context),
-                child:Column(
-                  children: [
-                    _buildBonusDetail(),
-                    _buildFooterInfo()
-                  ]
-                ),
-              ),
+            Positioned(
+              top: getPixe(200, context),
+              child:
+                  Column(children: [_buildBonusDetail(), _buildFooterInfo()]),
+            ),
           ]),
         )));
   }
