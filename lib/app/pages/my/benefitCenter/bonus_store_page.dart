@@ -459,7 +459,9 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
           ),
           actions: <Widget>[
             InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, '/bonusdetail');
+                },
                 child: Container(
                     padding: EdgeInsets.only(
                       right: getPixe(15, context),
