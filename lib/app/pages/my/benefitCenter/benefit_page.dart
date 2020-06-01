@@ -765,16 +765,27 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                   )))
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _buildHeader(),
-            _buildDailyBenefit(),
-            _buildBeginnerBenefit(),
-            _buildFooterInfo()
-          ],
-        ),
-      ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                _buildHeader(),
+                _buildDailyBenefit(),
+                _buildBeginnerBenefit(),
+                _buildFooterInfo()
+              ],
+            ),
+          ),
+          Positioned(
+            right: getPixe(20, context),
+            top: getPixe(50, context),
+            child: InkWell(
+              onTap: toBonusStorePage,
+              child: Image.asset('images/adGift.png', width: getPixe(50, context), fit: BoxFit.fill,)
+            ),
+          )
+        ])
     );
   }
 }
