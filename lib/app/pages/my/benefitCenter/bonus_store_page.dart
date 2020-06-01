@@ -121,102 +121,234 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
     return Container(
       padding: EdgeInsets.all(getPixe(15, context)),
       width: mainWidth,
-      height: 500,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24), topRight: Radius.circular(24)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Column(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Container(
+          padding: EdgeInsets.only(bottom: getPixe(20, context)),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                '兑换iPhone Xs Max',
-                style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: getPixe(20, context)),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    '兑换iPhone Xs Max',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: getPixe(20, context)),
+                  ),
+                  Text(
+                    '已获得0个碎片，集满10个可兑换iPhone Xs Max',
+                    style: TextStyle(
+                        color: Colors.grey, fontSize: getPixe(11, context)),
+                  )
+                ],
               ),
-              Text(
-                '已获得0个碎片，集满10个可兑换iPhone Xs Max',
-                style: TextStyle(
-                    color: Colors.grey, fontSize: getPixe(10, context)),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, getPixe(15, context),
+                    getPixe(10, context), getPixe(10, context)),
+                child: Wrap(
+                  direction: Axis.horizontal,
+                  spacing: getPixe(15, context),
+                  children: [
+                    _getStoreCard(childWidth, 'images/welfare_integral_1.png',
+                        'iPhone X', ishot: true),
+                    _getStoreCard(childWidth, 'images/welfare_integral_2.png',
+                        'iPhone X 碎片'),
+                  ],
+                ),
               )
             ],
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, getPixe(15, context),
-                getPixe(10, context), getPixe(10, context)),
-            child: Wrap(
-              direction: Axis.horizontal,
-              spacing: getPixe(15, context),
-              children: [
-                _getStoreCard(
-                    childWidth, 'images/welfare_integral_1.png', 'iPhone X'),
-                _getStoreCard(
-                    childWidth, 'images/welfare_integral_2.png', 'iPhone X 碎片'),
-              ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              '兑换免广告特权',
+              style: TextStyle(
+                  fontWeight: FontWeight.w600, fontSize: getPixe(20, context)),
             ),
-          )
-        ],
-      ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, getPixe(15, context),
+                  getPixe(10, context), getPixe(10, context)),
+              child: Wrap(
+                direction: Axis.horizontal,
+                spacing: getPixe(15, context),
+                runSpacing: getPixe(30, context),
+                children: [
+                  _getTextCard(childWidth, isNew: true, time: '5分钟', earnNum: 10),
+                  _getTextCard(childWidth, isHot: true, time: '30分钟', earnNum: 120),
+                  _getTextCard(childWidth, isHot: true, time: '1小时', earnNum: 240),
+                  _getTextCard(childWidth, time: '1天', earnNum: 1200),
+                  _getTextCard(childWidth, time: '1周', earnNum: 4000),
+                  _getTextCard(childWidth, time: '1个月', earnNum: 8888),
+                ],
+              ),
+            )
+          ],
+        )
+      ]),
     );
   }
 
   _getButton({String title, VoidCallback callback}) {
     return InkWell(
-      onTap: () {},
-      child: Container(
-          padding: EdgeInsets.symmetric(
-              horizontal: getPixe(24, context), vertical: getPixe(2, context)),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(getPixe(20, context)),
-              gradient: LinearGradient(
-                  colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight)),
-          child: Text(
-            title,
-            style: TextStyle(
-                fontSize: getPixe(13, context),
-                fontWeight: FontWeight.w600,
-                color: Colors.deepOrange[900]),
-          ))
+        onTap: () {},
+        child: Container(
+            padding: EdgeInsets.symmetric(
+                horizontal: getPixe(30, context),
+                vertical: getPixe(3, context)),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(getPixe(20, context)),
+                gradient: LinearGradient(
+                    colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight)),
+            child: Text(
+              title,
+              style: TextStyle(
+                  fontSize: getPixe(13, context),
+                  fontWeight: FontWeight.w600,
+                  color: Colors.deepOrange[900]),
+            )));
+  }
+
+  Widget _getTextCard(childWidth,{bool isNew=false, bool isHot = false, String time, int earnNum,}) {
+    List<Color> _newColors = [Colors.deepOrange, Colors.orange[700]];
+    List<Color> _hotColors = [Colors.amber[700], Colors.amber[300]];
+    bool _isActive = isNew || isHot;
+
+    return Stack(
+        children: [
+        Container(
+        width: childWidth,
+        height: childWidth,
+        decoration: BoxDecoration(
+          color: Colors.amber[50],
+          borderRadius: BorderRadius.circular(8),
+        ),
+         child: Center(
+           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+             Column(
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: <Widget>[
+                 Text(
+                   '免$time广告',
+                   style: TextStyle(fontSize: getPixe(15, context)),
+                 ),
+                 Text(
+                   '消耗 $earnNum积分',
+                   style: TextStyle(
+                       fontSize: getPixe(12, context), color: Colors.grey),
+                 )
+               ],
+             ),
+             SizedBox(
+               height: getPixe(10, context),
+             ),
+             _getButton(title: '兑换')
+           ]),
+         ),
+       ),
+       _isActive ? 
+         Positioned(
+          right: 0,
+          child: Container(
+            padding: EdgeInsets.symmetric(
+                horizontal: getPixe(5, context), vertical: getPixe(1, context)),
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: isNew ? _newColors : _hotColors,
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight
+                ),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(getPixe(8, context)),bottomLeft: Radius.circular(getPixe(8, context)),bottomRight: Radius.circular(getPixe(8, context)))
+            ),
+            child: Text(
+             isNew? '新用户专享':'热门',
+              style:
+                  TextStyle(color: Colors.white, fontSize: getPixe(10, context)),
+            ),
+          )
+        )
+        : SizedBox()
+      ]);
+  }
+
+ 
+  ///
+  Widget _getStoreCard(childWidth, imgUrl, productName, {bool ishot = false}) {
+    return Stack(
+      children: [
+        Container(
+          height: getPixe(160, context),
+          width: childWidth,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                width: childWidth,
+                height: childWidth,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                        color: Colors.grey[300], width: getPixe(1, context))),
+                child: Center(
+                  child: Image.asset(
+                    imgUrl,
+                    width: childWidth - 40,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              Text(
+                productName,
+                style: TextStyle(fontSize: getPixe(12, context)),
+              ),
+              _getButton(title: '兑换')
+            ],
+          ),
+        ),
+        ishot ? 
+        Positioned(
+          right: 0,
+          child: Container(
+            padding: EdgeInsets.symmetric(
+                horizontal: getPixe(5, context), vertical: getPixe(1, context)),
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.deepOrange, Colors.orange[700]],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight
+                ),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(getPixe(8, context)),bottomLeft: Radius.circular(getPixe(8, context)),bottomRight: Radius.circular(getPixe(8, context)))
+            ),
+            child: Text(
+              'HOT',
+              style:
+                  TextStyle(color: Colors.white, fontSize: getPixe(10, context)),
+            ),
+          )
+        ) :
+        SizedBox()
+      ]
     );
   }
 
-  ///
-  Widget _getStoreCard(childWidth, imgUrl, productName) {
+    /// 底部提示信息
+  Widget _buildFooterInfo() {
     return Container(
-      height: getPixe(160, context),
-      width: childWidth,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Container(
-            width: childWidth,
-            height: childWidth,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                    color: Colors.grey[300], width: getPixe(1, context))),
-            child: Center(
-              child: Image.asset(
-                imgUrl,
-                width: childWidth - 40,
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
-          Text(
-            productName,
-            style: TextStyle(fontSize: getPixe(12, context)),
-          ),
-          _getButton(title: '兑换')
-        ],
+      padding: EdgeInsets.symmetric(vertical: getPixe(15, context)),
+      child: Text(
+        '抽奖活动及活动奖品由热读小说提供',
+        style: TextStyle(fontSize: getPixe(12, context), color: Colors.grey),
+        textAlign: TextAlign.center,
       ),
     );
   }
@@ -257,15 +389,18 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
         ),
         body: SingleChildScrollView(
             child: Container(
-          height: 1000,
+          height: 800,
           child: Stack(children: [
             _buildHeader(),
-            Stack(children: [
               Positioned(
                 top: getPixe(200, context),
-                child: _buildBonusDetail(),
+                child:Column(
+                  children: [
+                    _buildBonusDetail(),
+                    _buildFooterInfo()
+                  ]
+                ),
               ),
-            ]),
           ]),
         )));
   }
