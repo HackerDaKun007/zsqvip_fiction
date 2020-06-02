@@ -177,7 +177,9 @@ class _MineBodyState extends State<MineBody> with PixelSize{
           _getListItem(title: '福利中心', icon: Icons.redeem, subtitle: '抽大奖', callback: () {
             Navigator.pushNamed(context, '/benefit');
           }),
-          _getListItem(title: '积分商城', icon: Icons.store, subtitle: '兑换好礼'),
+          _getListItem(title: '积分商城', icon: Icons.store, subtitle: '兑换好礼', callback: () {
+            Navigator.pushNamed(context, '/bonusstore');
+          }),
           _getListItem(
             title: '阅读记录',
             icon: Icons.access_time,

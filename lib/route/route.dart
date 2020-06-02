@@ -26,6 +26,7 @@ import 'package:fiction/app/pages/my/my.dart';  //我的
 
 
 //Yuri配置_路由区域
+import 'package:fiction/app/bookDetail/book_detail_page.dart'; // 书籍详情页面
 import 'package:fiction/app/pages/home/top_charts.dart'; // 排行榜页面
 import 'package:fiction/app/bookList/book_list_detail.dart'; // 书单详情页面
 import 'package:fiction/app/bookList/book_list_page.dart'; // 书单页面
@@ -34,7 +35,6 @@ import 'package:fiction/app/pages/my/settings/aboutus.dart';  // 关于我们页
 import 'package:fiction/app/pages/my/benefitCenter/benefit_page.dart';  // 福利中心页面
 import 'package:fiction/app/pages/my/benefitCenter/bonus_store_page.dart';  // 积分商城页面
 import 'package:fiction/app/pages/my/benefitCenter/bonus_detail_page.dart';  // 积分明细页面
-import 'package:fiction/app/bookDetail/book_detail_page.dart'; // 书籍详情页面
 
 //配置命令路由
 final routes = {
@@ -59,12 +59,13 @@ final routes = {
   '/topcharts': (context) => TopChartsPage(),
   '/booklist': (context) => BookListPage(),
   '/booklistdetail': (context, {arguments}) => BookListDetail(arguments:arguments),
+  '/bookdetail': (context, {arguments}) => BookDetailPage(arguments:arguments),
   '/settings': (context) => SettingsPage(),
   '/aboutus': (context) => AboutUsPage(),
   '/benefit': (context) => BenefitPage(),
   '/bonusstore': (context) => BonusStorePage(),
   '/bonusdetail': (context) => BonusDetailPage(),
-  '/bookdetail': (context, {arguments}) => BookDetailPage(arguments:arguments),
+
 };
 
 var onGenerateRoute = (RouteSettings settings) {
