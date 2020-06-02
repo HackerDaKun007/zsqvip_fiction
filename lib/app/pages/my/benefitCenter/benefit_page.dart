@@ -24,6 +24,8 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   bool isLogin; // 是否登录
   bool isTodayRegister; // 今日是否签到
   TabIndexProvider tabProvider;
+  List registerEarnList = [10, 20, 50, 30, 30, 30, 100]; // 测试积分
+
   @override
   void initState() {
     super.initState();
@@ -462,7 +464,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                               color: Colors.amber[600]),
                         ),
                       ]),
-                      _getRegisterDay(index: 2)
+                      _getRegisterDay(activeDay: 2)
                     ],
                   ))),
           Positioned(
@@ -483,13 +485,13 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
     );
   }
 
-  _getRegisterDay({int index}) {
-    List registerEarnList = [10, 20, 50, 30, 30, 30, 100];
+  /// 签到日期和积分组件
+  _getRegisterDay({int activeDay}) {
     _getItem() {
       List<Widget> _list = List<Widget>();
       for (int i = 0; i < registerEarnList.length; i++) {
-        bool isActive = index == (i + 1);
-        bool isPassed = i < index;
+        bool isActive = activeDay == (i + 1);
+        bool isPassed = i < activeDay;
         bool isFirst = i == 0;
         bool isLast = i == registerEarnList.length - 1;
         Color _bgColor = isPassed ? Colors.deepOrange : Colors.amber[200];
@@ -566,6 +568,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
         ));
   }
 
+  /// 阅读时间组件
   _getReadTimeContent(
       {bool isFirst = false,
       bool isLast = false,
