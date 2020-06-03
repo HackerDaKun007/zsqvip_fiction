@@ -150,10 +150,10 @@ class _SearchState extends State<Search> with Common {
     _isIconValidata() {
       if (isIcon == "1") {
         return Padding(
-          padding: EdgeInsets.fromLTRB(getPixe(3, context), 0, 0, 0),
+          padding: EdgeInsets.fromLTRB(pixel.setWidth(3, context), 0, 0, 0),
           child: Icon(
             Iconfont.remen,
-            size: getPixe(16, context),
+            size: pixel.setFontSize(16, context),
             color: Colors.red,
           ),
         );
@@ -169,17 +169,17 @@ class _SearchState extends State<Search> with Common {
             Text(
               text,
               style: TextStyle(
-                fontSize: getPixe(14, context),
+                fontSize: pixel.setFontSize(14, context),
               ),
             ),
             _isIconValidata(),
           ],
         ),
-        padding: EdgeInsets.fromLTRB(getPixe(10, context), getPixe(5, context),
-            getPixe(10, context), getPixe(5, context)),
-        margin: EdgeInsets.fromLTRB(0, 0, 0, getPixe(10, context)),
+        padding: EdgeInsets.fromLTRB(pixel.setWidth(10, context), pixel.setHeight(5, context),
+            pixel.setWidth(10, context), pixel.setHeight(5, context)),
+        margin: EdgeInsets.fromLTRB(0, 0, 0, pixel.setHeight(10, context)),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(getPixe(3, context)),
+          borderRadius: BorderRadius.circular(pixel.setWidth(3, context)),
           color: Color(0x99e2e2e2),
         ),
       ),
