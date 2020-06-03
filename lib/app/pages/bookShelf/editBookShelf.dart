@@ -49,11 +49,11 @@ class _EditBookShelfState extends State<EditBookShelf>  {
         elevation: 1,
         centerTitle: true,
         leading: Container(
-          width: getPixe(70, context),
+          width: pixel.setWidth(70, context),
           child: IconButton(
             icon: Icon(
               Iconfont.zuo,
-              size: getPixe(28, context),
+              size: pixel.setFontSize(28, context),
             ),
             onPressed: () {
               Navigator.pop(context);
