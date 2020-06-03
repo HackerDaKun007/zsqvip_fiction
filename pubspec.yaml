@@ -33,8 +33,9 @@ dependencies:
   connectivity: ^0.4.8+6
   cached_network_image: ^2.2.0+1
   flutter_inappwebview: ^3.2.0
-  
-  # flutter_cupertino_date_picker: ^1.0.24
+  video_player: ^0.10.11+1
+
+  # flutter_cupertino_datse_picker: ^1.0.24
 
 dev_dependencies:
   flutter_test:
