@@ -67,7 +67,7 @@ class _EditBookShelfState extends State<EditBookShelf>  {
       ),
       body: Internet(_init(), providerListData.isData),
       bottomNavigationBar: Container(
-        height: getPixe(80, context),
+        height: pixel.setHeight(80, context),
         child: Row(
           children: <Widget>[
             Expanded(
@@ -78,7 +78,7 @@ class _EditBookShelfState extends State<EditBookShelf>  {
                   child: Center(
                     child: Text('全选',
                         style: TextStyle(
-                          fontSize: getPixe(16, context),
+                          fontSize: pixel.setFontSize(16, context),
                         )),
                   ),
                 ),
@@ -98,7 +98,7 @@ class _EditBookShelfState extends State<EditBookShelf>  {
                     child: Text(
                       '删除',
                       style: TextStyle(
-                          fontSize: getPixe(16, context),
+                          fontSize: pixel.setFontSize(16, context),
                           color: providerListData.deleteColos),
                     ),
                   ),

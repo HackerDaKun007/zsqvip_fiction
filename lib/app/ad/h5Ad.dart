@@ -19,7 +19,8 @@ class H5Ad extends StatefulWidget {
   _H5AdState createState() => _H5AdState(arguments:this.arguments);
 }
 
-class _H5AdState extends State<H5Ad> with PixelSize {
+class _H5AdState extends State<H5Ad>  {
+  PixelSize pixel = PixelSize();
   Map arguments;
   Map data;
 
@@ -49,7 +50,7 @@ class _H5AdState extends State<H5Ad> with PixelSize {
         leading: IconButton(
           icon: Icon(
             Iconfont.zuo,
-            size: getPixe(28, context),
+            size: pixel.setFontSize(28, context),
             color: Color(0x99393D49),
           ),
           onPressed: () {
@@ -57,11 +58,11 @@ class _H5AdState extends State<H5Ad> with PixelSize {
           },
         ),
         title: Container(
-          width: getPixe(200, context),
+          width: pixel.setWidth(200, context),
           child: Text(
             data['title'],
             style: TextStyle(
-                fontSize: getPixe(16, context), color: Color(0x99393D49),),
+                fontSize: pixel.setFontSize(16, context), color: Color(0x99393D49),),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
