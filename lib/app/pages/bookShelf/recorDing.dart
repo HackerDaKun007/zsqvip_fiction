@@ -29,7 +29,9 @@ class Recording extends StatefulWidget {
   _RecordingState createState() => _RecordingState();
 }
 
-class _RecordingState extends State<Recording> with PixelSize {
+class _RecordingState extends State<Recording> {
+
+  PixelSize pixel = PixelSize();
 
   var bounced  = Bounced(); //配置弹出层
   var dataProvider;
@@ -47,7 +49,7 @@ class _RecordingState extends State<Recording> with PixelSize {
         leading: IconButton(
           icon: Icon(
             Iconfont.zuo,
-            size: getPixe(28, context),
+            size: pixel.setFontSize(28, context),
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -83,7 +85,7 @@ class _RecordingState extends State<Recording> with PixelSize {
                   '清空',
                   style: TextStyle(
                     color: Colors.grey,
-                    fontSize: getPixe(18, context),
+                    fontSize: pixel.setFontSize(18, context),
                   ),
                 ),
               ),
@@ -102,7 +104,7 @@ class _RecordingState extends State<Recording> with PixelSize {
                 });
               },
             ),
-            width: getPixe(70, context),
+            width: pixel.setWidth(70, context),
           );
     } else {
       return Text('');
@@ -119,7 +121,7 @@ class _RecordingState extends State<Recording> with PixelSize {
             child: Text(
               '已在书架',
               style: TextStyle(
-                  fontSize: getPixe(14, context), color: Colors.white),
+                  fontSize: pixel.setFontSize(14, context), color: Colors.white),
             ),
             onPressed: () {
 
@@ -131,7 +133,7 @@ class _RecordingState extends State<Recording> with PixelSize {
             child: Text(
               '加入书架',
               style: TextStyle(
-                  fontSize: getPixe(14, context), color: Colors.white),
+                  fontSize: pixel.setFontSize(14, context), color: Colors.white),
             ),
             onPressed: () {
               // print(key);
@@ -146,22 +148,22 @@ class _RecordingState extends State<Recording> with PixelSize {
       for (int i=0; i < dataProvider.data.length; i++) {
         data.add(InkWell(
             child: Container(
-              height: getPixe(135, context),
-              padding: EdgeInsets.all(getPixe(10, context)),
+              height: pixel.setHeight(135, context),
+              padding: EdgeInsets.all(pixel.setWidth(10, context)),
               child: Row(
                 children: <Widget>[
                   Container(
-                    height: getPixe(110, context),
-                    width: getPixe(83, context),
+                    height: pixel.setHeight(110, context),
+                    width: pixel.setWidth(83, context),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(getPixe(3, context)),
+                        borderRadius: BorderRadius.circular(pixel.setWidth(3, context)),
                         image: DecorationImage(
                           image: NetworkImage(dataProvider.data[i]['imageUrl']),
                           fit: BoxFit.cover,
                         )),
                   ),
                   SizedBox(
-                    width: getPixe(10, context),
+                    width: pixel.setWidth(10, context),
                   ),
                   Expanded(
                     flex: 1,
@@ -169,41 +171,41 @@ class _RecordingState extends State<Recording> with PixelSize {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SizedBox(
-                          height: getPixe(5, context),
+                          height: pixel.setHeight(5, context),
                         ),
                         Text(dataProvider.data[i]['title'],
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            fontSize: getPixe(18, context),
+                            fontSize: pixel.setFontSize(18, context),
                           ),
                         ),
                         SizedBox(
-                          height: getPixe(25, context),
+                          height: pixel.setHeight(25, context),
                         ),
                         Text("${dataProvider.data[i]['category'][0]} · ${dataProvider.data[i]['update_status']}",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                fontSize: getPixe(12, context),
+                                fontSize: pixel.setFontSize(12, context),
                                 color: Color(0x99151515))),
                         SizedBox(
-                          height: getPixe(3, context),
+                          height: pixel.setHeight(3, context),
                         ),
                         Text("读到第${dataProvider.data[i]['read_chapter']}章: ${dataProvider.data[i]['read_chapter_title']}",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                fontSize: getPixe(12, context),
+                                fontSize: pixel.setFontSize(12, context),
                                 color: Color(0x99151515))),
                         SizedBox(
-                          height: getPixe(3, context),
+                          height: pixel.setHeight(3, context),
                         ),
                         Text(dataProvider.data[i]['read_time'],
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                fontSize: getPixe(12, context),
+                                fontSize: pixel.setFontSize(12, context),
                                 color: Color(0x99151515))),
                       ],
                     ),

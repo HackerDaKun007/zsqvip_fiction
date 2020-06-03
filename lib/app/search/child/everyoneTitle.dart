@@ -24,7 +24,9 @@ class EveryoneTitle extends StatefulWidget {
   _EveryoneTitleState createState() => _EveryoneTitleState();
 }
 
-class _EveryoneTitleState extends State<EveryoneTitle> with PixelSize {
+class _EveryoneTitleState extends State<EveryoneTitle> {
+
+  PixelSize pixel = PixelSize();
 
   static List _listData = []; //保存网络请求下来数据
 
@@ -96,7 +98,7 @@ class _EveryoneTitleState extends State<EveryoneTitle> with PixelSize {
     return _request ? Column(
       children: <Widget>[
         this._getEveryoneTitle(),
-        SizedBox(height: getPixe(10, context)),
+        SizedBox(height: pixel.setHeight(10, context)),
         this._getEveryoneContent(),
       ],
     ) : Text('');
@@ -111,7 +113,7 @@ class _EveryoneTitleState extends State<EveryoneTitle> with PixelSize {
           child: Text(
             '大家都在搜索',
             style: TextStyle(
-                fontSize: getPixe(16, context), fontWeight: FontWeight.bold),
+                fontSize: pixel.setFontSize(16, context), fontWeight: FontWeight.bold),
           ),
         ),
         Container(
@@ -122,16 +124,16 @@ class _EveryoneTitleState extends State<EveryoneTitle> with PixelSize {
                 Text(
                   '换一换',
                   style: TextStyle(
-                    fontSize: getPixe(14, context),
+                    fontSize: pixel.setFontSize(14, context),
                     color: Color(0x993e3e3e),
                   ),
                 ),
                 SizedBox(
-                  width: getPixe(2, context),
+                  width: pixel.setWidth(2, context),
                 ),
                 Icon(
                   Icons.loop,
-                  size: getPixe(14, context),
+                  size: pixel.setFontSize(14, context),
                   color: Color(0x993e3e3e),
                 ),
               ],
@@ -154,7 +156,7 @@ class _EveryoneTitleState extends State<EveryoneTitle> with PixelSize {
     return Container(
       width: double.infinity,
       child: Wrap(
-        spacing: getPixe(10, context),
+        spacing: pixel.setWidth(10, context),
         alignment: WrapAlignment.start,
         children: _list,
       ),

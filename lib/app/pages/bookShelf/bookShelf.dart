@@ -40,7 +40,9 @@ class BookShelfPage extends StatefulWidget {
   _BookShelfPageState createState() => _BookShelfPageState();
 }
 
-class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
+class _BookShelfPageState extends State<BookShelfPage> {
+  PixelSize pixel = PixelSize();
+
   var providerListData; //状态
 
   final int appbarAlpha = 100; //滚动最大值
@@ -121,7 +123,7 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
           fit: BoxFit.cover,
         ),
       ),
-      height: getPixe(220, context),
+      height: pixel.setHeight(220, context),
       width: double.infinity,
       child: Column(
         children: <Widget>[
@@ -134,14 +136,14 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                     children: <Widget>[
                       Padding(
                         padding:
-                            EdgeInsets.fromLTRB(0, getPixe(100, context), 0, 0),
+                            EdgeInsets.fromLTRB(0, pixel.setHeight(100, context), 0, 0),
                         child: ReadTime(
-                          style: TextStyle(fontSize: getPixe(50, context)),
+                          style: TextStyle(fontSize: pixel.setFontSize(50, context)),
                         ),
                       ),
                       Text(
                         '今日已读 / 分钟',
-                        style: TextStyle(fontSize: getPixe(12, context)),
+                        style: TextStyle(fontSize: pixel.setFontSize(12, context)),
                       ),
                     ],
                   ),
@@ -154,8 +156,8 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                 padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
                 child: GestureDetector(
                   child: Container(
-                      height: getPixe(30, context),
-                      width: getPixe(70, context),
+                      height: pixel.setHeight(30, context),
+                      width: pixel.setWidth(70, context),
                       // color: Colors.white,
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -165,11 +167,11 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                       ),
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(
-                            getPixe(30, context), getPixe(8, context), 0, 0),
+                            pixel.setWidth(30, context),  pixel.setHeight(8, context), 0, 0),
                         child: Text(
                           '签到',
                           style: TextStyle(
-                            fontSize: getPixe(12, context),
+                            fontSize: pixel.setFontSize(12, context),
                           ),
                         ),
                       )),
@@ -193,16 +195,16 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
     return Align(
       alignment: Alignment.topRight,
       child: Container(
-        height: getPixe(75, context),
+        height: pixel.setHeight(75, context),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(0, getPixe(35, context), 10, 0),
+          padding: EdgeInsets.fromLTRB(0, pixel.setHeight(35, context), pixel.setWidth(10, context), 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               IconButton(
                 icon: Icon(
                   Iconfont.sousuo,
-                  size: getPixe(22, context),
+                  size: pixel.setFontSize(22, context),
                   color: Color(0xFF000000),
                 ),
                 onPressed: () {
@@ -212,14 +214,14 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
               IconButton(
                 icon: Icon(
                   Iconfont.youcecaidan,
-                  size: getPixe(22, context),
+                  size: pixel.setFontSize(22, context),
                   color: Color(0xFF000000),
                 ),
                 onPressed: () {
                   showMenu(
                     context: context,
-                    position: RelativeRect.fromLTRB(getPixe(500, context),
-                        getPixe(74, context), getPixe(10, context), 0),
+                    position: RelativeRect.fromLTRB(pixel.setWidth(500, context),
+                        pixel.setHeight(74, context), pixel.setWidth(10, context), 0),
                     items: <PopupMenuEntry<String>>[
                       PopupMenuItem(
                         value: '1',
@@ -229,15 +231,15 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                             Icon(
                               Icons.query_builder,
                               color: Colors.blue,
-                              size: getPixe(21, context),
+                              size: pixel.setFontSize(21, context),
                             ),
                             Container(
                               padding: EdgeInsets.fromLTRB(
-                                  getPixe(10, context), 0, 0, 0),
+                                  pixel.setWidth(10, context), 0, 0, 0),
                               child: Text(
                                 "记录",
                                 style:
-                                    TextStyle(fontSize: getPixe(14, context)),
+                                    TextStyle(fontSize: pixel.setFontSize(14, context)),
                               ),
                             )
                           ],
@@ -252,15 +254,15 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
                             Icon(
                               Iconfont.bianji,
                               color: Colors.blue,
-                              size: getPixe(21, context),
+                              size: pixel.setFontSize(21, context),
                             ),
                             Container(
                               padding: EdgeInsets.fromLTRB(
-                                  getPixe(11, context), 0, 0, 0),
+                                  pixel.setWidth(11, context), 0, 0, 0),
                               child: Text(
                                 "编辑",
                                 style:
-                                    TextStyle(fontSize: getPixe(14, context)),
+                                    TextStyle(fontSize: pixel.setFontSize(14, context)),
                               ),
                             )
                           ],
@@ -288,7 +290,10 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
 }
 
 //推荐内容
-class RecommendedContent extends StatelessWidget with PixelSize {
+class RecommendedContent extends StatelessWidget {
+
+  PixelSize pixel = PixelSize();
+  
   List<Map> list = [
     {"title": "我把你当兄弟你居然想上我？", "id": 1},
     {"title": "穿越异界，成为一代邪君！", "id": 2},
@@ -303,12 +308,12 @@ class RecommendedContent extends StatelessWidget with PixelSize {
         children: <Widget>[
           Container(
             // color: Colors.yellow,
-            width: getPixe(40, context),
+            width: pixel.setWidth(40, context),
             child: Center(
               child: Icon(
                 Iconfont.remen,
                 color: Colors.red,
-                size: getPixe(18, context),
+                size: pixel.setWidth(18, context),
               ),
             ),
           ),
@@ -335,7 +340,7 @@ class RecommendedContent extends StatelessWidget with PixelSize {
                     return Center(
                       child: Text(list[index]['title'],
                           style: TextStyle(
-                            fontSize: getPixe(14, context),
+                            fontSize: pixel.setFontSize(14, context),
                             color: Color(0x99333333),
                           ),
                           maxLines: 1,
@@ -345,18 +350,18 @@ class RecommendedContent extends StatelessWidget with PixelSize {
                 ),
               )),
           SizedBox(
-            width: getPixe(10, context),
+            width: pixel.setWidth(10, context),
           ),
           Container(
-            width: getPixe(30, context),
+            width: pixel.setWidth(30, context),
             // color: Colors.yellow,
             child: Icon(Icons.keyboard_arrow_right,
-                size: getPixe(20, context), color: Color(0x99333333)),
+                size: pixel.setFontSize(20, context), color: Color(0x99333333)),
           ),
         ],
       ),
       // color: Colors.white,
-      height: getPixe(37, context),
+      height: pixel.setHeight(37, context),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(4.0)),
@@ -371,7 +376,7 @@ class RecommendedContent extends StatelessWidget with PixelSize {
             BoxShadow(color: Color(0x99e7e7e7))
           ]),
       margin: EdgeInsets.fromLTRB(
-          getPixe(25, context), 0, getPixe(25, context), getPixe(10, context)),
+          pixel.setWidth(25, context), 0, pixel.setHeight(25, context), pixel.setWidth(10, context)),
     );
   }
 }

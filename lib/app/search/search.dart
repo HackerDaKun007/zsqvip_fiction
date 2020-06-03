@@ -65,18 +65,18 @@ class _SearchState extends State<Search> with Common {
         title: Container(
           // color: Colors.yellow,
           width: double.infinity,
-          height: getPixe(44, context),
+          height: pixel.setHeight(44, context),
           child: Padding(
             padding: EdgeInsets.fromLTRB(
-                getPixe(10, context), 0, getPixe(10, context), 0),
+                pixel.setWidth(10, context), 0, pixel.setWidth(10, context), 0),
             child: Center(
               child: TextField(
                 decoration: InputDecoration(
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: getPixe(11.2, context)),
+                      EdgeInsets.symmetric(vertical: pixel.setHeight(11.2, context)),
                   icon: Icon(
                     Iconfont.sousuo,
-                    size: getPixe(22, context),
+                    size: pixel.setFontSize(22, context),
                     color: Color(0x993c3c3c),
                   ),
                   hintText: '搜索书名或作者',
@@ -85,21 +85,21 @@ class _SearchState extends State<Search> with Common {
                 onChanged: (value) {
                   this._input = value;
                 },
-                style: TextStyle(fontSize: getPixe(16.0, context)),
+                style: TextStyle(fontSize: pixel.setFontSize(16.0, context)),
               ),
             ),
           ),
           decoration: BoxDecoration(
             color: Color(0x99ededed),
             borderRadius: BorderRadius.all(
-              Radius.circular(getPixe(100, context)),
+              Radius.circular(pixel.setWidth(100, context)),
             ),
           ),
         ),
         // elevation:
         actions: <Widget>[
           Container(
-              width: getPixe(70, context),
+              width: pixel.setWidth(70, context),
               // height: 40,
               // color: Colors.red,
               child: GestureDetector(
@@ -107,7 +107,7 @@ class _SearchState extends State<Search> with Common {
                   child: Text(
                     '搜索',
                     style: TextStyle(
-                      fontSize: getPixe(16, context),
+                      fontSize: pixel.setFontSize(16, context),
                     ),
                   ),
                 ),
@@ -120,8 +120,8 @@ class _SearchState extends State<Search> with Common {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(getPixe(10, context), getPixe(20, context),
-            getPixe(10, context), getPixe(10, context)),
+        padding: EdgeInsets.fromLTRB(pixel.setWidth(10, context), pixel.setHeight(20, context),
+            pixel.setWidth(10, context), pixel.setHeight(10, context)),
         child: Stack(
           children: <Widget>[
             //主体内容

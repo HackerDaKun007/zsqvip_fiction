@@ -20,7 +20,9 @@ class Recent extends StatefulWidget {
   _RecentState createState() => _RecentState();
 }
 
-class _RecentState extends State<Recent> with PixelSize {
+class _RecentState extends State<Recent> {
+
+  PixelSize pixel = PixelSize();
 
   //判断是否删除搜索记录, true不删除，false删除
   List<String> recen = []; //最近搜索记录
@@ -46,7 +48,7 @@ class _RecentState extends State<Recent> with PixelSize {
     return _request ? Column(
       children: <Widget>[
         this._getRecentTitle(),
-        SizedBox(height: getPixe(10, context)),
+        SizedBox(height: pixel.setHeight(10, context)),
         this._getRecentContent(),
       ],
     ) : Text('');
@@ -63,7 +65,7 @@ class _RecentState extends State<Recent> with PixelSize {
             child: Text(
               '最近搜索',
               style: TextStyle(
-                  fontSize: getPixe(16, context), fontWeight: FontWeight.bold),
+                  fontSize: pixel.setFontSize(16, context), fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -74,16 +76,16 @@ class _RecentState extends State<Recent> with PixelSize {
                   Text(
                     '删除',
                     style: TextStyle(
-                      fontSize: getPixe(14, context),
+                      fontSize: pixel.setFontSize(14, context),
                       color: Color(0x993e3e3e),
                     ),
                   ),
                   SizedBox(
-                    width: getPixe(2, context),
+                    width: pixel.setWidth(2, context),
                   ),
                   Icon(
                     Iconfont.shanchu1,
-                    size: getPixe(13, context),
+                    size: pixel.setFontSize(13, context),
                     color: Color(0x993e3e3e),
                   ),
                 ],
@@ -115,7 +117,7 @@ class _RecentState extends State<Recent> with PixelSize {
       return Container(
         width: double.infinity,
         child: Wrap(
-          spacing: getPixe(10, context),
+          spacing: pixel.setWidth(10, context),
           alignment: WrapAlignment.start,
           children: rencentList,
         ),

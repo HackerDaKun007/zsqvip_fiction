@@ -21,7 +21,9 @@ class ColumnLet  extends StatefulWidget {
   _ColumnLetState createState() => _ColumnLetState();
 }
  
-class _ColumnLetState extends State<ColumnLet> with PixelSize{
+class _ColumnLetState extends State<ColumnLet> {
+  
+  PixelSize pixel = PixelSize();
  
   double appBarAlpha = 0.0;
 
@@ -39,19 +41,19 @@ class _ColumnLetState extends State<ColumnLet> with PixelSize{
       child: Opacity(
         opacity: this.appBarAlpha,
         child: Container(
-          height: getPixe(75, context),
+          height: pixel.setHeight(75, context),
           width: double.infinity,
           color: Colors.white,
           child: Padding(
             padding: EdgeInsets.fromLTRB(
-                getPixe(10, context), getPixe(35, context), 0, 0),
+                pixel.setWidth(10, context), pixel.setHeight(35, context), 0, 0),
             child: Row(
               children: <Widget>[
                 Text('今天阅读'),
                 Padding(
                   padding: EdgeInsets.fromLTRB(3, 0, 3, 6),
                   child: ReadTime(style:TextStyle(
-                          fontSize: getPixe(20, context), color: Colors.black))
+                          fontSize: pixel.setFontSize(20, context), color: Colors.black))
                 ),
                 Text('分钟'),
               ],
