@@ -11,7 +11,9 @@
 import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
-class OverlayLoad  with PixelSize { 
+class OverlayLoad  { 
+
+  PixelSize pixel = PixelSize();
 
   OverlayEntry _overlayLoad; //加到屏幕上
 
@@ -25,18 +27,18 @@ class OverlayLoad  with PixelSize {
       //创建OverlayEntry
       _overlayLoad = OverlayEntry(
         builder: (BuildContext context) => Container(
-            margin: EdgeInsets.fromLTRB(0, getPixe(top, context), 0, getPixe(bottom, context)),
+            margin: EdgeInsets.fromLTRB(0, pixel.setHeight(top, context), 0, pixel.setHeight(bottom, context)),
           width: double.infinity,
           height: double.infinity,
           color: Colors.black12,
             child: Center(
               child: Container(
-                width: getPixe(120, context),
-                height: getPixe(120, context),
+                width: pixel.setWidth(120, context),
+                height: pixel.setHeight(120, context),
                 // padding: EdgeInsets.all(getPixe(20, context),
                 decoration: BoxDecoration(
                   color: Colors.black54,
-                  borderRadius: BorderRadius.circular(getPixe(4, context)),
+                  borderRadius: BorderRadius.circular(pixel.setWidth(4, context)),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +48,7 @@ class OverlayLoad  with PixelSize {
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
                     SizedBox(
-                      height: getPixe(15, context),
+                      height: pixel.setHeight(15, context),
                     ),
                     Text(
                       value,

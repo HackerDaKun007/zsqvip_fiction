@@ -24,6 +24,10 @@ PODS:
   - sqflite (0.0.1):
     - Flutter
     - FMDB (~> 2.7.2)
+  - video_player (0.0.1):
+    - Flutter
+  - video_player_web (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
@@ -36,11 +40,12 @@ DEPENDENCIES:
   - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
   - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - video_player (from `.symlinks/plugins/video_player/ios`)
+  - video_player_web (from `.symlinks/plugins/video_player_web/ios`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs:
     - FMDB
-  trunk:
     - Reachability
 
 EXTERNAL SOURCES:
@@ -64,12 +69,16 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_web/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
+  video_player:
+    :path: ".symlinks/plugins/video_player/ios"
+  video_player_web:
+    :path: ".symlinks/plugins/video_player_web/ios"
 
 SPEC CHECKSUMS:
   connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
   connectivity_macos: e2e9731b6b22dda39eb1b128f6969d574460e191
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_inappwebview: 239198123453705522ba6c4f78d3d7468215f248
+  flutter_inappwebview: 69dfbac46157b336ffbec19ca6dfd4638c7bf189
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
@@ -78,6 +87,8 @@ SPEC CHECKSUMS:
   shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
+  video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
+  video_player_web: da8cadb8274ed4f8dbee8d7171b420dedd437ce7
 
 PODFILE CHECKSUM: 1ccad1158d676e541c20c806ed3c9116895f609a
 

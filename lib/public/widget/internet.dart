@@ -28,7 +28,10 @@ class Internet extends StatefulWidget {
       value: this.value, isError: this.isError);
 }
 
-class _InternetState extends State<Internet> with PixelSize {
+class _InternetState extends State<Internet> {
+
+  PixelSize pixel = PixelSize(); 
+
   var subscription;
   String stateText;
   bool isInternet = true;
@@ -116,12 +119,12 @@ class _InternetState extends State<Internet> with PixelSize {
       color: Colors.white,
       child: Center(
         child: Container(
-          width: getPixe(120, context),
-          height: getPixe(120, context),
+          width: pixel.setWidth(120, context),
+          height: pixel.setHeight(120, context),
           // padding: EdgeInsets.all(getPixe(20, context),
           decoration: BoxDecoration(
             color: Colors.black38,
-            borderRadius: BorderRadius.circular(getPixe(4, context)),
+            borderRadius: BorderRadius.circular(pixel.setWidth(4, context)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -134,7 +137,7 @@ class _InternetState extends State<Internet> with PixelSize {
                 // backgroundColor: Colors.black,
               ),
               SizedBox(
-                height: getPixe(15, context),
+                height: pixel.setHeight(15, context),
               ),
               Text(
                 this.value,
@@ -162,16 +165,16 @@ class _InternetState extends State<Internet> with PixelSize {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-              height: getPixe(80, context),
+              height: pixel.setHeight(80, context),
               child: Image.asset('images/internet.png', fit: BoxFit.fill),
             ),
             SizedBox(
-                height: getPixe(15, context),
+                height: pixel.setHeight(15, context),
               ),
             Text(
               '请检查当前网络状态',
               style: TextStyle(
-                  fontSize: getPixe(14, context),
+                  fontSize: pixel.setFontSize(14, context),
                   color: Colors.grey,
                   decoration: TextDecoration.none),
             ),
@@ -189,21 +192,21 @@ class _InternetState extends State<Internet> with PixelSize {
       color: Colors.white,
       child: Center(
         child: Container(
-          width: getPixe(120, context),
-          height: getPixe(120, context),
+          width: pixel.setWidth(120, context),
+          height: pixel.setHeight(120, context),
           // padding: EdgeInsets.all(getPixe(20, context),
           decoration: BoxDecoration(
             color: Colors.black38,
-            borderRadius: BorderRadius.circular(getPixe(4, context)),
+            borderRadius: BorderRadius.circular(pixel.setWidth(4, context)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Icon(Iconfont.jinggao,
-                  size: getPixe(35, context), color: Colors.white),
+                  size: pixel.setFontSize(35, context), color: Colors.white),
               SizedBox(
-                height: getPixe(15, context),
+                height: pixel.setFontSize(15, context),
               ),
               Text(
                 '数据请求失败',

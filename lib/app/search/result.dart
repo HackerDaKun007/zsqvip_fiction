@@ -24,7 +24,10 @@ class ResultSearch extends StatefulWidget {
       _ResultSearchState(arguments: this.arguments);
 }
 
-class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
+class _ResultSearchState extends State<ResultSearch> with Common {
+
+   PixelSize pixel = PixelSize();
+
   //定义变量区域
   String title; //
   String _input; //
@@ -150,46 +153,46 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
           },
           child: Container(
             width: double.infinity,
-            height: getPixe(135, context),
+            height: pixel.setHeight(135, context),
             padding: EdgeInsets.fromLTRB(
-                getPixe(10, context),
-                getPixe(25, context),
-                getPixe(10, context),
-                getPixe(10, context)),
+                pixel.setWidth(10, context),
+                pixel.setHeight(25, context),
+                pixel.setWidth(10, context),
+                pixel.setHeight(10, context)),
             // color: Colors.yellow,
             child: Row(
               children: <Widget>[
                 Container(
-                  height: getPixe(110, context),
-                  width: getPixe(83, context),
+                  height: pixel.setHeight(110, context),
+                  width: pixel.setWidth(83, context),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(getPixe(3, context)),
+                      borderRadius: BorderRadius.circular(pixel.setWidth(3, context)),
                       image: DecorationImage(
                         image: NetworkImage(value['imageUrl']),
                         fit: BoxFit.cover,
                       )),
                 ),
                 SizedBox(
-                  width: getPixe(10, context),
+                  width: pixel.setWidth(10, context),
                 ),
                 Expanded(
                   flex: 1,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      SizedBox(height: getPixe(5, context)),
+                      SizedBox(height: pixel.setHeight(5, context)),
                       Text(
                         "${value['title']}",
                         style: TextStyle(
-                          fontSize: getPixe(16, context),
+                          fontSize: pixel.setFontSize(16, context),
                         ),
                       ),
-                      SizedBox(height: getPixe(5, context)),
+                      SizedBox(height: pixel.setFontSize(5, context)),
                       Row(
                         children: <Widget>[
                           Text("${value['author']}",
                               style: TextStyle(
-                                  fontSize: getPixe(12, context),
+                                  fontSize: pixel.setFontSize(12, context),
                                   color: Color(0x997e7e7e))),
                           Row(
                             children: _getCategory(value['category']),
@@ -197,11 +200,11 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
                           // _getCategory(value['category']),
                         ],
                       ),
-                      SizedBox(height: getPixe(5, context)),
+                      SizedBox(height: pixel.setHeight(5, context)),
                       Text(
                         "${value['sutitle']}",
                         style: TextStyle(
-                            fontSize: getPixe(14, context),
+                            fontSize: pixel.setFontSize(14, context),
                             color: Color(0x99151515)),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -225,16 +228,16 @@ class _ResultSearchState extends State<ResultSearch> with PixelSize, Common {
     data.forEach((value) {
       if (_num <= 2) {
         _category.add(Container(
-          margin: EdgeInsets.symmetric(horizontal: getPixe(5.0, context)),
-          padding: EdgeInsets.symmetric(horizontal: getPixe(5.0, context)),
+          margin: EdgeInsets.symmetric(horizontal: pixel.setWidth(5.0, context)),
+          padding: EdgeInsets.symmetric(horizontal: pixel.setWidth(5.0, context)),
           decoration: BoxDecoration(
               border:
-                  Border.all(width: getPixe(1, context), color: Config.color),
+                  Border.all(width: pixel.setWidth(1, context), color: Config.color),
               borderRadius: BorderRadius.circular(2)),
           child: Text(
             value,
             style: TextStyle(
-                color: Config.color, fontSize: getPixe(10.0, context)),
+                color: Config.color, fontSize: pixel.setFontSize(10.0, context)),
           ),
         ));
         _num++;

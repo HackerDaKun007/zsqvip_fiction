@@ -28,7 +28,9 @@ class Search extends StatefulWidget {
   _SearchState createState() => _SearchState();
 }
 
-class _SearchState extends State<Search> with PixelSize, Common {
+class _SearchState extends State<Search> with Common {
+
+  PixelSize pixel = PixelSize();
 
   //搜索框记本
   String _input = '';
@@ -48,11 +50,11 @@ class _SearchState extends State<Search> with PixelSize, Common {
         // centerTitle: true,
         elevation: 1,
         leading: Container(
-          width: getPixe(70, context),
+          width: pixel.setWidth(70, context),
           child: IconButton(
             icon: Icon(
               Iconfont.zuo,
-              size: getPixe(28, context),
+              size: pixel.setFontSize(28, context),
             ),
             onPressed: () {
               Navigator.pop(context);

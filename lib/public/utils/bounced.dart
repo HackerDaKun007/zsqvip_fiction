@@ -13,8 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
 
 
-class Bounced  with PixelSize {
-  // const Bounced({Key key}) : super(key: key);
+class Bounced  {
+
+  PixelSize pixel = PixelSize(); 
 
   /*
    * 质询框
@@ -31,7 +32,7 @@ class Bounced  with PixelSize {
             title: Text(title),
             content: Text(content,
                 style: TextStyle(
-                  fontSize: getPixe(16, context),
+                  fontSize: pixel.setFontSize(16, context),
                 )),
             actions: <Widget>[
               FlatButton(
@@ -47,7 +48,7 @@ class Bounced  with PixelSize {
               FlatButton(
                 child: Text('确定',
                     style: TextStyle(
-                      fontSize: getPixe(16, context),
+                      fontSize: pixel.setFontSize(16, context),
                     )),
                 onPressed: () {
                   Navigator.pop(context, true);
@@ -74,13 +75,13 @@ class Bounced  with PixelSize {
             title: Text(title),
             content: Text(content,
                 style: TextStyle(
-                  fontSize: getPixe(16, context),
+                  fontSize: pixel.setFontSize(16, context),
                 )),
             actions: <Widget>[
               FlatButton(
                 child: Text('确定',
                     style: TextStyle(
-                      fontSize: getPixe(16, context),
+                      fontSize: pixel.setFontSize(16, context),
                     )),
                 onPressed: () {
                   Navigator.pop(context, true);
