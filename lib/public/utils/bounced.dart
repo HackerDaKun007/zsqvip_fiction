@@ -38,7 +38,7 @@ class Bounced  {
               FlatButton(
                 child: Text('取消',
                     style: TextStyle(
-                      fontSize: getPixe(16, context),
+                      fontSize: pixel.setFontSize(16, context),
                     )),
                 textColor: Colors.grey,
                 onPressed: () {
@@ -115,12 +115,12 @@ class Bounced  {
       _overlayEntry = OverlayEntry(
           builder: (BuildContext context) => Positioned(
                 //top值，可以改变这个值来改变toast在屏幕中的位置
-                top: getHeight(context) * 2 / 2.5,
+                top: pixel.screenHeightDp(context) * 2 / 2.5,
                 child: Container(
                     alignment: Alignment.center,
-                    width: getWidth(context),
+                    width: pixel.screenWidthDp(context),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: getPixe(80.0, context)),
+                      padding: EdgeInsets.symmetric(horizontal: pixel.setWidth(80.0, context)),
                       child: AnimatedOpacity(
                         opacity: _showing ? 1.0 : 0.0, //目标透明度
                         duration: _showing
@@ -131,12 +131,12 @@ class Bounced  {
                             color: Colors.black54,
                             child: Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: getPixe(12.0, context),
-                                  vertical: getPixe(7.0, context)),
+                                  horizontal: pixel.setWidth(12.0, context),
+                                  vertical: pixel.setHeight(7.0, context)),
                               child: Text(
                                 _msg,
                                 style: TextStyle(
-                                  fontSize: getPixe(16, context),
+                                  fontSize: pixel.setFontSize(16, context),
                                   color: Colors.white,
                                 ),
                               ),
