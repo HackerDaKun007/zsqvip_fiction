@@ -5,7 +5,7 @@
  * @since       1.0 version
  *
  * 
- * @see         书籍界面-目录
+ * @see         积分商城
 */
 
 import 'package:fiction/public/public.dart';

@@ -20,19 +20,22 @@ import 'package:fiction/app/pages/bookShelf/editBookShelf.dart';  //编辑书架
 import 'package:fiction/app/search/search.dart';  //搜索页面
 import 'package:fiction/app/search/result.dart';  //搜索结果页面
 import 'package:fiction/app/ad/h5Ad.dart';  //H5广告页面
+// import 'package:fiction/app/ad/videoAd.dart';  //视频广告页面
 
 import 'package:fiction/app/pages/category/category.dart';  //分类
 import 'package:fiction/app/pages/my/my.dart';  //我的
 
 
 //Yuri配置_路由区域
+import 'package:fiction/app/bookDetail/book_detail_page.dart'; // 书籍详情页面
 import 'package:fiction/app/pages/home/top_charts.dart'; // 排行榜页面
 import 'package:fiction/app/bookList/book_list_detail.dart'; // 书单详情页面
 import 'package:fiction/app/bookList/book_list_page.dart'; // 书单页面
 import 'package:fiction/app/pages/my/settings/settings_page.dart'; // 设置页面
 import 'package:fiction/app/pages/my/settings/aboutus.dart';  // 关于我们页面
 import 'package:fiction/app/pages/my/benefitCenter/benefit_page.dart';  // 福利中心页面
-import 'package:fiction/app/bookDetail/book_detail_page.dart'; // 书籍详情页面
+import 'package:fiction/app/pages/my/benefitCenter/bonus_store_page.dart';  // 积分商城页面
+import 'package:fiction/app/pages/my/benefitCenter/bonus_detail_page.dart';  // 积分明细页面
 
 //配置命令路由
 final routes = {
@@ -51,16 +54,21 @@ final routes = {
   '/categorypage': (context) => CategoryPage(),
   '/mypage': (context) => MyPage(),
 
+  //广告页面
   '/h5ad': (context, {arguments}) => H5Ad(arguments:arguments),
+  // '/videoad': (context, {arguments}) => VideoAd(arguments:arguments),
 
   //Yuri配置_路由区域
   '/topcharts': (context) => TopChartsPage(),
   '/booklist': (context) => BookListPage(),
   '/booklistdetail': (context, {arguments}) => BookListDetail(arguments:arguments),
+  '/bookdetail': (context, {arguments}) => BookDetailPage(arguments:arguments),
   '/settings': (context) => SettingsPage(),
   '/aboutus': (context) => AboutUsPage(),
   '/benefit': (context) => BenefitPage(),
-  '/bookdetail': (context, {arguments}) => BookDetailPage(arguments:arguments),
+  '/bonusstore': (context) => BonusStorePage(),
+  '/bonusdetail': (context) => BonusDetailPage(),
+
 };
 
 var onGenerateRoute = (RouteSettings settings) {

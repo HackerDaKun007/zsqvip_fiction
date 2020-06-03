@@ -96,6 +96,7 @@ class BookDetailHeader extends StatelessWidget with PixelSize{
       width: width,
       height: getPixe(height, context),
       decoration: BoxDecoration(
+        color: Colors.white,
         image: DecorationImage(
           image: NetworkImage(data['imageUrl']),
           fit: BoxFit.cover,

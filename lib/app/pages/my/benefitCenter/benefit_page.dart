@@ -1,3 +1,13 @@
+/*
+ * @author      Yuri Chen <pluto401zz@gmail.com>
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ * 
+ * @see         福利中心
+*/
+
 import 'package:dio/dio.dart';
 import 'package:fiction/providers/tabIndexProvider.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +24,8 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   bool isLogin; // 是否登录
   bool isTodayRegister; // 今日是否签到
   TabIndexProvider tabProvider;
+  List registerEarnList = [10, 20, 50, 30, 30, 30, 100]; // 测试积分
+
   @override
   void initState() {
     super.initState();
@@ -33,8 +45,8 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   }
 
   /// 转到积分商城页
-  void toStorePage() {
-    Navigator.pushNamed(context, '/store');
+  void toBonusStorePage() {
+    Navigator.pushNamed(context, '/bonusstore');
   }
 
   /// 头部
@@ -141,7 +153,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                     fontSize: getPixe(18, context)),
               ),
               InkWell(
-                onTap: () {},
+                onTap: toBonusStorePage,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
@@ -184,7 +196,29 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
     );
   }
 
-  _getStoreCard(childWidth, imgUrl, productName) {
+  /// 主按钮
+  Widget _buildButton({String title, VoidCallback onTabHandler}) {
+    return InkWell(
+      onTap: isLogin ? onTabHandler : toLoginPage,
+      child: Container(
+          padding: EdgeInsets.symmetric(
+              horizontal: getPixe(15, context), vertical: getPixe(5, context)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(getPixe(20, context)),
+              gradient: LinearGradient(
+                  colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
+                  end: Alignment.centerLeft,
+                  begin: Alignment.centerRight)),
+          child: Text(
+            title,
+            style: TextStyle(
+                fontSize: getPixe(14, context), fontWeight: FontWeight.w600),
+          )),
+    );
+  }
+
+  ///
+  Widget _getStoreCard(childWidth, imgUrl, productName) {
     return Container(
       height: getPixe(160, context),
       width: childWidth,
@@ -208,31 +242,34 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
             productName,
             style: TextStyle(fontSize: getPixe(12, context)),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: getPixe(20, context),
-                vertical: getPixe(5, context)),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                    offset: Offset(1, 3),
-                    blurRadius: 2,
-                    color: Color(0xccff7043)),
-                BoxShadow(
-                    offset: Offset(1, 2),
-                    blurRadius: 0,
-                    color: Color(0x22ffffff)),
-              ],
-              gradient: LinearGradient(
-                  colors: [Colors.deepOrange, Colors.orange[700]],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight),
-            ),
-            child: Text('立即兑换',
-                style: TextStyle(
-                    fontSize: getPixe(13, context), color: Colors.white)),
-          )
+         InkWell(
+           onTap: toBonusStorePage,
+           child: Container(
+             padding: EdgeInsets.symmetric(
+                 horizontal: getPixe(20, context),
+                 vertical: getPixe(5, context)),
+             decoration: BoxDecoration(
+               borderRadius: BorderRadius.circular(20),
+               boxShadow: [
+                 BoxShadow(
+                     offset: Offset(1, 3),
+                     blurRadius: 2,
+                     color: Color(0xccff7043)),
+                 BoxShadow(
+                     offset: Offset(1, 2),
+                     blurRadius: 0,
+                     color: Color(0x22ffffff)),
+               ],
+               gradient: LinearGradient(
+                   colors: [Colors.deepOrange, Colors.orange[700]],
+                   begin: Alignment.centerLeft,
+                   end: Alignment.centerRight),
+             ),
+             child: Text('立即兑换',
+                 style: TextStyle(
+                     fontSize: getPixe(13, context), color: Colors.white)),
+           )
+         )
         ],
       ),
     );
@@ -298,7 +335,12 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                 ),
                 InkWell(
                     onTap: () {
-                      print('============= 签到 ===========');
+                      showDialog(
+                          context: context,
+                          child: Dialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: _buildRegisterDialog()));
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -369,7 +411,8 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                                     isActive: true,
                                     time: 5,
                                     earnNum: 10),
-                                _getReadTimeContent(time: 15, earnNum: 20),
+                                _getReadTimeContent(
+                                    time: 15, earnNum: 20, isActive: true),
                                 _getReadTimeContent(time: 30, earnNum: 20),
                                 _getReadTimeContent(time: 60, earnNum: 30),
                                 _getReadTimeContent(time: 90, earnNum: 30),
@@ -395,27 +438,137 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
       ),
     );
   }
-
-  Widget _buildButton({String title, VoidCallback onTabHandler}) {
-    return InkWell(
-      onTap: isLogin ? onTabHandler : toLoginPage,
-      child: Container(
-          padding: EdgeInsets.symmetric(
-              horizontal: getPixe(15, context), vertical: getPixe(5, context)),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(getPixe(20, context)),
-              gradient: LinearGradient(
-                  colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
-                  end: Alignment.centerLeft,
-                  begin: Alignment.centerRight)),
-          child: Text(
-            title,
-            style: TextStyle(
-                fontSize: getPixe(15, context), fontWeight: FontWeight.w500),
-          )),
+  /// 签到弹窗
+  _buildRegisterDialog() {
+    return Container(
+      height: getPixe(380, context),
+      padding: EdgeInsets.all(getPixe(10, context)),
+      child: Stack(
+        children: <Widget>[
+          Center(
+              child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: getPixe(10, context),
+                      horizontal: getPixe(10, context)),
+                  child: Column(
+                    children: <Widget>[
+                      Column(children: [
+                        Text(
+                          '已累计签到2天',
+                          style: TextStyle(fontSize: getPixe(22, context)),
+                        ),
+                        Text(
+                          '明天签到可领50积分',
+                          style: TextStyle(
+                              fontSize: getPixe(12, context),
+                              color: Colors.amber[600]),
+                        ),
+                      ]),
+                      _getRegisterDay(activeDay: 2)
+                    ],
+                  ))),
+          Positioned(
+            right: 0,
+            top: 0,
+            child: InkWell(
+              child: Icon(
+                Icons.close,
+                color: Colors.grey,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 
+  /// 签到日期和积分组件
+  _getRegisterDay({int activeDay}) {
+    _getItem() {
+      List<Widget> _list = List<Widget>();
+      for (int i = 0; i < registerEarnList.length; i++) {
+        bool isActive = activeDay == (i + 1);
+        bool isPassed = i < activeDay;
+        bool isFirst = i == 0;
+        bool isLast = i == registerEarnList.length - 1;
+        Color _bgColor = isPassed ? Colors.deepOrange : Colors.amber[200];
+        _list.add(Column(children: [
+          Container(
+            padding: isActive
+                ? EdgeInsets.only(bottom: getPixe(6, context))
+                : EdgeInsets.only(
+                    top: getPixe(1.5, context), bottom: getPixe(7.5, context)),
+            child: Row(
+              children: <Widget>[
+                isFirst
+                    ? SizedBox()
+                    : Container(
+                        width: getPixe(10, context),
+                        height: getPixe(2, context),
+                        color: _bgColor,
+                      ),
+                Container(
+                    padding: isLast
+                        ? EdgeInsets.symmetric(
+                            vertical: getPixe(4, context),
+                            horizontal: getPixe(1, context))
+                        : EdgeInsets.all(getPixe(4, context)),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: _bgColor,
+                    ),
+                    child: Text(
+                      '${registerEarnList[i]}',
+                      style: TextStyle(
+                          fontSize: isActive
+                              ? getPixe(16, context)
+                              : getPixe(13, context),
+                          color: Colors.white),
+                    )),
+                isLast
+                    ? SizedBox()
+                    : Container(
+                        width: getPixe(10, context),
+                        height: getPixe(2, context),
+                        color: _bgColor,
+                      ),
+              ],
+            ),
+          ),
+          Row(children: [
+            isLast
+                ? SizedBox(
+                    width: getPixe(10, context),
+                  )
+                : SizedBox(),
+            Text(
+              '${i + 1}天',
+              style: TextStyle(
+                  fontSize: getPixe(10, context), color: Colors.brown),
+            ),
+            isFirst
+                ? SizedBox(
+                    width: getPixe(10, context),
+                  )
+                : SizedBox(),
+          ]),
+        ]));
+      }
+      return _list;
+    }
+
+    return Container(
+        padding: EdgeInsets.symmetric(vertical: getPixe(20, context)),
+        height: getPixe(90, context),
+        child: Row(
+          children: _getItem(),
+        ));
+  }
+
+  /// 阅读时间组件
   _getReadTimeContent(
       {bool isFirst = false,
       bool isLast = false,
@@ -494,74 +647,75 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
             child: Text(
               '新手福利',
               style: TextStyle(
-                  color: Colors.orange[700],
+                  color: Colors.orange[800],
                   fontWeight: FontWeight.w500,
                   fontSize: getPixe(18, context)),
             ),
           ),
-          _getRowItem('首次登录奖励', '登录后可领取更多积分',10, toLoginPage),
-          _getRowItem('首次阅读10分钟', '轻轻松松赚积分',10, toBookShelfPage, isRead: true),
-          _getRowItem('开启精选推送', '开启必要权限及时收取推送',50, toLoginPage),
+          _getRowItem('首次登录奖励', '登录后可领取更多积分', 10, toLoginPage),
+          _getRowItem('首次阅读10分钟', '轻轻松松赚积分', 10, toBookShelfPage, isRead: true),
+          _getRowItem('开启精选推送', '开启必要权限及时收取推送', 50, toLoginPage),
         ],
       ),
     );
   }
 
-  _getRowItem(title,subTitle,earnNum, callback, {bool isRead = false}) {
+  _getRowItem(title, subTitle, earnNum, callback, {bool isRead = false}) {
     return Container(
-            padding: EdgeInsets.symmetric(horizontal: getPixe(10, context)),
-            child: Column(
+      padding: EdgeInsets.symmetric(horizontal: getPixe(10, context)),
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.symmetric(vertical: getPixe(10, context)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: getPixe(10, context)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                     Expanded(
-                       flex: 7,
-                       child: Padding(
-                         padding: EdgeInsets.only(right: getPixe(50, context)),
-                         child: Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           children: [
-                             Column(
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                               children: <Widget>[
-                                 Text(
-                                   title,
-                                   style: TextStyle(
-                                       fontSize: getPixe(16, context),
-                                       fontWeight: FontWeight.w500),
-                                 ),
-                                 Text(
-                                   subTitle,
-                                   style: TextStyle(
-                                       fontSize: getPixe(10, context),
-                                       color: Colors.grey),
-                                 )
-                               ],
-                             ),
-                             Text(
-                               '$earnNum积分',
-                               style: TextStyle(
-                                   fontWeight: FontWeight.w500,
-                                   color: Colors.deepOrange,
-                                   fontSize: getPixe(12, context)),
-                             ),
-                           ]
-                         )
-                       ),
-                     ),
-                      Expanded(
-                        flex: 2,
-                        child: Center(child: _buildButton(title: isRead ? '去阅读': '去完成', onTabHandler: callback),)
-                      )
-                    ],
-                  ),
+                Expanded(
+                  flex: 7,
+                  child: Padding(
+                      padding: EdgeInsets.only(right: getPixe(50, context)),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  title,
+                                  style: TextStyle(
+                                      fontSize: getPixe(15, context),
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(
+                                  subTitle,
+                                  style: TextStyle(
+                                      fontSize: getPixe(10, context),
+                                      color: Colors.grey),
+                                )
+                              ],
+                            ),
+                            Text(
+                              '$earnNum积分',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.deepOrange,
+                                  fontSize: getPixe(12, context)),
+                            ),
+                          ])),
                 ),
+                Expanded(
+                    flex: 2,
+                    child: Center(
+                      child: _buildButton(
+                          title: isRead ? '去阅读' : '去完成',
+                          onTabHandler: callback),
+                    ))
               ],
             ),
-          );
+          ),
+        ],
+      ),
+    );
   }
 
   /// 底部提示信息
@@ -597,7 +751,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
         ),
         actions: <Widget>[
           InkWell(
-              onTap: () {},
+              onTap: toBonusStorePage,
               child: Container(
                   padding: EdgeInsets.only(
                     right: getPixe(15, context),
@@ -614,16 +768,27 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                   )))
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _buildHeader(),
-            _buildDailyBenefit(),
-            _buildBeginnerBenefit(),
-            _buildFooterInfo()
-          ],
-        ),
-      ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                _buildHeader(),
+                _buildDailyBenefit(),
+                _buildBeginnerBenefit(),
+                _buildFooterInfo()
+              ],
+            ),
+          ),
+          Positioned(
+            right: getPixe(20, context),
+            top: getPixe(50, context),
+            child: InkWell(
+              onTap: toBonusStorePage,
+              child: Image.asset('images/adGift.png', width: getPixe(50, context), fit: BoxFit.fill,)
+            ),
+          )
+        ])
     );
   }
 }
