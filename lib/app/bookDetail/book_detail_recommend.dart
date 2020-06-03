@@ -46,7 +46,7 @@ class _BookDetailRecommendState extends State<BookDetailRecommend> {
       },
       child: Container(
         width: (pixel.screenWidthDp(context) - 80) / 3,
-        height: pixel.setFontSize(190, context),
+        height: pixel.setFontSize(193, context),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,9 +96,8 @@ class _BookDetailRecommendState extends State<BookDetailRecommend> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: pixel.setFontSize(20, context)),
       padding: EdgeInsets.all(pixel.setFontSize(15, context)),
-      height: pixel.setFontSize(500, context),
+      height: pixel.setFontSize(510, context),
       child: Column(
         children: <Widget>[
           Row(

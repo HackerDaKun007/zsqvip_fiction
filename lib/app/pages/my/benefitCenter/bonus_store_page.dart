@@ -163,7 +163,7 @@ class _BonusStorePageState extends State<BonusStorePage> {
                   children: [
                     _getProductCard(
                         childWidth, 'images/welfare_integral_1.png', 'iPhone X',
-                        ishot: true),
+                        isHot: true),
                     _getProductCard(childWidth, 'images/welfare_integral_2.png',
                         'iPhone X 碎片'),
                     _getProductCard(childWidth, 'images/welfare_integral_2.png',
@@ -220,7 +220,7 @@ class _BonusStorePageState extends State<BonusStorePage> {
                       top: Radius.circular(pixel.setFontSize(16, context)))),
               builder: (BuildContext context) {
                 return Container(
-                  height: pixel.height * 0.35,
+                  height: pixel.screenHeightDp(context) * 0.35,
                   child: _buildBottomSheetContent(),
                 );
               });
@@ -380,7 +380,7 @@ class _BonusStorePageState extends State<BonusStorePage> {
 
   /// 产品卡片
   Widget _getProductCard(childWidth, imgUrl, productName,
-      {bool ishot = false}) {
+      {bool isHot = false}) {
     return Stack(children: [
       Container(
         height: pixel.setFontSize(165, context),
@@ -412,7 +412,7 @@ class _BonusStorePageState extends State<BonusStorePage> {
           ],
         ),
       ),
-      ishot
+      isHot
           ? Positioned(
               right: 0,
               child: Container(
@@ -489,7 +489,7 @@ class _BonusStorePageState extends State<BonusStorePage> {
       body: SingleChildScrollView(
         child: Stack(children: [
           Container(
-            height: 1000,
+            height: 800,
           ),
           _buildHeader(),
           Positioned(
