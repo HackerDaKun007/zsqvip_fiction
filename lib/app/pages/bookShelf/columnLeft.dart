@@ -41,7 +41,7 @@ class _ColumnLetState extends State<ColumnLet> {
       child: Opacity(
         opacity: this.appBarAlpha,
         child: Container(
-          height: pixel.setHeight(75, context),
+          height: pixel.setHeight(120, context),
           width: double.infinity,
           color: Colors.white,
           child: Padding(

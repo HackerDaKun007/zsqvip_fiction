@@ -8,7 +8,6 @@
  * @see         书架页面
 */
 
-
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -27,13 +26,11 @@ import 'package:provider/provider.dart';
 //网络状态
 import 'package:fiction/public/widget/internet.dart';
 
-
 //阅读分钟
 // int Path.minute = 0;
 // int parindex = 0BuildContext context, ;
 
 class BookShelfPage extends StatefulWidget {
-  
   // int print;
   BookShelfPage({Key key}) : super(key: key);
   @override
@@ -69,15 +66,11 @@ class _BookShelfPageState extends State<BookShelfPage> {
   }
 
   Widget build(BuildContext context) {
-    
     return Internet(_init(), providerListData.isData);
-
   }
-
 
   //主体内容
   Widget _init() {
-    
     //数据管理状态
     this.providerListData = Provider.of<BookShelfProviders>(context);
     return Stack(
@@ -94,13 +87,13 @@ class _BookShelfPageState extends State<BookShelfPage> {
               }
             },
             child: ListView(
-              // shrinkWrap: true, 
+              // shrinkWrap: true,
               children: <Widget>[
                 this._readTime(),
                 //推荐内容
                 RecommendedContent(),
                 //列表内容
-                Content(),  //修改父级组件
+                Content(), //修改父级组件
               ],
             ),
           ),
@@ -123,8 +116,8 @@ class _BookShelfPageState extends State<BookShelfPage> {
           fit: BoxFit.cover,
         ),
       ),
-      height: pixel.setHeight(220, context),
-      width: double.infinity,
+      height: pixel.setHeight(440, context),
+      width: pixel.screenWidthDp(context),
       child: Column(
         children: <Widget>[
           Padding(
@@ -135,56 +128,22 @@ class _BookShelfPageState extends State<BookShelfPage> {
                   Column(
                     children: <Widget>[
                       Padding(
-                        padding:
-                            EdgeInsets.fromLTRB(0, pixel.setHeight(100, context), 0, 0),
+                        padding: EdgeInsets.fromLTRB(
+                            0, pixel.setHeight(100, context), 0, 0),
                         child: ReadTime(
-                          style: TextStyle(fontSize: pixel.setFontSize(50, context)),
+                          style: TextStyle(
+                              fontSize: pixel.setFontSize(50, context)),
                         ),
                       ),
                       Text(
                         '今日已读 / 分钟',
-                        style: TextStyle(fontSize: pixel.setFontSize(12, context)),
+                        style:
+                            TextStyle(fontSize: pixel.setFontSize(12, context)),
                       ),
                     ],
                   ),
                 ],
               )),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                child: GestureDetector(
-                  child: Container(
-                      height: pixel.setHeight(30, context),
-                      width: pixel.setWidth(70, context),
-                      // color: Colors.white,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('images/li.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            pixel.setWidth(30, context),  pixel.setHeight(8, context), 0, 0),
-                        child: Text(
-                          '签到',
-                          style: TextStyle(
-                            fontSize: pixel.setFontSize(12, context),
-                          ),
-                        ),
-                      )),
-                  onTap: () {
-                    print('签到');
-                    // setState(() {
-                    //   Path.minute += 1;
-                    // });
-                  },
-                ),
-              ),
-            ],
-          ),
         ],
       ),
     );
@@ -195,90 +154,102 @@ class _BookShelfPageState extends State<BookShelfPage> {
     return Align(
       alignment: Alignment.topRight,
       child: Container(
-        height: pixel.setHeight(75, context),
+        height: pixel.setHeight(120, context),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(0, pixel.setHeight(35, context), pixel.setWidth(10, context), 0),
+          padding: EdgeInsets.fromLTRB(
+              0, pixel.setHeight(30, context), pixel.setWidth(10, context), 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Iconfont.sousuo,
-                  size: pixel.setFontSize(22, context),
-                  color: Color(0xFF000000),
+              Container(
+                width: pixel.setWidth(70, context),
+                height: pixel.setHeight(100, context),
+                child: IconButton(
+                  icon: Icon(
+                    Iconfont.sousuo,
+                    size: pixel.setFontSize(20, context),
+                    color: Color(0xFF000000),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/search');
+                  },
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/search');
-                },
               ),
-              IconButton(
-                icon: Icon(
-                  Iconfont.youcecaidan,
-                  size: pixel.setFontSize(22, context),
-                  color: Color(0xFF000000),
+              Container(
+                width: pixel.setWidth(70, context),
+                height: pixel.setHeight(100, context),
+                child: IconButton(
+                  icon: Icon(
+                    Iconfont.youcecaidan,
+                    size: pixel.setFontSize(20, context),
+                    color: Color(0xFF000000),
+                  ),
+                  onPressed: () {
+                    showMenu(
+                      context: context,
+                      position: RelativeRect.fromLTRB(
+                          pixel.setWidth(500, context),
+                          pixel.setHeight(120, context),
+                          pixel.setWidth(10, context),
+                          0),
+                      items: <PopupMenuEntry<String>>[
+                        PopupMenuItem(
+                          value: '1',
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Icon(
+                                Icons.query_builder,
+                                color: Colors.blue,
+                                size: pixel.setFontSize(21, context),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(
+                                    pixel.setWidth(10, context), 0, 0, 0),
+                                child: Text(
+                                  "记录",
+                                  style: TextStyle(
+                                      fontSize: pixel.setFontSize(14, context)),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        PopupMenuDivider(),
+                        PopupMenuItem(
+                          value: '2',
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Icon(
+                                Iconfont.bianji,
+                                color: Colors.blue,
+                                size: pixel.setFontSize(21, context),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(
+                                    pixel.setWidth(11, context), 0, 0, 0),
+                                child: Text(
+                                  "编辑",
+                                  style: TextStyle(
+                                      fontSize: pixel.setFontSize(14, context)),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ).then<void>((String value) {
+                      // Navigator.pop(context);
+                      if (value == '1') {
+                        Navigator.pushNamed(context, '/recording');
+                      } else if (value == '2') {
+                        Navigator.pushNamed(context, '/editbookshelf');
+                      }
+                      // pop.onSelected(value);
+                    });
+                  },
                 ),
-                onPressed: () {
-                  showMenu(
-                    context: context,
-                    position: RelativeRect.fromLTRB(pixel.setWidth(500, context),
-                        pixel.setHeight(74, context), pixel.setWidth(10, context), 0),
-                    items: <PopupMenuEntry<String>>[
-                      PopupMenuItem(
-                        value: '1',
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Icon(
-                              Icons.query_builder,
-                              color: Colors.blue,
-                              size: pixel.setFontSize(21, context),
-                            ),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(
-                                  pixel.setWidth(10, context), 0, 0, 0),
-                              child: Text(
-                                "记录",
-                                style:
-                                    TextStyle(fontSize: pixel.setFontSize(14, context)),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      PopupMenuDivider(),
-                      PopupMenuItem(
-                        value: '2',
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Icon(
-                              Iconfont.bianji,
-                              color: Colors.blue,
-                              size: pixel.setFontSize(21, context),
-                            ),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(
-                                  pixel.setWidth(11, context), 0, 0, 0),
-                              child: Text(
-                                "编辑",
-                                style:
-                                    TextStyle(fontSize: pixel.setFontSize(14, context)),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ).then<void>((String value) {
-                    // Navigator.pop(context);
-                    if (value == '1') {
-                      Navigator.pushNamed(context, '/recording');
-                    } else if (value == '2') {
-                      Navigator.pushNamed(context, '/editbookshelf');
-                    }
-                    // pop.onSelected(value);
-                  });
-                },
               ),
             ],
           ),
@@ -286,14 +257,12 @@ class _BookShelfPageState extends State<BookShelfPage> {
       ),
     );
   }
-
 }
 
 //推荐内容
 class RecommendedContent extends StatelessWidget {
-
   PixelSize pixel = PixelSize();
-  
+
   List<Map> list = [
     {"title": "我把你当兄弟你居然想上我？", "id": 1},
     {"title": "穿越异界，成为一代邪君！", "id": 2},
@@ -308,12 +277,12 @@ class RecommendedContent extends StatelessWidget {
         children: <Widget>[
           Container(
             // color: Colors.yellow,
-            width: pixel.setWidth(40, context),
+            width: pixel.setWidth(80, context),
             child: Center(
               child: Icon(
                 Iconfont.remen,
                 color: Colors.red,
-                size: pixel.setWidth(18, context),
+                size: pixel.setFontSize(22, context),
               ),
             ),
           ),
@@ -340,7 +309,7 @@ class RecommendedContent extends StatelessWidget {
                     return Center(
                       child: Text(list[index]['title'],
                           style: TextStyle(
-                            fontSize: pixel.setFontSize(14, context),
+                            fontSize: pixel.setFontSize(16, context),
                             color: Color(0x99333333),
                           ),
                           maxLines: 1,
@@ -353,15 +322,15 @@ class RecommendedContent extends StatelessWidget {
             width: pixel.setWidth(10, context),
           ),
           Container(
-            width: pixel.setWidth(30, context),
+            width: pixel.setWidth(50, context),
             // color: Colors.yellow,
             child: Icon(Icons.keyboard_arrow_right,
-                size: pixel.setFontSize(20, context), color: Color(0x99333333)),
+                size: pixel.setFontSize(24, context), color: Color(0x99333333)),
           ),
         ],
       ),
       // color: Colors.white,
-      height: pixel.setHeight(37, context),
+      height: pixel.setHeight(80, context),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(4.0)),
@@ -375,8 +344,8 @@ class RecommendedContent extends StatelessWidget {
             BoxShadow(color: Color(0x99e7e7e7), offset: Offset(1.0, 1.0)),
             BoxShadow(color: Color(0x99e7e7e7))
           ]),
-      margin: EdgeInsets.fromLTRB(
-          pixel.setWidth(25, context), 0, pixel.setHeight(25, context), pixel.setWidth(10, context)),
+      margin: EdgeInsets.fromLTRB(pixel.setWidth(25, context), 0,
+          pixel.setHeight(25, context), pixel.setWidth(10, context)),
     );
   }
 }

@@ -61,7 +61,7 @@ class _ResultSearchState extends State<ResultSearch> with Common {
         // centerTitle: true,
         elevation: 1,
         leading: Container(
-          width: pixel.setWidth(70, context),
+          width: pixel.setWidth(70.0, context),
           child: IconButton(
             icon: Icon(
               Iconfont.zuo,
@@ -76,10 +76,10 @@ class _ResultSearchState extends State<ResultSearch> with Common {
         title: Container(
           // color: Colors.yellow,
           width: double.infinity,
-          height: pixel.setHeight(44, context),
+          height: pixel.setHeight(80.0, context),
           child: Padding(
             padding: EdgeInsets.fromLTRB(
-                pixel.setWidth(10, context), 0, pixel.setHeight(10, context), 0),
+                pixel.setWidth(10.0, context), 0, pixel.setHeight(10, context), 0),
             child: Center(
               child: TextField(
                 controller: TextEditingController(
@@ -90,7 +90,7 @@ class _ResultSearchState extends State<ResultSearch> with Common {
                       EdgeInsets.symmetric(vertical: pixel.setHeight(11.2, context)),
                   icon: Icon(
                     Iconfont.sousuo,
-                    size: pixel.setFontSize(22, context),
+                    size: pixel.setFontSize(24, context),
                     color: Color(0x993c3c3c),
                   ),
                   hintText: '搜索书名或作者',
@@ -99,7 +99,7 @@ class _ResultSearchState extends State<ResultSearch> with Common {
                 onChanged: (value) {
                   this._input = value;
                 },
-                style: TextStyle(fontSize: pixel.setFontSize(16.0, context)),
+                style: TextStyle(fontSize: pixel.setFontSize(18.0, context)),
               ),
             ),
           ),
@@ -113,7 +113,7 @@ class _ResultSearchState extends State<ResultSearch> with Common {
         // elevation:
         actions: <Widget>[
           Container(
-              width: pixel.setWidth(70, context),
+              width: pixel.setWidth(115, context),
               // height: 40,
               // color: Colors.red,
               child: GestureDetector(
@@ -121,7 +121,7 @@ class _ResultSearchState extends State<ResultSearch> with Common {
                   child: Text(
                     '搜索',
                     style: TextStyle(
-                      fontSize: pixel.setFontSize(16, context),
+                      fontSize: pixel.setFontSize(18, context),
                     ),
                   ),
                 ),
@@ -153,18 +153,18 @@ class _ResultSearchState extends State<ResultSearch> with Common {
           },
           child: Container(
             width: double.infinity,
-            height: pixel.setHeight(135, context),
+            height: pixel.setHeight(210, context),
             padding: EdgeInsets.fromLTRB(
-                pixel.setWidth(10, context),
+                pixel.setWidth(20, context),
                 pixel.setHeight(25, context),
-                pixel.setWidth(10, context),
-                pixel.setHeight(10, context)),
+                pixel.setWidth(20, context),
+                pixel.setHeight(20, context)),
             // color: Colors.yellow,
             child: Row(
-              children: <Widget>[
+              children: <Widget>[ 
                 Container(
-                  height: pixel.setHeight(110, context),
-                  width: pixel.setWidth(83, context),
+                  height: double.infinity,
+                  width: pixel.setWidth(145, context),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(pixel.setWidth(3, context)),
                       image: DecorationImage(
@@ -173,7 +173,7 @@ class _ResultSearchState extends State<ResultSearch> with Common {
                       )),
                 ),
                 SizedBox(
-                  width: pixel.setWidth(10, context),
+                  width: pixel.setWidth(20, context),
                 ),
                 Expanded(
                   flex: 1,

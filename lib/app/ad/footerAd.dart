@@ -44,7 +44,7 @@ class _FooterAdState extends State<FooterAd>  {
         left: pixel.setWidth(15, context),
         right: pixel.setWidth(15, context),
         child: Container(
-          height: pixel.setHeight(150, context),
+          height: pixel.setHeight(300, context),
           width: double.infinity,
           child: Stack(
             children: <Widget>[

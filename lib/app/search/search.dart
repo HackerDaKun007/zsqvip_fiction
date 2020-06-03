@@ -65,7 +65,7 @@ class _SearchState extends State<Search> with Common {
         title: Container(
           // color: Colors.yellow,
           width: double.infinity,
-          height: pixel.setHeight(44, context),
+          height: pixel.setHeight(80, context),
           child: Padding(
             padding: EdgeInsets.fromLTRB(
                 pixel.setWidth(10, context), 0, pixel.setWidth(10, context), 0),
@@ -76,7 +76,7 @@ class _SearchState extends State<Search> with Common {
                       EdgeInsets.symmetric(vertical: pixel.setHeight(11.2, context)),
                   icon: Icon(
                     Iconfont.sousuo,
-                    size: pixel.setFontSize(22, context),
+                    size: pixel.setFontSize(24, context),
                     color: Color(0x993c3c3c),
                   ),
                   hintText: '搜索书名或作者',
@@ -85,7 +85,7 @@ class _SearchState extends State<Search> with Common {
                 onChanged: (value) {
                   this._input = value;
                 },
-                style: TextStyle(fontSize: pixel.setFontSize(16.0, context)),
+                style: TextStyle(fontSize: pixel.setFontSize(18.0, context)),
               ),
             ),
           ),
@@ -99,7 +99,7 @@ class _SearchState extends State<Search> with Common {
         // elevation:
         actions: <Widget>[
           Container(
-              width: pixel.setWidth(70, context),
+              width: pixel.setWidth(115, context),
               // height: 40,
               // color: Colors.red,
               child: GestureDetector(
@@ -107,7 +107,7 @@ class _SearchState extends State<Search> with Common {
                   child: Text(
                     '搜索',
                     style: TextStyle(
-                      fontSize: pixel.setFontSize(16, context),
+                      fontSize: pixel.setFontSize(18, context),
                     ),
                   ),
                 ),
@@ -130,6 +130,9 @@ class _SearchState extends State<Search> with Common {
                 Column(
                   children: <Widget>[
                     EveryoneTitle(myButton: (text, isIcon) => _myButton(text, isIcon),),
+                    SizedBox(
+                  height: pixel.setWidth(20, context),
+                ),
                     Recent(myButton: (text, isIcon) => _myButton(text, isIcon),),
                   ],
                 ),
@@ -169,15 +172,15 @@ class _SearchState extends State<Search> with Common {
             Text(
               text,
               style: TextStyle(
-                fontSize: pixel.setFontSize(14, context),
+                fontSize: pixel.setFontSize(16, context),
               ),
             ),
             _isIconValidata(),
           ],
         ),
-        padding: EdgeInsets.fromLTRB(pixel.setWidth(10, context), pixel.setHeight(5, context),
-            pixel.setWidth(10, context), pixel.setHeight(5, context)),
-        margin: EdgeInsets.fromLTRB(0, 0, 0, pixel.setHeight(10, context)),
+        padding: EdgeInsets.fromLTRB(pixel.setWidth(15, context), pixel.setHeight(10, context),
+            pixel.setWidth(15, context), pixel.setHeight(10, context)),
+        margin: EdgeInsets.fromLTRB(0, 0, 0, pixel.setHeight(15, context)),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(pixel.setWidth(3, context)),
           color: Color(0x99e2e2e2),

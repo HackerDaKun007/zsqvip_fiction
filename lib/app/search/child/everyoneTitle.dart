@@ -98,7 +98,7 @@ class _EveryoneTitleState extends State<EveryoneTitle> {
     return _request ? Column(
       children: <Widget>[
         this._getEveryoneTitle(),
-        SizedBox(height: pixel.setHeight(10, context)),
+        SizedBox(height: pixel.setHeight(20, context)),
         this._getEveryoneContent(),
       ],
     ) : Text('');
@@ -113,7 +113,7 @@ class _EveryoneTitleState extends State<EveryoneTitle> {
           child: Text(
             '大家都在搜索',
             style: TextStyle(
-                fontSize: pixel.setFontSize(16, context), fontWeight: FontWeight.bold),
+                fontSize: pixel.setFontSize(18, context), fontWeight: FontWeight.bold),
           ),
         ),
         Container(
@@ -133,7 +133,7 @@ class _EveryoneTitleState extends State<EveryoneTitle> {
                 ),
                 Icon(
                   Icons.loop,
-                  size: pixel.setFontSize(14, context),
+                  size: pixel.setFontSize(16, context),
                   color: Color(0x993e3e3e),
                 ),
               ],

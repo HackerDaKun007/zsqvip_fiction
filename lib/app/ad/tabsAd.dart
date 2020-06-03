@@ -28,8 +28,8 @@ class _TabsAdState extends State<TabsAd> {
       bottom: pixel.setHeight(20, context),
       right: 20,
       child: Container(
-        width: pixel.setWidth(60, context),
-        height: pixel.setHeight(60, context),
+        width: pixel.setWidth(100, context),
+        height: pixel.setHeight(100, context),
         child: GestureDetector(
           child: Center(
             child: Text("$_num", style: TextStyle(
