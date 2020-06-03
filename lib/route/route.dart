@@ -36,6 +36,7 @@ import 'package:fiction/app/pages/my/settings/aboutus.dart';  // 关于我们页
 import 'package:fiction/app/pages/my/benefitCenter/benefit_page.dart';  // 福利中心页面
 import 'package:fiction/app/pages/my/benefitCenter/bonus_store_page.dart';  // 积分商城页面
 import 'package:fiction/app/pages/my/benefitCenter/bonus_detail_page.dart';  // 积分明细页面
+import 'package:fiction/app/reader/reader_page.dart'; // 书籍详情页面
 
 //配置命令路由
 final routes = {
@@ -68,7 +69,7 @@ final routes = {
   '/benefit': (context) => BenefitPage(),
   '/bonusstore': (context) => BonusStorePage(),
   '/bonusdetail': (context) => BonusDetailPage(),
-
+  '/reader': (context, {arguments}) => ReaderPage(arguments:arguments),
 };
 
 var onGenerateRoute = (RouteSettings settings) {

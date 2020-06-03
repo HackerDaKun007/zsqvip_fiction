@@ -262,7 +262,11 @@ class _BookDetailPageState extends State<BookDetailPage> {
                   )),
               Spacer(),
               InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/reader', arguments: {
+                      'data': data
+                    });
+                  },
                   child: Container(
                     padding: EdgeInsets.symmetric(
                         horizontal: pixel.setFontSize(buttonPadding, context),

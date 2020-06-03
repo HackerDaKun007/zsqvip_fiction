@@ -8,28 +8,28 @@ class ReaderToolBar extends StatefulWidget {
 
 class _ReaderToolBarState extends State<ReaderToolBar> {
   final PixelSize pixel = PixelSize();
+  Color paperColor = Color(0xFFF5F5F5);
 
 
-  Widget _buildTopBar() {
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      height: kToolbarHeight + MediaQuery.of(context).padding.top,
-      color: Colors.transparent,
-      child: AppBar(
-        leading: IconButton(
-          icon: const Icon(Iconfont.zuo),
+      height: kToolbarHeight + pixel.statusBarHeight(context),
+      padding: EdgeInsets.only(top: pixel.statusBarHeight(context)),
+      width: pixel.screenWidthDp(context),
+      color: Colors.black.withOpacity(0.7),
+      child: Row(
+        children: <Widget>[
+          IconButton(
+          icon: const Icon(Iconfont.zuo, color: Colors.white,),
           iconSize: pixel.setFontSize(26, context),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      
+        ],
+      )
     );
   }
 }
