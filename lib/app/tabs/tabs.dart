@@ -27,7 +27,9 @@ class Tabs extends StatefulWidget{
   _TabsState createState() => _TabsState();
 }
 
-class _TabsState extends State<Tabs> with PixelSize{
+class _TabsState extends State<Tabs> {
+
+  PixelSize pixel = PixelSize();
 
   @override
 
@@ -50,9 +52,9 @@ class _TabsState extends State<Tabs> with PixelSize{
            type: BottomNavigationBarType.fixed, //未选中显示字体
           fixedColor: Config.color,
           unselectedItemColor:Colors.grey,
-          iconSize: getPixe(23, context),
-          selectedFontSize: getPixe(11, context),
-          unselectedFontSize: getPixe(11, context),
+          iconSize: pixel.setFontSize(23, context),
+          selectedFontSize: pixel.setFontSize(11, context),
+          unselectedFontSize: pixel.setFontSize(11, context),
           currentIndex: provider.tabCurrentIndex,
           onTap: (int index) {
             provider.changeCurrentIndex(index);

@@ -27,6 +27,7 @@ import 'package:provider/provider.dart';
 //网络状态
 import 'package:fiction/public/widget/internet.dart';
 
+
 //阅读分钟
 // int Path.minute = 0;
 // int parindex = 0BuildContext context, ;
@@ -68,8 +69,9 @@ class _BookShelfPageState extends State<BookShelfPage> with PixelSize {
   Widget build(BuildContext context) {
     
     return Internet(_init(), providerListData.isData);
-    // return _init();
+
   }
+
 
   //主体内容
   Widget _init() {

@@ -9,7 +9,9 @@
 */
 import 'package:flutter/material.dart';
 import 'package:fiction/public/public.dart';
-class ModuleLoad extends PixelSize {
+class ModuleLoad  {
+
+  PixelSize pixel = PixelSize(); 
 
   //显示局部请求加载动画
   Widget showModuleLoad(BuildContext context, {String value:'加载中...'}) {
@@ -26,7 +28,7 @@ class ModuleLoad extends PixelSize {
               valueColor: AlwaysStoppedAnimation<Color>(Config.color),
             ),
             SizedBox(
-                height: getPixe(15, context),
+                height: pixel.setHeight(15, context),
               ),
               Text(value,
                 style: TextStyle(
@@ -52,9 +54,9 @@ class ModuleLoad extends PixelSize {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
              Icon(Iconfont.jinggao,
-                  size: getPixe(35, context), color: Colors.red),
+                  size: pixel.setFontSize(35, context), color: Colors.red),
             SizedBox(
-                height: getPixe(15, context),
+                height: pixel.setHeight(15, context),
               ),
               Text(value,
                 style: TextStyle(
