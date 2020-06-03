@@ -45,7 +45,7 @@ class PixelSize {
   //字体大小适配方法 
   //@param fontSize 传入设计稿上字体的 px ,  mediaQueryData(context).textScaleFactor //控制字体是要根据系统的“字体大小”辅助选项来进行缩 放
   setFontSize(double fontSize, BuildContext context) =>
-      setWidth(fontSize, context) / textScaleFactory(context);
+      setWidth(fontSize, context) / textScaleFactory(context) * 1.75;
 
 
   // 每个逻辑像素的字体像素数，字体的缩放比例 

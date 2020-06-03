@@ -11,6 +11,7 @@ class _BonusDetailPageState extends State<BonusDetailPage> {
 
   Widget _buildListItem() {
     return Container(
+      color: Colors.white,
       padding: EdgeInsets.symmetric(
           horizontal: pixel.setFontSize(10, context), vertical: pixel.setFontSize(15, context)),
       child: Row(
