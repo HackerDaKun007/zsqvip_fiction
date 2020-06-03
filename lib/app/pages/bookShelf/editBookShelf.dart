@@ -27,7 +27,9 @@ class EditBookShelf extends StatefulWidget {
   _EditBookShelfState createState() => _EditBookShelfState();
 }
 
-class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
+class _EditBookShelfState extends State<EditBookShelf>  {
+
+  PixelSize pixel = PixelSize();
   var bounced = Bounced(); //配置弹出层
 
   var providerListData;
@@ -65,7 +67,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
       ),
       body: Internet(_init(), providerListData.isData),
       bottomNavigationBar: Container(
-        height: getPixe(80, context),
+        height: pixel.setHeight(80, context),
         child: Row(
           children: <Widget>[
             Expanded(
@@ -76,7 +78,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
                   child: Center(
                     child: Text('全选',
                         style: TextStyle(
-                          fontSize: getPixe(16, context),
+                          fontSize: pixel.setFontSize(16, context),
                         )),
                   ),
                 ),
@@ -96,7 +98,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
                     child: Text(
                       '删除',
                       style: TextStyle(
-                          fontSize: getPixe(16, context),
+                          fontSize: pixel.setFontSize(16, context),
                           color: providerListData.deleteColos),
                     ),
                   ),
@@ -141,7 +143,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
     // print(this._dataAction.length);
     // if (this._dataAction.length > 0) {
     return Container(
-        width: getPixe(70, context),
+        width: pixel.setWidth(70, context),
         // height: 40,
         // color: Colors.red,
         child: GestureDetector(
@@ -149,7 +151,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
             child: Text(
               '取消',
               style:
-                  TextStyle(fontSize: getPixe(18, context), color: Colors.grey),
+                  TextStyle(fontSize: pixel.setFontSize(18, context), color: Colors.grey),
             ),
           ),
           onTap: () {
@@ -202,11 +204,11 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
                     providerListData.editData[i]['imageUrl'],
                   ),
                   Positioned(
-                    top: getPixe(7, context),
-                    right: getPixe(7, context),
+                    top: pixel.setHeight(7, context),
+                    right: pixel.setWidth(7, context),
                     child: Icon(
                       Icons.check_circle,
-                      size: getPixe(22, context),
+                      size: pixel.setFontSize(22, context),
                       color: Color(providerListData.dataColor[i]['color']),
                     ),
                   ),
@@ -223,7 +225,7 @@ class _EditBookShelfState extends State<EditBookShelf> with PixelSize {
                       providerListData.editData[i]['title'],
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                          color: Colors.black, fontSize: getPixe(14, context)),
+                          color: Colors.black, fontSize: pixel.setFontSize(14, context)),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

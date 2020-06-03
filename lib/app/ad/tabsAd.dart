@@ -17,17 +17,19 @@ class TabsAd extends StatefulWidget {
   _TabsAdState createState() => _TabsAdState();
 }
 
-class _TabsAdState extends State<TabsAd> with PixelSize {
+class _TabsAdState extends State<TabsAd> {
+
+  PixelSize pixel = PixelSize();
   int _num = 1;
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: getPixe(20, context),
+      bottom: pixel.setHeight(20, context),
       right: 20,
       child: Container(
-        width: getPixe(60, context),
-        height: getPixe(60, context),
+        width: pixel.setWidth(60, context),
+        height: pixel.setHeight(60, context),
         child: GestureDetector(
           child: Center(
             child: Text("$_num", style: TextStyle(

@@ -22,7 +22,9 @@ class Content extends StatefulWidget {
   _ContentState createState() => _ContentState();
 }
 
-class _ContentState extends State<Content> with PixelSize, Common {
+class _ContentState extends State<Content> with Common {
+
+  PixelSize pixel = PixelSize();
 
   // List<Map> listData = [{
   //     "title": '',
@@ -89,7 +91,7 @@ class _ContentState extends State<Content> with PixelSize, Common {
                   providerListData.data[i]['title'],
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.black, fontSize: getPixe(12, context)),
+                      color: Colors.black, fontSize: pixel.setFontSize(12, context)),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -108,17 +110,17 @@ class _ContentState extends State<Content> with PixelSize, Common {
         if (providerListData.data[i]['click'] == 0 &&
             providerListData.data[i]['chapter'] > providerListData.data[i]['watched_chapter'] && providerListData.data[i]['ad'] == 0) {
           return Positioned(
-            top: getPixe(10, context),
+            top: pixel.setHeight(10, context),
             left: 0,
             child: Container(
-              width: getPixe(40, context),
-              height: getPixe(20, context),
+              width: pixel.setWidth(40, context),
+              height: pixel.setHeight(20, context),
               color: Config.color,
               child: Center(
                 child: Text(
                   '更新',
                   style: TextStyle(
-                      fontSize: getPixe(12, context), color: Colors.white),
+                      fontSize: pixel.setFontSize(12, context), color: Colors.white),
                 ),
               ),
             ),
@@ -151,7 +153,7 @@ class _ContentState extends State<Content> with PixelSize, Common {
                       providerListData.data[i]['ad'] == 1 ? "[广告]" : "",
                       style: TextStyle(
                         color: Color(0x99C9C9C9),
-                        fontSize: getPixe(9, context),
+                        fontSize: pixel.setFontSize(9, context),
                       ),
                     ),
                     Expanded(
@@ -161,7 +163,7 @@ class _ContentState extends State<Content> with PixelSize, Common {
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: getPixe(14, context)),
+                            fontSize: pixel.setFontSize(14, context)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),

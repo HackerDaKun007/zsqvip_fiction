@@ -17,7 +17,9 @@ class FooterAd extends StatefulWidget {
   _FooterAdState createState() => _FooterAdState();
 }
 
-class _FooterAdState extends State<FooterAd> with PixelSize {
+class _FooterAdState extends State<FooterAd>  {
+
+  PixelSize pixel = PixelSize();
 
   //判断是否关闭广告, true开启广告，false关闭广告
   bool _isAd = true;
@@ -38,11 +40,11 @@ class _FooterAdState extends State<FooterAd> with PixelSize {
   Widget _getAd() {
     if (this._isAd) {
       return Positioned(
-        bottom: getPixe(15, context),
-        left: getPixe(15, context),
-        right: getPixe(15, context),
+        bottom: pixel.setHeight(15, context),
+        left: pixel.setWidth(15, context),
+        right: pixel.setWidth(15, context),
         child: Container(
-          height: getPixe(150, context),
+          height: pixel.setHeight(150, context),
           width: double.infinity,
           child: Stack(
             children: <Widget>[
@@ -66,7 +68,7 @@ class _FooterAdState extends State<FooterAd> with PixelSize {
                     child: Icon(
                       Iconfont.shanchu,
                       color: Colors.black,
-                      size: getPixe(25, context),
+                      size: pixel.setFontSize(25, context),
                     ),
                     onTap: () {
                       //关闭广告
@@ -83,14 +85,14 @@ class _FooterAdState extends State<FooterAd> with PixelSize {
                   color: Color(0x99e2e2e2),
                   child: Padding(
                       padding: EdgeInsets.fromLTRB(
-                          getPixe(5, context),
-                          getPixe(2, context),
-                          getPixe(5, context),
-                          getPixe(2, context)),
+                          pixel.setWidth(5, context),
+                          pixel.setHeight(2, context),
+                          pixel.setWidth(5, context),
+                          pixel.setHeight(2, context)),
                       child: Text(
                         '广告',
                         style: TextStyle(
-                          fontSize: getPixe(12, context),
+                          fontSize: pixel.setFontSize(12, context),
                         ),
                       )),
                 ),
