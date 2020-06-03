@@ -49,7 +49,11 @@ class _EditBookShelfState extends State<EditBookShelf>  {
         elevation: 1,
         centerTitle: true,
         leading: Container(
+<<<<<<< HEAD
           width: pixel.setFontSize(70, context),
+=======
+          width: pixel.setWidth(70, context),
+>>>>>>> cc68c8b768ac82e2609f0e30c4ef7a6e1f9d974a
           child: IconButton(
             icon: Icon(
               Iconfont.zuo,

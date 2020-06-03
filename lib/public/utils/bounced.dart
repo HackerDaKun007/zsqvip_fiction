@@ -120,7 +120,7 @@ class Bounced  {
                     alignment: Alignment.center,
                     width: pixel.screenWidthDp(context),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: pixel.setFontSize(80.0, context)),
+                      padding: EdgeInsets.symmetric(horizontal: pixel.setWidth(80.0, context)),
                       child: AnimatedOpacity(
                         opacity: _showing ? 1.0 : 0.0, //目标透明度
                         duration: _showing
@@ -131,8 +131,8 @@ class Bounced  {
                             color: Colors.black54,
                             child: Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: pixel.setFontSize(12.0, context),
-                                  vertical: pixel.setFontSize(7.0, context)),
+                                  horizontal: pixel.setWidth(12.0, context),
+                                  vertical: pixel.setHeight(7.0, context)),
                               child: Text(
                                 _msg,
                                 style: TextStyle(
