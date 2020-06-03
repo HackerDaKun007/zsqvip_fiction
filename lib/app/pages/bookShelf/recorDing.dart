@@ -104,7 +104,7 @@ class _RecordingState extends State<Recording> {
                 });
               },
             ),
-            width: pixel.setWidth(70, context),
+            width: pixel.setWidth(115, context),
           );
     } else {
       return Text('');
@@ -148,13 +148,13 @@ class _RecordingState extends State<Recording> {
       for (int i=0; i < dataProvider.data.length; i++) {
         data.add(InkWell(
             child: Container(
-              height: pixel.setHeight(135, context),
-              padding: EdgeInsets.all(pixel.setWidth(10, context)),
+              height: pixel.setHeight(210, context),
+              padding: EdgeInsets.all(pixel.setWidth(20, context)),
               child: Row(
                 children: <Widget>[
                   Container(
-                    height: pixel.setHeight(110, context),
-                    width: pixel.setWidth(83, context),
+                    height: double.infinity,
+                    width: pixel.setWidth(145, context),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(pixel.setWidth(3, context)),
                         image: DecorationImage(
@@ -163,7 +163,7 @@ class _RecordingState extends State<Recording> {
                         )),
                   ),
                   SizedBox(
-                    width: pixel.setWidth(10, context),
+                    width: pixel.setWidth(20, context),
                   ),
                   Expanded(
                     flex: 1,

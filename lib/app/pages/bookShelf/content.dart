@@ -113,8 +113,8 @@ class _ContentState extends State<Content> with Common {
             top: pixel.setHeight(10, context),
             left: 0,
             child: Container(
-              width: pixel.setWidth(40, context),
-              height: pixel.setHeight(20, context),
+              width: pixel.setWidth(65, context),
+              height: pixel.setHeight(45, context),
               color: Config.color,
               child: Center(
                 child: Text(

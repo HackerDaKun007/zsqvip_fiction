@@ -48,7 +48,7 @@ class _RecentState extends State<Recent> {
     return _request ? Column(
       children: <Widget>[
         this._getRecentTitle(),
-        SizedBox(height: pixel.setHeight(10, context)),
+        SizedBox(height: pixel.setHeight(20, context)),
         this._getRecentContent(),
       ],
     ) : Text('');
@@ -65,7 +65,7 @@ class _RecentState extends State<Recent> {
             child: Text(
               '最近搜索',
               style: TextStyle(
-                  fontSize: pixel.setFontSize(16, context), fontWeight: FontWeight.bold),
+                  fontSize: pixel.setFontSize(18, context), fontWeight: FontWeight.bold),
             ),
           ),
           Container(

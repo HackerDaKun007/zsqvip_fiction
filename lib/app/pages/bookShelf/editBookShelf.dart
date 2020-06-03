@@ -67,7 +67,7 @@ class _EditBookShelfState extends State<EditBookShelf>  {
       ),
       body: Internet(_init(), providerListData.isData),
       bottomNavigationBar: Container(
-        height: pixel.setHeight(80, context),
+        height: pixel.setHeight(110, context),
         child: Row(
           children: <Widget>[
             Expanded(
@@ -143,7 +143,7 @@ class _EditBookShelfState extends State<EditBookShelf>  {
     // print(this._dataAction.length);
     // if (this._dataAction.length > 0) {
     return Container(
-        width: pixel.setWidth(70, context),
+        width: pixel.setWidth(115, context),
         // height: 40,
         // color: Colors.red,
         child: GestureDetector(
