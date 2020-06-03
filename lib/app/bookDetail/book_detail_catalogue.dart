@@ -44,12 +44,12 @@ class BookDetailCatalogue extends StatefulWidget {
   _BookDetailCatalogueState createState() => _BookDetailCatalogueState();
 }
 
-class _BookDetailCatalogueState extends State<BookDetailCatalogue>
-    with PixelSize {
+class _BookDetailCatalogueState extends State<BookDetailCatalogue> {
   List<Widget> catalogueList = List<Widget>();
   List<Widget> reversedCatalogueList = List<Widget>();
   Map data;
   bool _isReversed;
+  final PixelSize pixel = PixelSize();
 
   @override
   void initState() {
@@ -76,9 +76,9 @@ class _BookDetailCatalogueState extends State<BookDetailCatalogue>
           print('=========第${index + 1}章=========');
         },
         child: Ink(
-          height: getPixe(50, context),
+          height: pixel.setFontSize(50, context),
           padding: EdgeInsets.symmetric(
-              vertical: getPixe(10, context), horizontal: getPixe(20, context)),
+              vertical: pixel.setFontSize(10, context), horizontal: pixel.setFontSize(20, context)),
           child: Text('第${index + 1}章  $chapter'),
         ));
   }
@@ -93,7 +93,7 @@ class _BookDetailCatalogueState extends State<BookDetailCatalogue>
     return Column(
       children: <Widget>[
         Container(
-          width: getWidth(context),
+          width: pixel.screenWidthDp(context),
           child: Row(
             children: <Widget>[
               Spacer(
@@ -105,7 +105,7 @@ class _BookDetailCatalogueState extends State<BookDetailCatalogue>
                   '目录',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: getPixe(18, context),
+                      fontSize: pixel.setFontSize(18, context),
                       fontWeight: FontWeight.w500),
                 ),
               ),
@@ -118,21 +118,21 @@ class _BookDetailCatalogueState extends State<BookDetailCatalogue>
           ),
         ),
         Container(
-          width: getWidth(context),
-          padding: EdgeInsets.symmetric(horizontal: getPixe(15, context)),
+          width: pixel.screenWidthDp(context),
+          padding: EdgeInsets.symmetric(horizontal: pixel.setFontSize(15, context)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
                 '共${data['chapter']}章',
                 style: TextStyle(
-                    fontSize: getPixe(12, context), color: Config.color),
+                    fontSize: pixel.setFontSize(12, context), color: Config.color),
               ),
               IconButton(
                 onPressed: _handleCatalogueReverse,
                 icon: const Icon(Icons.swap_vert),
                 color: Config.color,
-                iconSize: getPixe(20, context),
+                iconSize: pixel.setFontSize(20, context),
               )
             ],
           ),

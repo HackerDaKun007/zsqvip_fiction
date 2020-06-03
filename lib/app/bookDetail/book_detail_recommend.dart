@@ -21,8 +21,9 @@ class BookDetailRecommend extends StatefulWidget {
   _BookDetailRecommendState createState() => _BookDetailRecommendState();
 }
 
-class _BookDetailRecommendState extends State<BookDetailRecommend> with PixelSize {
+class _BookDetailRecommendState extends State<BookDetailRecommend> {
   List<Map> recommendData = guessYouLikeData;
+  final PixelSize pixel = PixelSize();
 
   @override
   void initState() {
@@ -44,8 +45,8 @@ class _BookDetailRecommendState extends State<BookDetailRecommend> with PixelSiz
         Navigator.pushNamed(context, '/bookdetail', arguments: {'data': data});
       },
       child: Container(
-        width: (getWidth(context) - 80) / 3,
-        height: getPixe(190, context),
+        width: (pixel.screenWidthDp(context) - 80) / 3,
+        height: pixel.setFontSize(190, context),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,15 +55,15 @@ class _BookDetailRecommendState extends State<BookDetailRecommend> with PixelSiz
               elevation: 3,
               color: Colors.transparent,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(getPixe(4, context)),
+                borderRadius: BorderRadius.circular(pixel.setFontSize(4, context)),
                 child: Image.network(data['imageUrl'], fit: BoxFit.fitWidth),
               )
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(data['title'], style: TextStyle(fontSize: getPixe(14, context)),),
-                Text('${(data['total_num'] / 10000).floor()} 万人气', style: TextStyle(fontSize: getPixe(12, context), color: Colors.grey),)
+                Text(data['title'], style: TextStyle(fontSize: pixel.setFontSize(14, context)),),
+                Text('${(data['total_num'] / 10000).floor()} 万人气', style: TextStyle(fontSize: pixel.setFontSize(12, context), color: Colors.grey),)
               ],
             )
           ],
@@ -81,12 +82,12 @@ class _BookDetailRecommendState extends State<BookDetailRecommend> with PixelSiz
 
   Widget _buildRecommendContent(context) {
     return Container(
-      margin: EdgeInsets.only(top: getPixe(20, context)),
-      padding: EdgeInsets.symmetric(vertical: getPixe(10, context)),
+      margin: EdgeInsets.only(top: pixel.setFontSize(20, context)),
+      padding: EdgeInsets.symmetric(vertical: pixel.setFontSize(10, context)),
       child: Wrap(
         direction: Axis.horizontal,
-        spacing: getPixe(20, context),
-        runSpacing: getPixe(20, context),
+        spacing: pixel.setFontSize(20, context),
+        runSpacing: pixel.setFontSize(20, context),
         children: _getContentList(context),
       ),
     );
@@ -95,9 +96,9 @@ class _BookDetailRecommendState extends State<BookDetailRecommend> with PixelSiz
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: getPixe(20, context)),
-      padding: EdgeInsets.all(getPixe(15, context)),
-      height: getPixe(500, context),
+      margin: EdgeInsets.only(bottom: pixel.setFontSize(20, context)),
+      padding: EdgeInsets.all(pixel.setFontSize(15, context)),
+      height: pixel.setFontSize(500, context),
       child: Column(
         children: <Widget>[
           Row(
@@ -107,11 +108,11 @@ class _BookDetailRecommendState extends State<BookDetailRecommend> with PixelSiz
               Text(
                 '编辑推荐',
                 style: TextStyle(
-                    fontSize: getPixe(20, context),
+                    fontSize: pixel.setFontSize(20, context),
                     fontWeight: FontWeight.w500),
               ),
               Container(
-                  padding: EdgeInsets.only(right: getPixe(10, context)),
+                  padding: EdgeInsets.only(right: pixel.setFontSize(10, context)),
                   child: InkWell(
                     onTap: () {
                       shuffleRecommendData();
@@ -122,14 +123,14 @@ class _BookDetailRecommendState extends State<BookDetailRecommend> with PixelSiz
                           '换一换',
                           style: TextStyle(
                               color: Colors.black45,
-                              fontSize: getPixe(14, context)),
+                              fontSize: pixel.setFontSize(14, context)),
                         ),
                         SizedBox(
-                          width: getPixe(5, context),
+                          width: pixel.setFontSize(5, context),
                         ),
                         Icon(
                           Icons.loop,
-                          size: getPixe(16, context),
+                          size: pixel.setFontSize(16, context),
                           color: Colors.grey[400],
                         )
                       ],

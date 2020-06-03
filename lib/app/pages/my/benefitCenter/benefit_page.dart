@@ -20,7 +20,9 @@ class BenefitPage extends StatefulWidget {
   _BenefitPageState createState() => _BenefitPageState();
 }
 
-class _BenefitPageState extends State<BenefitPage> with PixelSize {
+class _BenefitPageState extends State<BenefitPage> {
+  PixelSize pixel = PixelSize();
+
   bool isLogin; // 是否登录
   bool isTodayRegister; // 今日是否签到
   TabIndexProvider tabProvider;
@@ -52,18 +54,18 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   /// 头部
   Widget _buildHeader() {
     return Container(
-        height: getPixe(375, context),
-        width: getWidth(context),
+        height: pixel.setFontSize(375, context),
+        width: pixel.screenWidthDp(context),
         child: Stack(children: [
           Container(
-            width: getWidth(context),
-            height: getPixe(200, context),
+            width: pixel.screenWidthDp(context),
+            height: pixel.setFontSize(200, context),
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('images/welfare.jpg'),
                     fit: BoxFit.cover)),
             child: Container(
-              padding: EdgeInsets.only(top: getPixe(35, context)),
+              padding: EdgeInsets.only(top: pixel.setFontSize(35, context)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: isLogin
@@ -71,16 +73,16 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                         Text(
                           '当前积分',
                           style: TextStyle(
-                              fontSize: getPixe(12, context),
+                              fontSize: pixel.setFontSize(12, context),
                               color: Colors.white54),
                         ),
                         SizedBox(
-                          height: getPixe(10, context),
+                          height: pixel.setFontSize(10, context),
                         ),
                         Text(
                           '50',
                           style: TextStyle(
-                            fontSize: getPixe(45, context),
+                            fontSize: pixel.setFontSize(45, context),
                             color: Colors.white,
                           ),
                         )
@@ -90,17 +92,17 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                           '登录可领取积分、兑换大奖',
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: getPixe(12, context)),
+                              fontSize: pixel.setFontSize(12, context)),
                         ),
                         SizedBox(
-                          height: getPixe(15, context),
+                          height: pixel.setFontSize(15, context),
                         ),
                         InkWell(
                           onTap: () {},
                           child: Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: getPixe(35, context),
-                                  vertical: getPixe(6, context)),
+                                  horizontal: pixel.setFontSize(35, context),
+                                  vertical: pixel.setFontSize(6, context)),
                               decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                       colors: [
@@ -114,24 +116,24 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                                 '立即登录',
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: getPixe(14, context)),
+                                    fontSize: pixel.setFontSize(14, context)),
                               )),
                         )
                       ],
               ),
             ),
           ),
-          Positioned(top: getPixe(130, context), child: _buildStoreSummary()),
+          Positioned(top: pixel.setFontSize(130, context), child: _buildStoreSummary()),
         ]));
   }
 
   /// 积分商城展示
   Widget _buildStoreSummary() {
-    double mainWidth = getWidth(context) - getPixe(20, context);
-    double childWidth = getPixe((mainWidth - 80) / 3, context);
+    double mainWidth = pixel.screenWidthDp(context) - pixel.setFontSize(20, context);
+    double childWidth = pixel.setFontSize((mainWidth - 80) / 3, context);
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: getPixe(10, context)),
-      padding: EdgeInsets.all(getPixe(15, context)),
+      margin: EdgeInsets.symmetric(horizontal: pixel.setFontSize(10, context)),
+      padding: EdgeInsets.all(pixel.setFontSize(15, context)),
       width: mainWidth,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
@@ -150,7 +152,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
-                    fontSize: getPixe(18, context)),
+                    fontSize: pixel.setFontSize(18, context)),
               ),
               InkWell(
                 onTap: toBonusStorePage,
@@ -160,13 +162,13 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                     Text(
                       '查看更多',
                       style: TextStyle(
-                          fontSize: getPixe(13, context),
+                          fontSize: pixel.setFontSize(13, context),
                           color: Color(0xffdaa520)),
                     ),
                     Icon(
                       Icons.chevron_right,
                       color: Color(0xffdaa520),
-                      size: getPixe(20, context),
+                      size: pixel.setFontSize(20, context),
                     )
                   ],
                 ),
@@ -175,10 +177,10 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(
-                getPixe(10, context),
-                getPixe(15, context),
-                getPixe(10, context),
-                getPixe(10, context)),
+                pixel.setFontSize(10, context),
+                pixel.setFontSize(15, context),
+                pixel.setFontSize(10, context),
+                pixel.setFontSize(10, context)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -202,9 +204,9 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
       onTap: isLogin ? onTabHandler : toLoginPage,
       child: Container(
           padding: EdgeInsets.symmetric(
-              horizontal: getPixe(15, context), vertical: getPixe(5, context)),
+              horizontal: pixel.setFontSize(15, context), vertical: pixel.setFontSize(5, context)),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(getPixe(20, context)),
+              borderRadius: BorderRadius.circular(pixel.setFontSize(20, context)),
               gradient: LinearGradient(
                   colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
                   end: Alignment.centerLeft,
@@ -212,7 +214,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
           child: Text(
             title,
             style: TextStyle(
-                fontSize: getPixe(14, context), fontWeight: FontWeight.w600),
+                fontSize: pixel.setFontSize(14, context), fontWeight: FontWeight.w600),
           )),
     );
   }
@@ -220,7 +222,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   ///
   Widget _getStoreCard(childWidth, imgUrl, productName) {
     return Container(
-      height: getPixe(160, context),
+      height: pixel.setFontSize(160, context),
       width: childWidth,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -240,14 +242,14 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
           ),
           Text(
             productName,
-            style: TextStyle(fontSize: getPixe(12, context)),
+            style: TextStyle(fontSize: pixel.setFontSize(12, context)),
           ),
          InkWell(
            onTap: toBonusStorePage,
            child: Container(
              padding: EdgeInsets.symmetric(
-                 horizontal: getPixe(20, context),
-                 vertical: getPixe(5, context)),
+                 horizontal: pixel.setFontSize(20, context),
+                 vertical: pixel.setFontSize(5, context)),
              decoration: BoxDecoration(
                borderRadius: BorderRadius.circular(20),
                boxShadow: [
@@ -267,7 +269,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
              ),
              child: Text('立即兑换',
                  style: TextStyle(
-                     fontSize: getPixe(13, context), color: Colors.white)),
+                     fontSize: pixel.setFontSize(13, context), color: Colors.white)),
            )
          )
         ],
@@ -279,9 +281,9 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   Widget _buildDailyBenefit() {
     return Container(
       margin: EdgeInsets.symmetric(
-          horizontal: getPixe(10, context), vertical: getPixe(10, context)),
-      padding: EdgeInsets.all(getPixe(10, context)),
-      width: getWidth(context),
+          horizontal: pixel.setFontSize(10, context), vertical: pixel.setFontSize(10, context)),
+      padding: EdgeInsets.all(pixel.setFontSize(10, context)),
+      width: pixel.screenWidthDp(context),
       decoration: BoxDecoration(
         color: Color(0xfffffffe),
         borderRadius: BorderRadius.circular(16),
@@ -291,19 +293,19 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(
-                left: getPixe(10, context), bottom: getPixe(10, context)),
+                left: pixel.setFontSize(10, context), bottom: pixel.setFontSize(10, context)),
             child: Text(
               '日常福利',
               style: TextStyle(
                   color: Color(0xffE3B967),
                   fontWeight: FontWeight.w500,
-                  fontSize: getPixe(18, context)),
+                  fontSize: pixel.setFontSize(18, context)),
             ),
           ),
           Container(
-            height: getPixe(70, context),
-            padding: EdgeInsets.all(getPixe(10, context)),
-            margin: EdgeInsets.only(bottom: getPixe(15, context)),
+            height: pixel.setFontSize(70, context),
+            padding: EdgeInsets.all(pixel.setFontSize(10, context)),
+            margin: EdgeInsets.only(bottom: pixel.setFontSize(15, context)),
             decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('images/bg.jpg'),
@@ -320,16 +322,16 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                       '每日签到',
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: getPixe(17, context)),
+                          fontSize: pixel.setFontSize(17, context)),
                     ),
                     SizedBox(
-                      height: getPixe(5, context),
+                      height: pixel.setFontSize(5, context),
                     ),
                     Text(
                       '连续签到赚更多积分',
                       style: TextStyle(
                           color: Colors.black45,
-                          fontSize: getPixe(13, context)),
+                          fontSize: pixel.setFontSize(13, context)),
                     )
                   ],
                 ),
@@ -344,8 +346,8 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: getPixe(15, context),
-                          vertical: getPixe(5, context)),
+                          horizontal: pixel.setFontSize(15, context),
+                          vertical: pixel.setFontSize(5, context)),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.orange[800],
@@ -360,7 +362,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                         '去签到',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: getPixe(14, context),
+                            fontSize: pixel.setFontSize(14, context),
                             fontWeight: FontWeight.w500),
                       ),
                     )),
@@ -369,7 +371,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
           ),
           Container(
             padding: EdgeInsets.symmetric(
-              horizontal: getPixe(5, context),
+              horizontal: pixel.setFontSize(5, context),
             ),
             child: Column(
               children: <Widget>[
@@ -378,16 +380,16 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                     Text(
                       '读享快乐',
                       style: TextStyle(
-                          fontSize: getPixe(16, context),
+                          fontSize: pixel.setFontSize(16, context),
                           fontWeight: FontWeight.w500),
                     ),
                     SizedBox(
-                      width: getPixe(5, context),
+                      width: pixel.setFontSize(5, context),
                     ),
                     Text(
                       '每日阅读轻松赚积分',
                       style: TextStyle(
-                          fontSize: getPixe(12, context),
+                          fontSize: pixel.setFontSize(12, context),
                           color: Colors.grey,
                           fontWeight: FontWeight.w500),
                     )
@@ -395,15 +397,15 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(
-                      horizontal: getPixe(5, context),
-                      vertical: getPixe(10, context)),
+                      horizontal: pixel.setFontSize(5, context),
+                      vertical: pixel.setFontSize(10, context)),
                   child: Row(
                     children: <Widget>[
                       Expanded(
                         flex: 7,
                         child: Padding(
                             padding:
-                                EdgeInsets.only(right: getPixe(50, context)),
+                                EdgeInsets.only(right: pixel.setFontSize(50, context)),
                             child: Column(
                               children: <Widget>[
                                 _getReadTimeContent(
@@ -441,26 +443,26 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   /// 签到弹窗
   _buildRegisterDialog() {
     return Container(
-      height: getPixe(380, context),
-      padding: EdgeInsets.all(getPixe(10, context)),
+      height: pixel.setFontSize(380, context),
+      padding: EdgeInsets.all(pixel.setFontSize(10, context)),
       child: Stack(
         children: <Widget>[
           Center(
               child: Padding(
                   padding: EdgeInsets.symmetric(
-                      vertical: getPixe(10, context),
-                      horizontal: getPixe(10, context)),
+                      vertical: pixel.setFontSize(10, context),
+                      horizontal: pixel.setFontSize(10, context)),
                   child: Column(
                     children: <Widget>[
                       Column(children: [
                         Text(
                           '已累计签到2天',
-                          style: TextStyle(fontSize: getPixe(22, context)),
+                          style: TextStyle(fontSize: pixel.setFontSize(22, context)),
                         ),
                         Text(
                           '明天签到可领50积分',
                           style: TextStyle(
-                              fontSize: getPixe(12, context),
+                              fontSize: pixel.setFontSize(12, context),
                               color: Colors.amber[600]),
                         ),
                       ]),
@@ -498,24 +500,24 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
         _list.add(Column(children: [
           Container(
             padding: isActive
-                ? EdgeInsets.only(bottom: getPixe(6, context))
+                ? EdgeInsets.only(bottom: pixel.setFontSize(6, context))
                 : EdgeInsets.only(
-                    top: getPixe(1.5, context), bottom: getPixe(7.5, context)),
+                    top: pixel.setFontSize(1.5, context), bottom: pixel.setFontSize(7.5, context)),
             child: Row(
               children: <Widget>[
                 isFirst
                     ? SizedBox()
                     : Container(
-                        width: getPixe(10, context),
-                        height: getPixe(2, context),
+                        width: pixel.setFontSize(10, context),
+                        height: pixel.setFontSize(2, context),
                         color: _bgColor,
                       ),
                 Container(
                     padding: isLast
                         ? EdgeInsets.symmetric(
-                            vertical: getPixe(4, context),
-                            horizontal: getPixe(1, context))
-                        : EdgeInsets.all(getPixe(4, context)),
+                            vertical: pixel.setFontSize(4, context),
+                            horizontal: pixel.setFontSize(1, context))
+                        : EdgeInsets.all(pixel.setFontSize(4, context)),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: _bgColor,
@@ -524,15 +526,15 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                       '${registerEarnList[i]}',
                       style: TextStyle(
                           fontSize: isActive
-                              ? getPixe(16, context)
-                              : getPixe(13, context),
+                              ? pixel.setFontSize(16, context)
+                              : pixel.setFontSize(13, context),
                           color: Colors.white),
                     )),
                 isLast
                     ? SizedBox()
                     : Container(
-                        width: getPixe(10, context),
-                        height: getPixe(2, context),
+                        width: pixel.setFontSize(10, context),
+                        height: pixel.setFontSize(2, context),
                         color: _bgColor,
                       ),
               ],
@@ -541,17 +543,17 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
           Row(children: [
             isLast
                 ? SizedBox(
-                    width: getPixe(10, context),
+                    width: pixel.setFontSize(10, context),
                   )
                 : SizedBox(),
             Text(
               '${i + 1}天',
               style: TextStyle(
-                  fontSize: getPixe(10, context), color: Colors.brown),
+                  fontSize: pixel.setFontSize(10, context), color: Colors.brown),
             ),
             isFirst
                 ? SizedBox(
-                    width: getPixe(10, context),
+                    width: pixel.setFontSize(10, context),
                   )
                 : SizedBox(),
           ]),
@@ -561,8 +563,8 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
     }
 
     return Container(
-        padding: EdgeInsets.symmetric(vertical: getPixe(20, context)),
-        height: getPixe(90, context),
+        padding: EdgeInsets.symmetric(vertical: pixel.setFontSize(20, context)),
+        height: pixel.setFontSize(90, context),
         child: Row(
           children: _getItem(),
         ));
@@ -582,13 +584,13 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
         Row(children: [
           Column(children: [
             Container(
-              width: getPixe(2, context),
-              height: getPixe(10, context),
+              width: pixel.setFontSize(2, context),
+              height: pixel.setFontSize(10, context),
               color: isFirst ? Colors.transparent : _bgColor,
             ),
             Container(
-              width: getPixe(13, context),
-              height: getPixe(13, context),
+              width: pixel.setFontSize(13, context),
+              height: pixel.setFontSize(13, context),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: _bgColor,
@@ -596,24 +598,24 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
               child: isActive
                   ? Icon(
                       Icons.check,
-                      size: getPixe(10, context),
+                      size: pixel.setFontSize(10, context),
                       color: Colors.white,
                     )
                   : SizedBox(),
             ),
             Container(
-              width: getPixe(2, context),
-              height: getPixe(10, context),
+              width: pixel.setFontSize(2, context),
+              height: pixel.setFontSize(10, context),
               color: isLast ? Colors.transparent : _bgColor,
             ),
           ]),
           SizedBox(
-            width: getPixe(10, context),
+            width: pixel.setFontSize(10, context),
           ),
           Text(
             '阅读$time分钟',
             style: TextStyle(
-                fontWeight: FontWeight.w600, fontSize: getPixe(14, context)),
+                fontWeight: FontWeight.w600, fontSize: pixel.setFontSize(14, context)),
           ),
         ]),
         Text(
@@ -621,7 +623,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
           style: TextStyle(
               fontWeight: FontWeight.w500,
               color: Colors.deepOrange,
-              fontSize: getPixe(12, context)),
+              fontSize: pixel.setFontSize(12, context)),
         )
       ],
     );
@@ -631,9 +633,9 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   Widget _buildBeginnerBenefit() {
     return Container(
       margin: EdgeInsets.symmetric(
-          horizontal: getPixe(10, context), vertical: getPixe(10, context)),
-      padding: EdgeInsets.all(getPixe(10, context)),
-      width: getWidth(context),
+          horizontal: pixel.setFontSize(10, context), vertical: pixel.setFontSize(10, context)),
+      padding: EdgeInsets.all(pixel.setFontSize(10, context)),
+      width: pixel.screenWidthDp(context),
       decoration: BoxDecoration(
         color: Color(0xfffffffe),
         borderRadius: BorderRadius.circular(16),
@@ -643,13 +645,13 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(
-                left: getPixe(10, context), bottom: getPixe(10, context)),
+                left: pixel.setFontSize(10, context), bottom: pixel.setFontSize(10, context)),
             child: Text(
               '新手福利',
               style: TextStyle(
                   color: Colors.orange[800],
                   fontWeight: FontWeight.w500,
-                  fontSize: getPixe(18, context)),
+                  fontSize: pixel.setFontSize(18, context)),
             ),
           ),
           _getRowItem('首次登录奖励', '登录后可领取更多积分', 10, toLoginPage),
@@ -662,18 +664,18 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
 
   _getRowItem(title, subTitle, earnNum, callback, {bool isRead = false}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: getPixe(10, context)),
+      padding: EdgeInsets.symmetric(horizontal: pixel.setFontSize(10, context)),
       child: Column(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.symmetric(vertical: getPixe(10, context)),
+            padding: EdgeInsets.symmetric(vertical: pixel.setFontSize(10, context)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Expanded(
                   flex: 7,
                   child: Padding(
-                      padding: EdgeInsets.only(right: getPixe(50, context)),
+                      padding: EdgeInsets.only(right: pixel.setFontSize(50, context)),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -683,13 +685,13 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                                 Text(
                                   title,
                                   style: TextStyle(
-                                      fontSize: getPixe(15, context),
+                                      fontSize: pixel.setFontSize(15, context),
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Text(
                                   subTitle,
                                   style: TextStyle(
-                                      fontSize: getPixe(10, context),
+                                      fontSize: pixel.setFontSize(10, context),
                                       color: Colors.grey),
                                 )
                               ],
@@ -699,7 +701,7 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.deepOrange,
-                                  fontSize: getPixe(12, context)),
+                                  fontSize: pixel.setFontSize(12, context)),
                             ),
                           ])),
                 ),
@@ -721,10 +723,10 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
   /// 底部提示信息
   Widget _buildFooterInfo() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: getPixe(15, context)),
+      padding: EdgeInsets.symmetric(vertical: pixel.setFontSize(15, context)),
       child: Text(
         '抽奖活动及活动奖品由热读小说提供',
-        style: TextStyle(fontSize: getPixe(12, context), color: Colors.grey),
+        style: TextStyle(fontSize: pixel.setFontSize(12, context), color: Colors.grey),
         textAlign: TextAlign.center,
       ),
     );
@@ -738,13 +740,13 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
       appBar: AppBar(
         title: Text(
           '福利中心',
-          style: TextStyle(fontSize: getPixe(20, context)),
+          style: TextStyle(fontSize: pixel.setFontSize(20, context)),
         ),
         centerTitle: true,
         elevation: 1,
         leading: IconButton(
           icon: const Icon(Iconfont.zuo),
-          iconSize: getPixe(26, context),
+          iconSize: pixel.setFontSize(26, context),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -754,14 +756,14 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
               onTap: toBonusStorePage,
               child: Container(
                   padding: EdgeInsets.only(
-                    right: getPixe(15, context),
+                    right: pixel.setFontSize(15, context),
                   ),
                   child: Center(
                     child: Text(
                       '积分商城',
                       style: TextStyle(
                           color: Colors.grey,
-                          fontSize: getPixe(16, context),
+                          fontSize: pixel.setFontSize(16, context),
                           fontWeight: FontWeight.w500),
                       textAlign: TextAlign.center,
                     ),
@@ -781,11 +783,11 @@ class _BenefitPageState extends State<BenefitPage> with PixelSize {
             ),
           ),
           Positioned(
-            right: getPixe(20, context),
-            top: getPixe(50, context),
+            right: pixel.setFontSize(20, context),
+            top: pixel.setFontSize(50, context),
             child: InkWell(
               onTap: toBonusStorePage,
-              child: Image.asset('images/adGift.png', width: getPixe(50, context), fit: BoxFit.fill,)
+              child: Image.asset('images/adGift.png', width: pixel.setFontSize(50, context), fit: BoxFit.fill,)
             ),
           )
         ])

@@ -27,8 +27,9 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage>
-    with SingleTickerProviderStateMixin, PixelSize {
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
+    final PixelSize pixel = PixelSize();
 
   Object _boyCategoryNameData = categoryNameData[0];
   Object _girlCategoryNameData = categoryNameData[1];
@@ -47,7 +48,7 @@ class _CategoryPageState extends State<CategoryPage>
 
   @override
   Widget build(BuildContext context) {
-    double indicatorWidth = getWidth(context) / 5 + 10;
+    double indicatorWidth = pixel.screenWidthDp(context) / 5 + 10;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -59,7 +60,7 @@ class _CategoryPageState extends State<CategoryPage>
           actions: <Widget>[
             Container(
                 padding: EdgeInsets.only(
-                    bottom: getPixe(6, context), right: getPixe(6, context)),
+                    bottom: pixel.setFontSize(6, context), right: pixel.setFontSize(6, context)),
                 child: IconButton(
                   icon: const Icon(Iconfont.sousuo),
                   onPressed: () {
@@ -69,14 +70,14 @@ class _CategoryPageState extends State<CategoryPage>
           ],
           title: TabBar(
             controller: _tabController,
-            labelPadding: EdgeInsets.only(bottom: getPixe(5, context)),
+            labelPadding: EdgeInsets.only(bottom: pixel.setFontSize(5, context)),
             labelColor: Config.color,
             unselectedLabelColor: Colors.black54,
             labelStyle: TextStyle(
-                fontSize: getPixe(16, context), fontWeight: FontWeight.bold),
+                fontSize: pixel.setFontSize(16, context), fontWeight: FontWeight.bold),
             unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
             indicatorPadding: EdgeInsets.symmetric(
-                horizontal: getPixe(indicatorWidth, context)),
+                horizontal: pixel.setFontSize(indicatorWidth, context)),
             tabs: <Widget>[
               const Text('男生频道'),
               const Text('女生频道'),
@@ -115,7 +116,7 @@ class CategoryContent extends StatefulWidget {
 }
 
 class _CategoryContentState extends State<CategoryContent>
-    with PixelSize, AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin {
     List _booksData = List();
     List _categoryNameData = List();
 

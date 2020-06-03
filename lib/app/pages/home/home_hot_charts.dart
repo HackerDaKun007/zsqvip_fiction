@@ -10,7 +10,6 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:fiction/public/public.dart';
 import 'package:fiction/res/todayHotChartsData.dart';
 
 
@@ -20,7 +19,7 @@ class HotChartsWidget extends StatefulWidget {
   _HotChartsWidgetState createState() => _HotChartsWidgetState();
 }
 
-class _HotChartsWidgetState extends State<HotChartsWidget> with SingleTickerProviderStateMixin, PixelSize{
+class _HotChartsWidgetState extends State<HotChartsWidget> with SingleTickerProviderStateMixin{
   TabController _tabController;
   double rpx;
   double screenWidth;
@@ -72,7 +71,7 @@ class _HotChartsWidgetState extends State<HotChartsWidget> with SingleTickerProv
   
   @override
   Widget build(BuildContext context) {
-    screenWidth = getWidth(context);
+    screenWidth = MediaQuery.of(context).size.width;
     rpx = screenWidth / 750;
     return Container(
         width: screenWidth,
@@ -135,7 +134,7 @@ class HotChartsTabView extends StatefulWidget {
 }
 
 class _HotChartsTabViewState extends State<HotChartsTabView>
-    with AutomaticKeepAliveClientMixin, PixelSize {
+    with AutomaticKeepAliveClientMixin {
 
   double rpx;
   double screenWidth;
@@ -229,7 +228,7 @@ class _HotChartsTabViewState extends State<HotChartsTabView>
 
   @override
   Widget build(BuildContext context) {
-    screenWidth = getWidth(context);
+    screenWidth = MediaQuery.of(context).size.width;
     rpx = screenWidth / 750;
     return Container(
       width: screenWidth,

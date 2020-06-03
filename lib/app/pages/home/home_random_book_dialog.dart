@@ -8,7 +8,6 @@
  * @see         书城页面-随便看看版块
 */
 
-import 'package:fiction/public/public.dart';
 import 'package:fiction/res/guessYouLikeData.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +17,7 @@ class RandomBookDialog extends StatefulWidget {
   _RandomBookDialogState createState() => _RandomBookDialogState();
 }
 
-class _RandomBookDialogState extends State<RandomBookDialog> with PixelSize{
+class _RandomBookDialogState extends State<RandomBookDialog> {
   double rpx;
   List<Map> _data = guessYouLikeData;
 
@@ -30,7 +29,7 @@ class _RandomBookDialogState extends State<RandomBookDialog> with PixelSize{
 
   @override
   Widget build(BuildContext context) {
-    rpx = getWidth(context) / 750;
+    rpx = MediaQuery.of(context).size.width / 750;
     return Container(
       height: 620 * rpx,
       width: 450 * rpx,

@@ -19,9 +19,11 @@ class BookListPage extends StatefulWidget {
   _BookListPageState createState() => _BookListPageState();
 }
 
-class _BookListPageState extends State<BookListPage> with PixelSize {
+class _BookListPageState extends State<BookListPage> {
   double rpx;
   int listIndex;
+  final PixelSize pixel = PixelSize();
+
 
   Widget _getBookListWidget(int index) {
     return InkWell(
@@ -62,7 +64,7 @@ class _BookListPageState extends State<BookListPage> with PixelSize {
 
   @override
   Widget build(BuildContext context) {
-    rpx = getWidth(context) / 750;
+    rpx = pixel.screenWidthDp(context) / 750;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -73,7 +75,7 @@ class _BookListPageState extends State<BookListPage> with PixelSize {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Iconfont.zuo),
-          iconSize: getPixe(26, context),
+          iconSize: pixel.setFontSize(26, context),
           onPressed: () {
             Navigator.pop(context);
           },

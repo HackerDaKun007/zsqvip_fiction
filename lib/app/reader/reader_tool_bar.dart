@@ -6,7 +6,9 @@ class ReaderToolBar extends StatefulWidget {
   _ReaderToolBarState createState() => _ReaderToolBarState();
 }
 
-class _ReaderToolBarState extends State<ReaderToolBar> with PixelSize{
+class _ReaderToolBarState extends State<ReaderToolBar> {
+  final PixelSize pixel = PixelSize();
+
 
   Widget _buildTopBar() {
     return Container(
@@ -15,7 +17,7 @@ class _ReaderToolBarState extends State<ReaderToolBar> with PixelSize{
       child: AppBar(
         leading: IconButton(
           icon: const Icon(Iconfont.zuo),
-          iconSize: getPixe(26, context),
+          iconSize: pixel.setFontSize(26, context),
           onPressed: () {
             Navigator.pop(context);
           },

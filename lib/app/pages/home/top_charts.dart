@@ -20,9 +20,10 @@ class TopChartsPage extends StatefulWidget {
 }
 
 class _TopChartsPageState extends State<TopChartsPage>
-    with SingleTickerProviderStateMixin, PixelSize {
+    with SingleTickerProviderStateMixin {
   TabController _controller;
   double rpx;
+  final PixelSize pixel = PixelSize();
 
   @override
   void initState() {
@@ -38,8 +39,8 @@ class _TopChartsPageState extends State<TopChartsPage>
 
   @override
   Widget build(BuildContext context) {
-    rpx = getWidth(context) / 750;
-    double indicatorWidth = getWidth(context) / 2 - 30;
+    rpx = pixel.screenWidthDp(context) / 750;
+    double indicatorWidth = pixel.screenWidthDp(context) / 2 - 30;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -50,7 +51,7 @@ class _TopChartsPageState extends State<TopChartsPage>
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Iconfont.zuo),
-          iconSize: getPixe(26, context),
+          iconSize: pixel.setFontSize(26, context),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -90,7 +91,7 @@ class TabViewContentWidget extends StatefulWidget {
   _TabViewContentWidgetState createState() => _TabViewContentWidgetState();
 }
 
-class _TabViewContentWidgetState extends State<TabViewContentWidget> with AutomaticKeepAliveClientMixin, PixelSize{
+class _TabViewContentWidgetState extends State<TabViewContentWidget> with AutomaticKeepAliveClientMixin{
   double rpx;
   int indexItem;
   List _chartsData;
@@ -285,7 +286,7 @@ class _TabViewContentWidgetState extends State<TabViewContentWidget> with Automa
 
   @override
   Widget build(BuildContext context) {
-    rpx = getWidth(context) / 750;
+    rpx = MediaQuery.of(context).size.width / 750;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[

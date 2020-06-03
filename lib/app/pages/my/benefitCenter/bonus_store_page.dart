@@ -6,8 +6,10 @@ class BonusStorePage extends StatefulWidget {
   _BonusStorePageState createState() => _BonusStorePageState();
 }
 
-class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
+class _BonusStorePageState extends State<BonusStorePage> {
   bool isLogin;
+
+  PixelSize pixel = PixelSize();
 
   /// 转到登录页
   void toLoginPage() {
@@ -21,7 +23,6 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     isLogin = true;
   }
@@ -29,8 +30,8 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
   /// 头部
   Widget _buildHeader() {
     return Container(
-      width: getWidth(context),
-      height: getPixe(250, context),
+      width: pixel.screenWidthDp(context),
+      height: pixel.setFontSize(250, context),
       decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage('images/welfare.jpg'), fit: BoxFit.cover)),
@@ -40,7 +41,7 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
 
   Widget _buildHeaderText() {
     return Container(
-      padding: EdgeInsets.only(top: getPixe(35, context)),
+      padding: EdgeInsets.only(top: pixel.setFontSize(35, context)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: isLogin
@@ -48,30 +49,30 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
                 Text(
                   '当前积分',
                   style: TextStyle(
-                      fontSize: getPixe(12, context), color: Colors.white54),
+                      fontSize: pixel.setFontSize(12, context), color: Colors.white54),
                 ),
                 SizedBox(
-                  height: getPixe(10, context),
+                  height: pixel.setFontSize(10, context),
                 ),
                 Text(
                   '50',
                   style: TextStyle(
-                    fontSize: getPixe(45, context),
+                    fontSize: pixel.setFontSize(45, context),
                     color: Colors.white,
                   ),
                 ),
                 SizedBox(
-                  height: getPixe(8, context),
+                  height: pixel.setFontSize(8, context),
                 ),
                 InkWell(
                   onTap: toBack,
                   child: Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: getPixe(50, context),
-                          vertical: getPixe(6, context)),
+                          horizontal: pixel.setFontSize(50, context),
+                          vertical: pixel.setFontSize(6, context)),
                       decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.circular(getPixe(20, context)),
+                              BorderRadius.circular(pixel.setFontSize(20, context)),
                           gradient: LinearGradient(
                               colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
                               begin: Alignment.centerLeft,
@@ -79,7 +80,7 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
                       child: Text(
                         '去赚积分>',
                         style: TextStyle(
-                            fontSize: getPixe(15, context),
+                            fontSize: pixel.setFontSize(15, context),
                             fontWeight: FontWeight.w600,
                             color: Colors.deepOrange[900]),
                       )),
@@ -89,17 +90,17 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
                 Text(
                   '登录可领取积分、兑换大奖',
                   style: TextStyle(
-                      color: Colors.white, fontSize: getPixe(12, context)),
+                      color: Colors.white, fontSize: pixel.setFontSize(12, context)),
                 ),
                 SizedBox(
-                  height: getPixe(15, context),
+                  height: pixel.setFontSize(15, context),
                 ),
                 InkWell(
                   onTap: () {},
                   child: Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: getPixe(35, context),
-                          vertical: getPixe(6, context)),
+                          horizontal: pixel.setFontSize(35, context),
+                          vertical: pixel.setFontSize(6, context)),
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
                               colors: [Colors.blue[600], Colors.blue[300]],
@@ -110,7 +111,7 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
                         '立即登录',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: getPixe(14, context)),
+                            fontSize: pixel.setFontSize(14, context)),
                       )),
                 )
               ],
@@ -120,10 +121,10 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
 
   /// 积分商城展示
   Widget _buildBonusDetail() {
-    double mainWidth = getWidth(context);
-    double childWidth = getPixe((mainWidth - 63) / 3, context);
+    double mainWidth = pixel.screenWidthDp(context);
+    double childWidth = pixel.setFontSize((mainWidth - 63) / 3, context);
     return Container(
-      padding: EdgeInsets.all(getPixe(15, context)),
+      padding: EdgeInsets.all(pixel.setFontSize(15, context)),
       width: mainWidth,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -132,7 +133,7 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
-          padding: EdgeInsets.only(bottom: getPixe(20, context)),
+          padding: EdgeInsets.only(bottom: pixel.setFontSize(20, context)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -143,22 +144,22 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
                     '兑换iPhone Xs Max',
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: getPixe(20, context)),
+                        fontSize: pixel.setFontSize(20, context)),
                   ),
                   Text(
                     '已获得0个碎片，集满10个可兑换iPhone Xs Max',
                     style: TextStyle(
-                        color: Colors.grey, fontSize: getPixe(11, context)),
+                        color: Colors.grey, fontSize: pixel.setFontSize(11, context)),
                   )
                 ],
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(
-                    0, getPixe(15, context), 0, getPixe(10, context)),
+                    0, pixel.setFontSize(15, context), 0, pixel.setFontSize(10, context)),
                 child: Wrap(
                   direction: Axis.horizontal,
-                  spacing: getPixe(15, context),
-                  runSpacing: getPixe(15, context),
+                  spacing: pixel.setFontSize(15, context),
+                  runSpacing: pixel.setFontSize(15, context),
                   children: [
                     _getProductCard(
                         childWidth, 'images/welfare_integral_1.png', 'iPhone X',
@@ -179,15 +180,15 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
             Text(
               '兑换免广告特权',
               style: TextStyle(
-                  fontWeight: FontWeight.w600, fontSize: getPixe(20, context)),
+                  fontWeight: FontWeight.w600, fontSize: pixel.setFontSize(20, context)),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(
-                  0, getPixe(15, context), 0, getPixe(10, context)),
+                  0, pixel.setFontSize(15, context), 0, pixel.setFontSize(10, context)),
               child: Wrap(
                 direction: Axis.horizontal,
-                spacing: getPixe(15, context),
-                runSpacing: getPixe(15, context),
+                spacing: pixel.setFontSize(15, context),
+                runSpacing: pixel.setFontSize(15, context),
                 children: [
                   _getTextCard(childWidth,
                       isNew: true, time: '5分钟', earnNum: 10),
@@ -216,20 +217,20 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
               isScrollControlled: true, // 设置为true即可设置高度
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(getPixe(16, context)))),
+                      top: Radius.circular(pixel.setFontSize(16, context)))),
               builder: (BuildContext context) {
                 return Container(
-                  height: getHeight(context) * 0.35,
+                  height: pixel.height * 0.35,
                   child: _buildBottomSheetContent(),
                 );
               });
         },
         child: Container(
             padding: EdgeInsets.symmetric(
-                horizontal: getPixe(30, context),
-                vertical: getPixe(3, context)),
+                horizontal: pixel.setFontSize(30, context),
+                vertical: pixel.setFontSize(3, context)),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(getPixe(22, context)),
+                borderRadius: BorderRadius.circular(pixel.setFontSize(22, context)),
                 gradient: LinearGradient(
                     colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
                     begin: Alignment.centerLeft,
@@ -237,7 +238,7 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
             child: Text(
               title,
               style: TextStyle(
-                  fontSize: getPixe(13, context),
+                  fontSize: pixel.setFontSize(13, context),
                   fontWeight: FontWeight.w600,
                   color: Colors.deepOrange[900]),
             )));
@@ -245,14 +246,14 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
 
   Widget _buildBottomSheetContent() {
     return Container(
-        padding: EdgeInsets.all(getPixe(10, context)),
-        margin: EdgeInsets.only(bottom: getPixe(20, context)),
+        padding: EdgeInsets.all(pixel.setFontSize(10, context)),
+        margin: EdgeInsets.only(bottom: pixel.setFontSize(20, context)),
         child: Stack(
           children: <Widget>[
             Container(
               padding: EdgeInsets.symmetric(
-                  vertical: getPixe(30, context),
-                  horizontal: getPixe(20, context)),
+                  vertical: pixel.setFontSize(30, context),
+                  horizontal: pixel.setFontSize(20, context)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -261,14 +262,14 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
                       children: [
                         Text(
                           '免5分钟广告',
-                          style: TextStyle(fontSize: getPixe(24, context)),
+                          style: TextStyle(fontSize: pixel.setFontSize(24, context)),
                         ),
                         SizedBox(
-                          height: getPixe(15, context),
+                          height: pixel.setFontSize(15, context),
                         ),
                         Text(
                           '兑换后立即生效，可以免除5分钟阅读器内广告，5分钟后自动失效。',
-                          style: TextStyle(fontSize: getPixe(12, context)),
+                          style: TextStyle(fontSize: pixel.setFontSize(12, context)),
                         )
                       ]),
                   Spacer(),
@@ -276,11 +277,11 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
                     onTap: toBack,
                     child: Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: getPixe(120, context),
-                            vertical: getPixe(10, context)),
+                            horizontal: pixel.setFontSize(120, context),
+                            vertical: pixel.setFontSize(10, context)),
                         decoration: BoxDecoration(
                             borderRadius:
-                                BorderRadius.circular(getPixe(20, context)),
+                                BorderRadius.circular(pixel.setFontSize(20, context)),
                             gradient: LinearGradient(
                                 colors: [Color(0xffE3B967), Color(0xffF8E1AA)],
                                 end: Alignment.centerLeft,
@@ -288,7 +289,7 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
                         child: Text(
                           '使用10积分兑换',
                           style: TextStyle(
-                              fontSize: getPixe(15, context),
+                              fontSize: pixel.setFontSize(15, context),
                               color: Colors.deepOrange[900]),
                         )),
                   )
@@ -335,17 +336,17 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
               children: <Widget>[
                 Text(
                   '免$time广告',
-                  style: TextStyle(fontSize: getPixe(15, context)),
+                  style: TextStyle(fontSize: pixel.setFontSize(15, context)),
                 ),
                 Text(
                   '消耗 $earnNum积分',
                   style: TextStyle(
-                      fontSize: getPixe(12, context), color: Colors.grey),
+                      fontSize: pixel.setFontSize(12, context), color: Colors.grey),
                 )
               ],
             ),
             SizedBox(
-              height: getPixe(10, context),
+              height: pixel.setFontSize(10, context),
             ),
             _getButton(title: '兑换')
           ]),
@@ -356,21 +357,21 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
               right: 0,
               child: Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: getPixe(5, context),
-                    vertical: getPixe(1, context)),
+                    horizontal: pixel.setFontSize(5, context),
+                    vertical: pixel.setFontSize(1, context)),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                         colors: isNew ? _newColors : _hotColors,
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight),
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(getPixe(8, context)),
-                        bottomLeft: Radius.circular(getPixe(8, context)),
-                        bottomRight: Radius.circular(getPixe(8, context)))),
+                        topLeft: Radius.circular(pixel.setFontSize(8, context)),
+                        bottomLeft: Radius.circular(pixel.setFontSize(8, context)),
+                        bottomRight: Radius.circular(pixel.setFontSize(8, context)))),
                 child: Text(
                   isNew ? '新用户专享' : '热门',
                   style: TextStyle(
-                      color: Colors.white, fontSize: getPixe(10, context)),
+                      color: Colors.white, fontSize: pixel.setFontSize(10, context)),
                 ),
               ))
           : SizedBox()
@@ -382,7 +383,7 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
       {bool ishot = false}) {
     return Stack(children: [
       Container(
-        height: getPixe(165, context),
+        height: pixel.setFontSize(165, context),
         width: childWidth,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -394,7 +395,7 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                      color: Colors.grey[300], width: getPixe(1, context))),
+                      color: Colors.grey[300], width: pixel.setFontSize(1, context))),
               child: Center(
                 child: Image.asset(
                   imgUrl,
@@ -405,7 +406,7 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
             ),
             Text(
               productName,
-              style: TextStyle(fontSize: getPixe(12, context)),
+              style: TextStyle(fontSize: pixel.setFontSize(12, context)),
             ),
             _getButton(title: '兑换')
           ],
@@ -416,21 +417,21 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
               right: 0,
               child: Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: getPixe(5, context),
-                    vertical: getPixe(1, context)),
+                    horizontal: pixel.setFontSize(5, context),
+                    vertical: pixel.setFontSize(1, context)),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                         colors: [Colors.deepOrange, Colors.orange[700]],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight),
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(getPixe(8, context)),
-                        bottomLeft: Radius.circular(getPixe(8, context)),
-                        bottomRight: Radius.circular(getPixe(8, context)))),
+                        topLeft: Radius.circular(pixel.setFontSize(8, context)),
+                        bottomLeft: Radius.circular(pixel.setFontSize(8, context)),
+                        bottomRight: Radius.circular(pixel.setFontSize(8, context)))),
                 child: Text(
                   'HOT',
                   style: TextStyle(
-                      color: Colors.white, fontSize: getPixe(10, context)),
+                      color: Colors.white, fontSize: pixel.setFontSize(10, context)),
                 ),
               ))
           : SizedBox()
@@ -440,10 +441,10 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
   /// 底部提示信息
   Widget _buildFooterInfo() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: getPixe(15, context)),
+      padding: EdgeInsets.symmetric(vertical: pixel.setFontSize(15, context)),
       child: Text(
         '抽奖活动及活动奖品由热读小说提供',
-        style: TextStyle(fontSize: getPixe(12, context), color: Colors.grey),
+        style: TextStyle(fontSize: pixel.setFontSize(12, context), color: Colors.grey),
         textAlign: TextAlign.center,
       ),
     );
@@ -455,13 +456,13 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
       appBar: AppBar(
         title: Text(
           '积分兑换',
-          style: TextStyle(fontSize: getPixe(20, context)),
+          style: TextStyle(fontSize: pixel.setFontSize(20, context)),
         ),
         centerTitle: true,
         elevation: 1,
         leading: IconButton(
           icon: const Icon(Iconfont.zuo),
-          iconSize: getPixe(26, context),
+          iconSize: pixel.setFontSize(26, context),
           onPressed: toBack,
         ),
         actions: <Widget>[
@@ -471,14 +472,14 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
               },
               child: Container(
                   padding: EdgeInsets.only(
-                    right: getPixe(15, context),
+                    right: pixel.setFontSize(15, context),
                   ),
                   child: Center(
                     child: Text(
                       '明细',
                       style: TextStyle(
                           color: Colors.grey,
-                          fontSize: getPixe(16, context),
+                          fontSize: pixel.setFontSize(16, context),
                           fontWeight: FontWeight.w500),
                       textAlign: TextAlign.center,
                     ),
@@ -492,7 +493,7 @@ class _BonusStorePageState extends State<BonusStorePage> with PixelSize {
           ),
           _buildHeader(),
           Positioned(
-            top: getPixe(200, context),
+            top: pixel.setFontSize(200, context),
             child: Column(children: [_buildBonusDetail(), _buildFooterInfo()]),
           ),
         ]),

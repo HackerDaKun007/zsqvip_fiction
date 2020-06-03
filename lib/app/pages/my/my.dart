@@ -10,12 +10,11 @@
 import 'package:fiction/providers/readTime.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fiction/public/public.dart';
 import 'package:fiction/app/ad/Tabsad.dart';
 import 'package:provider/provider.dart';
 
 
-class MyPage extends StatelessWidget with PixelSize{
+class MyPage extends StatelessWidget {
   MyPage({Key key}):super(key: key);
 
   @override
@@ -23,7 +22,7 @@ class MyPage extends StatelessWidget with PixelSize{
     return Scaffold(
       backgroundColor: const Color(0xfff7f7f7),
       body: Container(
-        width: getWidth(context),
+        width: MediaQuery.of(context).size.width,
         height: double.infinity,
         child: Stack(
           children: [
@@ -42,12 +41,12 @@ class MineBody extends StatefulWidget {
   _MineBodyState createState() => _MineBodyState();
 }
 
-class _MineBodyState extends State<MineBody> with PixelSize{
+class _MineBodyState extends State<MineBody> {
   double rpx;
 
   @override
   Widget build(BuildContext context) {
-    rpx = getWidth(context) / 750;
+    rpx = MediaQuery.of(context).size.width / 750;
     return Container(
         child: Column(
       children: <Widget>[

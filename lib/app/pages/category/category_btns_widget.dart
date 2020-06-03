@@ -13,7 +13,8 @@ import 'package:fiction/public/public.dart';
 import 'package:flutter/material.dart';
 
 
-class CategoryBtnsWidget extends StatelessWidget with PixelSize {
+class CategoryBtnsWidget extends StatelessWidget {
+  final PixelSize pixel = PixelSize();
 
   final List data;
   final CategoryProvider provider;
@@ -22,14 +23,14 @@ class CategoryBtnsWidget extends StatelessWidget with PixelSize {
   /// 分类按钮列表
   Widget _getbtnList({data, BuildContext context, bool isLastOne=false, int index}) {
     return Container(
-      width: getWidth(context),
+      width: pixel.screenWidthDp(context),
       padding: isLastOne ? 
         EdgeInsets.symmetric(
-          vertical: getPixe(5, context), horizontal: getPixe(20, context))
+          vertical: pixel.setFontSize(5, context), horizontal: pixel.setFontSize(20, context))
       :EdgeInsets.only(
-          bottom: getPixe(10, context),
-          right: getPixe(20, context),
-          left: getPixe(20, context)),
+          bottom: pixel.setFontSize(10, context),
+          right: pixel.setFontSize(20, context),
+          left: pixel.setFontSize(20, context)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -40,14 +41,14 @@ class CategoryBtnsWidget extends StatelessWidget with PixelSize {
             provider: provider,
           ),
           SizedBox(
-            width: getPixe(20, context),
+            width: pixel.setFontSize(20, context),
           ),
           Expanded(
               flex: 1,
               child: Wrap(
                 direction: Axis.horizontal,
-                spacing: getPixe(20, context),
-                runSpacing: getPixe(10, context),
+                spacing: pixel.setFontSize(20, context),
+                runSpacing: pixel.setFontSize(10, context),
                 children: _getbtns(data, index),
               )),
         ],
@@ -72,8 +73,8 @@ class CategoryBtnsWidget extends StatelessWidget with PixelSize {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: getWidth(context),
-      margin: EdgeInsets.symmetric(vertical: getPixe(10, context)),
+      width: pixel.screenWidthDp(context),
+      margin: EdgeInsets.symmetric(vertical: pixel.setFontSize(10, context)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -90,7 +91,9 @@ class CategoryBtnsWidget extends StatelessWidget with PixelSize {
 }
 
 /// 创建分类按钮
-class CategoryBtn extends StatelessWidget with PixelSize{
+class CategoryBtn extends StatelessWidget {
+  final PixelSize pixel = PixelSize();
+
   final String name;
   final int index;
   final int parentIndex;
@@ -106,14 +109,14 @@ class CategoryBtn extends StatelessWidget with PixelSize{
       },
       child: Container(
         padding: EdgeInsets.symmetric(
-            horizontal: getPixe(6, context), vertical: getPixe(2, context)),
+            horizontal: pixel.setFontSize(6, context), vertical: pixel.setFontSize(2, context)),
         decoration: BoxDecoration(
             color: isActive ? Colors.lightBlue[50] : Colors.transparent,
-            borderRadius: BorderRadius.circular(getPixe(4, context))),
+            borderRadius: BorderRadius.circular(pixel.setFontSize(4, context))),
         child: Text(
           name,
           style: TextStyle(
-              fontSize: getPixe(14, context),
+              fontSize: pixel.setFontSize(14, context),
               color: isActive ? Config.color : Colors.black54),
           textAlign: TextAlign.center,
         ),

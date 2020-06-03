@@ -7,7 +7,7 @@
  * 
  * @see         书城页面-猜你喜欢版块
 */
-import 'package:fiction/public/public.dart';
+
 import 'package:fiction/res/guessYouLikeData.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +21,7 @@ class GuessYouLike extends StatefulWidget {
   _GuessYouLikeState createState() => _GuessYouLikeState();
 }
 
-class _GuessYouLikeState extends State<GuessYouLike> with PixelSize{
+class _GuessYouLikeState extends State<GuessYouLike> {
   List<Map> _listData = guessYouLikeData;
   double rpx;
 
@@ -49,7 +49,7 @@ class _GuessYouLikeState extends State<GuessYouLike> with PixelSize{
 
   @override
   Widget build(BuildContext context) {
-    rpx = getWidth(context) / 750;
+    rpx = MediaQuery.of(context).size.width / 750;
     return Container(
       width: 750 * rpx,
       height: 770 * rpx,

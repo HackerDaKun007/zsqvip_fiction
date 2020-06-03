@@ -23,7 +23,8 @@ import 'package:fiction/app/pages/home/home_recommend.dart';
 import 'package:fiction/res/guessYouLikeData.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget with PixelSize {
+class HomePage extends StatelessWidget {
+  final PixelSize pixel = PixelSize();
 
   @override
   Widget build(BuildContext context) {
@@ -33,23 +34,23 @@ class HomePage extends StatelessWidget with PixelSize {
           elevation: 1,
           titleSpacing: 0,
           title: Container(
-            height: getPixe(44, context),
+            height: pixel.setFontSize(44, context),
             child: Container(
               color: const Color(0xfffcfcfc),
-              margin: EdgeInsets.only(left: getPixe(15, context)),
-              padding: EdgeInsets.only(left: getPixe(5, context)),
+              margin: EdgeInsets.only(left: pixel.setFontSize(15, context)),
+              padding: EdgeInsets.only(left: pixel.setFontSize(5, context)),
               child: TextField(
                 readOnly: true,
                 textAlignVertical: TextAlignVertical(y: -1),
                 decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(left: getPixe(5, context)),
+                    contentPadding: EdgeInsets.only(left: pixel.setFontSize(5, context)),
                     icon: const Icon(
                       Iconfont.sousuo,
                       color: Color(0xffb5b5b5),
                     ),
                     hintText: '搜索书名或作者',
                     hintStyle: TextStyle(
-                      fontSize: getPixe(16, context),
+                      fontSize: pixel.setFontSize(16, context),
                       color: const Color(0xffb5b5b5),
                     ),
                     border: InputBorder.none),
@@ -62,8 +63,8 @@ class HomePage extends StatelessWidget with PixelSize {
           actions: <Widget>[
             GestureDetector(
               child: Container(
-                padding: EdgeInsets.only(left: getPixe(8, context), right: getPixe(8, context)),
-                child: Image.asset('images/box.png', width: getPixe(42, context), fit:BoxFit.fitWidth),
+                padding: EdgeInsets.only(left: pixel.setFontSize(8, context), right: pixel.setFontSize(8, context)),
+                child: Image.asset('images/box.png', width: pixel.setFontSize(42, context), fit:BoxFit.fitWidth),
               ),
               onTap: () {
                 Navigator.pushNamed(context, '/benefit');
@@ -80,7 +81,9 @@ class HomePage extends StatelessWidget with PixelSize {
   }
 }
 
-class HomeBody extends StatelessWidget with PixelSize{
+class HomeBody extends StatelessWidget {
+
+  final PixelSize pixel = PixelSize();
 
   final List<String> swiperList = [
     'https://images.pexels.com/photos/1667071/pexels-photo-1667071.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
@@ -93,7 +96,7 @@ class HomeBody extends StatelessWidget with PixelSize{
 
   @override
   Widget build(BuildContext context) {
-    screenWidth = getWidth(context);
+    screenWidth = pixel.screenWidthDp(context);
     rpx = screenWidth /750;
     return Column(
       children: <Widget>[

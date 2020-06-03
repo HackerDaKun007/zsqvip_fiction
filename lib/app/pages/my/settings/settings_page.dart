@@ -12,13 +12,15 @@ import 'package:flutter/material.dart';
 
 import 'package:fiction/public/public.dart';
 
-class SettingsPage extends StatelessWidget with PixelSize {
+class SettingsPage extends StatelessWidget {
   SettingsPage({Key key}):super(key: key);
+  final PixelSize pixel = PixelSize();
+
 
   Widget _buildContent(context) {
     return Container(
-      width: getWidth(context),
-      padding: EdgeInsets.symmetric(vertical: getPixe(10, context)),
+      width: pixel.screenWidthDp(context),
+      padding: EdgeInsets.symmetric(vertical: pixel.setFontSize(10, context)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -36,8 +38,8 @@ class SettingsPage extends StatelessWidget with PixelSize {
         onTap: callback,
         child: Ink(
           padding: EdgeInsets.symmetric(
-          horizontal: getPixe(15, context), vertical: getPixe(20, context)),
-          width: getWidth(context),
+          horizontal: pixel.setFontSize(15, context), vertical: pixel.setFontSize(20, context)),
+          width: pixel.screenWidthDp(context),
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border(bottom: BorderSide(color: Colors.grey[200],))
@@ -47,11 +49,11 @@ class SettingsPage extends StatelessWidget with PixelSize {
             children: <Widget>[
               Text(
                 title,
-                style: TextStyle(fontSize: getPixe(16, context), height: 1),
+                style: TextStyle(fontSize: pixel.setFontSize(16, context), height: 1),
               ),
               Icon(
                 Icons.chevron_right,
-                size: getPixe(22, context),
+                size: pixel.setFontSize(22, context),
                 color: Colors.grey,
               )
             ],
@@ -66,13 +68,13 @@ class SettingsPage extends StatelessWidget with PixelSize {
       appBar: AppBar(
         title: Text(
           '设置',
-          style: TextStyle(fontSize: getPixe(20, context)),
+          style: TextStyle(fontSize: pixel.setFontSize(20, context)),
         ),
         centerTitle: true,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Iconfont.zuo),
-          iconSize: getPixe(26, context),
+          iconSize: pixel.setFontSize(26, context),
           onPressed: () {
             Navigator.pop(context);
           },

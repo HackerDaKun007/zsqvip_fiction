@@ -22,7 +22,9 @@ class BookDetailPage extends StatefulWidget {
   _BookDetailPageState createState() => _BookDetailPageState();
 }
 
-class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
+class _BookDetailPageState extends State<BookDetailPage> {
+  final PixelSize pixel = PixelSize();
+
   Map data;
   double paddingTop;
   double screenWidth;
@@ -81,7 +83,7 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
             color: Colors.white.withOpacity(alpha),
           ),
           padding: EdgeInsets.only(
-              left: getPixe(5, context), top: getPixe(paddingTop, context)),
+              left: pixel.setFontSize(5, context), top: pixel.setFontSize(paddingTop, context)),
           height: kToolbarHeight + paddingTop,
           child: Row(
             children: <Widget>[
@@ -90,7 +92,7 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
                   icon: Icon(
                     Iconfont.zuo,
                     color: Colors.black,
-                    size: getPixe(26, context),
+                    size: pixel.setFontSize(26, context),
                   )),
               Expanded(
                 child: Opacity(
@@ -98,13 +100,13 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
                   child: Text(
                     data['title'],
                     style: TextStyle(
-                        fontSize: getPixe(20, context),
+                        fontSize: pixel.setFontSize(20, context),
                         fontWeight: FontWeight.w500),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
-              Container(width: getPixe(44, context)),
+              Container(width: pixel.setFontSize(44, context)),
             ],
           ),
         ),
@@ -115,50 +117,50 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
   /// 内容
   Widget _buildNovelContent() {
     return Container(
-      width: getWidth(context),
-      margin: EdgeInsets.symmetric(vertical: getPixe(10, context)),
-      padding: EdgeInsets.all(getPixe(15, context)),
+      width: pixel.screenWidthDp(context),
+      margin: EdgeInsets.symmetric(vertical: pixel.setFontSize(10, context)),
+      padding: EdgeInsets.all(pixel.setFontSize(15, context)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             '内容简介',
             style: TextStyle(
-                fontSize: getPixe(19, context), fontWeight: FontWeight.w500),
+                fontSize: pixel.setFontSize(19, context), fontWeight: FontWeight.w500),
           ),
           Container(
-              padding: EdgeInsets.symmetric(vertical: getPixe(20, context)),
+              padding: EdgeInsets.symmetric(vertical: pixel.setFontSize(20, context)),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(right: getPixe(10, context)),
+                    margin: EdgeInsets.only(right: pixel.setFontSize(10, context)),
                     padding: EdgeInsets.symmetric(
-                        horizontal: getPixe(9, context),
-                        vertical: getPixe(4, context)),
+                        horizontal: pixel.setFontSize(9, context),
+                        vertical: pixel.setFontSize(4, context)),
                     decoration: BoxDecoration(
                         color: Colors.blue[50],
                         borderRadius:
-                            BorderRadius.circular(getPixe(4, context))),
+                            BorderRadius.circular(pixel.setFontSize(4, context))),
                     child: Text(
                       '${data['desc_word'][0]}',
                       style: TextStyle(
-                          fontSize: getPixe(12, context), color: Config.color),
+                          fontSize: pixel.setFontSize(12, context), color: Config.color),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(right: getPixe(10, context)),
+                    margin: EdgeInsets.only(right: pixel.setFontSize(10, context)),
                     padding: EdgeInsets.symmetric(
-                        horizontal: getPixe(10, context),
-                        vertical: getPixe(4, context)),
+                        horizontal: pixel.setFontSize(10, context),
+                        vertical: pixel.setFontSize(4, context)),
                     decoration: BoxDecoration(
                         color: Colors.blue[50],
                         borderRadius:
-                            BorderRadius.circular(getPixe(4, context))),
+                            BorderRadius.circular(pixel.setFontSize(4, context))),
                     child: Text(
                       '${data['desc_word'][1]}',
                       style: TextStyle(
-                          fontSize: getPixe(12, context), color: Config.color),
+                          fontSize: pixel.setFontSize(12, context), color: Config.color),
                     ),
                   ),
                 ],
@@ -167,13 +169,13 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
             data['sutitle'],
             style: TextStyle(
               color: Colors.black54,
-              fontSize: getPixe(16, context),
+              fontSize: pixel.setFontSize(16, context),
             ),
             maxLines: 4,
             overflow: TextOverflow.clip,
           ),
           Container(
-              margin: EdgeInsets.only(top: getPixe(25, context)),
+              margin: EdgeInsets.only(top: pixel.setFontSize(25, context)),
               padding: EdgeInsets.symmetric(),
               child: InkWell(
                 onTap: () {
@@ -182,7 +184,7 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
                       isScrollControlled: true, // 设置为true即可设置高度
                       builder: (BuildContext context) {
                         return Container(
-                          height: getHeight(context) * 0.75,
+                          height: pixel.screenHeightDp(context) * 0.75,
                           child: BookDetailCatalogue(
                             data: data,
                           ),
@@ -196,17 +198,17 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
                       Text(
                         '目录',
                         style: TextStyle(
-                            fontSize: getPixe(16, context),
+                            fontSize: pixel.setFontSize(16, context),
                             fontWeight: FontWeight.w500),
                       ),
                       SizedBox(
-                        width: getPixe(10, context),
+                        width: pixel.setFontSize(10, context),
                       ),
                       Text(
                         '连载至${data['chapter']}章',
                         style: TextStyle(
                             color: Colors.black38,
-                            fontSize: getPixe(12, context)),
+                            fontSize: pixel.setFontSize(12, context)),
                       )
                     ]),
                     Row(
@@ -215,12 +217,12 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
                           '更新于今天',
                           style: TextStyle(
                               color: Colors.black45,
-                              fontSize: getPixe(14, context)),
+                              fontSize: pixel.setFontSize(14, context)),
                         ),
                         Icon(
                           Icons.chevron_right,
                           color: Colors.black26,
-                          size: getPixe(22, context),
+                          size: pixel.setFontSize(22, context),
                         )
                       ],
                     )
@@ -241,8 +243,8 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
         child: Container(
           width: screenWidth,
           color: Colors.white,
-          padding: EdgeInsets.all(getPixe(5, context)),
-          height: getMediaQuery(context).padding.bottom + 50,
+          padding: EdgeInsets.all(pixel.setFontSize(5, context)),
+          height: pixel.bottomBarHeight(context) + 50,
           child: Row(
             children: <Widget>[
               GestureDetector(
@@ -250,10 +252,10 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius:
-                            BorderRadius.circular(getPixe(8, context))),
+                            BorderRadius.circular(pixel.setFontSize(8, context))),
                     padding: EdgeInsets.symmetric(
-                        horizontal: getPixe(buttonPadding, context),
-                        vertical: getPixe(10, context)),
+                        horizontal: pixel.setFontSize(buttonPadding, context),
+                        vertical: pixel.setFontSize(10, context)),
                     child: isBookShelf
                         ? const Text('已在书架', style: TextStyle(color: Colors.grey))
                         : const Text('加入书架', style: TextStyle(color: Colors.lightBlue)),
@@ -263,12 +265,12 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
                   onTap: () {},
                   child: Container(
                     padding: EdgeInsets.symmetric(
-                        horizontal: getPixe(buttonPadding, context),
-                        vertical: getPixe(10, context)),
+                        horizontal: pixel.setFontSize(buttonPadding, context),
+                        vertical: pixel.setFontSize(10, context)),
                     decoration: BoxDecoration(
                         color: Config.color,
                         borderRadius:
-                            BorderRadius.circular(getPixe(8, context))),
+                            BorderRadius.circular(pixel.setFontSize(8, context))),
                     child: Text(
                       '免费阅读',
                       style: TextStyle(color: Colors.white),
@@ -281,8 +283,8 @@ class _BookDetailPageState extends State<BookDetailPage> with PixelSize {
 
   @override
   Widget build(BuildContext context) {
-    paddingTop = getMediaQuery(context).padding.top;
-    screenWidth = getWidth(context);
+    paddingTop = pixel.statusBarHeight(context);
+    screenWidth = pixel.screenWidthDp(context);
     return Scaffold(
       body: Stack(
         children: <Widget>[

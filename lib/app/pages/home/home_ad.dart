@@ -18,8 +18,9 @@ class AdWidget extends StatefulWidget {
   _AdWidgetState createState() => _AdWidgetState();
 }
 
-class _AdWidgetState extends State<AdWidget> with PixelSize{
+class _AdWidgetState extends State<AdWidget> {
 
+  final PixelSize pixel = PixelSize();
   List<Map> _adData = adData; 
 
   @override
@@ -31,9 +32,9 @@ class _AdWidgetState extends State<AdWidget> with PixelSize{
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: getWidth(context),
-      height: getPixe(180, context),
-      margin: EdgeInsets.symmetric(horizontal: getPixe(10, context), vertical: getPixe(15, context)),
+      width: pixel.screenWidthDp(context),
+      height: pixel.setFontSize(180, context),
+      margin: EdgeInsets.symmetric(horizontal: pixel.setFontSize(10, context), vertical: pixel.setFontSize(15, context)),
       child: InkWell(
         onTap: () {
           print('广告');
@@ -44,13 +45,13 @@ class _AdWidgetState extends State<AdWidget> with PixelSize{
         child: Stack(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(getPixe(8, context)),
-              child: Image.network(_adData.last['image'], width: getWidth(context),fit: BoxFit.fitWidth,),
+              borderRadius: BorderRadius.circular(pixel.setFontSize(8, context)),
+              child: Image.network(_adData.last['image'], width: pixel.screenWidthDp(context),fit: BoxFit.fitWidth,),
             ),
             Positioned(
-              bottom: getPixe(10, context),
-              left: getPixe(20, context),
-              child: Text('广告', style: TextStyle(fontSize: getPixe(12, context), color: Colors.black26),),
+              bottom: pixel.setFontSize(10, context),
+              left: pixel.setFontSize(20, context),
+              child: Text('广告', style: TextStyle(fontSize: pixel.setFontSize(12, context), color: Colors.black26),),
             )
           ]
         )

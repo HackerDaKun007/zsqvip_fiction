@@ -11,8 +11,11 @@
 import 'package:fiction/public/public.dart';
 import 'package:flutter/material.dart';
 
-class AboutUsPage extends StatelessWidget with PixelSize {
+class AboutUsPage extends StatelessWidget {
   AboutUsPage({Key key}):super(key: key);
+
+  final PixelSize pixel = PixelSize();
+
   
   @override
   Widget build(BuildContext context) {
@@ -20,13 +23,13 @@ class AboutUsPage extends StatelessWidget with PixelSize {
       appBar: AppBar(
         title: Text(
           '关于我们',
-          style: TextStyle(fontSize: getPixe(20, context)),
+          style: TextStyle(fontSize: pixel.setFontSize(20, context)),
         ),
         centerTitle: true,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Iconfont.zuo),
-          iconSize: getPixe(26, context),
+          iconSize: pixel.setFontSize(26, context),
           onPressed: () {
             Navigator.pop(context);
           },

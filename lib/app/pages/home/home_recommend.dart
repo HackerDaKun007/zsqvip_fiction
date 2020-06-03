@@ -11,7 +11,6 @@
 import 'package:fiction/res/guessYouLikeData.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fiction/public/public.dart';
 import 'package:fiction/app/pages/home/home_build_book.dart';
 
 
@@ -23,7 +22,7 @@ class EditorsRecommend extends StatefulWidget {
   _EditorsRecommendState createState() => _EditorsRecommendState();
 }
 
-class _EditorsRecommendState extends State<EditorsRecommend> with PixelSize{
+class _EditorsRecommendState extends State<EditorsRecommend> {
 
   double rpx;
   Map _firstRecommendData; // 第一个推荐
@@ -104,7 +103,7 @@ class _EditorsRecommendState extends State<EditorsRecommend> with PixelSize{
 
   @override
   Widget build(BuildContext context) {
-    rpx = getWidth(context) / 750;
+    rpx = MediaQuery.of(context).size.width / 750;
     return Container(
       width: 750 * rpx,
       height: 630 * rpx,

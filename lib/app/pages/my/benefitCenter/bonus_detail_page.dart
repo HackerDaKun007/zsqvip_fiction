@@ -6,11 +6,13 @@ class BonusDetailPage extends StatefulWidget {
   _BonusDetailPageState createState() => _BonusDetailPageState();
 }
 
-class _BonusDetailPageState extends State<BonusDetailPage> with PixelSize {
+class _BonusDetailPageState extends State<BonusDetailPage> {
+  PixelSize pixel = PixelSize();
+
   Widget _buildListItem() {
     return Container(
       padding: EdgeInsets.symmetric(
-          horizontal: getPixe(10, context), vertical: getPixe(15, context)),
+          horizontal: pixel.setFontSize(10, context), vertical: pixel.setFontSize(15, context)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -20,7 +22,7 @@ class _BonusDetailPageState extends State<BonusDetailPage> with PixelSize {
               Text(
                 '2020-05-29 18:09:32',
                 style: TextStyle(
-                    color: Colors.grey, fontSize: getPixe(12, context)),
+                    color: Colors.grey, fontSize: pixel.setFontSize(12, context)),
               )
             ],
           ),
@@ -29,9 +31,9 @@ class _BonusDetailPageState extends State<BonusDetailPage> with PixelSize {
               Text(
                 '+20',
                 style: TextStyle(
-                    fontSize: getPixe(17, context), color: Colors.deepOrange),
+                    fontSize: pixel.setFontSize(17, context), color: Colors.deepOrange),
               ),
-              Text(' 积分', style: TextStyle(fontSize: getPixe(14, context), color: Colors.deepOrange),)
+              Text(' 积分', style: TextStyle(fontSize: pixel.setFontSize(14, context), color: Colors.deepOrange),)
             ]
           )
         ],
@@ -45,20 +47,20 @@ class _BonusDetailPageState extends State<BonusDetailPage> with PixelSize {
         appBar: AppBar(
           title: Text(
             '积分明细',
-            style: TextStyle(fontSize: getPixe(20, context)),
+            style: TextStyle(fontSize: pixel.setFontSize(20, context)),
           ),
           centerTitle: true,
           elevation: 1,
           leading: IconButton(
             icon: const Icon(Iconfont.zuo),
-            iconSize: getPixe(26, context),
+            iconSize: pixel.setFontSize(26, context),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
         ),
         body: SingleChildScrollView(
-            padding: EdgeInsets.all(getPixe(10, context)),
+            padding: EdgeInsets.all(pixel.setFontSize(10, context)),
             child: Column(
               children: <Widget>[
                 Column(
@@ -75,13 +77,13 @@ class _BonusDetailPageState extends State<BonusDetailPage> with PixelSize {
                       border: Border(
                           top: BorderSide(
                               color: Colors.grey[200],
-                              width: getPixe(0.5, context)))),
-                  padding: EdgeInsets.symmetric(vertical: getPixe(10, context)),
+                              width: pixel.setFontSize(0.5, context)))),
+                  padding: EdgeInsets.symmetric(vertical: pixel.setFontSize(10, context)),
                   child: Center(
                     child: Text(
                       '仅展示最近60天的记录',
                       style: TextStyle(
-                          color: Colors.grey, fontSize: getPixe(12, context)),
+                          color: Colors.grey, fontSize: pixel.setFontSize(12, context)),
                     ),
                   ),
                 )

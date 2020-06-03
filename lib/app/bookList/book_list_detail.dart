@@ -20,9 +20,11 @@ class BookListDetail extends StatefulWidget {
   _BookListDetailState createState() => _BookListDetailState();
 }
 
-class _BookListDetailState extends State<BookListDetail> with PixelSize {
+class _BookListDetailState extends State<BookListDetail> {
   double rpx;
   dynamic _data;
+  final PixelSize pixel = PixelSize();
+  
 
   @override
   void initState() {
@@ -113,7 +115,7 @@ class _BookListDetailState extends State<BookListDetail> with PixelSize {
 
   @override
   Widget build(BuildContext context) {
-    rpx = MediaQuery.of(context).size.width / 750;
+    rpx = pixel.screenWidthDp(context) / 750;
     return Scaffold(
         body: CustomScrollView(
       slivers: <Widget>[
@@ -124,7 +126,7 @@ class _BookListDetailState extends State<BookListDetail> with PixelSize {
             elevation: 0,
             leading: IconButton(
               icon: const Icon(Iconfont.zuo),
-              iconSize: getPixe(26, context),
+              iconSize: pixel.setFontSize(26, context),
               onPressed: () {
                 Navigator.pop(context);
               },

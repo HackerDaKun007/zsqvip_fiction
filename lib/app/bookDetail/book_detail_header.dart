@@ -14,34 +14,35 @@ import 'dart:ui' as ui;
 import 'package:fiction/public/public.dart';
 
 
-class BookDetailHeader extends StatelessWidget with PixelSize{
+class BookDetailHeader extends StatelessWidget {
+  final PixelSize pixel = PixelSize();
   
   final dynamic data;
   BookDetailHeader({this.data, Key key}):super(key: key);
 
   Widget _buildHeaderContent(context) {
-    double paddingTop = getMediaQuery(context).padding.top;
+    double paddingTop = pixel.statusBarHeight(context);
     return Container(
-      height: getPixe(220, context),
-      width: getWidth(context),
+      height: pixel.setFontSize(220, context),
+      width: pixel.screenWidthDp(context),
       padding: EdgeInsets.fromLTRB(
-          getPixe(15, context), getPixe(58 + paddingTop, context), getPixe(10, context), 0),
+          pixel.setFontSize(15, context), pixel.setFontSize(58 + paddingTop, context), pixel.setFontSize(10, context), 0),
       child: Row(
         children: <Widget>[
           Material(
             elevation: 5,
             color: Colors.transparent,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(getPixe(4, context)),
+              borderRadius: BorderRadius.circular(pixel.setFontSize(4, context)),
               child: Image.network(
                 data['imageUrl'],
-                width: getPixe(100, context),
+                width: pixel.setFontSize(100, context),
                 fit: BoxFit.fitHeight,
               ),
             ),
           ),
           SizedBox(
-            width: getPixe(20, context),
+            width: pixel.setFontSize(20, context),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +52,7 @@ class BookDetailHeader extends StatelessWidget with PixelSize{
                 data['title'],
                 maxLines: 2,
                 style: TextStyle(
-                    fontSize: getPixe(22, context),
+                    fontSize: pixel.setFontSize(22, context),
                     fontWeight: FontWeight.w500),
               ),
               Column(
@@ -60,23 +61,23 @@ class BookDetailHeader extends StatelessWidget with PixelSize{
                   Text(
                     data['author'],
                     style: TextStyle(
-                      fontSize: getPixe(14, context),
+                      fontSize: pixel.setFontSize(14, context),
                       color: Colors.black45
                     )
                   ),
-                  SizedBox(height: getPixe(5, context),),
+                  SizedBox(height: pixel.setFontSize(5, context),),
                   Text(
                     '${data['category'][0]} · ${data['update_status']} · ${(data['total_num'] / 10000).floor()}万字',
                     style: TextStyle(
-                      fontSize: getPixe(13, context),
+                      fontSize: pixel.setFontSize(13, context),
                       color: Colors.black45
                     )
                   ),
-                  SizedBox(height: getPixe(5, context),),
+                  SizedBox(height: pixel.setFontSize(5, context),),
                   Text(
                     '${(data['total_num'] / 10000).round()} 万人气',
                     style: TextStyle(
-                      fontSize: getPixe(16, context),
+                      fontSize: pixel.setFontSize(16, context),
                     )
                   ),
                 ],
@@ -90,11 +91,11 @@ class BookDetailHeader extends StatelessWidget with PixelSize{
 
   @override
   Widget build(BuildContext context) {
-    double width = getWidth(context);
-    double height = getMediaQuery(context).padding.top + 200;
+    double width = pixel.screenWidthDp(context);
+    double height = pixel.statusBarHeight(context)+ 200;
     return Container(
       width: width,
-      height: getPixe(height, context),
+      height: pixel.setFontSize(height, context),
       decoration: BoxDecoration(
         color: Colors.white,
         image: DecorationImage(
