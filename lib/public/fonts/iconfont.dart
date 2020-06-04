@@ -143,4 +143,39 @@ class Iconfont {
     fontFamily: 'myIcon',
     matchTextDirection: true
   );
+
+  // 目录
+  static const IconData list = const IconData(
+    0xe601,
+    fontFamily: 'myIcon',
+    matchTextDirection: true
+  );
+
+  // 月亮
+  static const IconData moon = const IconData(
+    0xe68d,
+    fontFamily: 'myIcon',
+    matchTextDirection: true
+  );
+
+  // 太阳
+  static const IconData sun = const IconData(
+    0xe68a,
+    fontFamily: 'myIcon',
+    matchTextDirection: true
+  );
+
+  // 更多outline
+  static const IconData more = const IconData(
+    0xe691,
+    fontFamily: 'myIcon',
+    matchTextDirection: true
+  );
+
+  // 设置
+  static const IconData setting = const IconData(
+    0xe607,
+    fontFamily: 'myIcon',
+    matchTextDirection: true
+  );
 }

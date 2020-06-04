@@ -8,6 +8,7 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   final PixelSize pixel = PixelSize();
+  Color toolColor = Color(0xffb9610b);
 
   Widget _buildChapterChangeBar() {
     return Container(
@@ -18,12 +19,15 @@ class _BottomBarState extends State<BottomBar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           InkWell(
-            onTap: () {},
+            onTap: () {
+              print('======= previous chapter ======');
+            },
             child: Text(
               '上一章',
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: pixel.setFontSize(16, context)),
+                  color: toolColor,
+                  fontSize: pixel.setFontSize(16, context),
+                  fontWeight: FontWeight.w500),
             ),
           ),
           SizedBox(
@@ -32,58 +36,74 @@ class _BottomBarState extends State<BottomBar> {
           Expanded(
             child: Container(
               height: 1,
-              color: Colors.white,
+              color: toolColor,
             ),
           ),
           SizedBox(
             width: pixel.setFontSize(20, context),
           ),
           InkWell(
-              onTap: () {},
+              onTap: () {
+                print('========== next chapter==========');
+              },
               child: Text(
                 '下一章',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: pixel.setFontSize(16, context)),
+                    color: Color(0xffb9610b),
+                    fontSize: pixel.setFontSize(16, context),
+                    fontWeight: FontWeight.w500),
               ))
         ],
       ),
     );
   }
 
-
   Widget _buildBottomToolBar() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: pixel.setFontSize(20, context)),
+      padding: EdgeInsets.symmetric(horizontal: pixel.setFontSize(20, context), vertical: pixel.setFontSize(10, context)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildBottomBarItem()
+          _buildBottomBarItem(icon: Iconfont.list, title: '目录'),
+          _buildBottomBarItem(icon: Iconfont.moon, title: '夜间'),
+          _buildBottomBarItem(icon: Iconfont.setting, title: '设置'),
+          _buildBottomBarItem(icon: Iconfont.more, title: '更多'),
         ],
       ),
     );
   }
 
-  Widget _buildBottomBarItem() {
+  Widget _buildBottomBarItem({IconData icon, String title, VoidCallback callback}) {
     return InkWell(
-      onTap: () {},
-      child: Column(
-        children: <Widget>[
-          Icon(Icons.list, color: Colors.white,),
-          Text('目录', style: TextStyle(fontSize: pixel.setFontSize(14, context), color: Colors.white),)
-        ],
-      )
-    );
+        onTap: callback,
+        child: Column(
+          children: <Widget>[
+            Icon(
+              icon,
+              color: toolColor,
+              size: pixel.setFontSize(26, context),
+            ),
+            SizedBox(height: 2,),
+            Text(
+              title,
+              style: TextStyle(
+                  fontSize: pixel.setFontSize(13, context), color: toolColor),
+            )
+          ],
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black.withOpacity(0.7),
-      height: pixel.setFontSize(150, context),
+      color: Color(0xffE3D5AE),
+      height: pixel.setFontSize(135, context),
       width: pixel.screenWidthDp(context),
       child: Column(
-        children: <Widget>[_buildChapterChangeBar(),_buildBottomToolBar()],
+        children: <Widget>[
+          _buildChapterChangeBar(),
+          Expanded(flex: 1, child: _buildBottomToolBar())
+        ],
       ),
     );
   }
