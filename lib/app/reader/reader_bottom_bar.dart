@@ -8,7 +8,11 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   final PixelSize pixel = PixelSize();
-  Color toolColor = Color(0xffb9610b);
+  Color toolTextColor = Color(0xffb9610b);
+
+  void openDrawer() {
+    Scaffold.of(context).openDrawer();
+  }
 
   Widget _buildChapterChangeBar() {
     return Container(
@@ -25,7 +29,7 @@ class _BottomBarState extends State<BottomBar> {
             child: Text(
               '上一章',
               style: TextStyle(
-                  color: toolColor,
+                  color: toolTextColor,
                   fontSize: pixel.setFontSize(16, context),
                   fontWeight: FontWeight.w500),
             ),
@@ -36,7 +40,7 @@ class _BottomBarState extends State<BottomBar> {
           Expanded(
             child: Container(
               height: 1,
-              color: toolColor,
+              color: toolTextColor,
             ),
           ),
           SizedBox(
@@ -64,7 +68,7 @@ class _BottomBarState extends State<BottomBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildBottomBarItem(icon: Iconfont.list, title: '目录'),
+          _buildBottomBarItem(icon: Iconfont.list, title: '目录', callback: openDrawer),
           _buildBottomBarItem(icon: Iconfont.moon, title: '夜间'),
           _buildBottomBarItem(icon: Iconfont.setting, title: '设置'),
           _buildBottomBarItem(icon: Iconfont.more, title: '更多'),
@@ -80,14 +84,14 @@ class _BottomBarState extends State<BottomBar> {
           children: <Widget>[
             Icon(
               icon,
-              color: toolColor,
+              color: toolTextColor,
               size: pixel.setFontSize(26, context),
             ),
             SizedBox(height: 2,),
             Text(
               title,
               style: TextStyle(
-                  fontSize: pixel.setFontSize(13, context), color: toolColor),
+                  fontSize: pixel.setFontSize(13, context), color: toolTextColor),
             )
           ],
         ));

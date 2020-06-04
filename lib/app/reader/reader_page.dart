@@ -1,10 +1,11 @@
-import 'dart:io';
 
 import 'package:fiction/app/reader/reader_bottom_bar.dart';
+import 'package:fiction/app/reader/reader_drawer.dart';
 import 'package:fiction/app/reader/reader_tool_bar.dart';
 import 'package:fiction/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 
 class ReaderPage extends StatefulWidget {
   final arguments;
@@ -17,45 +18,37 @@ class ReaderPage extends StatefulWidget {
 class _ReaderPageState extends State<ReaderPage> {
   Color paperColor = Color(0xffF0E3C0);
   Color textColor = Color(0xff603c18);
+  Color toolTextColor = Color(0xffb9610b);
+  Color toolBarColor = Color(0xffE3D5AE);
+
   double textSize = 20;
   final PixelSize pixel = PixelSize();
   bool isVisible = false;
+  dynamic _data;
 
-  // AnimationController _animationController;
-  // Animation _animation;
 
   @override
   void initState() {
     super.initState();
-
-    if (Platform.isAndroid) {
-      SystemUiOverlayStyle systemUiOverlayStyle =
-          SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-    }
-    SystemChrome.setEnabledSystemUIOverlays([]);
-    // _animationController = AnimationController(
-    //     vsync: this, duration: const Duration(milliseconds: 200));
-    // _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
-    // _animation.addListener(() {
-    //   setState(() {});
-    // });
-    // _animationController.forward();
+    _data = widget.arguments['data'];
   }
+
 
   onTapHandler(Offset position) {
     double xRate = position.dx / pixel.screenWidthDp(context);
     if (xRate > 0.33 && xRate < 0.66) {
-      setState(() {
+      systemStatusBarHandler();
+    } else if (xRate >= 0.66) {}
+  }
+
+  void systemStatusBarHandler() {
+    setState(() {
         isVisible = !isVisible;
         isVisible
-            ? SystemChrome.setEnabledSystemUIOverlays(
-                [SystemUiOverlay.top, SystemUiOverlay.bottom])
-            : SystemChrome.setEnabledSystemUIOverlays([]);
-
-        print(isVisible);
+        ? SystemChrome.setEnabledSystemUIOverlays(
+            [SystemUiOverlay.top, SystemUiOverlay.bottom])
+        : SystemChrome.setEnabledSystemUIOverlays([]);
       });
-    } else if (xRate >= 0.66) {}
   }
 
   Widget _buildContent() {
@@ -75,10 +68,57 @@ class _ReaderPageState extends State<ReaderPage> {
     );
   }
 
+  Widget _buildDrawer() {
+    return Container(
+      color: toolBarColor,
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.fromLTRB(pixel.setWidth(20, context), pixel.statusBarHeight(context)+10, pixel.setWidth(20, context), pixel.setHeight(30, context)),
+            color: paperColor,
+            child:Stack(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Image.network(_data['imageUrl'], width: pixel.setWidth(110, context), fit: BoxFit.fitWidth,),
+                    SizedBox(width: pixel.setWidth(20, context),),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(_data['title'], style: TextStyle(fontSize: pixel.setFontSize(20, context), fontWeight: FontWeight.w500),),
+                        Text(_data['author']),
+                        Text('共${_data['chapter']}章'),
+                      ],
+                    ),
+                  ],
+                ),
+                Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: InkWell(
+                    child: Icon(Icons.swap_vert,size: pixel.setFontSize(26, context), color: textColor,),
+                    onTap: (){print('========== reversed ======');},
+                  )
+                )
+              ]
+            ),
+          ),
+         
+        ],
+      )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: paperColor,
+      drawer: Drawer(
+        child: ReaderDrawer(data:_data),
+      ),
+      drawerEdgeDragWidth: 0.0,
       body: Stack(children: [
         GestureDetector(
           onTapUp: (TapUpDetails details) {

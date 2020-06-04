@@ -13,23 +13,13 @@ class _ReaderToolBarState extends State<ReaderToolBar> {
   final PixelSize pixel = PixelSize();
   Color paperColor = Color(0xFFF5F5F5);
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    if (Platform.isAndroid) {
-      SystemUiOverlayStyle systemUiOverlayStyle =
-          SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-    }
-  }
 
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: kToolbarHeight + pixel.statusBarHeight(context),
-      padding: EdgeInsets.only(top: pixel.statusBarHeight(context)),
+      padding: EdgeInsets.only(top: pixel.statusBarHeight(context), left: pixel.setFontSize(5, context)),
       width: pixel.screenWidthDp(context),
       color: Color(0xffE3D5AE),
       child: Row(

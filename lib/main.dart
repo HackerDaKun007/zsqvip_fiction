@@ -8,9 +8,12 @@
  * @see         执行模块
 */
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:fiction/route/route.dart'; //路由文件
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; //国际包
 
 import 'package:provider/provider.dart'; //provider
@@ -22,7 +25,13 @@ import 'package:fiction/providers/recordingData.dart'; //阅读记录数据
 //Yuri_provider
 import 'package:fiction/providers/tabIndexProvider.dart'; // 导航栏记录
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+   if (Platform.isAndroid) {
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
