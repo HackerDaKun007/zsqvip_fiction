@@ -40,14 +40,16 @@ class _ReaderAdState extends State<ReaderAd> {
                      ),
                    ),
                  ),
-                 Container(
-                   padding: EdgeInsets.symmetric(vertical: pixel.setFontSize(10, context)),
-                   child: Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                     children: <Widget>[
-                       Text('抖音', style: TextStyle(color: ZFColors.textColor, fontWeight: FontWeight.w500),),
-                       Text('太好玩了！来电秀，海量视频免费看看看啊看', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: pixel.setFontSize(12, context), color: ZFColors.textColor),)
-                     ],
+                 Expanded(
+                   child: Container(
+                     padding: EdgeInsets.symmetric(vertical: pixel.setFontSize(10, context)),
+                     child: Column(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: <Widget>[
+                         Text('抖音', style: TextStyle(color: ZFColors.textColor, fontWeight: FontWeight.w500),),
+                         Text('太好玩了！来电秀，海量视频免费看看看啊看', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: pixel.setFontSize(12, context), color: ZFColors.textColor),)
+                       ],
+                     ),
                    ),
                  ),
                  GestureDetector(
