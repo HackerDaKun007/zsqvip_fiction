@@ -8,7 +8,6 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   final PixelSize pixel = PixelSize();
-  Color toolTextColor = Color(0xffb9610b);
 
   void openDrawer() {
     Scaffold.of(context).openDrawer();
@@ -29,7 +28,7 @@ class _BottomBarState extends State<BottomBar> {
             child: Text(
               '上一章',
               style: TextStyle(
-                  color: toolTextColor,
+                  color: ZFColors.toolTextColor,
                   fontSize: pixel.setFontSize(16, context),
                   fontWeight: FontWeight.w500),
             ),
@@ -40,7 +39,7 @@ class _BottomBarState extends State<BottomBar> {
           Expanded(
             child: Container(
               height: 1,
-              color: toolTextColor,
+              color: ZFColors.toolTextColor,
             ),
           ),
           SizedBox(
@@ -53,7 +52,7 @@ class _BottomBarState extends State<BottomBar> {
               child: Text(
                 '下一章',
                 style: TextStyle(
-                    color: Color(0xffb9610b),
+                    color: ZFColors.toolTextColor,
                     fontSize: pixel.setFontSize(16, context),
                     fontWeight: FontWeight.w500),
               ))
@@ -84,14 +83,14 @@ class _BottomBarState extends State<BottomBar> {
           children: <Widget>[
             Icon(
               icon,
-              color: toolTextColor,
+              color: ZFColors.toolTextColor,
               size: pixel.setFontSize(26, context),
             ),
             SizedBox(height: 2,),
             Text(
               title,
               style: TextStyle(
-                  fontSize: pixel.setFontSize(13, context), color: toolTextColor),
+                  fontSize: pixel.setFontSize(13, context), color: ZFColors.toolTextColor),
             )
           ],
         ));
@@ -100,7 +99,7 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xffE3D5AE),
+      color: ZFColors.toolBarColor,
       height: pixel.setFontSize(135, context),
       width: pixel.screenWidthDp(context),
       child: Column(

@@ -35,10 +35,7 @@ class ReaderDrawer extends StatefulWidget {
 }
 
 class _ReaderDrawerState extends State<ReaderDrawer> {
-  Color paperColor = Color(0xffF0E3C0);
-  Color textColor = Color(0xff603c18);
-  Color toolBarColor = Color(0xffE3D5AE);
-  Color toolTextColor = Color(0xffb9610b);
+
   Color activeColor = Colors.black;
 
   List<Widget> catalogueList = List<Widget>();
@@ -78,14 +75,14 @@ class _ReaderDrawerState extends State<ReaderDrawer> {
           padding: EdgeInsets.symmetric(
               vertical: pixel.setFontSize(10, context),
               horizontal: pixel.setFontSize(20, context)),
-          child: Text('第${index + 1}章  $chapter', style: TextStyle(color:toolTextColor),),
+          child: Text('第${index + 1}章  $chapter', style: TextStyle(color:ZFColors.toolTextColor),),
         ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: toolBarColor,
+        color: ZFColors.toolBarColor,
         child: Column(
           children: <Widget>[
             Container(
@@ -94,7 +91,7 @@ class _ReaderDrawerState extends State<ReaderDrawer> {
                   pixel.statusBarHeight(context) + 10,
                   pixel.setWidth(20, context),
                   pixel.setHeight(30, context)),
-              color: paperColor,
+              color: ZFColors.paperColor,
               child: Stack(children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -130,7 +127,7 @@ class _ReaderDrawerState extends State<ReaderDrawer> {
                       child: Icon(
                         Icons.swap_vert,
                         size: pixel.setFontSize(26, context),
-                        color: textColor,
+                        color: ZFColors.textColor,
                       ),
                       onTap: _handleCatalogueReverse,
                     ))

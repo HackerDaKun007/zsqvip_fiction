@@ -16,10 +16,6 @@ class ReaderPage extends StatefulWidget {
 }
 
 class _ReaderPageState extends State<ReaderPage> {
-  Color paperColor = Color(0xffF0E3C0);
-  Color textColor = Color(0xff603c18);
-  Color toolTextColor = Color(0xffb9610b);
-  Color toolBarColor = Color(0xffE3D5AE);
 
   double textSize = 20;
   final PixelSize pixel = PixelSize();
@@ -57,12 +53,12 @@ class _ReaderPageState extends State<ReaderPage> {
       height: pixel.screenHeightDp(context),
       padding:
           EdgeInsets.only(top: kToolbarHeight + pixel.statusBarHeight(context)),
-      color: Color(0xffF0E3C0),
+      color: ZFColors.paperColor,
       child: Text.rich(TextSpan(children: [
         TextSpan(
             text: '生活时尚上升空间空间',
             style: TextStyle(
-                color: textColor,
+                color: ZFColors.textColor,
                 fontSize: pixel.setFontSize(textSize, context)))
       ])),
     );
@@ -70,12 +66,12 @@ class _ReaderPageState extends State<ReaderPage> {
 
   Widget _buildDrawer() {
     return Container(
-      color: toolBarColor,
+      color: ZFColors.toolBarColor,
       child: Column(
         children: <Widget>[
           Container(
             padding: EdgeInsets.fromLTRB(pixel.setWidth(20, context), pixel.statusBarHeight(context)+10, pixel.setWidth(20, context), pixel.setHeight(30, context)),
-            color: paperColor,
+            color: ZFColors.paperColor,
             child:Stack(
               children: [
                 Row(
@@ -98,7 +94,7 @@ class _ReaderPageState extends State<ReaderPage> {
                   right: 0,
                   bottom: 0,
                   child: InkWell(
-                    child: Icon(Icons.swap_vert,size: pixel.setFontSize(26, context), color: textColor,),
+                    child: Icon(Icons.swap_vert,size: pixel.setFontSize(26, context), color: ZFColors.textColor,),
                     onTap: (){print('========== reversed ======');},
                   )
                 )
@@ -114,7 +110,7 @@ class _ReaderPageState extends State<ReaderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: paperColor,
+      backgroundColor: ZFColors.paperColor,
       drawer: Drawer(
         child: ReaderDrawer(data:_data),
       ),
