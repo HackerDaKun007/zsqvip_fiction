@@ -1,3 +1,13 @@
+/*
+ * @author      Yuri Chen <pluto401zz@gmail.com>
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ *
+ * @see         颜色统一管理
+*/
+
 import 'package:flutter/material.dart';
 
 class ZFColors {

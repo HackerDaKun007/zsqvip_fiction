@@ -1,3 +1,13 @@
+/*
+ * @author      Yuri Chen <pluto401zz@gmail.com>
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ *
+ * @see         阅读页面 - 底部工具栏
+*/
+
 import 'package:fiction/public/public.dart';
 import 'package:flutter/material.dart';
 
@@ -11,11 +21,13 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   final PixelSize pixel = PixelSize();
 
+  /// 弹出目录侧边栏
   void openDrawer() {
     Scaffold.of(context).openDrawer();
   }
 
-  void openSettingBar() {
+  /// 弹出底部栏
+  void openMoreBar() {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true, // 设置为true即可设置高度
@@ -29,6 +41,7 @@ class _BottomBarState extends State<BottomBar> {
         });
   }
 
+  /// 更多
   Widget _buildBottomSheetContent() {
     return Container(
       child: Column(
@@ -70,6 +83,7 @@ class _BottomBarState extends State<BottomBar> {
     );
   }
 
+  /// 切换上下文章
   Widget _buildChapterChangeBar() {
     return Container(
       padding: EdgeInsets.symmetric(
@@ -118,6 +132,7 @@ class _BottomBarState extends State<BottomBar> {
     );
   }
 
+  /// 底部工具栏
   Widget _buildBottomToolBar() {
     return Container(
       padding: EdgeInsets.symmetric(
@@ -131,12 +146,13 @@ class _BottomBarState extends State<BottomBar> {
           _buildBottomBarItem(icon: Iconfont.moon, title: '夜间'),
           _buildBottomBarItem(icon: Iconfont.setting, title: '设置'),
           _buildBottomBarItem(
-              icon: Iconfont.more, title: '更多', callback: openSettingBar),
+              icon: Iconfont.more, title: '更多', callback: openMoreBar),
         ],
       ),
     );
   }
 
+ /// 底部工具栏按钮
   Widget _buildBottomBarItem(
       {IconData icon, String title, VoidCallback callback}) {
     return InkWell(

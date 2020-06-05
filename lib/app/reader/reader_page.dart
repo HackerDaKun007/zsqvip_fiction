@@ -1,3 +1,12 @@
+/*
+ * @author      Yuri Chen <pluto401zz@gmail.com> 
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ *
+ * @see         阅读页面 - 主页
+*/
 
 import 'package:fiction/app/ad/readerAd.dart';
 import 'package:fiction/app/reader/reader_bottom_bar.dart';

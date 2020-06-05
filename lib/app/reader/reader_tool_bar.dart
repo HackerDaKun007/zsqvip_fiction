@@ -1,3 +1,13 @@
+/*
+ * @author      Yuri Chen <pluto401zz@gmail.com>
+ * @Remarks     无
+ * @copyright   GPL
+ * @since       1.0 version
+ *
+ *
+ * @see         阅读页面 - 顶部栏
+*/
+
 import 'package:fiction/public/public.dart';
 import 'package:flutter/material.dart';
 
