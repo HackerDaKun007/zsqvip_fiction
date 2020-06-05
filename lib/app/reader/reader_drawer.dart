@@ -82,7 +82,7 @@ class _ReaderDrawerState extends State<ReaderDrawer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: ZFColors.toolBarColor,
+        color: ZFColors.paperColor,
         child: Column(
           children: <Widget>[
             Container(
@@ -91,7 +91,7 @@ class _ReaderDrawerState extends State<ReaderDrawer> {
                   pixel.statusBarHeight(context) + 10,
                   pixel.setWidth(20, context),
                   pixel.setHeight(30, context)),
-              color: ZFColors.paperColor,
+              color: ZFColors.toolBarColor,
               child: Stack(children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -102,7 +102,7 @@ class _ReaderDrawerState extends State<ReaderDrawer> {
                       fit: BoxFit.fitWidth,
                     ),
                     SizedBox(
-                      width: pixel.setWidth(20, context),
+                      width: pixel.setWidth(30, context),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
