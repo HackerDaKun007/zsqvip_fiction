@@ -2,6 +2,8 @@ import 'package:fiction/public/public.dart';
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatefulWidget {
+  final Map data;
+  BottomBar({this.data});
   @override
   _BottomBarState createState() => _BottomBarState();
 }
@@ -18,11 +20,10 @@ class _BottomBarState extends State<BottomBar> {
         context: context,
         isScrollControlled: true, // 设置为true即可设置高度
         backgroundColor: ZFColors.toolBarColor,
-        barrierColor: Colors.transparent,
         elevation: 0,
         builder: (BuildContext context) {
           return Container(
-            height: pixel.screenHeightDp(context) * 0.35,
+            height: pixel.screenHeightDp(context) * 0.2,
             child: _buildBottomSheetContent(),
           );
         });
@@ -30,7 +31,42 @@ class _BottomBarState extends State<BottomBar> {
 
   Widget _buildBottomSheetContent() {
     return Container(
-      child: Text('hello world'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/bookdetail',
+                    arguments: {'data': widget.data});
+              },
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(
+                    vertical: pixel.setFontSize(15, context),
+                    horizontal: pixel.setFontSize(30, context)),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Iconfont.bookDetail,
+                      color: ZFColors.textColor,
+                      size: pixel.setFontSize(23, context),
+                    ),
+                    SizedBox(
+                      width: pixel.setWidth(25, context),
+                    ),
+                    Expanded(
+                      child: Text(
+                        '书籍详情',
+                        style: TextStyle(
+                            fontSize: pixel.setFontSize(15, context),
+                            color: ZFColors.textColor),
+                      ),
+                    )
+                  ],
+                ),
+              ))
+        ],
+      ),
     );
   }
 
@@ -94,7 +130,8 @@ class _BottomBarState extends State<BottomBar> {
               icon: Iconfont.list, title: '目录', callback: openDrawer),
           _buildBottomBarItem(icon: Iconfont.moon, title: '夜间'),
           _buildBottomBarItem(icon: Iconfont.setting, title: '设置'),
-          _buildBottomBarItem(icon: Iconfont.more, title: '更多', callback: openSettingBar),
+          _buildBottomBarItem(
+              icon: Iconfont.more, title: '更多', callback: openSettingBar),
         ],
       ),
     );

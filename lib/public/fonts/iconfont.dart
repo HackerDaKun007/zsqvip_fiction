@@ -178,4 +178,10 @@ class Iconfont {
     fontFamily: 'myIcon',
     matchTextDirection: true
   );
+  // 设置
+  static const IconData bookDetail = const IconData(
+    0xe60d,
+    fontFamily: 'myIcon',
+    matchTextDirection: true
+  );
 }

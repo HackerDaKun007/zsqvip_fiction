@@ -113,7 +113,7 @@ class _ReaderPageState extends State<ReaderPage> {
                 ? 0
                 : -(pixel.bottomBarHeight(context) +
                     pixel.setFontSize(135, context)),
-            child: BottomBar())
+            child: BottomBar(data: _data,))
       ]),
     );
   }
