@@ -84,7 +84,7 @@ class _ReaderAdState extends State<ReaderAd> {
                     border: Border.all(width: pixel.setWidth(1, context), color: Colors.grey[400]),
                     borderRadius: BorderRadius.circular(2)
                   ),
-                  child: Text('广告', style: TextStyle(fontSize: pixel.setFontSize(10, context),color: ZFColors.textColor),),
+                  child: Text('广告', style: TextStyle(fontSize: pixel.setFontSize(9, context),color: ZFColors.textColor),),
                 ),
               )
             ]
