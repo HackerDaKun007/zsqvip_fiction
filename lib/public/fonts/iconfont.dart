@@ -89,6 +89,13 @@ class Iconfont {
     matchTextDirection: true
   );
 
+  //搜索
+  static const IconData sousuo1 = const IconData(
+    0xe60f,
+    fontFamily: 'myIcon',
+    matchTextDirection: true
+  );
+
   //阅读
   static const IconData yuedu = const IconData(
     0xe609,

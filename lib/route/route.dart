@@ -21,7 +21,6 @@ import 'package:fiction/app/search/search.dart';  //搜索页面
 import 'package:fiction/app/search/result.dart';  //搜索结果页面
 import 'package:fiction/app/ad/h5Ad.dart';  //H5广告页面
 // import 'package:fiction/app/ad/videoAd.dart';  //视频广告页面
-
 import 'package:fiction/app/pages/category/category.dart';  //分类
 import 'package:fiction/app/pages/my/my.dart';  //我的
 
@@ -47,14 +46,10 @@ final routes = {
   '/bookshelf': (context) => BookShelfPage(),
   '/recording': (context) => Recording(),
   '/editbookshelf': (context) => EditBookShelf(),
-
   '/search': (context) => Search(),
   '/result': (context, {arguments}) => ResultSearch(arguments:arguments),
-
   '/categorypage': (context) => CategoryPage(),
   '/mypage': (context) => MyPage(),
-
-  //广告页面
   '/h5ad': (context, {arguments}) => H5Ad(arguments:arguments),
   // '/videoad': (context, {arguments}) => VideoAd(arguments:arguments),
 
