@@ -19,7 +19,7 @@ import 'package:flutter_localizations/flutter_localizations.dart'; //国际包
 import 'package:provider/provider.dart'; //provider
 //大坤配置_provider
 import 'package:fiction/providers/readTime.dart'; //阅读时间
-import 'package:fiction/providers/bookShelf.dart';//书架数据
+import 'package:fiction/providers/bookShelf.dart'; //书架数据
 import 'package:fiction/providers/recordingData.dart'; //阅读记录数据
 
 //Yuri_provider
@@ -27,8 +27,11 @@ import 'package:fiction/providers/tabIndexProvider.dart'; // 导航栏记录
 
 void main() {
   runApp(MyApp());
-   if (Platform.isAndroid) {
-    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+
+  // 设置安卓沉浸式
+  if (Platform.isAndroid) {
+    SystemUiOverlayStyle systemUiOverlayStyle =
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent);
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
 }
