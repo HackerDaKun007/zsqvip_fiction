@@ -13,13 +13,15 @@ import 'package:flutter/material.dart';
 import 'package:fiction/res/listData.dart';
 class BookShelfProviders with ChangeNotifier{
 
-  List<Map> _listData = [{
-      "title": '',
-      "author": '',
-      "imageUrl": 'images/jia.png',
-      "system": 1,
-    }]; //数据
+  List<Map> _listData = []; //数据
 
+
+  Map _osData = {
+    "title": '',
+    "author": '',
+    "imageUrl": 'images/jia.png',
+    "system": 1,
+  };
   //编辑书架数据
   List<Map> _data = []; //数据
   List _dataAction = []; //保存选中数据坐标key
@@ -34,9 +36,9 @@ class BookShelfProviders with ChangeNotifier{
   bool _isData = false; //判断数据是否请求成功
 
   BookShelfProviders() {
+    this._listData.add(this._osData);
     this._listData.addAll(listData);
     initEdit();
-
     _isData = true;
   }
 
@@ -111,7 +113,7 @@ class BookShelfProviders with ChangeNotifier{
   //编辑删除
   void editDel() {
     if (this._dataAction.length == this._data.length) {
-      this._listData = [];
+      this._listData.add(this._osData);
       this._data = [];
     } else {
       this._dataAction.forEach((value) {

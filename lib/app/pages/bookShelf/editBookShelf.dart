@@ -49,18 +49,17 @@ class _EditBookShelfState extends State<EditBookShelf>  {
         elevation: 1,
         centerTitle: true,
         leading: Container(
-          width: pixel.setWidth(70, context),
           child: IconButton(
             icon: Icon(
               Iconfont.zuo,
-              size: pixel.setFontSize(28, context),
+              size: pixel.setFontSize(26, context),
             ),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
         ),
-        title: Text('编辑书架'),
+        title: Text('编辑书架', style: TextStyle(fontSize: pixel.setFontSize(22.0, context)),),
         actions: <Widget>[
           _getCancel(),
         ],
@@ -151,7 +150,7 @@ class _EditBookShelfState extends State<EditBookShelf>  {
             child: Text(
               '取消',
               style:
-                  TextStyle(fontSize: pixel.setFontSize(18, context), color: Colors.grey),
+                  TextStyle(fontSize: pixel.setFontSize(16, context), color: Colors.grey),
             ),
           ),
           onTap: () {

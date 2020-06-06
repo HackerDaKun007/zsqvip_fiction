@@ -157,7 +157,7 @@ class _BookShelfPageState extends State<BookShelfPage> {
         height: pixel.setHeight(120, context),
         child: Padding(
           padding: EdgeInsets.fromLTRB(
-              0, pixel.setHeight(30, context), pixel.setWidth(10, context), 0),
+              0, pixel.setHeight(34.0, context), pixel.setWidth(10, context), 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[

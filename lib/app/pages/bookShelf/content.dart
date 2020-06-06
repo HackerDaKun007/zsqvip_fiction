@@ -175,7 +175,7 @@ class _ContentState extends State<Content> with Common {
           ),
           onTap: () {
             if (providerListData.data[i]['ad'] == 1) {
-               Navigator.pushNamed(context, '/h5ad', arguments: {"id":1});
+               Navigator.pushNamed(context, '/videoad', arguments: {"id":1});
             } else {
               // print(listData[index]['title']);
               // print(123);

@@ -7,6 +7,7 @@
  *
  * @see         搜索页面
 */
+import 'package:fiction/app/pages/bookShelf/content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -29,16 +30,14 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> with Common {
-
   PixelSize pixel = PixelSize();
+  Path path = Path();
 
   //搜索框记本
   String _input = '';
 
   @override
-
   Widget build(BuildContext context) {
-
     return Internet(_init(), true);
   }
 
@@ -46,82 +45,13 @@ class _SearchState extends State<Search> with Common {
   Widget _init() {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        // centerTitle: true,
-        elevation: 1,
-        leading: Container(
-          width: pixel.setWidth(70, context),
-          child: IconButton(
-            icon: Icon(
-              Iconfont.zuo,
-              size: pixel.setFontSize(28, context),
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        titleSpacing: 0.0,
-        title: Container(
-          // color: Colors.yellow,
-          width: double.infinity,
-          height: pixel.setHeight(80, context),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(
-                pixel.setWidth(10, context), 0, pixel.setWidth(10, context), 0),
-            child: Center(
-              child: TextField(
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: pixel.setHeight(11.2, context)),
-                  icon: Icon(
-                    Iconfont.sousuo,
-                    size: pixel.setFontSize(24, context),
-                    color: Color(0x993c3c3c),
-                  ),
-                  hintText: '搜索书名或作者',
-                  border: InputBorder.none,
-                ),
-                onChanged: (value) {
-                  this._input = value;
-                },
-                style: TextStyle(fontSize: pixel.setFontSize(18.0, context)),
-              ),
-            ),
-          ),
-          decoration: BoxDecoration(
-            color: Color(0x99ededed),
-            borderRadius: BorderRadius.all(
-              Radius.circular(pixel.setWidth(100, context)),
-            ),
-          ),
-        ),
-        // elevation:
-        actions: <Widget>[
-          Container(
-              width: pixel.setWidth(115, context),
-              // height: 40,
-              // color: Colors.red,
-              child: GestureDetector(
-                child: Center(
-                  child: Text(
-                    '搜索',
-                    style: TextStyle(
-                      fontSize: pixel.setFontSize(18, context),
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  if (empty(_input)) {
-                    _filterList(_input);
-                  }
-                },
-              )),
-        ],
-      ),
+      appBar: _appber(),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(pixel.setWidth(10, context), pixel.setHeight(20, context),
-            pixel.setWidth(10, context), pixel.setHeight(10, context)),
+        padding: EdgeInsets.fromLTRB(
+            pixel.setWidth(10, context),
+            pixel.setHeight(20, context),
+            pixel.setWidth(10, context),
+            pixel.setHeight(10, context)),
         child: Stack(
           children: <Widget>[
             //主体内容
@@ -129,11 +59,15 @@ class _SearchState extends State<Search> with Common {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    EveryoneTitle(myButton: (text, isIcon) => _myButton(text, isIcon),),
+                    EveryoneTitle(
+                      myButton: (text, isIcon) => _myButton(text, isIcon),
+                    ),
                     SizedBox(
-                  height: pixel.setWidth(20, context),
-                ),
-                    Recent(myButton: (text, isIcon) => _myButton(text, isIcon),),
+                      height: pixel.setWidth(20, context),
+                    ),
+                    Recent(
+                      myButton: (text, isIcon) => _myButton(text, isIcon),
+                    ),
                   ],
                 ),
               ],
@@ -146,7 +80,90 @@ class _SearchState extends State<Search> with Common {
       ),
     );
   }
-  
+
+  //头部
+  Widget _appber() {
+    return AppBar(
+      centerTitle: true,
+      elevation: 1,
+      automaticallyImplyLeading: false,
+      titleSpacing: 0.0,
+      title: Row(
+        children: <Widget>[
+          Container(
+            width: pixel.setWidth(115, context),
+            height: pixel.setHeight(85.0, context),
+            child: IconButton(
+              icon: Icon(
+                Iconfont.zuo,
+                size: pixel.setFontSize(26, context),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                  maxHeight: pixel.setHeight(85.0, context),
+                  maxWidth: double.infinity),
+              child: TextField(
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                      vertical: pixel.setHeight(4.0, context)),
+                  hintText: '搜索书名或作者',
+                  prefixIcon: Icon(
+                    Iconfont.sousuo,
+                    size: pixel.setFontSize(24, context),
+                    color: Color(0x993c3c3c),
+                  ),
+                  // contentPadding: EdgeInsets.all(10),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      borderSide: BorderSide.none),
+                  filled: true,
+                  fillColor: Color(0x99ededed),
+                ),
+                style: TextStyle(fontSize: pixel.setFontSize(18.0, context)),
+                onChanged: (value) {
+                  this._input = value;
+                },
+                onSubmitted: (value) {
+                  if (empty(value)) {
+                    _filterList(value);
+                  }
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        Container(
+            width: pixel.setWidth(115, context),
+            // height: 40,
+            // color: Colors.red,
+            child: GestureDetector(
+              child: Center(
+                child: Text(
+                  '搜索',
+                  style: TextStyle(
+                    fontSize: pixel.setFontSize(16, context),
+                  ),
+                ),
+              ),
+              onTap: () {
+                if (empty(_input)) {
+                  _filterList(_input);
+                }
+              },
+            )),
+      ],
+    );
+  }
 
   //公共点击按钮点击事件
   Widget _myButton(String text, String isIcon) {
@@ -164,6 +181,7 @@ class _SearchState extends State<Search> with Common {
         return Text('');
       }
     }
+
     return GestureDetector(
       child: Container(
         child: Row(
@@ -178,8 +196,11 @@ class _SearchState extends State<Search> with Common {
             _isIconValidata(),
           ],
         ),
-        padding: EdgeInsets.fromLTRB(pixel.setWidth(15, context), pixel.setHeight(10, context),
-            pixel.setWidth(15, context), pixel.setHeight(10, context)),
+        padding: EdgeInsets.fromLTRB(
+            pixel.setWidth(15, context),
+            pixel.setHeight(10, context),
+            pixel.setWidth(15, context),
+            pixel.setHeight(10, context)),
         margin: EdgeInsets.fromLTRB(0, 0, 0, pixel.setHeight(15, context)),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(pixel.setWidth(3, context)),
@@ -201,22 +222,19 @@ class _SearchState extends State<Search> with Common {
 
   //点击按钮过滤数据事件
   void _filterList(text) {
-    Storage.getList(Path.path['recen']).then((List value) {
+    Storage.getList(path.search['recen']).then((List value) {
       if (value != null) {
         if (inArray(value, text)) {
           value.remove(text);
         }
         value.add(text);
-        Storage.setList(Path.path['recen'], value);
+        Storage.setList(path.search['recen'], value);
       } else {
         List<String> arr = [];
         arr.add(text);
-        Storage.setList(Path.path['recen'], arr);
+        Storage.setList(path.search['recen'], arr);
       }
       _getResult(text);
     });
   }
-
 }
-
-

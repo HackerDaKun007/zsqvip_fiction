@@ -46,12 +46,12 @@ class _ColumnLetState extends State<ColumnLet> {
           color: Colors.white,
           child: Padding(
             padding: EdgeInsets.fromLTRB(
-                pixel.setWidth(10, context), pixel.setHeight(35, context), 0, 0),
+                pixel.setWidth(10, context), pixel.setHeight(42, context), 0, 0),
             child: Row(
               children: <Widget>[
                 Text('今天阅读'),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(3, 0, 3, 6),
+                  padding: EdgeInsets.fromLTRB(3, 0, 3, 4),
                   child: ReadTime(style:TextStyle(
                           fontSize: pixel.setFontSize(20, context), color: Colors.black))
                 ),

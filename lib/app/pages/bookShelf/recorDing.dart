@@ -49,13 +49,13 @@ class _RecordingState extends State<Recording> {
         leading: IconButton(
           icon: Icon(
             Iconfont.zuo,
-            size: pixel.setFontSize(28, context),
+            size: pixel.setFontSize(26, context),
           ),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('阅读记录'),
+        title: Text('阅读记录', style: TextStyle(fontSize: pixel.setFontSize(22.0, context)),),
         actions: <Widget>[
           _getColumnEmpty(),
         ],
@@ -85,7 +85,7 @@ class _RecordingState extends State<Recording> {
                   '清空',
                   style: TextStyle(
                     color: Colors.grey,
-                    fontSize: pixel.setFontSize(18, context),
+                    fontSize: pixel.setFontSize(16, context),
                   ),
                 ),
               ),
@@ -148,12 +148,12 @@ class _RecordingState extends State<Recording> {
       for (int i=0; i < dataProvider.data.length; i++) {
         data.add(InkWell(
             child: Container(
-              height: pixel.setHeight(210, context),
+              // height: pixel.setHeight(210, context),
               padding: EdgeInsets.all(pixel.setWidth(20, context)),
               child: Row(
                 children: <Widget>[
                   Container(
-                    height: double.infinity,
+                    height: pixel.setWidth(180, context),
                     width: pixel.setWidth(145, context),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(pixel.setWidth(3, context)),
