@@ -108,10 +108,42 @@ class _BottomBarState extends State<BottomBar> {
             width: pixel.setFontSize(20, context),
           ),
           Expanded(
-            child: Container(
-              height: 1,
-              color: ZFColors.toolTextColor,
-            ),
+            child: Stack(children: [
+              Container(
+                height: pixel.setFontSize(20, context),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Stack(children: [
+                    Container(
+                      height: 1,
+                      color: Colors.black.withOpacity(0.2),
+                    ),
+                    Positioned(
+                      top: 0,
+                      left: 25,
+                      child: Container(
+                        height: 1,
+                        color: ZFColors.toolTextColor,
+                      ),
+                    ),
+                  ]),
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 20,
+                child: GestureDetector(
+                  child: Container(
+                      height: pixel.setFontSize(20, context),
+                      width: pixel.setFontSize(20, context),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(pixel.setFontSize(20, context)),
+                          color: Colors.white),
+                    ),
+                ),
+              ),
+            ]),
           ),
           SizedBox(
             width: pixel.setFontSize(20, context),
@@ -152,7 +184,7 @@ class _BottomBarState extends State<BottomBar> {
     );
   }
 
- /// 底部工具栏按钮
+  /// 底部工具栏按钮
   Widget _buildBottomBarItem(
       {IconData icon, String title, VoidCallback callback}) {
     return InkWell(

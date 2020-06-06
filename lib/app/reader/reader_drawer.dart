@@ -106,7 +106,6 @@ class _ReaderDrawerState extends State<ReaderDrawer> {
         child: Column(
           children: <Widget>[
             Container(
-              height: pixel.setFontSize(140, context),
               padding: EdgeInsets.fromLTRB(
                   pixel.setWidth(20, context),
                   pixel.statusBarHeight(context) + 10,

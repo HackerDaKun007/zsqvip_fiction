@@ -81,7 +81,7 @@ class _ReaderPageState extends State<ReaderPage> {
                 top: pixel.statusBarHeight(context),
                 left: pixel.setFontSize(20, context),
                 right: pixel.setFontSize(20, context),
-                bottom: pixel.setFontSize(20, context)),
+                ),
             child: Container(
               // padding: EdgeInsets.only(top:pixel.setFontSize(10, context)),
               child: Text.rich(TextSpan(children: [
