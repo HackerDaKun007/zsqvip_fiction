@@ -38,7 +38,7 @@ List catalogueData = [
 
 class BookDetailCatalogue extends StatefulWidget {
   final Map data;
-  BookDetailCatalogue({Key key, this.data}):super(key: key);
+  BookDetailCatalogue({Key key, this.data}) : super(key: key);
 
   @override
   _BookDetailCatalogueState createState() => _BookDetailCatalogueState();
@@ -78,7 +78,8 @@ class _BookDetailCatalogueState extends State<BookDetailCatalogue> {
         child: Ink(
           height: pixel.setFontSize(50, context),
           padding: EdgeInsets.symmetric(
-              vertical: pixel.setFontSize(10, context), horizontal: pixel.setFontSize(20, context)),
+              vertical: pixel.setFontSize(10, context),
+              horizontal: pixel.setFontSize(20, context)),
           child: Text('第${index + 1}章  $chapter'),
         ));
   }
@@ -119,14 +120,16 @@ class _BookDetailCatalogueState extends State<BookDetailCatalogue> {
         ),
         Container(
           width: pixel.screenWidthDp(context),
-          padding: EdgeInsets.symmetric(horizontal: pixel.setFontSize(15, context)),
+          padding:
+              EdgeInsets.symmetric(horizontal: pixel.setFontSize(15, context)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
                 '共${data['chapter']}章',
                 style: TextStyle(
-                    fontSize: pixel.setFontSize(12, context), color: Config.color),
+                    fontSize: pixel.setFontSize(12, context),
+                    color: Config.color),
               ),
               IconButton(
                 onPressed: _handleCatalogueReverse,
@@ -139,6 +142,7 @@ class _BookDetailCatalogueState extends State<BookDetailCatalogue> {
         ),
         Expanded(
             child: ListView(
+          physics: BouncingScrollPhysics(), // 去掉水波纹
           children: _isReversed ? reversedCatalogueList : catalogueList,
         ))
       ],

@@ -45,8 +45,9 @@ class ReaderDrawer extends StatefulWidget {
 }
 
 class _ReaderDrawerState extends State<ReaderDrawer> {
-
-  Color activeColor = Colors.black;
+  int activeIndex = 5;
+  double _itemHeight = 50;
+  double activeHeight = 0;
 
   List<Widget> catalogueList = List<Widget>();
   List<Widget> reversedCatalogueList = List<Widget>();
@@ -55,17 +56,21 @@ class _ReaderDrawerState extends State<ReaderDrawer> {
   bool _isReversed;
 
   final PixelSize pixel = PixelSize();
+  ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
     _data = widget.data;
     _isReversed = false;
+    activeHeight = (activeIndex * _itemHeight) + 10;
     List.generate(
         catalogueData.length,
         (index) => catalogueList
             .add(_buildCatalogueItem(index, catalogueData[index])));
     reversedCatalogueList = catalogueList.reversed.toList();
+    _scrollController = ScrollController(
+        initialScrollOffset: pixel.setFontSize(activeHeight, context));
   }
 
   /// 目录倒转
@@ -76,16 +81,21 @@ class _ReaderDrawerState extends State<ReaderDrawer> {
   }
 
   Widget _buildCatalogueItem(index, chapter) {
+    bool active = index == activeIndex;
     return InkWell(
         onTap: () {
           print('=========第${index + 1}章=========');
         },
         child: Ink(
-          height: pixel.setFontSize(50, context),
+          height: pixel.setFontSize(_itemHeight, context),
           padding: EdgeInsets.symmetric(
               vertical: pixel.setFontSize(10, context),
               horizontal: pixel.setFontSize(20, context)),
-          child: Text('第${index + 1}章  $chapter', style: TextStyle(color:ZFColors.toolTextColor),),
+          child: Text(
+            '第${index + 1}章  $chapter',
+            style: TextStyle(
+                color: active ? ZFColors.textColor : ZFColors.toolTextColor),
+          ),
         ));
   }
 
@@ -96,6 +106,7 @@ class _ReaderDrawerState extends State<ReaderDrawer> {
         child: Column(
           children: <Widget>[
             Container(
+              height: pixel.setFontSize(140, context),
               padding: EdgeInsets.fromLTRB(
                   pixel.setWidth(20, context),
                   pixel.statusBarHeight(context) + 10,
@@ -145,6 +156,8 @@ class _ReaderDrawerState extends State<ReaderDrawer> {
             ),
             Expanded(
                 child: ListView(
+              controller: _scrollController,
+              physics: BouncingScrollPhysics(), // 去掉水波纹
               children: _isReversed ? reversedCatalogueList : catalogueList,
             ))
           ],
