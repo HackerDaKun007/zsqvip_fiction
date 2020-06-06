@@ -122,7 +122,7 @@ class _BonusStorePageState extends State<BonusStorePage> {
   /// 积分商城展示
   Widget _buildBonusDetail() {
     double mainWidth = pixel.screenWidthDp(context);
-    double childWidth = pixel.setFontSize((mainWidth - 63) / 3, context);
+    double childWidth = pixel.setWidth(205, context);
     return Container(
       padding: EdgeInsets.all(pixel.setFontSize(15, context)),
       width: mainWidth,
@@ -158,7 +158,7 @@ class _BonusStorePageState extends State<BonusStorePage> {
                     0, pixel.setFontSize(15, context), 0, pixel.setFontSize(10, context)),
                 child: Wrap(
                   direction: Axis.horizontal,
-                  spacing: pixel.setFontSize(15, context),
+                  spacing: pixel.setFontSize(20, context),
                   runSpacing: pixel.setFontSize(15, context),
                   children: [
                     _getProductCard(
@@ -187,8 +187,8 @@ class _BonusStorePageState extends State<BonusStorePage> {
                   0, pixel.setFontSize(15, context), 0, pixel.setFontSize(10, context)),
               child: Wrap(
                 direction: Axis.horizontal,
-                spacing: pixel.setFontSize(15, context),
-                runSpacing: pixel.setFontSize(15, context),
+                spacing: pixel.setFontSize(20, context),
+                runSpacing: pixel.setFontSize(20, context),
                 children: [
                   _getTextCard(childWidth,
                       isNew: true, time: '5分钟', earnNum: 10),
@@ -489,7 +489,7 @@ class _BonusStorePageState extends State<BonusStorePage> {
       body: SingleChildScrollView(
         child: Stack(children: [
           Container(
-            height: 800,
+            height: pixel.setHeight(1550, context) ,
           ),
           _buildHeader(),
           Positioned(
