@@ -25,14 +25,12 @@ class ResultSearch extends StatefulWidget {
 }
 
 class _ResultSearchState extends State<ResultSearch> with Common {
-
-   PixelSize pixel = PixelSize();
+  PixelSize pixel = PixelSize();
 
   //定义变量区域
   String title; //
   String _input; //
   Map arguments;
-
   bool _isData = false; //判断数据是否请求下来
   //构造函数
   _ResultSearchState({this.arguments}) {
@@ -56,89 +54,102 @@ class _ResultSearchState extends State<ResultSearch> with Common {
   //主体内容
   Widget _init() {
     return Scaffold(
-      backgroundColor:Colors.white,
-      appBar: AppBar(
-        // centerTitle: true,
-        elevation: 1,
-        leading: Container(
-          width: pixel.setWidth(70.0, context),
-          child: IconButton(
-            icon: Icon(
-              Iconfont.zuo,
-              size: pixel.setFontSize(28, context),
+      backgroundColor: Colors.white,
+      appBar: _appber(),
+      body: ListView(
+        children: _getData(),
+      ),
+    );
+  }
+
+  //头部
+  Widget _appber() {
+    return AppBar(
+      centerTitle: true,
+      elevation: 1,
+      automaticallyImplyLeading: false,
+      titleSpacing: 0.0,
+      title: Row(
+        children: <Widget>[
+          Container(
+            width: pixel.setWidth(115, context),
+            height: pixel.setHeight(85.0, context),
+            child: IconButton(
+              icon: Icon(
+                Iconfont.zuo,
+                size: pixel.setFontSize(26, context),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
           ),
-        ),
-        titleSpacing: 0.0,
-        title: Container(
-          // color: Colors.yellow,
-          width: double.infinity,
-          height: pixel.setHeight(80.0, context),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(
-                pixel.setWidth(10.0, context), 0, pixel.setHeight(10, context), 0),
-            child: Center(
+          Expanded(
+            flex: 1,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                  maxHeight: pixel.setHeight(85.0, context),
+                  maxWidth: double.infinity),
               child: TextField(
-                controller: TextEditingController(
-                  text: this.title,
-                ),
+                controller: TextEditingController(text: this.title),
+                textInputAction: TextInputAction.search,
                 decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: pixel.setHeight(11.2, context)),
-                  icon: Icon(
+                  contentPadding: EdgeInsets.symmetric(
+                      vertical: pixel.setHeight(4.0, context)),
+                  hintText: '搜索书名或作者',
+                  prefixIcon: Icon(
                     Iconfont.sousuo,
                     size: pixel.setFontSize(24, context),
                     color: Color(0x993c3c3c),
                   ),
-                  hintText: '搜索书名或作者',
-                  border: InputBorder.none,
+                  // contentPadding: EdgeInsets.all(10),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      borderSide: BorderSide.none),
+                  filled: true,
+                  fillColor: Color(0x99ededed),
                 ),
+                style: TextStyle(fontSize: pixel.setFontSize(18.0, context)),
                 onChanged: (value) {
                   this._input = value;
                 },
-                style: TextStyle(fontSize: pixel.setFontSize(18.0, context)),
-              ),
-            ),
-          ),
-          decoration: BoxDecoration(
-            color: Color(0x99ededed),
-            borderRadius: BorderRadius.all(
-              Radius.circular(pixel.setWidth(100, context)),
-            ),
-          ),
-        ),
-        // elevation:
-        actions: <Widget>[
-          Container(
-              width: pixel.setWidth(115, context),
-              // height: 40,
-              // color: Colors.red,
-              child: GestureDetector(
-                child: Center(
-                  child: Text(
-                    '搜索',
-                    style: TextStyle(
-                      fontSize: pixel.setFontSize(18, context),
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  if (empty(this._input) && this._input != this.title) {
+                onSubmitted: (value) {
+                  if (empty(value) && value != this.title) {
                     setState(() {
-                      this.title = this._input;
+                      this.title = value;
                       print('搜索 ${this.title}');
                     });
                   }
                 },
-              )),
+              ),
+            ),
+          ),
         ],
       ),
-      body: ListView(
-        children: _getData(),
-      ),
+      actions: <Widget>[
+        Container(
+            width: pixel.setWidth(115, context),
+            // height: 40,
+            // color: Colors.red,
+            child: GestureDetector(
+              child: Center(
+                child: Text(
+                  '搜索',
+                  style: TextStyle(
+                    fontSize: pixel.setFontSize(16, context),
+                  ),
+                ),
+              ),
+              onTap: () {
+                if (empty(this._input) && this._input != this.title) {
+                  setState(() {
+                    this.title = this._input;
+                    print('搜索 ${this.title}');
+                  });
+                }
+              },
+            )),
+      ],
     );
   }
 
@@ -153,7 +164,7 @@ class _ResultSearchState extends State<ResultSearch> with Common {
           },
           child: Container(
             width: double.infinity,
-            height: pixel.setHeight(210, context),
+            // height: pixel.setHeight(210, context),
             padding: EdgeInsets.fromLTRB(
                 pixel.setWidth(20, context),
                 pixel.setHeight(25, context),
@@ -161,12 +172,13 @@ class _ResultSearchState extends State<ResultSearch> with Common {
                 pixel.setHeight(20, context)),
             // color: Colors.yellow,
             child: Row(
-              children: <Widget>[ 
+              children: <Widget>[
                 Container(
-                  height: double.infinity,
-                  width: pixel.setWidth(145, context),
+                  height: pixel.setHeight(200, context),
+                  width: pixel.setWidth(160, context),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(pixel.setWidth(3, context)),
+                      borderRadius:
+                          BorderRadius.circular(pixel.setWidth(3, context)),
                       image: DecorationImage(
                         image: NetworkImage(value['imageUrl']),
                         fit: BoxFit.cover,
@@ -228,16 +240,19 @@ class _ResultSearchState extends State<ResultSearch> with Common {
     data.forEach((value) {
       if (_num <= 2) {
         _category.add(Container(
-          margin: EdgeInsets.symmetric(horizontal: pixel.setWidth(5.0, context)),
-          padding: EdgeInsets.symmetric(horizontal: pixel.setWidth(5.0, context)),
+          margin:
+              EdgeInsets.symmetric(horizontal: pixel.setWidth(5.0, context)),
+          padding:
+              EdgeInsets.symmetric(horizontal: pixel.setWidth(5.0, context)),
           decoration: BoxDecoration(
-              border:
-                  Border.all(width: pixel.setWidth(1, context), color: Config.color),
+              border: Border.all(
+                  width: pixel.setWidth(1, context), color: Config.color),
               borderRadius: BorderRadius.circular(2)),
           child: Text(
             value,
             style: TextStyle(
-                color: Config.color, fontSize: pixel.setFontSize(10.0, context)),
+                color: Config.color,
+                fontSize: pixel.setFontSize(10.0, context)),
           ),
         ));
         _num++;

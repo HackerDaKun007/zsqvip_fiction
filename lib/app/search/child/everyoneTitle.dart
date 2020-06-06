@@ -27,6 +27,7 @@ class EveryoneTitle extends StatefulWidget {
 class _EveryoneTitleState extends State<EveryoneTitle> {
 
   PixelSize pixel = PixelSize();
+  Path path = Path();
 
   static List _listData = []; //保存网络请求下来数据
 
@@ -53,9 +54,9 @@ class _EveryoneTitleState extends State<EveryoneTitle> {
   //初始化获取本地数据
   _getDataList() async {
     SharedPreferences data = await SharedPreferences.getInstance();
-    var listName = data.getStringList(Path.path['everyoneUser']);
-    var listRen = data.getStringList(Path.path['everyoneRen']);
-    var randomLength = data.getInt(Path.path['everyoneCount']);
+    var listName = data.getStringList(path.search['everyoneUser']);
+    var listRen = data.getStringList(path.search['everyoneRen']);
+    var randomLength = data.getInt(path.search['everyoneCount']);
 
     if(listName == null || listRen == null || randomLength == null ) {
       _updateData();
@@ -85,9 +86,9 @@ class _EveryoneTitleState extends State<EveryoneTitle> {
       _listRen.add(_listData[i]['renme']);
     }
     SharedPreferences data = await SharedPreferences.getInstance();
-    data.setStringList(Path.path['everyoneUser'], _listName);
-    data.setStringList(Path.path['everyoneRen'], _listRen);
-    data.setInt(Path.path['everyoneCount'], _randomLength);
+    data.setStringList(path.search['everyoneUser'], _listName);
+    data.setStringList(path.search['everyoneRen'], _listRen);
+    data.setInt(path.search['everyoneCount'], _randomLength);
     setState(() {
       _request = true;
     });

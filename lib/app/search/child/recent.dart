@@ -23,6 +23,7 @@ class Recent extends StatefulWidget {
 class _RecentState extends State<Recent> {
 
   PixelSize pixel = PixelSize();
+  Path path = Path();
 
   //判断是否删除搜索记录, true不删除，false删除
   List<String> recen = []; //最近搜索记录
@@ -34,10 +35,9 @@ class _RecentState extends State<Recent> {
   //初始化数据
   void initState() {
     super.initState();
-    
   }
   Widget build(BuildContext context) {
-    Storage.getList(Path.path['recen']).then((value) {
+    Storage.getList(path.search['recen']).then((value) {
       if (value != null) {
         recen = value;
       }
@@ -94,7 +94,7 @@ class _RecentState extends State<Recent> {
                 setState(() {
                   //删除搜索记录
                   recen = [];
-                  Storage.remove(Path.path['recen']); //删除本地
+                  Storage.remove(path.search['recen']); //删除本地
                 });
               },
             ),
