@@ -86,7 +86,6 @@ class _BottomBarState extends State<BottomBar> {
 
   /// 切换上下文章
   Widget _buildChapterChangeBar() {
-    final double _progressWidth = pixel.setWidth(360, context);
     return Container(
       padding: EdgeInsets.symmetric(
           vertical: pixel.setFontSize(15, context),
