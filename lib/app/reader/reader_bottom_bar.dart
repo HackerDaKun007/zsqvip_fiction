@@ -20,6 +20,7 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   final PixelSize pixel = PixelSize();
+  double _value = 0;
 
   /// 弹出目录侧边栏
   void openDrawer() {
@@ -85,6 +86,7 @@ class _BottomBarState extends State<BottomBar> {
 
   /// 切换上下文章
   Widget _buildChapterChangeBar() {
+    final double _progressWidth = pixel.setWidth(360, context);
     return Container(
       padding: EdgeInsets.symmetric(
           vertical: pixel.setFontSize(15, context),
@@ -108,42 +110,24 @@ class _BottomBarState extends State<BottomBar> {
             width: pixel.setFontSize(20, context),
           ),
           Expanded(
-            child: Stack(children: [
-              Container(
-                height: pixel.setFontSize(20, context),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Stack(children: [
-                    Container(
-                      height: 1,
-                      color: Colors.black.withOpacity(0.2),
-                    ),
-                    Positioned(
-                      top: 0,
-                      left: 25,
-                      child: Container(
-                        height: 1,
-                        color: ZFColors.toolTextColor,
-                      ),
-                    ),
-                  ]),
-                ),
+            child:  Container(
+              height: pixel.setFontSize(30, context),
+              child: Slider(
+                value: _value,
+                onChanged: (double value) {
+                  setState(() {
+                    _value = value;
+                    print(_value);
+                  });
+                },
+                // onChangeEnd: (double value) {
+                //   // Chapter chapter = this.widget.chapters[currentArticleIndex()];
+                //   // this.widget.onToggleChapter(chapter);
+                // },
+                activeColor: ZFColors.toolTextColor,
+                inactiveColor: Colors.black.withOpacity(0.2),
               ),
-              Positioned(
-                top: 0,
-                left: 20,
-                child: GestureDetector(
-                  child: Container(
-                      height: pixel.setFontSize(20, context),
-                      width: pixel.setFontSize(20, context),
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(pixel.setFontSize(20, context)),
-                          color: Colors.white),
-                    ),
-                ),
-              ),
-            ]),
+            ),
           ),
           SizedBox(
             width: pixel.setFontSize(20, context),
@@ -213,7 +197,7 @@ class _BottomBarState extends State<BottomBar> {
   Widget build(BuildContext context) {
     return Container(
       color: ZFColors.toolBarColor,
-      height: pixel.setFontSize(135, context),
+      height: pixel.setHeight(250, context),
       width: pixel.screenWidthDp(context),
       child: Column(
         children: <Widget>[
