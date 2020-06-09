@@ -31,7 +31,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> with Common {
   PixelSize pixel = PixelSize();
-  Path path = Path();
+  PathName path = PathName();
 
   //搜索框记本
   String _input = '';

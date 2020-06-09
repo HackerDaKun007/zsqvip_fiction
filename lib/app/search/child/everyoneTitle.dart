@@ -27,7 +27,7 @@ class EveryoneTitle extends StatefulWidget {
 class _EveryoneTitleState extends State<EveryoneTitle> {
 
   PixelSize pixel = PixelSize();
-  Path path = Path();
+  PathName path = PathName();
 
   static List _listData = []; //保存网络请求下来数据
 

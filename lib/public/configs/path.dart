@@ -1,6 +1,6 @@
 //配置管理数据名称
 
-class Path {
+class PathName {
   Map search = {
     'recen': 'Recen',                       //最近搜索记录 - 本地存储
     'everyoneCount': 'everyoneCount',       //大家都搜索长度 - 本地存储

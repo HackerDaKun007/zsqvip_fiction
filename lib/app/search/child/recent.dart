@@ -23,7 +23,7 @@ class Recent extends StatefulWidget {
 class _RecentState extends State<Recent> {
 
   PixelSize pixel = PixelSize();
-  Path path = Path();
+  PathName path = PathName();
 
   //判断是否删除搜索记录, true不删除，false删除
   List<String> recen = []; //最近搜索记录

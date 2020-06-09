@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Article {
   int id;
   int novelId;
@@ -19,6 +17,7 @@ class Article {
     content = data['content'];
     content = '　　' + content;
     content = content.replaceAll('\n', '\n　　');
+    content = '$title\n' + content;
     price = data['price'];
     index = data['index'];
     nextArticleId = data['next_id'];
