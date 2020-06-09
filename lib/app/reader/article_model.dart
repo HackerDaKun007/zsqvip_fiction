@@ -15,9 +15,9 @@ class Article {
     novelId = data['novel_id'];
     title = data['title'];
     content = data['content'];
-    content = '　　' + content;
-    content = content.replaceAll('\n', '\n　　');
-    content = '$title\n' + content;
+    content = '\u3000\u3000' + content;
+    content = content.replaceAll('\n', '\n\u3000\u3000');
+    content = '$title\n\n' + content;
     price = data['price'];
     index = data['index'];
     nextArticleId = data['next_id'];
