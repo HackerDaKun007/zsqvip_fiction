@@ -65,7 +65,7 @@ class _ReaderPageState extends State<ReaderPage> {
     nextArticle = getNextArticle(_articleIndex);
     _pageCount = currentArticle.pageCount;
 
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
   }
 
   onTapHandler(Offset position) {
@@ -115,21 +115,21 @@ class _ReaderPageState extends State<ReaderPage> {
       isVisible
           ? SystemChrome.setEnabledSystemUIOverlays(
               [SystemUiOverlay.top, SystemUiOverlay.bottom])
-          : SystemChrome.setEnabledSystemUIOverlays([]);
+          : SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     });
   }
 
+  /// 监听页面滚动
   onScroll() {
     var page = _pageController.offset / pixel.screenWidthDp(context);
 
     var nextArtilePage = currentArticle.pageCount + (preArticle != null ? preArticle.pageCount : 0);
     if (page >= nextArtilePage) {
       print('到达下个章节了');
-
+      _currentPage = 0;
       preArticle = currentArticle;
       currentArticle = nextArticle;
       nextArticle = null;
-      _currentPage = 0;
       _pageController.jumpToPage(preArticle.pageCount);
       // fetchNextArticle(currentArticle.nextArticleId);
       setState(() {});
@@ -139,8 +139,9 @@ class _ReaderPageState extends State<ReaderPage> {
 
       nextArticle = currentArticle;
       currentArticle = preArticle;
-      preArticle = null;
       _currentPage = currentArticle.pageCount - 1;
+      preArticle = null;
+
       _pageController.jumpToPage(currentArticle.pageCount - 1);
       // fetchPreviousArticle(currentArticle.preArticleId);
       setState(() {});
@@ -151,17 +152,18 @@ class _ReaderPageState extends State<ReaderPage> {
   Widget _buildContent() {
     return Container(
       width: pixel.screenWidthDp(context),
-      height: pixel.screenHeightDp(context),
+      height: pixel.screenHeightDp(context)+pixel.bottomBarHeight(context),
       color: ZFColors.paperColor,
       child: Column(children: [
         Expanded(
           child: _buildPage(),
         ),
-        ReaderAd(),
+         ReaderAd(),
       ]),
     );
   }
 
+  /// 监听页面切换
   onPageChanged(int index) {
     var page = index - (preArticle != null ? preArticle.pageCount : 0);
     if (page < currentArticle.pageCount && page >= 0) {
@@ -171,7 +173,7 @@ class _ReaderPageState extends State<ReaderPage> {
     } 
     
   }
-
+ /// 页面
   Widget buildPage(BuildContext context, int index) {
     var page = index - (preArticle != null ? preArticle.pageCount : 0);
     var article;
@@ -203,6 +205,7 @@ class _ReaderPageState extends State<ReaderPage> {
       content = content.substring(1);
     }
     return Container(
+        height: pixel.screenHeightDp(context)+pixel.bottomBarHeight(context),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Container(
         padding: EdgeInsets.only(left: pixel.setFontSize(20, context)),
@@ -281,7 +284,7 @@ class _ReaderPageState extends State<ReaderPage> {
         child: ReaderDrawer(data: _data),
       ),
       drawerEdgeDragWidth: 0.0,
-      body: Stack(children: [
+      body: Stack(children: [ 
         GestureDetector(
           onTapUp: (TapUpDetails details) {
             onTapHandler(details.globalPosition);

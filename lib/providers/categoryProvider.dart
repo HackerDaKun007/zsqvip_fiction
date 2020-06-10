@@ -18,7 +18,7 @@ class CategoryProvider extends ChangeNotifier {
   List booksData = List(); // 书籍数据
   List booksList = List(); // 存储书籍改动数据
 
-  List<int> selectIndexs = List<int>(); // 存储每组选择的下标
+  List<int> selectIndexes = List<int>(); // 存储每组选择的下标
   List<int> categoryIDs = List<int>(); // 存储分类ID
 
   CategoryProvider(this.data) {
@@ -30,7 +30,7 @@ class CategoryProvider extends ChangeNotifier {
 
   /// 初始化数据
   _initData() {
-    List.generate(categorydata.length, (index) => selectIndexs.add(0));
+    List.generate(categorydata.length, (index) => selectIndexes.add(0));
 
     List.generate(categorydata.length, (index) => statusList.add([]));
 
@@ -51,12 +51,12 @@ class CategoryProvider extends ChangeNotifier {
 
 
   setBtnStatus(index, parentIndex) {
-    if (selectIndexs[parentIndex] == index) return;
+    if (selectIndexes[parentIndex] == index) return;
 
-    int selectIndex = selectIndexs[parentIndex];
+    int selectIndex = selectIndexes[parentIndex];
     statusList[parentIndex][selectIndex] = false; // 设置前一个按钮
 
-    selectIndexs[parentIndex] = index; // 存储当前按钮的下标
+    selectIndexes[parentIndex] = index; // 存储当前按钮的下标
     statusList[parentIndex][index] = true; // 设置当前按钮
 
     booksList = filterData();
@@ -66,19 +66,19 @@ class CategoryProvider extends ChangeNotifier {
   filterData() {
     List _data = booksData;
 
-    if (selectIndexs.every((element) => element == 0)) {
+    if (selectIndexes.every((element) => element == 0)) {
       _data = booksData;
     } else {
-      if (selectIndexs[0] > 0) {
+      if (selectIndexes[0] > 0) {
         _data = _firstFilter(_data);
       }
-      if (selectIndexs[1] > 0) {
+      if (selectIndexes[1] > 0) {
         _data = _secondFilter(_data);
       }
-      if (selectIndexs[2] > 0) {
+      if (selectIndexes[2] > 0) {
         _data = _thirdFilter(_data);
       }
-      if (selectIndexs[3] > 0) {
+      if (selectIndexes[3] > 0) {
         _data = _fourthFilter(_data);
       }
     }
@@ -87,7 +87,7 @@ class CategoryProvider extends ChangeNotifier {
 
   /// 过滤第一个分类数据，根据分类过滤
   _firstFilter(data) {
-    int _id = categoryIDs[selectIndexs[0]];
+    int _id = categoryIDs[selectIndexes[0]];
     List _list = List();
     data.forEach((item) {
       if (item['category_id'] == _id) {
@@ -99,7 +99,7 @@ class CategoryProvider extends ChangeNotifier {
 
   /// 过滤第二个分类数据，根据书籍字数过滤
   _secondFilter(data) {
-    int index = selectIndexs[1];
+    int index = selectIndexes[1];
     List _list = List();
     data.forEach((item) {
       bool isFit = (index == 1 && item['total_num'] < 1000000) ||
@@ -114,7 +114,7 @@ class CategoryProvider extends ChangeNotifier {
 
   /// 过滤第三个分类数据, 根据书籍当前状态过滤
   _thirdFilter(data) {
-    int index = selectIndexs[2];
+    int index = selectIndexes[2];
     List _list = List();
     data.forEach((item) {
       bool isFit = item['status'] == index;
@@ -127,18 +127,18 @@ class CategoryProvider extends ChangeNotifier {
 
   /// 过滤第四个分类数据，根据时间和评分排序
   _fourthFilter(data) {
-    int index = selectIndexs[3];
+    int index = selectIndexes[3];
     List _list = data;
 
     switch (index) {
       case 1:
         _list.sort((a, b) {
-          return b['update_time'].compareTo(a['update_time']);
+          return b['update_time'].compareTo(a['update_time']); // 时间
         });
         break;
       case 2:
         _list.sort((a, b) {
-          return b['score'].compareTo(a['score']);
+          return b['score'].compareTo(a['score']);  // 评分
         });
         break;
       default:
