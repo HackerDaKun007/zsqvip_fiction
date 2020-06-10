@@ -47,11 +47,10 @@ class _ReaderPageState extends State<ReaderPage> {
         (pixel.statusBarHeight(context) +
             kToolbarHeight +
             pixel.setHeight(170, context) +
-            pixel.setHeight(175, context));
+            pixel.setHeight(50, context));
     double contentWidth = pixel.screenWidthDp(context);
     _article.pageOffsets = ReaderPageAgent.getPageOffsets(
         _article.content, contentHeight, contentWidth, pixel.setFontSize(textSize, context));
-        print('${_article.pageOffsets}');
     return _article;
   }
 

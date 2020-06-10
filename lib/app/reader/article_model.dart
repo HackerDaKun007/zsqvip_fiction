@@ -16,7 +16,7 @@ class Article {
     title = data['title'];
     content = data['content'];
     content = '\u3000\u3000' + content;
-    content = content.replaceAll('\n', '\n\u3000\u3000');
+    content = content.replaceAll('\n', '\n\n\u3000\u3000');
     content = '$title\n\n' + content;
     price = data['price'];
     index = data['index'];
