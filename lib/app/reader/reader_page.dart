@@ -67,6 +67,7 @@ class _ReaderPageState extends State<ReaderPage> {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
   }
 
+  /// 屏幕点击监听
   onTapHandler(Offset position) {
     double xRate = position.dx / pixel.screenWidthDp(context);
     if (xRate > 0.33 && xRate < 0.66) {
@@ -78,6 +79,7 @@ class _ReaderPageState extends State<ReaderPage> {
     }
   }
 
+  /// 上一页
   previousPage() {
     if (_currentPage == 0 && _articleIndex == 0) {
       print('已经是第一页了');
@@ -86,6 +88,7 @@ class _ReaderPageState extends State<ReaderPage> {
     _pageController.previousPage(duration: Duration(milliseconds: 250), curve: Curves.easeOut);
   }
 
+  /// 下一页
   nextPage() {
     if (_currentPage >= currentArticle.pageCount - 1 && _articleIndex == 0) {
       print('已经是最后一页了');

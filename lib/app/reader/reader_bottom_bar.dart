@@ -36,7 +36,7 @@ class _BottomBarState extends State<BottomBar> {
         elevation: 0,
         builder: (BuildContext context) {
           return Container(
-            height: pixel.screenHeightDp(context) * 0.2,
+            height: pixel.screenHeightDp(context) * 0.1,
             child: _buildBottomSheetContent(),
           );
         });
